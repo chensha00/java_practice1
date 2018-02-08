@@ -1,0 +1,215 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
+    <!--胡志强-->
+    <!--Spring配置-->
+    <!-- 设置Spring的配置文件启动路径 -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            classpath*:applicationContext.xml
+        </param-value>
+    </context-param>
+    <!--设置profile运行环境变量 -->
+    <!--<context-param>-->
+    <!--<param-name>spring.profiles.default</param-name>-->
+    <!--<param-value>test</param-value>-->
+    <!--</context-param>-->
+
+
+    <!-- spring容器启动 -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <!-- spring request -->
+    <listener>
+        <listener-class>
+            org.springframework.web.context.request.RequestContextListener
+        </listener-class>
+    </listener>
+
+
+    <!--左睿-->
+    <!--登录页面servlet-->
+    <servlet>
+        <servlet-name>login</servlet-name>
+        <servlet-class>servlet.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>login</servlet-name>
+        <url-pattern>/servlet/loginPage.htm</url-pattern>
+    </servlet-mapping>
+    <!--注册页面servlet-->
+    <servlet>
+        <servlet-name>registration</servlet-name>
+        <servlet-class>servlet.RegistrationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>registration</servlet-name>
+        <url-pattern>/servlet/registration.htm</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>order_message</servlet-name>
+        <servlet-class>servlet.UserOrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>order_message</servlet-name>
+        <url-pattern>/order/order.htm</url-pattern>
+    </servlet-mapping>
+ <!--支付页面-->
+    <servlet>
+        <servlet-name>pay_money</servlet-name>
+        <servlet-class>servlet.payMoneyServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>pay_money</servlet-name>
+        <url-pattern>/pay/pay.htm</url-pattern>
+    </servlet-mapping>
+  <!--<display-name>Archetype Created Web Application</display-name>-->
+    <!--<context-param>-->
+        <!--<param-name>test</param-name>-->
+        <!--<param-value>testValues</param-value>-->
+    <!--</context-param>-->
+    <!--<servlet>-->
+        <!--<servlet-name>test</servlet-name>-->
+        <!--<servlet-class>com.servlet.MyServlet</servlet-class>-->
+        <!--<init-param>-->
+            <!--<param-name>test</param-name>-->
+            <!--<param-value>values</param-value>-->
+        <!--</init-param>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>test</servlet-name>-->
+        <!--<url-pattern>/test/test.htm</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <!--<filter>-->
+        <!--<filter-name>testFilter</filter-name>-->
+        <!--<filter-class>com.filter.MyFilter</filter-class>-->
+        <!--<init-param>-->
+            <!--<param-name>filter</param-name>-->
+            <!--<param-value>Filter-Values</param-value>-->
+        <!--</init-param>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>testFilter</filter-name>-->
+        <!--<url-pattern>/*</url-pattern>-->
+    <!--</filter-mapping>-->
+    <!--<listener>-->
+        <!--<listener-class>com.listener.RequestListener</listener-class>-->
+    <!--</listener>-->
+    <!--<listener>-->
+        <!--<listener-class>com.listener.SessionListener</listener-class>-->
+    <!--</listener>-->
+
+    <!--胡志强-->
+    <servlet>
+        <servlet-name>storeHomeServlet</servlet-name>
+        <servlet-class>servlet.StoreHomeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>storeHomeServlet</servlet-name>
+        <url-pattern>/store/storeHome.htm</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>openStoreServlet</servlet-name>
+        <servlet-class>servlet.OpenStoreServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>openStoreServlet</servlet-name>
+        <url-pattern>/store/openStore.htm</url-pattern>
+    </servlet-mapping>
+
+    <!--俞维洋-->
+    <!--订单详情页面查询按钮servlet-->
+    <servlet>
+        <servlet-name>StoreOrderServletSelect</servlet-name>
+        <servlet-class>servlet.StoreOrderServletSelect</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StoreOrderServletSelect</servlet-name>
+        <url-pattern>/StoreOrderServletSelect.htm</url-pattern>
+    </servlet-mapping>
+    <!--进货页面根据商品查询按钮servlet-->
+    <servlet>
+        <servlet-name>StoreServletSelectGoods</servlet-name>
+        <servlet-class>servlet.StoreServletSelectGoods</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StoreServletSelectGoods</servlet-name>
+        <url-pattern>/StoreServletSelectGoods.htm</url-pattern>
+    </servlet-mapping>
+    <!--进货页面根据商品进货提交按钮servlet-->
+    <servlet>
+        <servlet-name>StoreServletStock</servlet-name>
+        <servlet-class>servlet.StoreServletStock</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StoreServletStock</servlet-name>
+        <url-pattern>/StoreServletStock.htm</url-pattern>
+    </servlet-mapping>
+    <!--订单详情页面发货servlet-->
+    <servlet>
+        <servlet-name>StoreServletDelivery</servlet-name>
+        <servlet-class>servlet.StoreServletDelivery</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StoreServletDelivery</servlet-name>
+        <url-pattern>/StoreServletDelivery.htm</url-pattern>
+    </servlet-mapping>
+
+    <!--刘康-->
+    <!--主页serv-->
+    <servlet>
+        <servlet-name>mainPage</servlet-name>
+        <servlet-class>servlet.MainPageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>mainPage</servlet-name>
+        <url-pattern>/servlet/mainPage.htm</url-pattern>
+    </servlet-mapping>
+    <!--购物车servlet-->
+    <servlet>
+        <servlet-name>cart</servlet-name>
+        <servlet-class>servlet.CartServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>cart</servlet-name>
+        <url-pattern>/servlet/cartPage.htm</url-pattern>
+    </servlet-mapping>
+    <!--账户信息servlet-->
+    <servlet>
+        <servlet-name>person</servlet-name>
+        <servlet-class>servlet.PersonServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>person</servlet-name>
+        <url-pattern>/servlet/person.htm</url-pattern>
+    </servlet-mapping>
+    
+    <!--测试Goods MyBaties-->
+    <servlet>
+        <servlet-name>goodsTest</servlet-name>
+        <servlet-class>servlet.GoodsServiceServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>goodsTest</servlet-name>
+        <url-pattern>/test/goodsTest.htm</url-pattern>
+    </servlet-mapping>
+    <!--&lt;!&ndash;排头信息&ndash;&gt;-->
+    <!--<servlet>-->
+        <!--<servlet-name>head</servlet-name>-->
+        <!--<servlet-class>servlet.HeadPageServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>head</servlet-name>-->
+        <!--<url-pattern>/servlet/headPage.htm</url-pattern>-->
+    <!--</servlet-mapping>-->
+</web-app>

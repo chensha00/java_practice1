@@ -1,0 +1,153 @@
+.body{
+    width: 100%;
+    height: 100%;
+    background-image: url("");
+    background-size: 100% 100%;
+}
+/*
+ * 设置商铺主页的整体div
+*/
+.store_home{
+    width: 80%;
+    height: 950px
+    margin:0 auto;
+}
+/*
+ * 设置页面左方的板块
+*/
+.store_home_left{
+    width: 25%;
+    height: 950px;
+    margin-left: 0;
+    float: left;
+
+}
+/*设置排列商品的div*/
+.store_home-right{
+    width: 70%;
+    height: 1000px;
+    margin-left: 3px;
+    float: left;
+    border: 0px;
+}
+/*设置商品列表提示*/
+
+.store_home_goodsListHead{
+    width: 100%;
+    height: 15px;
+    font-weight: 200;
+    font-family: "微软雅黑";
+    font-size: 20px;
+    margin-bottom:30px ;
+    margin-top: 30px;
+}
+
+/*设置显示店铺新的div*/
+.store_home_storeInfo{
+    height: 150px;
+    margin: 0 auto;
+    text-align: center;
+}
+/*设置发货选项的div*/
+.store_home_delivery{
+    height: 60px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/*设置选项栏字体属性*/
+h4{
+    color: #ff4400;
+    font-size: 18px;
+    font-family: "微软雅黑";
+    font-weight: 600;
+}
+
+/*设置每棑商品陈列样式*/
+.store_home_goods{
+    width: 100%;
+    margin-right: 0;
+    float: left;
+    height: 400px;
+    border: hidden;
+}
+/*设置每个商品显示*/
+.store_home_good{
+    position: relative;
+    width: 31%;
+    height: 380px;
+    margin-left: 10px;
+    float: left;
+    border: hidden;
+}
+/*设置店铺名样式*/
+h2{
+  color: orange;
+}
+/*设置店主样式*/
+.storeInfo_font{
+    color: orange;
+    font-family:"Microsoft YaHei";
+    font-size: 15px;
+    font-weight: 400;
+}
+/*设置商品图片的框*/
+.store_home_goodImg{
+    position: relative;
+    width: 100%;
+    height: 233px;
+    margin-top: 3px;
+    float: left;
+    border: hidden;
+}
+/*设置图片自动适应div大小*/
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+/*设置显示商品信息的样式*/
+.store_home_goodInfo{
+    position: relative;
+    width: 100%;
+    height: 70px;
+    float: left;
+    border: hidden;
+    margin-top: 15px;
+}
+/*设置显示商品名的样式*/
+.store_home_goodName{
+    font-size: 15px;
+    font-family: "宋体";
+    font-weight:500;
+}
+/*显示商品的价格*/
+.store_home_goodPrice{
+    float: left;
+    color: #ff0000;
+    font-size: 20px;
+    font-weight: 400;
+}
+/*设置分页样式*/
+.limit{
+    width: 100%;
+    float: right;
+    height: 45px;
+}
+
+.form{
+    height: 45px;
+    color: #ff4400;
+    float: right;
+}
+
+.tb{
+    height: 45px;
+}
+/*设置商家开店的样式*/
+
+.people_open_store{
+    width: 40%;
+    height: 500px;
+    margin-top: 60px;
+    margin: 0 auto;
+}

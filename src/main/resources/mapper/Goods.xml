@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="domain.Goods">
+
+    <!--<resultMap type="domain.Test" id="test">-->
+        <!--<id property="id" column="id" jdbcType="BIGINT" javaType="java.lang.Long"/>-->
+        <!--<result property="name" column="NAME" jdbcType="VARCHAR"/>-->
+    <!--</resultMap>-->
+
+    <resultMap id="goods" type="domain.Goods">
+        <id property="id" column="ID" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <result property="goodsNum" column="GOODS_NUM" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="name" column="NAME" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="type" column="TYPE" jdbcType="TINYINT" javaType="java.lang.Byte"/>
+        <result property="unit" column="UNIT" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="procedureDate" column="PROCEDURE_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result property="shelfLife" column="SHELF_LIFE" jdbcType="FLOAT" javaType="java.lang.Float"/>
+        <result property="shelfLifeUnit" column="SHELF_LIFE_UNIT" jdbcType="TINYINT" javaType="java.lang.Byte"/>
+
+    </resultMap>
+    <sql id="goodsSql">
+        ID,GOODS_NUM,NAME,TYPE,UNIT,PROCEDURE_DATE,SHELF_LIFE,SHELF_LIFE_UNIT
+    </sql>
+    <!--查询所有-->
+    <select id="getAll" resultType="java.util.Map" resultMap="goods">
+        SELECT <include refid="goodsSql"/> FROM GOODS
+    </select>
+    <!--添加-->
+    <insert id="add" parameterType="domain.Goods">
+        INSERT INTO goods(ID,GOODS_NUM,NAME,TYPE,UNIT,PROCEDURE_DATE,SHELF_LIFE,SHELF_LIFE_UNIT) VALUES(DEFAULT ,
+        #{goodsNum,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{type,jdbcType=TINYINT},#{unit,jdbcType=VARCHAR},
+        #{procedureDate,jdbcType=TIMESTAMP},#{shelfLife,jdbcType=FLOAT},#{shelfLifeUnit,jdbcType=TINYINT})
+    </insert>
+    <!--<delete id="deleteById" parameterType="java.util.Map">-->
+        <!--DELETE FROM STU_TABLE WHERE ID IN-->
+    <!--</delete>-->
+
+</mapper>

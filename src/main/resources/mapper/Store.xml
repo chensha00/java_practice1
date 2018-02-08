@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="domain.Store">
+
+
+    <!--定义结果集-->
+    <resultMap id="storeMap" type="domain.Store">
+        <id column="ID" property="id" jdbcType="BIGINT"/>
+        <result column="STORE_NUM" property="storeNum" jdbcType="VARCHAR" />
+        <result column="STORE_NAME" property="storeName" jdbcType="VARCHAR" />
+        <result column="CREDIT" property="credit" jdbcType="BIGINT"/>
+        <result column="PEOPLE_ID" property="peopleId" jdbcType="BIGINT"/>
+
+
+
+    </resultMap>
+
+    <select id="findStoreById" resultMap="storeMap" parameterType="domain.Store">
+    SELECT ID,STORE_NUM,STORE_NAME,CREDIT,PEOPLE_ID FROM store WHERE ID=#{id}
+</select>
+
+    <select id="findStoreByStoreNum" resultMap="storeMap" parameterType="domain.Store">
+        SELECT ID,STORE_NUM,STORE_NAME,CREDIT,PEOPLE_ID FROM store WHERE STORE_NUM=#{storeNum}
+    </select>
+
+    <select id="findStoreByUnSureCondition" resultMap="storeMap" parameterType="java.util.Map">
+        SELECT ID,STORE_NUM,STORE_NAME,CREDIT,PEOPLE_ID FROM store WHERE 1=1
+        <foreach collection="list" item="map">
+            AND ${map.name} ${map.rela} ${map.value}
+        </foreach>
+    </select>
+</mapper>
