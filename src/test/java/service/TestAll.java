@@ -29,7 +29,7 @@ public class TestAll {
      */
     public static void main(String[] args) {
         //创建操作方法
-
+        System.out.println("这是测试github的");
         PeopleService peopleService = new PeopleServiceImpl();
         StoreService storeService = new StoreServiceImpl();
         GoodsService goodsService = new GoodsServiceImpl();
