@@ -1,4 +1,4 @@
-package service;/********************************************************************
+﻿package service;/********************************************************************
  /**
  * @Project: java_practice
  * @Package service
@@ -36,6 +36,7 @@ public class CommodityTrading {
         PeopleService peopleService = new PeopleServiceImpl();
         StoreService storeService = new StoreServiceImpl();
 
+        //testGetHub
         //首先生成商品信息插入数据库
         Goods goods1 = new Goods("G001", "衣服1", (byte) 3, "件", new Date(), 100f, (byte) 1);
         Goods goods2 = new Goods("G002", "衣服2", (byte) 3, "件", new Date(), 100f, (byte) 1);
