@@ -8,11 +8,13 @@
  * @version V1.0
  */
 
-import domain.*;
+import domain.Goods;
+import domain.Invertory;
+import domain.People;
+import domain.Store;
 import tools.GoodsException;
 import tools.PeopleException;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +29,7 @@ public class CommodityTrading {
 
     public static void main(String[] args) throws PeopleException {
 
+        //liukang  asfjkadslfjwqoenfskn
         //创建函数
         GoodsOrderService goodsOrderService = new GoodsOrderServiceImpl();
         GoodsService goodsService = new GoodsServiceImpl();
