@@ -62,13 +62,13 @@ public class TestAll {
         Store store2 = new Store("Ax002", "南极人直营店", 0L, 2L);
         Store store3 = new Store("Ax003", "立白官方授权", 0L, 3L);
         Store store4 = new Store("Ax004", "外星人官网直销", 0L, 4L);
-//        Store store5 = new Store("Ax005", "耐克专卖", 0L, 5L);
+        Store store5 = new Store("Ax005", "耐克专卖", 0L, 5L);
 
         System.out.println(storeService.saveStore(store1));
         System.out.println(storeService.saveStore(store2));
         System.out.println(storeService.saveStore(store3));
         System.out.println(storeService.saveStore(store4));
-//        System.out.println(storeService.saveStore(store5));
+        System.out.println(storeService.saveStore(store5));
 
 //        System.out.println(storeService.saveStore(store6));
 //        //String goodsNum, String name, Byte type, Double price, String unit, Double number, Date procedureDate, Float shelfLife, Byte shelfLifeUnit, Long storeId
