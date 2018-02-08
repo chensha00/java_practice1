@@ -30,6 +30,7 @@ public class CommodityTrading {
     public static void main(String[] args) throws PeopleException {
 
         //liukang  asfjkadslfjwqoenfskn
+        //asdasdasdas
         //创建函数
         GoodsOrderService goodsOrderService = new GoodsOrderServiceImpl();
         GoodsService goodsService = new GoodsServiceImpl();
