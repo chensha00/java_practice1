@@ -8,11 +8,13 @@
  * @version V1.0
  */
 
-import domain.*;
+import domain.Goods;
+import domain.Invertory;
+import domain.People;
+import domain.Store;
 import tools.GoodsException;
 import tools.PeopleException;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +29,7 @@ public class CommodityTrading {
 
     public static void main(String[] args) throws PeopleException {
 
+        //liukang  asfjkadslfjwqoenfskn
         //创建函数
         GoodsOrderService goodsOrderService = new GoodsOrderServiceImpl();
         GoodsService goodsService = new GoodsServiceImpl();
@@ -36,7 +39,7 @@ public class CommodityTrading {
         PeopleService peopleService = new PeopleServiceImpl();
         StoreService storeService = new StoreServiceImpl();
 
-        //testGetHub
+        //testGetHub zuorui
         //首先生成商品信息插入数据库
         Goods goods1 = new Goods("G001", "衣服1", (byte) 3, "件", new Date(), 100f, (byte) 1);
         Goods goods2 = new Goods("G002", "衣服2", (byte) 3, "件", new Date(), 100f, (byte) 1);
