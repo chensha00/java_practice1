@@ -8,6 +8,7 @@ package dao;/*******************************************************************
  * @version V1.0
  */
 
+import common.util.AddConditionUtils;
 import common.util.base.BaseDaoImpl;
 import domain.Store;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -21,6 +22,7 @@ import service.StoreService;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -86,12 +88,12 @@ public class StoreDaoImpl extends BaseDaoImpl<Store> implements StoreDao {
      */
     @Override
     public Long saveStore(Store store) throws SQLException {
-        //受影响的行数
-        String saveSqlDefault = "INSERT INTO store(STORE_NUM,STORE_NAME,CREDIT,PEOPLE_ID) VALUES(?,?,?,?)";
-        //设置参数
-       jdbcTemplate.update(saveSqlDefault,store.getStoreNum(),store.getStoreName(),store.getCredit(),store.getPeopleId());
-        Long storeId = storeService.findStoreByStoreNum(store.getStoreNum()).getId();
-        return storeId;
+        //执行存储操作
+        this.sqlSessionTemplate.insert(getMybaitsNameSpace() + "saveStore", store);
+        //调用不确定条件查询已保存的记录的id
+        List<Map<String,Object>> map = new ArrayList<Map<String,Object>>();
+        map.add(AddConditionUtils.addCondition("store_num", "=", store.getStoreNum()));
+        return storeService.findStoreByUnSureCondition(map).get(0).getId();
     }
 
     /**
@@ -106,10 +108,8 @@ public class StoreDaoImpl extends BaseDaoImpl<Store> implements StoreDao {
      */
     @Override
     public Integer deleteStoreById(Long id) throws SQLException {
-        Integer number = 0;
-        String deleteSql = "DELETE FROM store WHERE ID=?;";
-        number=jdbcTemplate.update(deleteSql,id);
-        return number;
+
+       return this.sqlSessionTemplate.delete(getMybaitsNameSpace() + "deleteStoreById", id);
     }
 
     /**
@@ -125,11 +125,12 @@ public class StoreDaoImpl extends BaseDaoImpl<Store> implements StoreDao {
      */
     @Override
     public Integer updateStoreById(Long id,Store store) throws SQLException {
-        Integer number = 0;
-        String updateSql = "UPDATE store SET STORE_NUM=?,STORE_NAME=?,CREDIT=?,PEOPLE_ID=? WHERE ID=?;";
-        number=
-                jdbcTemplate.update(updateSql,store.getStoreNum(),store.getStoreName(),store.getCredit(),store.getPeopleId());
-        return number;
+        List<Map<String,Object>> map = new ArrayList<Map<String,Object>>();
+        Map map1 = new HashMap();
+        Map map2 = new HashMap();
+        map1.put("store",store);
+        map2.put("id",id);
+        return this.sqlSessionTemplate.update(getMybaitsNameSpace() + "updateStoreById", map);
     }
     /**
      * @Title: findStoreByUnSureCondition
