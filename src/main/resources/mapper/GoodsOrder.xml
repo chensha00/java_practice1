@@ -14,8 +14,29 @@
     <sql id="goodsOrderSql">
         ID,ORDER_NUM ,PEOPLE_ID ,TOTAL_MONEY ,ADD_TIME ,SUCCESS_TIME ,ORDER_STATUS ,IS_INVALID
     </sql>
+
+    <select id="findGoodsOrderById" resultMap="goodsOrder" parameterType="domain.GoodsOrder">
+        SELECT <include refid="goodsOrderSql"/>FROM goods_order WHERE ID=#{id}
+    </select>
+
+    <insert id="addGoodsOrderById" parameterMap="goodsOrder" parameterType="domain.GoodsOrder">
+        INSERT INTO goods_order(ID,ORDER_NUM ,PEOPLE_ID,TOTAL_MONEY,ADD_TIME,SUCCESS_TIME,ORDER_STATUS,IS_INVALID)
+                VALUES(DEFAULT,#{id,jdbcType=BIGINT},#{orderNum,jdbcType=VARCHAR},#{peopleId,jdbcType=BIGINT},#{totalMoney,jdbcType=DECIMAL},
+                #{addTime,jdbcType=TIMESTAMP},#{successTime,jdbcType=TIMESTAMP},#{orderStatus,jdbcType=TINYINT},#{isInvalid,jdbcType=TINYINT};
+        INSERT INTO goods_order(ID,ORDER_NUM ,PEOPLE_ID,TOTAL_MONEY,ADD_TIME,ORDER_STATUS,IS_INVALID)
+                VALUES(DEFAULT,#{id,jdbcType=BIGINT},#{orderNum,jdbcType=VARCHAR},#{peopleId,jdbcType=BIGINT},#{totalMoney,jdbcType=DECIMAL},
+                #{addTime,jdbcType=TIMESTAMP},#{orderStatus,jdbcType=TINYINT},#{isInvalid,jdbcType=TINYINT};
+    </insert>
+
+    <update id="updateGoodsOrderById">
+        UPDATE goods_Order SET ORDER_NUM=${map.goodsOrder.orderNum},PEOPLE_ID=${map.goodsorder.peopleId} ,TOTAL_MONEY=${map.goodsorder.totalMoney} ,ADD_TIME=${map.goodsorder.addTime} ,SUCCESS_TIME=${map.goodsorder.successTime} ,ORDER_STATUS=${map.goodsorder.orderStatus} ,IS_INVALID=${map.goodsorder.isInvalid} WHERE ID=${map.id};
+    </update>
+
+    <select id="findGoodsOrderByNum" resultMap="goodsOrder" resultType="domain.GoodsOrder">
+        SELECT ID,ORDER_NUM ,PEOPLE_ID ,TOTAL_MONEY ,ADD_TIME ,SUCCESS_TIME ,ORDER_STATUS ,IS_INVALID FROM goods_order WHERE ORDER_NUM=#{orderNum};
+    </select>
     <!--通过人员id获取订单信息-->
     <select id="findGoodsOrderByPeopleId" resultType="java.util.Map" resultMap="goodsOrder">
-        SELECT <include refid="goodsOrderSql"/> FROM GOODS_ORDER
+        SELECT ID,ORDER_NUM ,PEOPLE_ID ,TOTAL_MONEY ,ADD_TIME ,SUCCESS_TIME ,ORDER_STATUS ,IS_INVALID FROM goods_order WHERE PEOPLE_ID=#(peopleId);
     </select>
 </mapper>

@@ -54,49 +54,18 @@ public class OffLoadingServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        session.setAttribute("username","zhangsan1");
-        String username = (String) session.getAttribute("username");
-
-        String sqlUserName = " '" + username + "' ";
+         //接收数据（商品信息和店铺信息）
+        Long storeId =(Long)req.getAttribute("storeId");
+        Long goodId =(Long)req.getAttribute("goodId");
+        //通过两个id查找库存表，获取该条记录的库存id
         List<Map<String,Object>> map = new ArrayList<Map<String,Object>>();
-        map.add(AddConditionUtils.addCondition("username", "=", sqlUserName));
+        map.add(AddConditionUtils.addCondition("store_id", "=", storeId));
+        map.add(AddConditionUtils.addCondition("good_id", "=", goodId));
         try {
-            //一个人只能同时拥有一个店
-            List<People> peoples = new ArrayList<People>();
-            peoples = peopleService.findPeopleByUnSureCondition(map);
-            if(peoples.get(0) != null ){
-                List<Map<String,Object>> map1 = new ArrayList<Map<String,Object>>();
-                map1.add(AddConditionUtils.addCondition("people_Id", "=", peoples.get(0).getId()));
-                List<Store> stores = new ArrayList<Store>();
-                stores = storeService.findStoreByUnSureCondition(map1);
-                //测试mybatis
-                Store store = new Store();
-                store = storeService.findStoreById(1L);
-                System.out.println(store.getStoreNum());
-                if (stores.get(0) == null){
-                    session.setAttribute("peoples",peoples);
-                    req.getRequestDispatcher("../people_open_store.jsp").forward(req,resp);
-                }else{
-                    //根据店铺id查找到库存信息
-                    List<Invertory> invertories = new ArrayList<Invertory>();
-                    List<Map<String,Object>> map2 = new ArrayList<Map<String,Object>>();
-                    map2.add(AddConditionUtils.addCondition("store_id","=",stores.get(0).getId()));
-                    invertories = invertoryService.findInvertoryByUnSureCondition(map2);
-                    //再根据库存编号中的商品id查找商品信息
-                    List<Goods> goods = new ArrayList<Goods>();
-                    for (int i = 0; i < invertories.size() ; i++) {
-                        Goods good = new Goods();
-                        good = goodsService.findGoodsById(invertories.get(i).getGoodsId());
-                        goods.add(good);
-                    }
-                    session.setAttribute("stores",stores);
-                    session.setAttribute("peoples",peoples);
-                    session.setAttribute("invertorys",invertories);
-                    session.setAttribute("goods",goods);
-                    req.getRequestDispatcher("../store_home_page.jsp").forward(req,resp);
-
-                }
+            List<Invertory> invertory = invertoryService.findInvertoryByUnSureCondition(map);
+            int res =  invertoryService.deleteInvertoryById(invertory.get(0).getId());
+            if (res!=0){
+                System.out.println("下架成功");
             }
         } catch (SQLException e) {
             e.printStackTrace();
