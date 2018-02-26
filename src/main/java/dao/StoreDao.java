@@ -86,14 +86,15 @@ public interface StoreDao {
      * @return: 受影响行数
      */
     public Integer updateStoreById(Long id, Store store) throws SQLException;
+
     /**
+     * @param map 条件和值对应key和value
      * @Title: findStoreByUnSureCondition
      * @Description: 商铺的不确定条件查询
      * @author hzq
      * @date 2018/01/30
-     * @param map 条件和值对应key和value
      * @throw SQLException
      */
-    public List<Store> findStoreByUnSureCondition(List<Map<String,Object>> map)
+    public List<Store> findStoreByUnSureCondition(List<Map<String, Object>> map)
             throws SQLException;
 }

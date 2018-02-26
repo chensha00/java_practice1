@@ -23,16 +23,17 @@
     </sql>
     <!--查询所有-->
     <select id="getAll" resultType="java.util.Map" resultMap="payFlow">
-        SELECT <include refid="payFlowSql"/> FROM PAYFLOW
+        SELECT
+        <include refid="payFlowSql"/>
+        FROM PAYFLOW
     </select>
+
+
     <!--添加-->
-    <insert id="add" parameterType="domain.PayFlow">
-        INSERT INTO payFlow(ID,FLOW_NUM,PEOPLE_ID,MONEY,FLOW_TYPE,CRATE_TIME,ORDER_DETAIL_ID,GOODS_ORDER_ID) VALUES(DEFAULT ,
-        #{flowNum,jdbcType=VARCHAR},#{peopleId,jdbcType=BIGINT},#{money,jdbcType=DECIMAL},#{flowType,jdbcType=TINYINT},
-        #{crateTime,jdbcType=TIMESTAMP},#{orderDetailId,jdbcType=BIGINT},#{goodsOrderId,jdbcType=BIGINT})
+    <insert id="add">
+        INSERT INTO PAYFLOW(ID,FLOW_NUM,PEOPLE_ID,MONEY,FLOW_TYPE,CRATE_TIME,ORDER_DETAIL_ID,GOODS_ORDER_ID) VALUES(DEFAULT ,
+        ${payFlow.flowNum},${payFlow.peopleId},${payFlow.money},${payFlow.flowType},
+        ${payFlow.crateTime},${payFlow.orderDetailId},${payFlow.goodsOrderId})
     </insert>
-    <!--<delete id="deleteById" parameterType="java.util.Map">-->
-    <!--DELETE FROM STU_TABLE WHERE ID IN-->
-    <!--</delete>-->
 
 </mapper>

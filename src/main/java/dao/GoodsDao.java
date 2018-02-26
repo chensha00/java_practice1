@@ -34,10 +34,11 @@ public interface GoodsDao {
      * @param: preparedStatement 预编译Statement
      * @return: 商品对象
      */
-    public List<Goods>  findGoodsById(Long id);
+    public List<Goods> findGoodsById(Long id);
 
 
     public List<Goods> findGoodsAll();
+
     /**
      * @Title: saveGoods
      * @Description: 保存商品信息
@@ -78,8 +79,6 @@ public interface GoodsDao {
      */
     public Integer updateGoodsById(Long id, Goods goods);
 }
-
-
 
 
 //public interface GoodsDao {

@@ -30,6 +30,7 @@ public class PeopleDaoImpl implements PeopleDao {
     private PeopleService peopleService;
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
     /**
      * @Title: findPeopleById
      * @Description: 通过指定Id查找人员
@@ -56,7 +57,7 @@ public class PeopleDaoImpl implements PeopleDao {
         //获取结果集合
 //        resultSet = preparedStatement.executeQuery();
         //获取人员对象信息
-       List<People> peoples = jdbcTemplate.query(findSql, new ResultSetExtractor<List<People>>() {
+        List<People> peoples = jdbcTemplate.query(findSql, new ResultSetExtractor<List<People>>() {
             @Override
             public List<People> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
                 List<People> peoples = new ArrayList<People>();
@@ -75,7 +76,7 @@ public class PeopleDaoImpl implements PeopleDao {
                 }
                 return peoples;
             }
-        },id);
+        }, id);
 //        connection.commit();
         //关闭预编译Statement对象
 //        preparedStatement.close();
@@ -95,7 +96,7 @@ public class PeopleDaoImpl implements PeopleDao {
      * @return: 人员对象
      */
     @Override
-    public People findPeopleByUserName(String userName,String password) throws SQLException{
+    public People findPeopleByUserName(String userName, String password) throws SQLException {
         //定义员对象
         People people = new People();
         //定义结果集合
@@ -131,7 +132,7 @@ public class PeopleDaoImpl implements PeopleDao {
                 }
                 return peoples;
             }
-        },userName,password);
+        }, userName, password);
 //        connection.commit();
         //关闭预编译Statement对象
 //        preparedStatement.close();
@@ -146,6 +147,7 @@ public class PeopleDaoImpl implements PeopleDao {
 //        connection.close();
         //返回人员对象
     }
+
     /**
      * @Title: savePeople
      * @Description: 保存人员信息
@@ -163,15 +165,15 @@ public class PeopleDaoImpl implements PeopleDao {
 //        String saveSqlAll = "INSERT INTO people(ID,NAME,CARD_ID,SEX,AGE,MONEY,ADDRESS,USERNAME,PASSWORD) VALUES(?,?,?,?,?,?,?,?,?);";
         String saveSqlDefault = "INSERT INTO people(ID,NAME,CARD_ID,SEX,AGE,MONEY,ADDRESS,USERNAME,PASSWORD) VALUES(DEFAULT,?,?,?,?,?,?,?,?);";
 //        if (people.getId() == 0) {
-            preparedStatement = connection.prepareStatement(saveSqlDefault);
-            preparedStatement.setString(1, people.getName());
-            preparedStatement.setString(2, people.getCardId());
-            preparedStatement.setString(3, people.getSex());
-            preparedStatement.setInt(4, people.getAge());
-            preparedStatement.setDouble(5, people.getMoney());
-            preparedStatement.setString(6, people.getAddress());
-            preparedStatement.setString(7, people.getUsreName());
-            preparedStatement.setString(8, people.getPassWord());
+        preparedStatement = connection.prepareStatement(saveSqlDefault);
+        preparedStatement.setString(1, people.getName());
+        preparedStatement.setString(2, people.getCardId());
+        preparedStatement.setString(3, people.getSex());
+        preparedStatement.setInt(4, people.getAge());
+        preparedStatement.setDouble(5, people.getMoney());
+        preparedStatement.setString(6, people.getAddress());
+        preparedStatement.setString(7, people.getUsreName());
+        preparedStatement.setString(8, people.getPassWord());
 //        } else {
 //            preparedStatement = connection.prepareStatement(saveSqlAll);
 //            preparedStatement.setLong(1, people.getId());
@@ -249,26 +251,26 @@ public class PeopleDaoImpl implements PeopleDao {
     }
 
     /**
+     * @param map              条件和值对应key和value
+     * @param connection       连接对象
+     * @param prepareStatement 预编译 Statement对象
      * @Title: findPeopleByUnSureCondition
      * @Description: 方法描述
      * @author hzq
      * @date 2018/01/30
-     * @param map 条件和值对应key和value
-     * @param connection 连接对象
-     * @param prepareStatement 预编译 Statement对象
      * @throw SQLException
      */
-    public List<People> findPeopleByUnSureCondition(List<Map<String,Object>> map,Connection connection, PreparedStatement prepareStatement)
-            throws SQLException{
+    public List<People> findPeopleByUnSureCondition(List<Map<String, Object>> map, Connection connection, PreparedStatement prepareStatement)
+            throws SQLException {
         List<People> peoples = new ArrayList<People>();
         //通过拼接sql语句来实现动态的不确定条件查询
         StringBuffer sql = new StringBuffer();
         sql.append("SELECT ID,NAME,CARD_ID,SEX,AGE,MONEY,ADDRESS,USERNAME,PASSWORD FROM people WHERE 1 =1 ");
-        if(map!=null&&map.size()>0){
-            for(int i = 0;i<map.size();i++){
+        if (map != null && map.size() > 0) {
+            for (int i = 0; i < map.size(); i++) {
                 //将条件拼接到sql中
-                Map<String,Object> condition = map.get(i);
-                sql.append(" and " + condition.get("name") + " " + condition.get("rela") + " " + condition.get("value")+" ");
+                Map<String, Object> condition = map.get(i);
+                sql.append(" and " + condition.get("name") + " " + condition.get("rela") + " " + condition.get("value") + " ");
             }
         }
         //输出sql语句并执行sql语句
@@ -276,7 +278,7 @@ public class PeopleDaoImpl implements PeopleDao {
         prepareStatement = connection.prepareStatement(sql.toString());
         ResultSet resultSet = prepareStatement.executeQuery();
         //将结果放入list中返回
-        while(resultSet.next()){
+        while (resultSet.next()) {
             People people = new People();
             people.setId(resultSet.getLong(1));
             people.setName(resultSet.getString(2));

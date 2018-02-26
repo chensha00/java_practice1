@@ -39,7 +39,8 @@ public interface PeopleDao {
      * @param: password 密码
      * @return: 人员对象
      */
-    public People findPeopleByUserName(String userName,String password) throws SQLException;
+    public People findPeopleByUserName(String userName, String password) throws SQLException;
+
     /**
      * @Title: savePeople
      * @Description: 插入人员信息
@@ -78,16 +79,17 @@ public interface PeopleDao {
      */
     public Integer updatePeopleById(Long id, People people, Connection connection, PreparedStatement prepareStatement)
             throws SQLException;
+
     /**
+     * @param map              条件和值对应key和value
+     * @param connection       连接对象
+     * @param prepareStatement 预编译 Statement对象
      * @Title: findPeopleByUnSureCondition
      * @Description: 方法描述
      * @author hzq
      * @date 2018/01/30
-     * @param map 条件和值对应key和value
-     * @param connection 连接对象
-     * @param prepareStatement 预编译 Statement对象
      * @throw SQLException
      */
-    public List<People> findPeopleByUnSureCondition(List<Map<String,Object>> map,Connection connection, PreparedStatement prepareStatement)
-        throws SQLException;
+    public List<People> findPeopleByUnSureCondition(List<Map<String, Object>> map, Connection connection, PreparedStatement prepareStatement)
+            throws SQLException;
 }

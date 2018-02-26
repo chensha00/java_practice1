@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="domain.Invertory">
-
-    <!--<resultMap type="domain.Test" id="test">-->
-    <!--<id property="id" column="id" jdbcType="BIGINT" javaType="java.lang.Long"/>-->
-    <!--<result property="name" column="NAME" jdbcType="VARCHAR"/>-->
-    <!--</resultMap>-->
-
+    <!--定义结果集-->
     <resultMap id="invertory" type="domain.Invertory">
         <id property="id" column="ID" jdbcType="BIGINT" javaType="java.lang.Long"/>
         <result property="storeId" column="STORE_ID" jdbcType="BIGINT" javaType="java.lang.Long"/>
@@ -15,22 +10,31 @@
         <result property="number" column="NUMBER" jdbcType="DOUBLE" javaType="java.lang.Double"/>
     </resultMap>
 
+    <!--sql语句-->
     <sql id="invertorySql">
         ID,STORE_ID,GOODS_ID,PRICE,NUMBER
     </sql>
     <!--查询所有-->
     <select id="getAll" resultType="java.util.Map" resultMap="invertory">
-        SELECT <include refid="invertorySql"/> FROM INVERTORY
+        SELECT
+        <include refid="invertorySql"/>
+        FROM INVERTORY
     </select>
+
+
     <!--添加-->
-    <insert id="add" parameterType="domain.Invertory">
-        INSERT INTO INVERTORY(ID,STORE_ID,GOODS_ID,PRICE,NUMBER) VALUES(DEFAULT ,
-        #{STORE_ID,jdbcType=BIGINT},#{GOODS_ID,jdbcType=BIGINT},#{PRICE,jdbcType=DECIMAL},#{NUMBER,jdbcType=DOUBLE})
+    <insert id="save">
+        INSERT INTO INVERTORY(ID,STORE_ID,GOODS_ID,PRICE,NUMBER) VALUES(DEFAULT,
+        ${invertory.storeId},${invertory.goodsId},${invertory.price},${invertory.number})
     </insert>
-    <delete id="deleteById" parameterType="java.util.Map">
-    DELETE FROM INVERTORY WHERE ID IN
+    <!--根据ID删除-->
+    <delete id="deleteById">
+        DELETE FROM INVERTORY WHERE ID=#{id}
     </delete>
-    <update id="updateById" parameterType="java.util.Map">
+    <!--根据ID进行修改-->
+    <update id="updateById">
+         UPDATE INVERTORY SET STORE_ID=${map.invertory.storeId},GOODS_ID=${map.invertory.goodsId},
+         PRICE=${map.invertory.price},NUMBER=${map.invertory.number} WHERE ID=${map.id};
     </update>
 
 </mapper>
