@@ -30,7 +30,7 @@ public interface InvertoryDao {
      * @param: invertory 库存对象
      * @return: 受影响行数
      */
-    public Long saveInvertory(Invertory invertory);
+    public Integer saveInvertory(Invertory invertory);
 
     /**
      * @Title: findInvertoryById

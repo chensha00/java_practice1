@@ -11,7 +11,6 @@ package service;/***************************************************************
 import domain.Goods;
 import domain.Invertory;
 import domain.Store;
-import org.springframework.stereotype.Service;
 import tools.GoodsException;
 
 import java.sql.SQLException;
@@ -36,7 +35,7 @@ public interface InvertoryService {
      * @param: invertory 库存对象
      * @return: 受影响行数
      */
-    public Long saveInvertory(Invertory invertory);
+    public Integer saveInvertory(Invertory invertory);
 
     /**
      * @Title: findInvertoryById

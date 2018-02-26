@@ -27,8 +27,10 @@
         INSERT INTO INVERTORY(ID,STORE_ID,GOODS_ID,PRICE,NUMBER) VALUES(DEFAULT ,
         #{STORE_ID,jdbcType=BIGINT},#{GOODS_ID,jdbcType=BIGINT},#{PRICE,jdbcType=DECIMAL},#{NUMBER,jdbcType=DOUBLE})
     </insert>
-    <!--<delete id="deleteById" parameterType="java.util.Map">-->
-    <!--DELETE FROM STU_TABLE WHERE ID IN-->
-    <!--</delete>-->
+    <delete id="deleteById" parameterType="java.util.Map">
+    DELETE FROM INVERTORY WHERE ID IN
+    </delete>
+    <update id="updateById" parameterType="java.util.Map">
+    </update>
 
 </mapper>
