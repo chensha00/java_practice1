@@ -61,6 +61,9 @@
                         <div class="store_home_goodPrice">
                                 ${invertory.price}
                         </div>
+                        <div class="store_home_goodPrice">
+                                商品下架
+                        </div>
                     </div>
                 </div>
                     </c:forEach>
