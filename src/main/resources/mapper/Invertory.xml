@@ -23,7 +23,7 @@
         SELECT <include refid="invertorySql"/> FROM INVERTORY
     </select>
     <!--添加-->
-    <insert id="add" parameterType="domain.Invertory">
+    <insert id="add" parameterType="domain.invertory">
         INSERT INTO INVERTORY(ID,STORE_ID,GOODS_ID,PRICE,NUMBER) VALUES(DEFAULT ,
         #{STORE_ID,jdbcType=BIGINT},#{GOODS_ID,jdbcType=BIGINT},#{PRICE,jdbcType=DECIMAL},#{NUMBER,jdbcType=DOUBLE})
     </insert>
