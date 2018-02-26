@@ -9,11 +9,11 @@
         <result property="storeId" column="STORE_ID" jdbcType="BIGINT" javaType="java.lang.Long"/>
         <result property="goodsId" column="GOODS_ID" jdbcType="BIGINT" javaType="java.lang.Long"/>
         <result property="goodsOrderId" column="GOODS_ORDER_ID" jdbcType="BIGINT" javaType="java.lang.Long"/>
-        <result property="number" column="NUMBER" jdbcType="DOUBLE" javaType="java.util.Double"/>
+        <result property="number" column="NUMBER" jdbcType="DOUBLE" javaType="java.lang.Double"/>
         <result property="goodsPrice" column="GOODS_PRICE" jdbcType="DECIMAL" javaType="java.lang.Double"/>
         <result property="goodsAmount" column="GOODS_AMOUNT" jdbcType="DECIMAL" javaType="java.lang.Double"/>
-        <result property="addTime" column="ADD_TIME" jdbcType="TIMESTAMP" javaType="java.lang.Date"/>
-        <result property="successTime" column="SUCCESS_TIME" jdbcType="TIMESTAMP" javaType="java.lang.Date"/>
+        <result property="addTime" column="ADD_TIME" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result property="successTime" column="SUCCESS_TIME" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
         <result property="deliveryTime" column="DELIVERY_TIME" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
         <result property="orderStatus" column="ORDER_STATUS" jdbcType="TINYINT" javaType="java.lang.Byte"/>
         <result property="isInvalid" column="IS_INVALID" jdbcType="TINYINT" javaType="java.lang.Boolean"/>
