@@ -25,3 +25,4 @@ zyht_web.iml
 .idea/.name
 target/MANIFEST.MF
 target/zyht_web-1.0-SNAPSHOT/META-INF/MANIFEST.MF
+*.MF
