@@ -30,7 +30,7 @@
         </foreach>
     </select>
     <insert id="saveStore">
-        INSERT INTO store(STORE_NUM,STORE_NAME,CREDIT,PEOPLE_ID) VALUES(${store.storeNum},${store.stoytnassm1},${store.credit},${store.peopleId})
+        INSERT INTO store(STORE_NUM,STORE_NAME,CREDIT,PEOPLE_ID) VALUES(${store.storeNum},${store.storeName},${store.credit},${store.peopleId})
     </insert>
     <delete id="deleteStoreById">
         DELETE FROM store WHERE ID=#{id}

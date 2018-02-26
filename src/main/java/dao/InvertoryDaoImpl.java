@@ -228,6 +228,7 @@ public class InvertoryDaoImpl extends BaseDaoImpl<Invertory> implements Invertor
                 }
                 return mainPages;
             }
+
         });
         return mainPages;
     }
