@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="domain.People">
+
+    <!--<resultMap type="domain.Test" id="test">-->
+        <!--<id property="id" column="id" jdbcType="BIGINT" javaType="java.lang.Long"/>-->
+        <!--<result property="name" column="NAME" jdbcType="VARCHAR"/>-->
+    <!--</resultMap>-->
+
+    <resultMap id="people" type="domain.People">
+        <id property="id" column="ID" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <result property="name" column="NAME" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="cardId" column="CARD_ID" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="sex" column="SEX" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="age" column="AGE" javaType="java.lang.Integer"/>
+        <result property="money" column="MONEY" jdbcType="DECIMAL" javaType="java.lang.Double"/>
+        <result property="address" column="ADDRESS" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="usreName" column="USERNAME" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="passWord" column="PASSWORD" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    </resultMap>
+    <!--NAME=#{name,jdbcType=VARCHAR},CARD_ID=#{cardId,jdbcType=VARCHAR},SEX=#{sex,jdbcType=VARCHAR},AGE=#{age},MONEY=#{money,jdbcType=DECIMAL},ADDRESS=#{address,jdbcType=VARCHAR},USERNAME=#{usreName,jdbcType=VARCHAR},PASSWORD=#{passWord,jdbcType=VARCHAR}-->
+    <!--查询人员表所对应的列-->
+    <sql id="peopleSql">
+        ID,NAME,CARD_ID,SEX,AGE,MONEY,ADDRESS,USERNAME,PASSWORD
+    </sql>
+    <!--查询store所对应的列-->
+    <!--<sql id="storeSql">-->
+        <!--ID,STORE_NUM,STORE_NAME,CREDIT,PEOPLE_ID-->
+    <!--</sql>-->
+    <!--查询人员信息 根据指定id-->
+    <select id="getPoepleById"  resultMap="people" parameterType="java.lang.Long">
+        SELECT <include refid="peopleSql"/> FROM people WHERE ID=#{id}
+    </select>
+    <!--删除人员信息根据指定id-->
+    <delete id="deletePeopleById" parameterType="java.lang.Long">
+        DELETE FROM people WHERE ID=#{id}
+    </delete>
+    <!--更新人员信息-->
+    <update id="updatePeople" parameterType="domain.People">
+        UPDATE people SET NAME=#{name,jdbcType=VARCHAR},CARD_ID=#{cardId,jdbcType=VARCHAR},SEX=#{sex,jdbcType=VARCHAR},
+        AGE=#{age},MONEY=#{money,jdbcType=DECIMAL},ADDRESS=#{address,jdbcType=VARCHAR},USERNAME=#{usreName,jdbcType=VARCHAR},
+        PASSWORD=#{passWord,jdbcType=VARCHAR} WHERE ID=#{id}
+    </update>
+
+    <!--插入人员信息-->
+    <insert id="savePeople" parameterType="domain.People">
+        <selectKey order="BEFORE" keyProperty="id" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO people(ID,<include refid="peopleSql"/>) VALUES(DEFAULT,NAME=#{name,jdbcType=VARCHAR},
+        CARD_ID=#{cardId,jdbcType=VARCHAR},SEX=#{sex,jdbcType=VARCHAR},AGE=#{age},MONEY=#{money,jdbcType=DECIMAL},
+        ADDRESS=#{address,jdbcType=VARCHAR},USERNAME=#{usreName,jdbcType=VARCHAR},PASSWORD=#{passWord,jdbcType=VARCHAR})
+    </insert>
+
+    <!--查询指定用户名密码的人员信息-->
+    <select id="findPeopleByUserName" resultMap="people">
+        SELECT <include refid="peopleSql"/> FROM people WHERE USERNAME=#{usreName,jdbcType=VARCHAR} AND
+        PASSWORD=#{passWord,jdbcType=VARCHAR}
+    </select>
+    <!--查询所有store信息-->
+    <!--<select id="getStoreAll" resultMap="store">-->
+        <!--SELECT <include refid="storeSql"/> FROM store-->
+    <!--</select>-->
+</mapper>

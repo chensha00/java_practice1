@@ -45,9 +45,9 @@ public class InvertoryServiceImpl implements InvertoryService {
      * @return: 受影响行数
      */
     @Override
-    public Long saveInvertory(Invertory invertory) {
+    public Integer saveInvertory(Invertory invertory) {
 
-        Long number = 0L;
+        Integer number = 0;
 
             number = invertoryDao.saveInvertory(invertory);
 

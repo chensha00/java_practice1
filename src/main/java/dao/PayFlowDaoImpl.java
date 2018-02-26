@@ -8,6 +8,7 @@ package dao;/*******************************************************************
  * @version V1.0
  */
 
+import common.util.base.BaseDaoImpl;
 import domain.PayFlow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -17,7 +18,8 @@ import org.springframework.stereotype.Repository;
 import service.PayFlowService;
 import tools.TimeFormat;
 
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -28,8 +30,8 @@ import java.util.Map;
  * @Description 流水表SQL的实现
  * @date 2018/1/20
  */
-@Repository ("payFlowDao")
-public class PayFlowDaoImpl implements PayFlowDao {
+@Repository("payFlowDao")
+public class PayFlowDaoImpl extends BaseDaoImpl<PayFlow> implements PayFlowDao {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -123,18 +125,8 @@ public class PayFlowDaoImpl implements PayFlowDao {
      */
     @Override
     public Long savePayFlow(PayFlow payFlow) throws SQLException {
-        String insertSql1 = "INSERT INTO pay_flow(ID,FLOW_NUM,PEOPLE_ID,MONEY,FLOW_TYPE,CREATE_TIME,ORDER_DETAIL_ID,GOODS_ORDER_ID) VALUES(DEFAULT,?,?,?,?,?,?,?);";
-        String insertSql2 = "INSERT INTO pay_flow(ID,FLOW_NUM,PEOPLE_ID,MONEY,FLOW_TYPE,CREATE_TIME,GOODS_ORDER_ID) VALUES(DEFAULT,?,?,?,?,?,?);";
-
-        if (payFlow.getOrderDetailId() != null) {
-            jdbcTemplate.update(insertSql1, payFlow.getFlowNum(), payFlow.getPeopleId(), payFlow.getMoney(), payFlow.getFlowType(),
-                    payFlow.getCrateTime(), payFlow.getGoodsOrderId(), payFlow.getOrderDetailId(), payFlow.getGoodsOrderId());
-        } else {
-            jdbcTemplate.update(insertSql2, payFlow.getFlowNum(), payFlow.getPeopleId(), payFlow.getMoney(), payFlow.getFlowType(),
-                    payFlow.getCrateTime(), payFlow.getGoodsOrderId());
-        }
-        Long payFlowId = payFlowService.findPayFlowByFlowNum(payFlow.getFlowNum()).getPayFlowId();
-        return payFlowId;
+        this.sqlSessionTemplate.insert(getMybaitsNameSpace() + "add", payFlow);
+        return null;
     }
 
 

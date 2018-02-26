@@ -10,14 +10,8 @@ package dao;/*******************************************************************
 
 import common.util.base.BaseDaoImpl;
 import domain.Goods;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Repository;
 
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,17 +26,17 @@ public class GoodsDaoImpl extends BaseDaoImpl<Goods> implements GoodsDao {
     @Override
     public List<Goods> findGoodsById(Long id) {
         //查询所有的商品
-        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace()+"getAll");
+        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "getAll");
     }
 
     @Override
-    public List<Goods> findGoodsAll(){
-        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace()+"getAll");
+    public List<Goods> findGoodsAll() {
+        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "getAll");
     }
+
     @Override
     public Integer saveGoods(Goods goods) {
-
-        this.sqlSessionTemplate.insert(getMybaitsNameSpace()+"add",goods);
+        this.sqlSessionTemplate.insert(getMybaitsNameSpace() + "add", goods);
         return null;
     }
 
@@ -58,9 +52,6 @@ public class GoodsDaoImpl extends BaseDaoImpl<Goods> implements GoodsDao {
         return null;
     }
 }
-
-
-
 
 
 //@Repository("goodsDao")

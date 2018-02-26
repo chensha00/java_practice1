@@ -293,7 +293,7 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
      * @return: 订单详情集合
      * @throws: SQLException
      */
-    public List<OrderDetail> findOrderDetailByPeopleId(Long peopleId,Connection connection, PreparedStatement preparedStatement) throws SQLException{
+    public List<OrderDetail> findOrderDetailByPeopleId(Long peopleId, Connection connection, PreparedStatement preparedStatement) throws SQLException {
         //定义订单详情集合对象
         List<OrderDetail> orderDetailList = new ArrayList<OrderDetail>();
         //定义结果集合

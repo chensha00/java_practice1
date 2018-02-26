@@ -20,7 +20,7 @@ public class PayFlow {
     /**
      * payFlowId 主键ID
      */
-    private Long payFlowId;
+    private Long id;
     /**
      * flowNum 流水号
      */
@@ -65,11 +65,11 @@ public class PayFlow {
     //封装
 
     public Long getPayFlowId() {
-        return payFlowId;
+        return id;
     }
 
-    public void setPayFlowId(Long payFlowId) {
-        this.payFlowId = payFlowId;
+    public void setPayFlowId(Long id) {
+        this.id = id;
     }
 
     public String getFlowNum() {
@@ -175,8 +175,8 @@ public class PayFlow {
         this.goodsOrderId = goodsOrderId;
     }
 
-    public PayFlow(Long payFlowId, String flowNum, Long peopleId, People people, Double money, Byte flowType, Date crateTime, Long orderDetailId, OrderDetail orderDetail, Long goodsOrderId, GoodsOrder goodsOrder) {
-        this.payFlowId = payFlowId;
+    public PayFlow(Long id, String flowNum, Long peopleId, People people, Double money, Byte flowType, Date crateTime, Long orderDetailId, OrderDetail orderDetail, Long goodsOrderId, GoodsOrder goodsOrder) {
+        this.id = id;
         this.flowNum = flowNum;
         this.peopleId = peopleId;
         this.people = people;

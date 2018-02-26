@@ -13,13 +13,10 @@ import common.util.base.BaseDaoImpl;
 import domain.Store;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Repository;
 import service.StoreService;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,6 +37,7 @@ public class StoreDaoImpl extends BaseDaoImpl<Store> implements StoreDao {
     private SqlSessionTemplate sqlSessionTemplate;
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
     /**
      * @Title: findStoreById
      * @Description: 通过指定Id查找商铺
@@ -55,7 +53,7 @@ public class StoreDaoImpl extends BaseDaoImpl<Store> implements StoreDao {
     public List<Store> findStoreById(Long id) throws SQLException {
 
         //查询所有的商品
-        return  this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findStoreById",id);
+        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findStoreById", id);
     }
 
     /**
@@ -71,7 +69,7 @@ public class StoreDaoImpl extends BaseDaoImpl<Store> implements StoreDao {
      */
     public Store findStoreByStoreNum(String storeNum) throws SQLException {
 
-        return this.sqlSessionTemplate.selectOne(getMybaitsNameSpace() + "findStoreByStoreNum",storeNum);
+        return this.sqlSessionTemplate.selectOne(getMybaitsNameSpace() + "findStoreByStoreNum", storeNum);
     }
 
 
@@ -91,7 +89,7 @@ public class StoreDaoImpl extends BaseDaoImpl<Store> implements StoreDao {
         //执行存储操作
         this.sqlSessionTemplate.insert(getMybaitsNameSpace() + "saveStore", store);
         //调用不确定条件查询已保存的记录的id
-        List<Map<String,Object>> map = new ArrayList<Map<String,Object>>();
+        List<Map<String, Object>> map = new ArrayList<Map<String, Object>>();
         map.add(AddConditionUtils.addCondition("store_num", "=", store.getStoreNum()));
         return storeService.findStoreByUnSureCondition(map).get(0).getId();
     }
@@ -109,7 +107,7 @@ public class StoreDaoImpl extends BaseDaoImpl<Store> implements StoreDao {
     @Override
     public Integer deleteStoreById(Long id) throws SQLException {
 
-       return this.sqlSessionTemplate.delete(getMybaitsNameSpace() + "deleteStoreById", id);
+        return this.sqlSessionTemplate.delete(getMybaitsNameSpace() + "deleteStoreById", id);
     }
 
     /**
@@ -124,23 +122,24 @@ public class StoreDaoImpl extends BaseDaoImpl<Store> implements StoreDao {
      * @return: 受影响行数
      */
     @Override
-    public Integer updateStoreById(Long id,Store store) throws SQLException {
-        List<Map<String,Object>> map = new ArrayList<Map<String,Object>>();
+    public Integer updateStoreById(Long id, Store store) throws SQLException {
+        List<Map<String, Object>> map = new ArrayList<Map<String, Object>>();
         Map map1 = new HashMap();
         Map map2 = new HashMap();
-        map1.put("store",store);
-        map2.put("id",id);
+        map1.put("store", store);
+        map2.put("id", id);
         return this.sqlSessionTemplate.update(getMybaitsNameSpace() + "updateStoreById", map);
     }
+
     /**
+     * @param map 条件和值对应key和value
      * @Title: findStoreByUnSureCondition
      * @Description: 商铺的不确定条件查询
      * @author hzq
      * @date 2018/01/30
-     * @param map 条件和值对应key和value
      * @throw SQLException
      */
-    public List<Store> findStoreByUnSureCondition(List<Map<String,Object>> map)
+    public List<Store> findStoreByUnSureCondition(List<Map<String, Object>> map)
             throws SQLException {
 
         return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findStoreByUnSureCondition", map);

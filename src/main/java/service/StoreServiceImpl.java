@@ -244,7 +244,7 @@ public class StoreServiceImpl implements StoreService {
                 invertory.setNumber(number[i]);
                 invertory.setStoreId(store.getId());
                 invertory.setPrice(price[i]);
-                Long rows = 0L;
+                Integer rows = 0;
                 rows = invertoryService.saveInvertory(invertory);
                 //根据rows的结果返回结果
                 if (rows != 0) {

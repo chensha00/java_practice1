@@ -54,8 +54,11 @@
                     <td>密码：</td>
                     <td><input type="password" name="password" value="${person.passWord}"></td>
                 </tr>
+                <tfoot>
+                <tr>账户充值：</tr><tr>
                 <button type="button">修改账户</button>
-                <button type="button">退出账户</button>
+                <button type="button">退出账户</button></tr>
+                </tfoot>
             </table>
         </form>
 </div>

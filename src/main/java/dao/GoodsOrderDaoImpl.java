@@ -175,6 +175,7 @@ public class GoodsOrderDaoImpl implements GoodsOrderDao {
         resultSet.close();
         return goodsOrder;
     }
+
     /**
      * @Title: findGoodsOrderByPeopleId
      * @Description: 获取订单信息通过人员id
@@ -186,7 +187,7 @@ public class GoodsOrderDaoImpl implements GoodsOrderDao {
      * @return: 订单信息集合
      * @throws: SQLException
      */
-    public List<GoodsOrder> findGoodsOrderByPeopleId(Long peopleId, Connection connection, PreparedStatement preparedStatement) throws SQLException{
+    public List<GoodsOrder> findGoodsOrderByPeopleId(Long peopleId, Connection connection, PreparedStatement preparedStatement) throws SQLException {
         //定义订单对象集合
         List<GoodsOrder> goodsOrderList = new ArrayList<GoodsOrder>();
         //定义结果集合
@@ -200,7 +201,7 @@ public class GoodsOrderDaoImpl implements GoodsOrderDao {
         resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             Long id1 = resultSet.getLong(1);
-            GoodsOrder goodsOrder=new GoodsOrder();
+            GoodsOrder goodsOrder = new GoodsOrder();
             goodsOrder.setId(id1);
             goodsOrder.setOrderNum(resultSet.getString(2));
             goodsOrder.setPeopleId(resultSet.getLong(3));

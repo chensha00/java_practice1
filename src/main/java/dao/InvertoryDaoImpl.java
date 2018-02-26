@@ -23,6 +23,7 @@ import service.StoreService;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +33,7 @@ import java.util.Map;
  * @Description 库存数据库操作类实现InvertoryDao
  * @date 2018/1/25
  */
-@Repository ("invertoryDao")
+@Repository("invertoryDao")
 public class InvertoryDaoImpl extends BaseDaoImpl<Invertory> implements InvertoryDao {
 
     @Autowired
@@ -56,14 +57,9 @@ public class InvertoryDaoImpl extends BaseDaoImpl<Invertory> implements Invertor
      * @return: 受影响行数
      */
     @Override
-    public Long saveInvertory(Invertory invertory){
-        //定义对象
-        Integer number = 0;
-        //查询sql语句
-        String saveSql = "INSERT INTO invertory(ID,STORE_ID,GOODS_ID,PRICE,NUMBER) VALUES(DEFAULT,?,?,?,?);";
-        jdbcTemplate.update(saveSql, invertory.getStoreId(), invertory.getGoodsId(), invertory.getPrice(), invertory.getNumber());
-        Long invertoryId = invertoryService.findInvertoryById(invertory.getId()).getId();
-        return invertoryId;
+    public Integer saveInvertory(Invertory invertory) {
+        this.sqlSessionTemplate.insert(getMybaitsNameSpace() + "save", invertory);
+        return null;
     }
 
     /**
@@ -92,12 +88,9 @@ public class InvertoryDaoImpl extends BaseDaoImpl<Invertory> implements Invertor
      */
     @Override
     public Integer deleteInvertoryById(Long id) throws SQLException {
-        //定义对象
-        Integer number = 0;
-        //查询sql语句
-        String deleteSql = "DELETE FROM invertory WHERE ID=?;";
-        number = jdbcTemplate.update(deleteSql, id);
-        return number;
+
+        return this.sqlSessionTemplate.delete(getMybaitsNameSpace() + "deleteById", id);
+
     }
 
     /**
@@ -111,13 +104,12 @@ public class InvertoryDaoImpl extends BaseDaoImpl<Invertory> implements Invertor
      */
     @Override
     public Integer updateInvertorById(Long id, Invertory invertory) throws SQLException {
-        //定义对象
-        Integer number = 0;
-        //查询sql语句
-        String updateSql = "UPDATE invertory SET STORE_ID=?,GOODS_ID=?,PRICE=?,NUMBER=? WHERE ID=?;";
-        number =
-                jdbcTemplate.update(updateSql, invertory.getStoreId(), invertory.getGoodsId(), invertory.getPrice(), invertory.getNumber());
-        return number;
+        List<Map<String, Object>> map = new ArrayList<Map<String, Object>>();
+        Map map1 = new HashMap();
+        Map map2 = new HashMap();
+        map1.put("invertory", invertory);
+        map2.put("id", id);
+        return this.sqlSessionTemplate.update(getMybaitsNameSpace() + "updateStoreById", map);
     }
 
     /**
