@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="domain.OrderDetail">
+
+    <resultMap id="orderDetail" type="domain.OrderDetail">
+        <id property="id" column="ID" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <result property="orderNum" column="ORDER_NUM" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="peopleId" column="PEOPLE_ID" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <result property="storeId" column="STORE_ID" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <result property="goodsId" column="GOODS_ID" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <result property="goodsOrderId" column="GOODS_ORDER_ID" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <result property="number" column="NUMBER" jdbcType="DOUBLE" javaType="java.util.Double"/>
+        <result property="goodsPrice" column="GOODS_PRICE" jdbcType="DECIMAL" javaType="java.lang.Double"/>
+        <result property="goodsAmount" column="GOODS_AMOUNT" jdbcType="DECIMAL" javaType="java.lang.Double"/>
+        <result property="addTime" column="ADD_TIME" jdbcType="TIMESTAMP" javaType="java.lang.Date"/>
+        <result property="successTime" column="SUCCESS_TIME" jdbcType="TIMESTAMP" javaType="java.lang.Date"/>
+        <result property="deliveryTime" column="DELIVERY_TIME" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result property="orderStatus" column="ORDER_STATUS" jdbcType="TINYINT" javaType="java.lang.Byte"/>
+        <result property="isInvalid" column="IS_INVALID" jdbcType="TINYINT" javaType="java.lang.Boolean"/>
+    </resultMap>
+    <sql id="OrderDetailSql">
+        ID,ORDER_NUM,PEOPLE_ID,STORE_ID,GOODS_ID,GOODS_ORDER_ID,NUMBER,GOODS_PRICE,GOODS_AMOUNT,ADD_TIME,SUCCESS_TIME,DELIVERY_TIME,ORDER_STATUS,IS_INVALID
+    </sql>
+    <!--查询所有-->
+    <select id="getAll" resultType="java.util.Map" resultMap="orderDetail">
+        SELECT <include refid="OrderDetailSql"/> FROM ORDER_DETAIL
+    </select>
+    <!--添加-->
+    <insert id="add" parameterType="domain.OrderDetail">
+        INSERT INTO ORDER_DETAIL(ID,ORDER_NUM,PEOPLE_ID,STORE_ID,GOODS_ID,GOODS_ORDER_ID,NUMBER,GOODS_PRICE,GOODS_AMOUNT,ADD_TIME,SUCCESS_TIME,DELIVERY_TIME,ORDER_STATUS,IS_INVALID)
+         VALUES
+         (DEFAULT
+         ,#{orderNum,jdbcType=VARCHAR},#{peopleId,jdbcType=BIGINT},#{storeId,jdbcType=BIGINT},#{goodsId,jdbcType=BIGINT},#{goodsOrderId,jdbcType=BIGINT}
+         ,#{number,jdbcType=DOUBLE},#{goodsPrice,jdbcType=DECIMAL},#{goodsAmount,jdbcType=DECIMAL}
+         ,#{addTime,jdbcType=TIMESTAMP},#{successTime,jdbcType=TIMESTAMP},#{deliveryTime,jdbcType=TIMESTAMP}
+         ,#{orderStatus,jdbcType=TINYINT},#{isInvalid,jdbcType=TINYINT},)
+    </insert>
+
+</mapper>
