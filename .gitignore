@@ -23,3 +23,5 @@ hs_err_pid*
 zyht_web.iml
 *.xml
 .idea/.name
+target/MANIFEST.MF
+target/zyht_web-1.0-SNAPSHOT/META-INF/MANIFEST.MF
