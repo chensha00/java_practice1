@@ -2,16 +2,9 @@ package service;/**
  * Created by HS on 2018/1/20.
  */
 
-import dao.PeopleDaoImpl;
-
-
-import com.mysql.cj.jdbc.*;
-import com.mysql.cj.jdbc.*;
-import common.util.ConnectionUtils;
 import common.util.DataSourceUtils;
 import common.util.JdbcUtils;
 import dao.PeopleDao;
-import dao.PeopleDaoImpl;
 import domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,6 +50,11 @@ public class PeopleServiceImpl implements PeopleService {
     @Autowired
     private PayFlowService payFlowService;
 
+//
+//    public List<People> getPeopleAll(){
+//        return peopleDao.getPeopleAll();
+//    }
+
 
     /**
      * @Title: findPeopleById
@@ -67,29 +65,71 @@ public class PeopleServiceImpl implements PeopleService {
      * @return: 人员对象
      */
     @Override
-    public People findPeopleById(Long id) {
-        //定义连接对象
-        Connection conn = null;
-        //定义预编译 Statement对象
-        PreparedStatement preparedStatement = null;
-        People people = null;
-        // 1.创建自定义连接池对象
-        DataSource dataSource = new DataSourceUtils();
-        try {
-            //获取连接对象
-            conn = dataSource.getConnection();
-            //关闭自动提交
-            conn.setAutoCommit(false);
-            people = peopleDao.findPeopleById(id);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            //释放连接资源
-            JdbcUtils.release(conn, preparedStatement, null);
-            //返回人员对象
-            return people;
-        }
+    public People findPeopleById(Long id){
+        return peopleDao.findPeopleById(id);
     }
+
+    /**
+     * @Title: deletePeopleById
+     * @Description: 删除指定id 的人员信息
+     * @author yanyong
+     * @date 2018-01-21
+     * @param: id 指定id
+     * @return: 受影响行数
+     */
+    public Integer deletePeopleById(Long id){
+        return peopleDao.deletePeopleById(id);
+    }
+    /**
+     * @Title: updatePeople
+     * @Description: 更新指定人员的信息
+     * @author yanyong
+     * @date 2018-01-21
+     * @param: id 指定人员id
+     * @param: people 指定人员信息
+     * @return: 受影响行数
+     */
+    @Override
+    public Integer updatePeople(People people){
+        return peopleDao.updatePeople(people);
+    }
+    /**
+     * @Title: savePeople
+     * @Description: 保存人员信息
+     * @author yanyong
+     * @date 2018-01-21
+     * @param: people 人员对象
+     * @return: 受影响行数
+     */
+    @Override
+    public Integer savePeople(People people){
+        return peopleDao.savePeople(people);
+    }
+
+//    public People findPeopleById(Long id) {
+//        //定义连接对象
+//        Connection conn = null;
+//        //定义预编译 Statement对象
+//        PreparedStatement preparedStatement = null;
+//        People people = null;
+//        // 1.创建自定义连接池对象
+//        DataSource dataSource = new DataSourceUtils();
+//        try {
+//            //获取连接对象
+//            conn = dataSource.getConnection();
+//            //关闭自动提交
+//            conn.setAutoCommit(false);
+//            people = peopleDao.findPeopleById(id);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            //释放连接资源
+//            JdbcUtils.release(conn, preparedStatement, null);
+//            //返回人员对象
+//            return people;
+//        }
+//    }
+
 
     /**
      * @Title: findPeopleByUserName
@@ -102,16 +142,9 @@ public class PeopleServiceImpl implements PeopleService {
      */
     public People findPeopleByUserName(String userName,String password){
 
-        People people = null;
+        return peopleDao.findPeopleByUserName(userName,password);
         // 1.创建自定义连接池对象
-
-        try {
-            people = peopleDao.findPeopleByUserName(userName,password);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return people;
+//        return people;
     }
 
     /**
@@ -122,36 +155,36 @@ public class PeopleServiceImpl implements PeopleService {
      * @param: people 人员对象
      * @return: 受影响行数
      */
-    @Override
-    public Integer savePeople(People people) {
-        //定义连接对象
-        Connection conn = null;
-        //定义预编译 Statement对象
-        PreparedStatement preparedStatement = null;
-        Integer number = null;
-//        if (people.getId()!=0 &&this.findPeopleById(people.getId())!=null){
-//            System.out.println("该人员已存在");
-//            return 0;
+//    @Override
+//    public Integer savePeople(People people) {
+//        //定义连接对象
+//        Connection conn = null;
+//        //定义预编译 Statement对象
+//        PreparedStatement preparedStatement = null;
+//        Integer number = null;
+////        if (people.getId()!=0 &&this.findPeopleById(people.getId())!=null){
+////            System.out.println("该人员已存在");
+////            return 0;
+////        }
+//        // 1.创建自定义连接池对象
+//        DataSource dataSource = new DataSourceUtils();
+//        try {
+//            //获取连接对象
+//            conn = dataSource.getConnection();
+//            //关闭自动提交
+//            conn.setAutoCommit(false);
+//            number = peopleDao.savePeople(people, conn, preparedStatement);
+//
+//        } catch (SQLException e) {
+//            conn.rollback();
+//            e.printStackTrace();
+//        } finally {
+//            //释放连接资源
+//            JdbcUtils.release(conn, preparedStatement, null);
+//            //返回受影响行数
+//            return number;
 //        }
-        // 1.创建自定义连接池对象
-        DataSource dataSource = new DataSourceUtils();
-        try {
-            //获取连接对象
-            conn = dataSource.getConnection();
-            //关闭自动提交
-            conn.setAutoCommit(false);
-            number = peopleDao.savePeople(people, conn, preparedStatement);
-
-        } catch (SQLException e) {
-            conn.rollback();
-            e.printStackTrace();
-        } finally {
-            //释放连接资源
-            JdbcUtils.release(conn, preparedStatement, null);
-            //返回受影响行数
-            return number;
-        }
-    }
+//    }
 
     /**
      * @Title: showPeople
@@ -180,31 +213,31 @@ public class PeopleServiceImpl implements PeopleService {
      * @param: id 指定id
      * @return: 受影响行数
      */
-    @Override
-    public Integer deletePeopleById(Long id) {
-        //定义连接对象
-        Connection conn = null;
-        //定义预编译 Statement对象
-        PreparedStatement preparedStatement = null;
-        Integer number = 0;
-        // 1.创建自定义连接池对象
-        DataSource dataSource = new DataSourceUtils();
-        try {
-            //获取连接对象
-            conn = dataSource.getConnection();
-            //关闭自动提交
-            conn.setAutoCommit(false);
-            number = peopleDao.deletePeopleById(id, conn, preparedStatement);
-        } catch (SQLException e) {
-            conn.rollback();
-            e.printStackTrace();
-        } finally {
-            //释放连接资源
-            JdbcUtils.release(conn, preparedStatement, null);
-            //返回受影响行数
-            return number;
-        }
-    }
+//    @Override
+//    public Integer deletePeopleById(Long id) {
+//        //定义连接对象
+//        Connection conn = null;
+//        //定义预编译 Statement对象
+//        PreparedStatement preparedStatement = null;
+//        Integer number = 0;
+//        // 1.创建自定义连接池对象
+//        DataSource dataSource = new DataSourceUtils();
+//        try {
+//            //获取连接对象
+//            conn = dataSource.getConnection();
+//            //关闭自动提交
+//            conn.setAutoCommit(false);
+//            number = peopleDao.deletePeopleById(id, conn, preparedStatement);
+//        } catch (SQLException e) {
+//            conn.rollback();
+//            e.printStackTrace();
+//        } finally {
+//            //释放连接资源
+//            JdbcUtils.release(conn, preparedStatement, null);
+//            //返回受影响行数
+//            return number;
+//        }
+//    }
 
     /**
      * @Title: updatePeopleById
@@ -215,54 +248,54 @@ public class PeopleServiceImpl implements PeopleService {
      * @param: people 指定人员信息
      * @return: 受影响行数
      */
-    @Override
-    public Integer updatePeopleById(Long id, People people) {
-        //定义连接对象
-        Connection conn = null;
-        //定义预编译 Statement对象
-        PreparedStatement preparedStatement = null;
-        Integer number = null;
-//        if (people.getId()!=0 &&this.findPeopleById(people.getId())!=null){
-//            System.out.println("该人员已存在");
-//            return 0;
+//    @Override
+//    public Integer updatePeopleById(Long id, People people) {
+//        //定义连接对象
+//        Connection conn = null;
+//        //定义预编译 Statement对象
+//        PreparedStatement preparedStatement = null;
+//        Integer number = null;
+////        if (people.getId()!=0 &&this.findPeopleById(people.getId())!=null){
+////            System.out.println("该人员已存在");
+////            return 0;
+////        }
+//        // 1.创建自定义连接池对象
+//        People oldPeople = this.findPeopleById(id);
+////        if (people.getName()!=null){
+////            oldPeople.setName(people.getName());
+////        }
+////        if (people.getCardId()!=null){
+////            oldPeople.setCardId(people.getCardId());
+////        }
+////        if (people.getSex()!=null){
+////            oldPeople.setSex(people.getSex());
+////        }
+//        if (people.getAge() != 0) {
+//            oldPeople.setAge(people.getAge());
 //        }
-        // 1.创建自定义连接池对象
-        People oldPeople = this.findPeopleById(id);
-//        if (people.getName()!=null){
-//            oldPeople.setName(people.getName());
+//        if (people.getMoney() != 0) {
+//            oldPeople.setMoney(people.getMoney());
 //        }
-//        if (people.getCardId()!=null){
-//            oldPeople.setCardId(people.getCardId());
+//        if (people.getAddress() != null) {
+//            oldPeople.setAddress(people.getAddress());
 //        }
-//        if (people.getSex()!=null){
-//            oldPeople.setSex(people.getSex());
+//        DataSource dataSource = new DataSourceUtils();
+//        try {
+//            //获取连接对象
+//            conn = dataSource.getConnection();
+//            //关闭自动提交
+//            conn.setAutoCommit(false);
+//            number = peopleDao.updatePeopleById(id, oldPeople, conn, preparedStatement);
+//        } catch (SQLException e) {
+//            conn.rollback();
+//            e.printStackTrace();
+//        } finally {
+//            //释放连接资源
+//            JdbcUtils.release(conn, preparedStatement, null);
+//            //返回受影响行数
+//            return number;
 //        }
-        if (people.getAge() != 0) {
-            oldPeople.setAge(people.getAge());
-        }
-        if (people.getMoney() != 0) {
-            oldPeople.setMoney(people.getMoney());
-        }
-        if (people.getAddress() != null) {
-            oldPeople.setAddress(people.getAddress());
-        }
-        DataSource dataSource = new DataSourceUtils();
-        try {
-            //获取连接对象
-            conn = dataSource.getConnection();
-            //关闭自动提交
-            conn.setAutoCommit(false);
-            number = peopleDao.updatePeopleById(id, oldPeople, conn, preparedStatement);
-        } catch (SQLException e) {
-            conn.rollback();
-            e.printStackTrace();
-        } finally {
-            //释放连接资源
-            JdbcUtils.release(conn, preparedStatement, null);
-            //返回受影响行数
-            return number;
-        }
-    }
+//    }
 
     /**
      * @param
@@ -467,7 +500,7 @@ public class PeopleServiceImpl implements PeopleService {
     public Boolean descMoney(Long peopleId, Double money) {
         People people = new PeopleServiceImpl().findPeopleById(peopleId);
         people.setMoney(people.getMoney() - money);
-        Integer number = new PeopleServiceImpl().updatePeopleById(people.getId(), people);
+        Integer number = new PeopleServiceImpl().updatePeople(people);
         if (number > 0) {
             return true;
         } else {
@@ -487,7 +520,7 @@ public class PeopleServiceImpl implements PeopleService {
     public Boolean ascMoney(Long peopleId, Double money) {
         People people = new PeopleServiceImpl().findPeopleById(peopleId);
         people.setMoney(people.getMoney() + money);
-        Integer number = new PeopleServiceImpl().updatePeopleById(people.getId(), people);
+        Integer number = new PeopleServiceImpl().updatePeople(people);
         if (number > 0) {
             return true;
         } else {
@@ -517,7 +550,7 @@ public class PeopleServiceImpl implements PeopleService {
             //关闭自动连接
 //            System.out.println(conn);
             conn.setAutoCommit(false);
-            peoples = peopleDao.findPeopleByUnSureCondition(map, conn, preparedStatement);
+//            peoples = peopleDao.findPeopleByUnSureCondition(map, conn, preparedStatement);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

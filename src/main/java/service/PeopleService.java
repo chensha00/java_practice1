@@ -7,8 +7,6 @@ import tools.GoodsException;
 import tools.GoodsOrderException;
 import tools.PeopleException;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +18,7 @@ import java.util.Map;
  * @date 2018/1/20
  */
 public interface PeopleService {
+//    public List<People> getPeopleAll();
 
     /**
      * @Title: findPeopleById
@@ -31,6 +30,8 @@ public interface PeopleService {
      */
     public People findPeopleById(Long id);
 
+
+
     /**
      * @Title: findPeopleByUserName
      * @Description: 查找用户根据用户名和密码
@@ -40,7 +41,8 @@ public interface PeopleService {
      * @param: password 密码
      * @return: 人员对象
      */
-    public People findPeopleByUserName(String userName,String password);
+    public People findPeopleByUserName(String userName, String password);
+
 
     /**
      * @Title: savePeople
@@ -72,7 +74,7 @@ public interface PeopleService {
     public Integer deletePeopleById(Long id);
 
     /**
-     * @Title: updatePeopleById
+     * @Title: updatePeople
      * @Description: 更新指定人员的信息
      * @author yanyong
      * @date 2018-01-21
@@ -80,7 +82,7 @@ public interface PeopleService {
      * @param: people 指定人员信息
      * @return: 受影响行数
      */
-    public Integer updatePeopleById(Long id, People people);
+    public Integer updatePeople(People people);
 
 
     /**
@@ -156,7 +158,7 @@ public interface PeopleService {
      * @param map 条件和值对应key和value
      * @throw SQLException
      */
-    public List<People> findPeopleByUnSureCondition(List<Map<String,Object>> map)
+    public List<People> findPeopleByUnSureCondition(List<Map<String, Object>> map)
             throws SQLException;
 
 }
