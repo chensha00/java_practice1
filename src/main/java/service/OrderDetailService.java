@@ -14,15 +14,15 @@ import java.util.List;
  */
 public interface OrderDetailService {
     /**
-     * @Title: findOrderDetailById
-     * @Description: 通过指定Id查找相应订单详情
+     * @Title: addOrderDetail
+     * @Description: 新增订单详情信息
      * @author yuweiyang
      * @date 2018-01-21
-     * @throws: SQLException
-     * @param: id 指定id
+     * @throw SQLException
+     * @param: people 人员信息
      * @param: connection 连接对象
-     * @param: preparedStatement 预编译Statement对象
-     * @return: 订单详情对象
+     * @param: preparedStatement 预编译Statement
+     * @return: 受影响行数
      */
     public OrderDetail findOrderDetailById(Long id);
 
