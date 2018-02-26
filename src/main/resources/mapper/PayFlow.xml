@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="domain.Goods">
+
+    <!--<resultMap type="domain.Test" id="test">-->
+    <!--<id property="id" column="id" jdbcType="BIGINT" javaType="java.lang.Long"/>-->
+    <!--<result property="name" column="NAME" jdbcType="VARCHAR"/>-->
+    <!--</resultMap>-->
+
+    <resultMap id="payFlow" type="domain.PayFlow">
+        <id property="id" column="ID" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <result property="flowNum" column="FLOW_NUM" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="peopleId" column="PEOPLE_ID" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <result property="money" column="MONEY" jdbcType="DECIMAL" javaType="java.lang.Double"/>
+        <result property="flowType" column="FLOW_TYPE" jdbcType="TINYINT" javaType="java.lang.Byte"/>
+        <result property="createTime" column="CREATE_TIME" jdbcType="DATETIME" javaType="java.util.Date"/>
+        <result property="orderDetailId" column="ORDER_DETAIL_ID" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <result property="goodsOrderId" column="GOODS_ORDER_ID" jdbcType="BIGINT" javaType="java.lang.Long"/>
+
+    </resultMap>
+    <sql id="invertorySql">
+        ID,FLOW_NUM,PEOPLE_ID,MONEY,FLOW_TYPE,CREATE_TIME,ORDER_DETAIL_ID,GOODS_ORDER_ID
+    </sql>
+    <!--查询所有-->
+    <select id="getAll" resultType="java.util.Map" resultMap="invertory">
+        SELECT <include refid="invertorySql"/> FROM INVERTORY
+    </select>
+    <!--添加-->
+    <insert id="add" parameterType="domain.Invertory">
+        INSERT INTO invertory(ID,FLOW_NUM,PEOPLE_ID,MONEY,FLOW_TYPE,CREATE_TIME,ORDER_DETAIL_ID,GOODS_ORDER_ID) VALUES(DEFAULT ,
+        #{FLOW_NUM,jdbcType=VARCHAR},#{name,PEOPLE_ID=BIGINT},#{MONEY,jdbcType=DECIMAL},#{FLOW_TYPE,jdbcType=TINYINT},
+        #{CREATE_TIME,jdbcType=DATETIME},#{ORDER_DETAIL_ID,jdbcType=BIGINT},#{GOODS_ORDER_ID,jdbcType=BIGINT})
+    </insert>
+    <!--<delete id="deleteById" parameterType="java.util.Map">-->
+    <!--DELETE FROM STU_TABLE WHERE ID IN-->
+    <!--</delete>-->
+
+</mapper>
