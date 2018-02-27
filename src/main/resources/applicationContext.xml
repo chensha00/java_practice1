@@ -17,7 +17,7 @@
         http://www.springframework.org/schema/tx/spring-tx.xsd"
        default-lazy-init="false">
     <!-- 注解装载 -->
-    <context:component-scan base-package="common,dao,service" >
+    <context:component-scan base-package="common,dao,service">
 
         <!--<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>-->
         <!--<context:include-filter type="annotation" expression="org.springframework.transaction.annotation.Transactional"/>-->
@@ -39,11 +39,11 @@
         </property>
     </bean>
     <!-- 数据源配置, 使用 c3p0 数据库连接池 -->
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"  destroy-method="close">
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
         <!-- 数据源驱动类可不写，Druid默认会自动根据URL识别DriverClass -->
         <!--&lt;!&ndash;<property name="dataSourceName" value="${jdbc.driver}" />&ndash;&gt;-->
         <!--<property name="driverClass" >-->
-            <!--<value>${jdbc.driver}</value>-->
+        <!--<value>${jdbc.driver}</value>-->
         <!--</property>-->
         <!--&lt;!&ndash; 基本属性 url、user、password &ndash;&gt;-->
         <!--<property name="url" value="${jdbc.url}" />-->
@@ -100,21 +100,21 @@
         <property name="acquireIncrement" value="2"/>
     </bean>
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource" />
+        <property name="dataSource" ref="dataSource"/>
     </bean>
     <!-- 使用annotation定义事务 -->
     <tx:annotation-driven transaction-manager="transactionManager"
-                          proxy-target-class="true" />
+                          proxy-target-class="true"/>
 
     <bean id="jdbctemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-                 <property name="dataSource" ref="dataSource"></property>
+        <property name="dataSource" ref="dataSource"></property>
     </bean>
 
     <!--&lt;!&ndash; spring和MyBatis完美整合，不需要mybatis的配置映射文件 &ndash;&gt;-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
+        <property name="dataSource" ref="dataSource"/>
         <!-- 自动扫描mapping.xml文件，**表示迭代查找 -->
-        <property name="mapperLocations" >
+        <property name="mapperLocations">
             <list>
                 <value>classpath*:mapper/*.xml</value>
             </list>
@@ -124,8 +124,8 @@
 
     <!--&lt;!&ndash; DAO接口所在包名，Spring会自动查找其下的类 ,包下的类需要使用@MapperScan注解,否则容器注入会失败 &ndash;&gt;-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="dao.*" />
-        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+        <property name="basePackage" value="dao.*"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
 
     </bean>
     <!--&lt;!&ndash; mybatis spring sqlSessionTemplate,使用时直接让spring注入即可 &ndash;&gt;-->
@@ -135,15 +135,15 @@
 
 
     <!--<bean id="oneTest" class="com.bean.TestBeanFactory" factory-method="crate">-->
-        <!--&lt;!&ndash; 指代crate方法的参数&ndash;&gt;-->
-        <!--<constructor-arg value="com.bean.OneTestBean"/>-->
-        <!--&lt;!&ndash;返回指代类型的bean &ndash;&gt;-->
-        <!--<property name="oneTest" value="testone"/>-->
+    <!--&lt;!&ndash; 指代crate方法的参数&ndash;&gt;-->
+    <!--<constructor-arg value="com.bean.OneTestBean"/>-->
+    <!--&lt;!&ndash;返回指代类型的bean &ndash;&gt;-->
+    <!--<property name="oneTest" value="testone"/>-->
     <!--</bean>-->
     <!--<bean id="twoTest" class="com.bean.TestBeanFactory" factory-method="crate">-->
 
-        <!--<constructor-arg value="com.bean.TwoTestBean"/>-->
-        <!--<property name="oneTest" value="testTwo"/>-->
+    <!--<constructor-arg value="com.bean.TwoTestBean"/>-->
+    <!--<property name="oneTest" value="testTwo"/>-->
     <!--</bean>-->
 
     <!--<bean id="testFactory" class="com.bean.TestBeanFactory"  >-->
@@ -151,29 +151,29 @@
     <!--</bean>-->
 
     <!--<bean id="threeTest" class="com.bean.TwoTestBean" factory-bean="testFactory" factory-method="crateTwo">-->
-        <!--<constructor-arg value="com.bean.TwoTestBean"/>-->
-        <!--<property name="oneTest" value="three"/>-->
+    <!--<constructor-arg value="com.bean.TwoTestBean"/>-->
+    <!--<property name="oneTest" value="three"/>-->
     <!--</bean>-->
 
     <!--<bean id="test" class="com.bean.TwoTestBean">-->
-        <!--<property name="map">-->
-            <!--<map>-->
-                <!--<entry key="test" value="1"/>-->
-            <!--</map>-->
-        <!--</property>-->
+    <!--<property name="map">-->
+    <!--<map>-->
+    <!--<entry key="test" value="1"/>-->
+    <!--</map>-->
+    <!--</property>-->
     <!--</bean>-->
     <!--&lt;!&ndash;<bean id="after" class="aop.AfterAop"/>&ndash;&gt;-->
     <!--<bean id="before" class="aop.BeforeAop"/>-->
     <!--<aop:config >-->
-        <!--<aop:aspect id="bAop" ref="before">-->
-                <!--<aop:pointcut id="bPwointCut" expression="execution(* com.com.service..*(..))" />-->
-                <!--<aop:before method="before" pointcut-ref="bPwointCut" ></aop:before>-->
-                <!--<aop:after method="afterReturning" pointcut-ref="bPwointCut"/>-->
-        <!--</aop:aspect>-->
-        <!--&lt;!&ndash;<aop:aspect id="aAop" ref="after">&ndash;&gt;-->
-            <!--&lt;!&ndash;<aop:pointcut id="aPointCut" expression="execution(* com.com.service..*(..))" />&ndash;&gt;-->
-            <!--&lt;!&ndash;<aop:after method="after" pointcut-ref="aPointCut" ></aop:after>&ndash;&gt;-->
-        <!--&lt;!&ndash;</aop:aspect>&ndash;&gt;-->
+    <!--<aop:aspect id="bAop" ref="before">-->
+    <!--<aop:pointcut id="bPwointCut" expression="execution(* com.com.service..*(..))" />-->
+    <!--<aop:before method="before" pointcut-ref="bPwointCut" ></aop:before>-->
+    <!--<aop:after method="afterReturning" pointcut-ref="bPwointCut"/>-->
+    <!--</aop:aspect>-->
+    <!--&lt;!&ndash;<aop:aspect id="aAop" ref="after">&ndash;&gt;-->
+    <!--&lt;!&ndash;<aop:pointcut id="aPointCut" expression="execution(* com.com.service..*(..))" />&ndash;&gt;-->
+    <!--&lt;!&ndash;<aop:after method="after" pointcut-ref="aPointCut" ></aop:after>&ndash;&gt;-->
+    <!--&lt;!&ndash;</aop:aspect>&ndash;&gt;-->
     <!--</aop:config>-->
 
     <!--&lt;!&ndash;<bean id="springContextUtil" class="com.com.service.SpringContextUtil">&ndash;&gt;-->
@@ -184,7 +184,7 @@
 
         <tx:attributes>
 
-            <tx:method name="save*" propagation="REQUIRED" />
+            <tx:method name="save*" propagation="REQUIRED"/>
 
             <tx:method name="del*" propagation="REQUIRED"/>
 
@@ -205,28 +205,28 @@
 
         <aop:pointcut id="allTestServiceMethod" expression="execution(* service..*(..))"/>
 
-        <aop:advisor pointcut-ref="allTestServiceMethod" advice-ref="TestAdvice" />
+        <aop:advisor pointcut-ref="allTestServiceMethod" advice-ref="TestAdvice"/>
 
     </aop:config>
     <!--<bean id="testOne" class="domain.Test">-->
-        <!--<property name="id" value="1"></property>-->
-        <!--<property name="name" value="zhagnsan"></property>-->
-        <!--<property name="userInfo" ref="userInfo"></property>-->
+    <!--<property name="id" value="1"></property>-->
+    <!--<property name="name" value="zhagnsan"></property>-->
+    <!--<property name="userInfo" ref="userInfo"></property>-->
     <!--</bean>-->
     <!--<bean id="testTwo" class="domain.Test">-->
-        <!--<constructor-arg index="0" name="id" value="2">-->
-        <!--</constructor-arg>-->
-        <!--<constructor-arg index="1" value="lisi"></constructor-arg>-->
+    <!--<constructor-arg index="0" name="id" value="2">-->
+    <!--</constructor-arg>-->
+    <!--<constructor-arg index="1" value="lisi"></constructor-arg>-->
     <!--</bean>-->
 
     <!--<bean id="userInfo" class="domain.UserInfo">-->
-        <!--<property name="userName" value="wangwu"></property>-->
+    <!--<property name="userName" value="wangwu"></property>-->
     <!--</bean>-->
 
 
     <!--<bean id="fourTest" class="com.bean.TestBeanFactory" factory-method="crate">-->
-        <!--<constructor-arg value="com.bean.OneTestBean"></constructor-arg>-->
-        <!--<property name="oneTest" value="testFour"></property>-->
+    <!--<constructor-arg value="com.bean.OneTestBean"></constructor-arg>-->
+    <!--<property name="oneTest" value="testFour"></property>-->
     <!--</bean>-->
 
 </beans>

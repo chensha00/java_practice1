@@ -241,17 +241,17 @@ public class InvertoryServiceImpl implements InvertoryService {
 
     /**
      * @param storeId:商铺id
-     * @param goodId：商铺id
-     * @Title: findInvertoryByStoreIdAndGoodId
+     * @param goodsId：商铺id
+     * @Title: findInvertoryByStoreIdAndGoodsId
      * @Description: 根据商铺id和商铺id查找库存信息
      * @author hzq
      * @date 2018-01-26
      * @throw RuntimeException
      */
-    public Invertory findInvertoryByStoreIdAndGoodId(Long storeId, Long goodId) throws SQLException {
+    public Invertory findInvertoryByStoreIdAndGoodsId(Long storeId, Long goodsId) throws SQLException {
         Invertory invertory = null;
         try {
-            invertory = invertoryDao.findInvertoryByStoreIdAndGoodId(storeId, goodId);
+            invertory = invertoryDao.findInvertoryByStoreIdAndGoodsId(storeId, goodsId);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
