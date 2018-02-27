@@ -82,7 +82,7 @@ public class OrderDetailDaoImpl extends BaseDaoImpl<OrderDetail> implements Orde
      */
     @Override
     public List<OrderDetail> findOrderDetailIdByOrderNum(String orderNum) throws SQLException {
-        return null;
+        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "getOrderDetailListByOrderId", orderNum);
     }
 
     /**
