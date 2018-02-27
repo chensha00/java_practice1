@@ -66,6 +66,9 @@ public class OffLoadingServlet extends HttpServlet {
             int res =  invertoryService.deleteInvertoryById(invertory.get(0).getId());
             if (res!=0){
                 System.out.println("下架成功");
+                req.getRequestDispatcher("../store/store_home_servlet").forward(req,resp);
+            }else{
+                System.out.println("出现错误");
             }
         } catch (SQLException e) {
             e.printStackTrace();
