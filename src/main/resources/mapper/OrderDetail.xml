@@ -34,20 +34,32 @@
         SELECT <include refid="OrderDetailSql"/> FROM ORDER_DETAIL WHERE PEOPLE_ID=#{peopleId}
     </select>
 
-    <!--通过指定订单编号查找相应订单详情ID-->
+    <!--通过指定订单编号查找相应订单详情-->
     <select id="findOrderDetailIdByOrderNum" resultType="java.util.Map" resultMap="orderDetail">
         SELECT <include refid="OrderDetailSql"/> FROM ORDER_DETAIL WHERE ORDER_NUM=#{orderNum}
     </select>
 
+    <!--通过指定ID查找相应订单详情-->
+    <select id="findOrderDetailById" resultType="java.util.Map" resultMap="orderDetail">
+        SELECT <include refid="OrderDetailSql"/> FROM ORDER_DETAIL WHERE ID=#{id}
+    </select>
+
+    <!--更新操作-->
+    <update id="updateOrderDetailById">
+        UPDATE ORDER_DETAIL SET ORDER_NUM=${map.orderdetail.orderNum}
+        ,SUCCESS_TIME=${map.orderdetail.successTime},DELIVERY_TIME=${map.orderdetail.deliveryTime}
+        ,ORDER_STATUS=${map.orderdetail.orderStatus},IS_INVALID=${map.orderdetail.isInvalid} WHERE ID=${map.id};
+    </update>
+
     <!--添加-->
-    <insert id="add" parameterType="domain.OrderDetail">
+    <insert id="addOrderDetail" parameterType="domain.OrderDetail">
         INSERT INTO ORDER_DETAIL(ID,ORDER_NUM,PEOPLE_ID,STORE_ID,GOODS_ID,GOODS_ORDER_ID,NUMBER,GOODS_PRICE,GOODS_AMOUNT,ADD_TIME,SUCCESS_TIME,DELIVERY_TIME,ORDER_STATUS,IS_INVALID)
          VALUES
          (DEFAULT
          ,#{orderNum,jdbcType=VARCHAR},#{peopleId,jdbcType=BIGINT},#{storeId,jdbcType=BIGINT},#{goodsId,jdbcType=BIGINT},#{goodsOrderId,jdbcType=BIGINT}
          ,#{number,jdbcType=DOUBLE},#{goodsPrice,jdbcType=DECIMAL},#{goodsAmount,jdbcType=DECIMAL}
          ,#{addTime,jdbcType=TIMESTAMP},#{successTime,jdbcType=TIMESTAMP},#{deliveryTime,jdbcType=TIMESTAMP}
-         ,#{orderStatus,jdbcType=TINYINT},#{isInvalid,jdbcType=TINYINT},)
+         ,#{orderStatus,jdbcType=TINYINT},#{isInvalid,jdbcType=TINYINT})
     </insert>
 
 </mapper>
