@@ -140,14 +140,14 @@ public interface InvertoryService {
 
     /**
      * @param storeId:商铺id
-     * @param goodsId：商铺id
+     * @param goodId：商铺id
      * @Title: findInvertoryByStoreIdAndGoodId
      * @Description: 根据商铺id和商铺id查找库存信息
      * @author hzq
      * @date 2018-01-26
      * @throw RuntimeException
      */
-    public Invertory findInvertoryByStoreIdAndGoodsId(Long storeId, Long goodsId) throws SQLException;
+    public Invertory findInvertoryByStoreIdAndGoodId(Long storeId, Long goodId) throws SQLException;
 
 
     /**

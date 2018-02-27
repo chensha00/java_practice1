@@ -70,7 +70,7 @@ public interface InvertoryDao {
     /**
      * @param storeId:商铺id
      * @param goodsId：商铺id
-     * @Title: findInvertoryByStoreIdAndGoodsId
+     * @Title: findInvertoryByStoreIdAndGoodId
      * @Description: 根据商铺id和商品id查找库存信息
      * @author hzq
      * @date 2018-01-26
