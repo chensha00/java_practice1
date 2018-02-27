@@ -251,7 +251,7 @@ public class InvertoryServiceImpl implements InvertoryService {
     public Invertory findInvertoryByStoreIdAndGoodsId(Long storeId, Long goodId) throws SQLException {
         Invertory invertory = null;
         try {
-            invertory = invertoryDao.findInvertoryByStoreIdAndGoodsId(storeId, goodId);
+            invertory = invertoryDao.findInvertoryByStoreIdAndGoodId(storeId, goodId);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
