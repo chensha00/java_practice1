@@ -220,7 +220,7 @@ public class StoreServiceImpl implements StoreService {
             Invertory invertory = new Invertory();
             //根据商铺id和商品id查找库存
             try {
-                invertory = invertoryService.findInvertoryByStoreIdAndGoodsId(store.getId(), goods.get(i).getId());
+                invertory = invertoryService.findInvertoryByStoreIdAndGoodId(store.getId(), goods.get(i).getId());
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -279,7 +279,7 @@ public class StoreServiceImpl implements StoreService {
         Invertory invertory = new Invertory();
         //根据商铺id和商品id查找库存
         try {
-            invertory = invertoryService.findInvertoryByStoreIdAndGoodsId(orderDetail.getStoreId(), orderDetail.getGoodsId());
+            invertory = invertoryService.findInvertoryByStoreIdAndGoodId(orderDetail.getStoreId(), orderDetail.getGoodsId());
         } catch (SQLException e) {
             e.printStackTrace();
         }
