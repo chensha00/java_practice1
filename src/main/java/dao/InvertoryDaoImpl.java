@@ -58,8 +58,7 @@ public class InvertoryDaoImpl extends BaseDaoImpl<Invertory> implements Invertor
      */
     @Override
     public Integer saveInvertory(Invertory invertory) {
-        this.sqlSessionTemplate.insert(getMybaitsNameSpace() + "save", invertory);
-        return null;
+        return this.sqlSessionTemplate.insert(getMybaitsNameSpace() + "save", invertory);
     }
 
     /**
@@ -72,9 +71,7 @@ public class InvertoryDaoImpl extends BaseDaoImpl<Invertory> implements Invertor
      */
     @Override
     public List<Invertory> findInvertoryById(Long id) {
-
         return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "getAll");
-
     }
 
 
@@ -88,9 +85,7 @@ public class InvertoryDaoImpl extends BaseDaoImpl<Invertory> implements Invertor
      */
     @Override
     public Integer deleteInvertoryById(Long id) throws SQLException {
-
         return this.sqlSessionTemplate.delete(getMybaitsNameSpace() + "deleteById", id);
-
     }
 
     /**
@@ -114,39 +109,17 @@ public class InvertoryDaoImpl extends BaseDaoImpl<Invertory> implements Invertor
 
     /**
      * @param storeId:商铺id
-     * @param goodId：商品id
+     * @param goodsId：商品id
      * @Title: findInvertoryByStoreIdAndGoodId
-     * @Description: 根据商铺id和商铺id查找库存信息
+     * @Description: 根据商铺id和商品id查找库存信息
      * @author hzq
      * @date 2018-01-26
      * @throw RuntimeException
      */
     @Override
-    public Invertory findInvertoryByStoreIdAndGoodId(Long storeId, Long goodId)
+    public Invertory findInvertoryByStoreIdAndGoodsId(Long storeId, Long goodsId)
             throws SQLException {
-        //定义结果集合
-        ResultSet resultSet = null;
-        //查询sql语句
-        String findSql = "SELECT ID,STORE_ID,GOODS_ID,PRICE,NUMBER FROM invertory WHERE GOODS_ID=? AND STORE_ID=?;";
-        System.out.println(findSql.toString());
-        List<Invertory> invertories = jdbcTemplate.query(findSql.toString(), new ResultSetExtractor<List<Invertory>>() {
-            @Override
-            public List<Invertory> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
-                List<Invertory> invertories = new ArrayList<Invertory>();
-                while (resultSet.next()) {
-                    Invertory invertory = new Invertory();
-                    invertory.setId(resultSet.getLong(1));
-                    invertory.setStoreId(resultSet.getLong(2));
-                    invertory.setGoodsId(resultSet.getLong(3));
-                    invertory.setPrice(resultSet.getDouble(4));
-                    invertory.setNumber(resultSet.getDouble(5));
-                    invertories.add(invertory);
-                }
-                return invertories;
-            }
-        }, storeId, goodId);
-        //返回人员对象
-        return invertories.get(0);
+        return this.sqlSessionTemplate.selectOne(getMybaitsNameSpace()+"storeAndGoods");
     }
 
     /**
@@ -220,6 +193,7 @@ public class InvertoryDaoImpl extends BaseDaoImpl<Invertory> implements Invertor
                 }
                 return mainPages;
             }
+
         });
         return mainPages;
     }

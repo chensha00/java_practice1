@@ -20,7 +20,13 @@
         <include refid="invertorySql"/>
         FROM INVERTORY
     </select>
-
+    <!--根据店铺ID和商品ID查询库存-->
+    <select id="storeAndGoods" resultType="java.util.Map" resultMap="invertory">
+        SELECT
+        <include refid="invertorySql"/>
+        FROM INVERTORY
+        WHERE STORE_ID=#{storeId} AND GOODS_ID=#{goodsId}
+    </select>
 
     <!--添加-->
     <insert id="save">
