@@ -31,6 +31,7 @@
         #{goodsNum,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{type,jdbcType=TINYINT},#{unit,jdbcType=VARCHAR},
         #{procedureDate,jdbcType=TIMESTAMP},#{shelfLife,jdbcType=FLOAT},#{shelfLifeUnit,jdbcType=TINYINT})
     </insert>
+
     <!--<delete id="deleteById" parameterType="java.util.Map">-->
         <!--DELETE FROM STU_TABLE WHERE ID IN-->
     <!--</delete>-->

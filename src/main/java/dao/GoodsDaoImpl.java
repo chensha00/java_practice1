@@ -24,34 +24,35 @@ import java.util.List;
 public class GoodsDaoImpl extends BaseDaoImpl<Goods> implements GoodsDao {
 
     @Override
-    public List<Goods> findGoodsById(Long id) {
+    public Goods findGoodsById(Long id) {
         //查询所有的商品
-        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "getAll");
+        return this.sqlSessionTemplate.selectOne(getMybaitsNameSpace() + "findGoodsById", id);
     }
-
     @Override
-    public List<Goods> findGoodsAll() {
-        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "getAll");
+    public List<Goods> findGoodsAll(){
+        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace()+"getAll");
     }
-
     @Override
     public Integer saveGoods(Goods goods) {
-        this.sqlSessionTemplate.insert(getMybaitsNameSpace() + "add", goods);
-        return null;
+
+        return this.sqlSessionTemplate.insert(getMybaitsNameSpace()+"add",goods);
     }
 
     @Override
     public Integer deleteGoodsById(Long id) {
+        return this.sqlSessionTemplate.delete(getMybaitsNameSpace()+"deleteGoodsById",id);
 
-
-        return null;
+//        return null;
     }
 
     @Override
-    public Integer updateGoodsById(Long id, Goods goods) {
-        return null;
+    public Integer updateGoods(Goods goods) {
+        return this.sqlSessionTemplate.update(getMybaitsNameSpace()+"updateGoods",goods);
     }
 }
+
+
+
 
 
 //@Repository("goodsDao")

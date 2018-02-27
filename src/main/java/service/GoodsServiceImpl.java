@@ -8,10 +8,7 @@ package service;/***************************************************************
  * @version V1.0
  */
 
-import common.util.DataSourceUtils;
-import common.util.JdbcUtils;
 import dao.GoodsDao;
-import dao.GoodsDaoImpl;
 import domain.Goods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,10 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import tools.GoodsTypeEnum;
 import tools.TimeFormat;
 
-import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -45,12 +38,15 @@ public class GoodsServiceImpl implements GoodsService {
      * @return: 商品对象
      */
     @Override
-    public Goods findGoodsById(Long id) {
-        Goods goods=null;
-
-        goods=goodsDao.findGoodsById(id).get(0);
-
-        return goods;
+    public Goods findGoodsById(Long id){
+        return goodsDao.findGoodsById(id);
+    }
+//    public Goods findGoodsById(Long id) {
+//        Goods goods=null;
+//
+//        return goodsDao.findGoodsById(id);
+//
+//        return goods;
 
 
 //        //定义商品独享
@@ -75,7 +71,7 @@ public class GoodsServiceImpl implements GoodsService {
 //            //返回商品对象
 //            return goods;
 //        }
-    }
+//    }
     public List<Goods> findGoodsAll(){
         return goodsDao.findGoodsAll();
     }
@@ -90,32 +86,35 @@ public class GoodsServiceImpl implements GoodsService {
      * @return: 受影响行数
      */
     @Override
-    public Integer saveGoods(Goods goods) {
-        //定义商品独享
-        Integer number = 0;
-        //定义连接对象
-        Connection conn = null;
-        //定义预编译Statement对象
-        PreparedStatement preparedStatement = null;
-        // 1.创建自定义连接池对象
-        DataSource dataSource = new DataSourceUtils();
-        try {
-            //获取连接对象
-            conn = dataSource.getConnection();
-            //关闭连接 自动提交
-            conn.setAutoCommit(false);
-            number = goodsDao.saveGoods(goods);
-        } catch (SQLException e) {
-            //回滚
-            conn.rollback();
-            e.printStackTrace();
-        } finally {
-            //释放连接资源
-            JdbcUtils.release(conn, preparedStatement, null);
-            //返回受影响行数
-            return number;
-        }
+    public Integer saveGoods(Goods goods){
+        return goodsDao.saveGoods(goods);
     }
+//    public Integer saveGoods(Goods goods) {
+//        //定义商品独享
+//        Integer number = 0;
+//        //定义连接对象
+//        Connection conn = null;
+//        //定义预编译Statement对象
+//        PreparedStatement preparedStatement = null;
+//        // 1.创建自定义连接池对象
+//        DataSource dataSource = new DataSourceUtils();
+//        try {
+//            //获取连接对象
+//            conn = dataSource.getConnection();
+//            //关闭连接 自动提交
+//            conn.setAutoCommit(false);
+//            number = goodsDao.saveGoods(goods);
+//        } catch (SQLException e) {
+//            //回滚
+//            conn.rollback();
+//            e.printStackTrace();
+//        } finally {
+//            //释放连接资源
+//            JdbcUtils.release(conn, preparedStatement, null);
+//            //返回受影响行数
+//            return number;
+//        }
+//    }
 
     /**
      * @Title: deleteGoodsById
@@ -127,32 +126,35 @@ public class GoodsServiceImpl implements GoodsService {
      */
     @Override
     public Integer deleteGoodsById(Long id) {
-        //定义商品独享
-        Integer number = 0;
-        //定义连接对象
-        Connection conn = null;
-        //定义预编译Statement对象
-        PreparedStatement preparedStatement = null;
-        // 1.创建自定义连接池对象
-        DataSource dataSource = new DataSourceUtils();
-        try {
-            //获取连接对象
-            conn = dataSource.getConnection();
-            //关闭连接 自动提交
-            conn.setAutoCommit(false);
-            number = goodsDao.deleteGoodsById(id);
-
-        } catch (SQLException e) {
-            //回滚
-            conn.rollback();
-            e.printStackTrace();
-        } finally {
-            //释放连接资源
-            JdbcUtils.release(conn, preparedStatement, null);
-            //返回受影响行数
-            return number;
-        }
+        return goodsDao.deleteGoodsById(id);
     }
+//    public Integer deleteGoodsById(Long id) {
+//        //定义商品独享
+//        Integer number = 0;
+//        //定义连接对象
+//        Connection conn = null;
+//        //定义预编译Statement对象
+//        PreparedStatement preparedStatement = null;
+//        // 1.创建自定义连接池对象
+//        DataSource dataSource = new DataSourceUtils();
+//        try {
+//            //获取连接对象
+//            conn = dataSource.getConnection();
+//            //关闭连接 自动提交
+//            conn.setAutoCommit(false);
+//            number = goodsDao.deleteGoodsById(id);
+//
+//        } catch (SQLException e) {
+//            //回滚
+//            conn.rollback();
+//            e.printStackTrace();
+//        } finally {
+//            //释放连接资源
+//            JdbcUtils.release(conn, preparedStatement, null);
+//            //返回受影响行数
+//            return number;
+//        }
+//    }
 
     /**
      * @Title: updateGoodsById
@@ -164,52 +166,55 @@ public class GoodsServiceImpl implements GoodsService {
      * @return: 受影响行数
      */
     @Override
-    public Integer updateGoodsById(Long id, Goods goods) {
-        //定义商品独享
-        Integer number = 0;
-        //定义连接对象
-        Connection conn = null;
-        //定义预编译Statement对象
-        PreparedStatement preparedStatement = null;
-        Goods oldGoods = this.findGoodsById(id);
-        if (goods.getName() != null) {
-            oldGoods.setName(goods.getName());
-        }
-        //ID,GOODS_NUM,`NAME`,TYPE,PRICE,UNIT,NUMBER,PROCEDURE_DATE,SHELF_LIFE,SHELF_LIFE_UNIT,STORE_ID
-        if (goods.getType() != null) {
-            oldGoods.setType(goods.getType());
-        }
-        if (goods.getUnit() != null) {
-            oldGoods.setUnit(goods.getUnit());
-        }
-        if (goods.getProcedureDate() != null) {
-            oldGoods.setProcedureDate(goods.getProcedureDate());
-        }
-        if (goods.getShelfLife() != null) {
-            oldGoods.setShelfLife(goods.getShelfLife());
-        }
-        if (goods.getShelfLifeUnit() != null) {
-            oldGoods.setShelfLifeUnit(goods.getShelfLifeUnit());
-        }
-        // 1.创建自定义连接池对象
-        DataSource dataSource = new DataSourceUtils();
-        try {
-            //获取连接对象
-            conn = dataSource.getConnection();
-            //关闭连接 自动提交
-            conn.setAutoCommit(false);
-            number = goodsDao.updateGoodsById(id, oldGoods);
-        } catch (SQLException e) {
-            //回滚
-            conn.rollback();
-            e.printStackTrace();
-        } finally {
-            //释放连接资源
-            JdbcUtils.release(conn, preparedStatement, null);
-            //返回受影响行数
-            return number;
-        }
+    public Integer updateGoods(Goods goods){
+        return goodsDao.updateGoods(goods);
     }
+//    public Integer updateGoodsById(Long id, Goods goods) {
+//        //定义商品独享
+//        Integer number = 0;
+//        //定义连接对象
+//        Connection conn = null;
+//        //定义预编译Statement对象
+//        PreparedStatement preparedStatement = null;
+//        Goods oldGoods = this.findGoodsById(id);
+//        if (goods.getName() != null) {
+//            oldGoods.setName(goods.getName());
+//        }
+//        //ID,GOODS_NUM,`NAME`,TYPE,PRICE,UNIT,NUMBER,PROCEDURE_DATE,SHELF_LIFE,SHELF_LIFE_UNIT,STORE_ID
+//        if (goods.getType() != null) {
+//            oldGoods.setType(goods.getType());
+//        }
+//        if (goods.getUnit() != null) {
+//            oldGoods.setUnit(goods.getUnit());
+//        }
+//        if (goods.getProcedureDate() != null) {
+//            oldGoods.setProcedureDate(goods.getProcedureDate());
+//        }
+//        if (goods.getShelfLife() != null) {
+//            oldGoods.setShelfLife(goods.getShelfLife());
+//        }
+//        if (goods.getShelfLifeUnit() != null) {
+//            oldGoods.setShelfLifeUnit(goods.getShelfLifeUnit());
+//        }
+//        // 1.创建自定义连接池对象
+//        DataSource dataSource = new DataSourceUtils();
+//        try {
+//            //获取连接对象
+//            conn = dataSource.getConnection();
+//            //关闭连接 自动提交
+//            conn.setAutoCommit(false);
+//            number = goodsDao.updateGoodsById(id, oldGoods);
+//        } catch (SQLException e) {
+//            //回滚
+//            conn.rollback();
+//            e.printStackTrace();
+//        } finally {
+//            //释放连接资源
+//            JdbcUtils.release(conn, preparedStatement, null);
+//            //返回受影响行数
+//            return number;
+//        }
+//    }
 
     /**
      * @Title: showGoods

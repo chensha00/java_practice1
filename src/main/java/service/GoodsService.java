@@ -61,7 +61,7 @@ public interface GoodsService {
      * @param: goods 商品信息
      * @return: 受影响行数
      */
-    public Integer updateGoodsById(Long id, Goods goods);
+    public Integer updateGoods(Goods goods);
 
     /**
      * @Title: showGoods

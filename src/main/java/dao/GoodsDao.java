@@ -10,9 +10,6 @@ package dao;/*******************************************************************
 
 import domain.Goods;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -34,11 +31,10 @@ public interface GoodsDao {
      * @param: preparedStatement 预编译Statement
      * @return: 商品对象
      */
-    public List<Goods> findGoodsById(Long id);
+    public Goods findGoodsById(Long id);
 
 
     public List<Goods> findGoodsAll();
-
     /**
      * @Title: saveGoods
      * @Description: 保存商品信息
@@ -77,8 +73,10 @@ public interface GoodsDao {
      * @param: preparedStatement 预编译Statement
      * @return: 受影响行数
      */
-    public Integer updateGoodsById(Long id, Goods goods);
+    public Integer updateGoods(Goods goods);
 }
+
+
 
 
 //public interface GoodsDao {
