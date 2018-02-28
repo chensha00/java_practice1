@@ -10,7 +10,7 @@
     <!--</resultMap>-->
 
     <!--查询主页需要显示的数据-->
-    <select id="findMainPageInvertory"  resultType="java.util.Map" resultMap="mainPage">
+    <select id="findMainPageInvertory"  resultType="java.util.Map" resultMap="javabean.MainPage">
         SELECT PRICE as price,NAME as name,NUMBER as number,STORE_NAME as storeName
         FROM GOODS,STORE,INVERTORY
         WHERE INVERTORY.STORE_ID = STORE.ID
