@@ -14,31 +14,49 @@
     <sql id="invertorySql">
         ID,STORE_ID,GOODS_ID,PRICE,NUMBER
     </sql>
-    <!--查询所有-->
-    <select id="getAll" resultType="java.util.Map" resultMap="invertory">
+    <!--根据ID查询-->
+    <select id="findInvertoryById" resultType="java.util.Map" resultMap="invertory">
         SELECT
         <include refid="invertorySql"/>
         FROM INVERTORY
+        WHERE ID=#{id}
+    </select>
+    <!--查询所有-->
+    <select id="findInvertoryAll" resultType="java.util.Map" resultMap="invertory">
+        SELECT
+        <include refid="invertorySql"/>
+        FROM INVERTORY
+        GROUP BY ID
     </select>
     <!--根据店铺ID和商品ID查询库存-->
-    <select id="storeAndGoods" resultType="java.util.Map" resultMap="invertory">
+    <select id="findInvertoryByStoreIdAndGoodsId" resultType="java.util.Map" resultMap="invertory">
         SELECT
         <include refid="invertorySql"/>
         FROM INVERTORY
         WHERE STORE_ID=#{storeId} AND GOODS_ID=#{goodsId}
+        GROUP BY ID
+    </select>
+    <!--根据店铺ID查询店铺所有库存-->
+    <select id="findInvertoryByUnSureCondition" resultType="java.util.Map" resultMap="invertory">
+        SELECT
+        <include refid="invertorySql"/>
+        FROM INVERTORY
+        WHERE STORE_ID=#{storeId}
+        GROUP BY ID
     </select>
 
+
     <!--添加-->
-    <insert id="save">
+    <insert id="saveInvertory">
         INSERT INTO INVERTORY(ID,STORE_ID,GOODS_ID,PRICE,NUMBER) VALUES(DEFAULT,
         ${invertory.storeId},${invertory.goodsId},${invertory.price},${invertory.number})
     </insert>
     <!--根据ID删除-->
-    <delete id="deleteById">
+    <delete id="deleteInvertoryById">
         DELETE FROM INVERTORY WHERE ID=#{id}
     </delete>
     <!--根据ID进行修改-->
-    <update id="updateById">
+    <update id="updateInvertorById">
          UPDATE INVERTORY SET STORE_ID=${map.invertory.storeId},GOODS_ID=${map.invertory.goodsId},
          PRICE=${map.invertory.price},NUMBER=${map.invertory.number} WHERE ID=${map.id};
     </update>

@@ -67,4 +67,7 @@ public class MainPage {
     public void setStoreName(String storeName) {
         this.storeName = storeName;
     }
+
+    public MainPage() {
+    }
 }

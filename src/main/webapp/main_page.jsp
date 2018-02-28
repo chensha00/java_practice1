@@ -21,7 +21,7 @@
 
 <body>
 
-<jsp:include page="head_page.jsp"></jsp:include>
+<jsp:include page="head_page.jsp" flush="true"/>
 
 <div class="goods-display">
 

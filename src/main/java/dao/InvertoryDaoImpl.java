@@ -10,17 +10,13 @@ package dao;/*******************************************************************
 
 import common.util.base.BaseDaoImpl;
 import domain.Invertory;
-import javabean.MainPage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Repository;
 import service.GoodsService;
 import service.InvertoryService;
 import service.StoreService;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,7 +54,7 @@ public class InvertoryDaoImpl extends BaseDaoImpl<Invertory> implements Invertor
      */
     @Override
     public Integer saveInvertory(Invertory invertory) {
-        return this.sqlSessionTemplate.insert(getMybaitsNameSpace() + "save", invertory);
+        return this.sqlSessionTemplate.insert(getMybaitsNameSpace() + "saveInvertory", invertory);
     }
 
     /**
@@ -71,9 +67,21 @@ public class InvertoryDaoImpl extends BaseDaoImpl<Invertory> implements Invertor
      */
     @Override
     public List<Invertory> findInvertoryById(Long id) {
-        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "getAll");
+        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findInvertoryById");
     }
 
+    /**
+     * @Title: findInvertoryById
+     * @Description: 查找库存信息通过指定id
+     * @author yanyong
+     * @date 2018-01-25
+     * @param: id 指定id
+     * @return: 库存对象
+     */
+    @Override
+    public List<Invertory> findInvertoryAll() {
+        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findInvertoryAll");
+    }
 
     /**
      * @Title: deleteInvertoryById
@@ -85,7 +93,7 @@ public class InvertoryDaoImpl extends BaseDaoImpl<Invertory> implements Invertor
      */
     @Override
     public Integer deleteInvertoryById(Long id) throws SQLException {
-        return this.sqlSessionTemplate.delete(getMybaitsNameSpace() + "deleteById", id);
+        return this.sqlSessionTemplate.delete(getMybaitsNameSpace() + "deleteInvertoryById", id);
     }
 
     /**
@@ -104,7 +112,7 @@ public class InvertoryDaoImpl extends BaseDaoImpl<Invertory> implements Invertor
         Map map2 = new HashMap();
         map1.put("invertory", invertory);
         map2.put("id", id);
-        return this.sqlSessionTemplate.update(getMybaitsNameSpace() + "updateStoreById", map);
+        return this.sqlSessionTemplate.update(getMybaitsNameSpace() + "updateInvertorById", map);
     }
 
     /**
@@ -119,7 +127,7 @@ public class InvertoryDaoImpl extends BaseDaoImpl<Invertory> implements Invertor
     @Override
     public Invertory findInvertoryByStoreIdAndGoodsId(Long storeId, Long goodsId)
             throws SQLException {
-        return this.sqlSessionTemplate.selectOne(getMybaitsNameSpace() + "storeAndGoods");
+        return this.sqlSessionTemplate.selectOne(getMybaitsNameSpace() + "findInvertoryByStoreIdAndGoodsId");
     }
 
     /**
@@ -132,37 +140,7 @@ public class InvertoryDaoImpl extends BaseDaoImpl<Invertory> implements Invertor
      */
     public List<Invertory> findInvertoryByUnSureCondition(List<Map<String, Object>> map)
             throws SQLException {
-        //通过拼接sql语句来实现动态的不确定条件查询
-        StringBuffer sql = new StringBuffer();
-        sql.append("SELECT ID,STORE_ID,GOODS_ID,PRICE,NUMBER FROM invertory WHERE 1 =1 ");
-        if (map != null && map.size() > 0) {
-            for (int i = 0; i < map.size(); i++) {
-                //将条件拼接到sql中
-                Map<String, Object> condition = map.get(i);
-                sql.append(" and " + condition.get("name") + " " + condition.get("rela") + " " + condition.get("value") + " ");
-            }
-        }
-        //输出sql语句并执行sql语句
-        System.out.println(sql.toString());
-        List<Invertory> invertories = jdbcTemplate.query(sql.toString(), new ResultSetExtractor<List<Invertory>>() {
-            @Override
-            public List<Invertory> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
-                List<Invertory> invertories = new ArrayList<Invertory>();
-                //将结果放入list中返回
-                while (resultSet.next()) {
-                    Invertory invertory = new Invertory();
-                    invertory.setId(resultSet.getLong(1));
-                    invertory.setStoreId(resultSet.getLong(2));
-                    invertory.setGoodsId(resultSet.getLong(3));
-                    invertory.setPrice(resultSet.getDouble(4));
-                    invertory.setNumber(resultSet.getDouble(5));
-                    invertories.add(invertory);
-                }
-                return invertories;
-            }
-
-        });
-        return invertories;
+        return this.sqlSessionTemplate.selectOne(getMybaitsNameSpace() + "findInvertoryByUnSureCondition");
     }
 
 
@@ -175,26 +153,6 @@ public class InvertoryDaoImpl extends BaseDaoImpl<Invertory> implements Invertor
      */
     @Override
     public List<javabean.MainPage> findMainPageInvertory() throws SQLException {
-        String selectSQL = "SELECT STORE_ID,GOODS_ID,PRICE,NUMBER FROM INVERTORY ORDER BY ID LIMIT 0,100; ";
-        System.out.println(selectSQL.toString());
-        List<MainPage> mainPages = jdbcTemplate.query(selectSQL.toString(), new ResultSetExtractor<List<MainPage>>() {
-            @Override
-            public List<MainPage> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
-                List<MainPage> mainPages = new ArrayList<MainPage>();
-                if (resultSet != null) {
-                    while (resultSet.next()) {
-                        javabean.MainPage mainPage = new javabean.MainPage();
-                        mainPage.setStoreName(storeService.findStoreById(resultSet.getLong(1)).getStoreName());
-                        mainPage.setName((goodsService.findGoodsById(resultSet.getLong(2))).getName());
-                        mainPage.setPrice(resultSet.getDouble(3));
-                        mainPage.setNumber(resultSet.getDouble(4));
-                        mainPages.add(mainPage);
-                    }
-                }
-                return mainPages;
-            }
-
-        });
-        return mainPages;
+        return this.sqlSessionTemplate.selectOne(getMybaitsNameSpace() + "findMainPageInvertory");
     }
 }

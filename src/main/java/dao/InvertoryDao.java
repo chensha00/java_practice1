@@ -42,6 +42,16 @@ public interface InvertoryDao {
      */
     public List<Invertory> findInvertoryById(Long id);
 
+    /**
+     * @Title: findInvertoryById
+     * @Description: 查找库存信息通过指定id
+     * @author yanyong
+     * @date 2018-01-25
+     * @param: id 指定id
+     * @return: 库存对象
+     */
+    public List<Invertory> findInvertoryAll();
+
 
     /**
      * @Title: deleteInvertoryById

@@ -20,7 +20,7 @@
 
 <body>
 
-<jsp:include page="head_page.jsp"></jsp:include>
+<jsp:include page="head_page.jsp" flush="true"/>
 
 <div class="cart_div">
     <form action="#" method="post" class="form">
