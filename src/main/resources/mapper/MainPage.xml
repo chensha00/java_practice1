@@ -2,16 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="javabean.MainPage">
     <!--定义MainPage结果集-->
-    <!--<resultMap id="mainPage" type="javabean.MainPage">-->
+    <!--<resultMap id="invertory" type="domain.Invertory">-->
         <!--<result property="price" column="PRICE" jdbcType="DECIMAL" javaType="java.lang.Double"/>-->
-        <!--<result property="name" column="NAME" jdbcType="VARCHAR" javaType="java.lang.String"/>-->
         <!--<result property="number" column="NUMBER" jdbcType="DOUBLE" javaType="java.lang.Double"/>-->
-        <!--<result property="storeName" column="STORE_NAME" jdbcType="VARCHAR" javaType="java.lang.String"/>-->
+            <!--<collection  property="goods" javaType="domain.Goods">-->
+            <!--<result property="name" column="NAME" jdbcType="VARCHAR" javaType="java.lang.String"/>-->
+            <!--</collection >-->
+            <!--<collection  property="store" javaType="domain.Store">-->
+            <!--<result property="storeName" column="STORE_NAME" jdbcType="VARCHAR" javaType="java.lang.String"/>-->
+            <!--</collection >-->
     <!--</resultMap>-->
 
+    <resultMap id="mainPage" type="javabean.MainPage">
+            <result property="price" column="PRICE" jdbcType="DECIMAL" javaType="java.lang.Double"/>
+            <result property="number" column="NUMBER" jdbcType="DOUBLE" javaType="java.lang.Double"/>
+            <result property="name" column="NAME" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <result property="storeName" column="STORE_NAME" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    </resultMap>
+
     <!--查询主页需要显示的数据-->
-    <select id="findMainPageInvertory"  resultType="java.util.Map" resultMap="javabean.MainPage">
-        SELECT PRICE as price,NAME as name,NUMBER as number,STORE_NAME as storeName
+    <select id="findMainPageInvertory"  resultType="java.util.Map" resultMap="mainPage">
+        SELECT
+--         PRICE AS price,NUMBER AS number,NAME AS name,STORE_NAME AS storeName
+        PRICE,NUMBER,NAME,STORE_NAME
         FROM GOODS,STORE,INVERTORY
         WHERE INVERTORY.STORE_ID = STORE.ID
         AND INVERTORY.GOODS_ID = GOODS.ID

@@ -101,13 +101,13 @@ public interface InvertoryDao {
             throws SQLException;
 
 
-    /**
-     * @Title: findMainPageInvertory
-     * @Description: 查询所有订单的价格，数量，以及商品的ID
-     * @author liukang
-     * @date
-     * @throw YnCorpSysException
-     */
-    public List<javabean.MainPage> findMainPageInvertory() throws SQLException;
+//    /**
+//     * @Title: findMainPageInvertory
+//     * @Description: 查询所有订单的价格，数量，以及商品的ID
+//     * @author liukang
+//     * @date
+//     * @throw YnCorpSysException
+//     */
+//    public List<javabean.MainPage> findMainPageInvertory() throws SQLException;
 
 }
