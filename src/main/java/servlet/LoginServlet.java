@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * @author yanyong
@@ -68,15 +69,23 @@ public class LoginServlet extends HttpServlet {
         System.out.println(person.getUsreName() + person.getPassWord()); //
         HttpSession session = req.getSession();
         if (person.getId() == null) {
-            session.setAttribute("LoginMessage", "error");
-            resp.sendRedirect("../login_page.jsp");
+//            session.setAttribute("LoginMessage", "error");
+//            resp.sendRedirect("../login_page.jsp");
         } else if (person.getId() == 0L) {
-            session.setAttribute("LoginMessage", "error");
-            resp.sendRedirect("../login_page.jsp");
+//            session.setAttribute("LoginMessage", "error");
+//            resp.sendRedirect("../login_page.jsp");
         } else {
-            session.removeAttribute("LoginMessage");
-            session.setAttribute("person", person);
-            resp.sendRedirect("/servlet/mainPage.htm");
+//            session.removeAttribute("LoginMessage");
+//            session.setAttribute("person", person);
+//            resp.sendRedirect("/servlet/mainPage.htm");
+            resp.setCharacterEncoding("UTF-8");
+            resp.setContentType("text/html;charset=UTF-8");
+
+            PrintWriter out = resp.getWriter();
+            out.print("登陆成功");
+            //关闭流
+            out.flush();
+            out.close();
         }
     }
 }
