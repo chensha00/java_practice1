@@ -23,7 +23,7 @@
 <jsp:include page="head_page.jsp" flush="true"/>
 
 <div class="cart_div">
-    <form action="../store_order.jsp" method="post" class="form">
+    <form action="pay/pay.htm?ob=money" method="post" class="form">
         <fieldset>
             <legend><img src="${basePath}../img/cart.jpg"></legend>
             <table class="cart_table" id="tab" border="1">
@@ -58,9 +58,9 @@
                 </tbody>
             </table>
             <tfoot>
-            <p class="to">所有商品价格总计：<label id="total" class="total"></label> 元</p>
+            <p class="to">所有商品价格总计：<label id="total" class="total" name="total"></label> 元</p>
             <input type="reset" value="数量重置" class="reset"/>
-            <input type="submit" value="全部提交" class="submit"/>
+            <input type="submit" value="全部提交" class="submit" id="submit"/>
             </tfoot>
         </fieldset>
     </form>
@@ -143,6 +143,22 @@
 
             setTotal();
 
+        });
+    </script>
+
+    <script>
+        $('#cart').live("click", function () {
+            var url = 'pay/pay.htm?op=money';
+            var data = {
+                'totalStr':document.getElementsByName("total") [0].valueOf(),
+                'ob': 'money'
+            };
+            var success = function (response) {
+                if (response.errno == 0) {
+                    alert(response.errmsg);
+                }
+            };
+            $.post(url, data, success, 'json');
         });
     </script>
 

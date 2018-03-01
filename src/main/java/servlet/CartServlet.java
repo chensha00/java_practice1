@@ -64,18 +64,15 @@ public class CartServlet extends HttpServlet {
      */
     public void add(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        String id = req.getParameter("id");
         String name = req.getParameter("nameName");
         String price = req.getParameter("priceName");
         String number = req.getParameter("numberName");
         String storeName = req.getParameter("storeNameName");
         javabean.MainPage mainPage = new javabean.MainPage();
-        mainPage.setId(Long.valueOf(id));
         mainPage.setName(name);
         mainPage.setPrice(Double.valueOf(price));
         mainPage.setNumber(Double.valueOf(number));
         mainPage.setStoreName(storeName);
-
 
 
         HttpSession session = req.getSession();

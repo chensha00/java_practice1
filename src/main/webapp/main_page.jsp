@@ -71,7 +71,6 @@
         //将数据传到另一个页面
         var url = 'servlet/cartPage.htm?op=add';
         var data = {
-            'idStr':entry.id,
             'nameStr': entry.name,
             'priceStr': entry.price,
             'numberStr': entry.number,
