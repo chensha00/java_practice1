@@ -5,17 +5,13 @@ package dao;/**
 import common.util.base.BaseDaoImpl;
 import domain.Goods;
 import domain.OrderDetail;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import service.OrderDetailService;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author yuweiyang
@@ -25,8 +21,6 @@ import java.util.Map;
  */
 @Repository("orderDetailDao")
 public class OrderDetailDaoImpl extends BaseDaoImpl<OrderDetail> implements OrderDetailDao {
-    @Autowired
-    private SqlSessionTemplate sqlSessionTemplate;
     /**
      * @Title: findOrderDetailById
      * @Description: 通过指定Id查找相应订单详情
@@ -40,10 +34,7 @@ public class OrderDetailDaoImpl extends BaseDaoImpl<OrderDetail> implements Orde
      */
     @Override
     public OrderDetail findOrderDetailById(Long id) throws SQLException {
-        List<OrderDetail> orderDetailList=new ArrayList<OrderDetail>();
-        orderDetailList=this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findOrderDetailById", id);
-        return orderDetailList.get(0);
-//        return null;
+        return null;
     }
 
     /**
@@ -59,7 +50,7 @@ public class OrderDetailDaoImpl extends BaseDaoImpl<OrderDetail> implements Orde
      */
     @Override
     public Integer addOrderDetail(OrderDetail orderDetail) throws SQLException {
-        return this.sqlSessionTemplate.insert(getMybaitsNameSpace() + "addOrderDetail", orderDetail);
+        return null;
     }
 
     /**
@@ -75,12 +66,7 @@ public class OrderDetailDaoImpl extends BaseDaoImpl<OrderDetail> implements Orde
      */
     @Override
     public Integer updateOrderDetailById(Long id, OrderDetail orderDetail) throws SQLException {
-        List<Map<String, Object>> map = new ArrayList<Map<String, Object>>();
-        Map map1 = new HashMap();
-        Map map2 = new HashMap();
-        map1.put("orderDetail", orderDetail);
-        map2.put("id", id);
-        return this.sqlSessionTemplate.update(getMybaitsNameSpace() + "updateOrderDetailById", map);
+        return null;
     }
 
     /**

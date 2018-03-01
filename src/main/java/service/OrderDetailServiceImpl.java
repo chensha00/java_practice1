@@ -15,7 +15,6 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,16 +43,8 @@ public class OrderDetailServiceImpl implements OrderDetailService {
      * @param: preparedStatement 预编译Statement
      * @return: 受影响行数
      */
-    public OrderDetail findOrderDetailById(Long id) {
-        OrderDetail orderDetail = null;
-        try {
-            orderDetail = orderDetailDao.findOrderDetailById(id);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return orderDetail;
-//        return null;
+    public OrderDetail findOrderDetailById(Long id){
+        return null;
     };
     /**
      * @Title: addOrderDetail
@@ -68,13 +59,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
      */
     @Override
     public Integer addOrderDetail(OrderDetail orderDetail) {
-        Integer integer=null;
-        try {
-            integer=orderDetailDao.addOrderDetail(orderDetail);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return integer;
+        return null;
     }
 
     /**
@@ -90,13 +75,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
      */
     @Override
     public Integer updateOrderDetailById(Long id, OrderDetail orderDetail) {
-        Integer integer=null;
-        try {
-            integer=orderDetailDao.updateOrderDetailById(id, orderDetail);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return integer;
+        return null;
     }
 
     /**
@@ -108,13 +87,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
      * @return: 订单详情集合
      */
     public List<OrderDetail> getOrderDetailListByOrderId(Long orderId) {
-        List<OrderDetail> orders=new ArrayList<OrderDetail>();
-        try {
-            orders=orderDetailDao.getOrderDetailListByOrderId(orderId);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return orders;
+        return null;
     }
 
     /**
@@ -126,13 +99,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
      * @return: 订单详情集合
      */
     public List<OrderDetail> findOrderDetailByPeopleId(Long peopleId){
-        List<OrderDetail> orders=new ArrayList<OrderDetail>();
-        try {
-            orders=orderDetailDao.findOrderDetailByPeopleId(peopleId);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return orders;
+        return null;
     }
 
     /**

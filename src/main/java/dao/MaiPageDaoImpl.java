@@ -33,6 +33,6 @@ public class MaiPageDaoImpl extends BaseDaoImpl<MainPage> implements MainPageDao
      */
     @Override
     public List<MainPage> findMainPageInvertory() throws SQLException {
-        return this.sqlSessionTemplate.selectOne(getMybaitsNameSpace() + "findMainPageInvertory");
+        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findMainPageInvertory");
     }
 }

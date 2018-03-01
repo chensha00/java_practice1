@@ -140,7 +140,7 @@ public class InvertoryDaoImpl extends BaseDaoImpl<Invertory> implements Invertor
      */
     public List<Invertory> findInvertoryByUnSureCondition(List<Map<String, Object>> map)
             throws SQLException {
-        return this.sqlSessionTemplate.selectOne(getMybaitsNameSpace() + "findInvertoryByUnSureCondition");
+        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findInvertoryByUnSureCondition");
     }
 
 
