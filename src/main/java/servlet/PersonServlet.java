@@ -25,7 +25,6 @@ import java.util.ResourceBundle;
  */
 public class PersonServlet extends HttpServlet{
 
-    private static ResourceBundle lStrings = ResourceBundle.getBundle("javax.servlet.http.LocalStrings");
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -36,13 +35,6 @@ public class PersonServlet extends HttpServlet{
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String protocol = req.getProtocol();
-        String msg = lStrings.getString("http.method_post_not_supported");
-        if(protocol.endsWith("1.1")) {
-            resp.sendError(405, msg);
-        } else {
-            resp.sendError(400, msg);
-        }
 
 //        设置字符集
         req.setCharacterEncoding("utf-8");
