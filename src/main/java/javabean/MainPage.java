@@ -17,6 +17,11 @@ package javabean;/**************************************************************
 public class MainPage {
 
     /**
+     * id ID
+     */
+    private Long id;
+
+    /**
      * price 商品价格
      */
     private Double price;
@@ -35,6 +40,14 @@ public class MainPage {
      * storeName 店铺名称
      */
     private String storeName;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Double getPrice() {
         return price;
