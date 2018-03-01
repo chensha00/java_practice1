@@ -9,6 +9,7 @@ package service;/***************************************************************
  */
 
 import dao.InvertoryDao;
+import dao.MainPageDao;
 import domain.Goods;
 import domain.Invertory;
 import domain.Store;
@@ -35,6 +36,9 @@ public class InvertoryServiceImpl implements InvertoryService {
 
     @Autowired
     private InvertoryDao invertoryDao;
+
+    @Autowired
+    private MainPageDao mainPageDao;
 
     /**
      * @Title: saveInvertory
@@ -291,7 +295,7 @@ public class InvertoryServiceImpl implements InvertoryService {
     public List<javabean.MainPage> findMainPageInvertory() {
         List<javabean.MainPage> mainPages = new ArrayList<javabean.MainPage>();
         try {
-            mainPages = invertoryDao.findMainPageInvertory();
+            mainPages = mainPageDao.findMainPageInvertory();
         } catch (SQLException e) {
             e.printStackTrace();
         }
