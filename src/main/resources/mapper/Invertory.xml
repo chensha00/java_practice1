@@ -36,13 +36,15 @@
         WHERE STORE_ID=#{storeId} AND GOODS_ID=#{goodsId}
         GROUP BY ID
     </select>
+
     <!--根据店铺ID查询店铺所有库存-->
     <select id="findInvertoryByUnSureCondition" resultType="java.util.Map" resultMap="invertory">
         SELECT
         <include refid="invertorySql"/>
-        FROM INVERTORY
-        WHERE STORE_ID=#{storeId}
-        GROUP BY ID
+        FROM INVERTORY WHERE 1=1
+        <foreach collection="list" item="map">
+            AND ${map.name} ${map.rela} ${map.value}
+        </foreach>
     </select>
 
 
