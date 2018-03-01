@@ -25,13 +25,26 @@
     <select id="getAll" resultType="java.util.Map" resultMap="goods">
         SELECT <include refid="goodsSql"/> FROM GOODS
     </select>
+    <!--查询指定id的商品信息-->
+    <select id="findGoodsById" resultMap="goods" parameterType="java.lang.Long">
+        SELECT <include refid="goodsSql"/> FROM GOODS WHERE ID=#{id}
+    </select>
     <!--添加-->
     <insert id="add" parameterType="domain.Goods">
         INSERT INTO goods(ID,GOODS_NUM,NAME,TYPE,UNIT,PROCEDURE_DATE,SHELF_LIFE,SHELF_LIFE_UNIT) VALUES(DEFAULT ,
         #{goodsNum,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{type,jdbcType=TINYINT},#{unit,jdbcType=VARCHAR},
         #{procedureDate,jdbcType=TIMESTAMP},#{shelfLife,jdbcType=FLOAT},#{shelfLifeUnit,jdbcType=TINYINT})
     </insert>
-
+    <!--删除指定id的商品信息-->
+    <delete id="deleteGoodsById" parameterType="java.lang.Long">
+        DELETE FROM goods WHERE ID=#{id}
+    </delete>
+    <!--更新指定商品信息-->
+    <update id="updateGoods" parameterType="domain.Goods">
+        UPDATE goods SET GOODS_NUM=#{goodsNum,jdbcType=VARCHAR},NAME=#{name,jdbcType=VARCHAR},TYPE=#{type,jdbcType=TINYINT},
+        UNIT=#{unit,jdbcType=VARCHAR},PROCEDURE_DATE=#{procedureDate,jdbcType=TIMESTAMP},SHELF_LIFE=#{shelfLife,jdbcType=FLOAT},
+        SHELF_LIFE_UNIT=#{shelfLifeUnit,jdbcType=TINYINT} WHERE ID=#{id}
+    </update>
     <!--<delete id="deleteById" parameterType="java.util.Map">-->
         <!--DELETE FROM STU_TABLE WHERE ID IN-->
     <!--</delete>-->

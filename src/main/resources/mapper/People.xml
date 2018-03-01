@@ -12,7 +12,7 @@
         <result property="name" column="NAME" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result property="cardId" column="CARD_ID" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result property="sex" column="SEX" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result property="age" column="AGE" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result property="age" column="AGE" javaType="java.lang.Integer"/>
         <result property="money" column="MONEY" jdbcType="DECIMAL" javaType="java.lang.Double"/>
         <result property="address" column="ADDRESS" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result property="usreName" column="USERNAME" jdbcType="VARCHAR" javaType="java.lang.String"/>
@@ -21,12 +21,8 @@
     <!--NAME=#{name,jdbcType=VARCHAR},CARD_ID=#{cardId,jdbcType=VARCHAR},SEX=#{sex,jdbcType=VARCHAR},AGE=#{age},MONEY=#{money,jdbcType=DECIMAL},ADDRESS=#{address,jdbcType=VARCHAR},USERNAME=#{usreName,jdbcType=VARCHAR},PASSWORD=#{passWord,jdbcType=VARCHAR}-->
     <!--查询人员表所对应的列-->
     <sql id="peopleSql">
-        ID,`NAME`,CARD_ID,SEX,AGE,MONEY,ADDRESS,USERNAME,PASSWORD
+        ID,NAME,CARD_ID,SEX,AGE,MONEY,ADDRESS,USERNAME,PASSWORD
     </sql>
-    <!--查询store所对应的列-->
-    <!--<sql id="storeSql">-->
-        <!--ID,STORE_NUM,STORE_NAME,CREDIT,PEOPLE_ID-->
-    <!--</sql>-->
     <!--查询人员信息 根据指定id-->
     <select id="getPoepleById"  resultMap="people" parameterType="java.lang.Long">
         SELECT <include refid="peopleSql"/> FROM people WHERE ID=#{id}
@@ -47,9 +43,9 @@
         <selectKey order="BEFORE" keyProperty="id" resultType="java.lang.Long">
             SELECT LAST_INSERT_ID()
         </selectKey>
-        INSERT INTO people(<include refid="peopleSql"/>) VALUES(DEFAULT,#{name,jdbcType=VARCHAR},
-        #{cardId,jdbcType=VARCHAR},#{sex,jdbcType=VARCHAR},#{age,jdbcType=INTEGER},#{money,jdbcType=DECIMAL},
-        #{address,jdbcType=VARCHAR},#{usreName,jdbcType=VARCHAR},#{passWord,jdbcType=VARCHAR})
+        INSERT INTO people(ID,<include refid="peopleSql"/>) VALUES(DEFAULT,NAME=#{name,jdbcType=VARCHAR},
+        CARD_ID=#{cardId,jdbcType=VARCHAR},SEX=#{sex,jdbcType=VARCHAR},AGE=#{age},MONEY=#{money,jdbcType=DECIMAL},
+        ADDRESS=#{address,jdbcType=VARCHAR},USERNAME=#{usreName,jdbcType=VARCHAR},PASSWORD=#{passWord,jdbcType=VARCHAR})
     </insert>
 
     <!--查询指定用户名密码的人员信息-->
@@ -57,6 +53,11 @@
         SELECT <include refid="peopleSql"/> FROM people WHERE USERNAME=#{usreName,jdbcType=VARCHAR} AND
         PASSWORD=#{passWord,jdbcType=VARCHAR}
     </select>
+    <!--查询所有的人员信息-->
+    <select id="getAllPeople" resultType="java.util.Map" resultMap="people">
+        SELECT <include refid="peopleSql"/> FROM people
+    </select>
+
     <!--查询所有store信息-->
     <!--<select id="getStoreAll" resultMap="store">-->
         <!--SELECT <include refid="storeSql"/> FROM store-->

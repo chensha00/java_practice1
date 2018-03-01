@@ -31,6 +31,8 @@ public interface PeopleService {
     public People findPeopleById(Long id);
 
 
+    public List<People> getAllPeople();
+
 
     /**
      * @Title: findPeopleByUserName
