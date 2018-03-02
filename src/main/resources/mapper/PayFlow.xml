@@ -25,15 +25,25 @@
     <select id="getAll" resultType="java.util.Map" resultMap="payFlow">
         SELECT
         <include refid="payFlowSql"/>
-        FROM PAYFLOW
+        FROM pay_flow
     </select>
 
+    <!--根据指定ID查询-->
+    <select id="payFlowById"  resultMap="payFlow" parameterType="java.lang.Long">
+        SELECT <include refid="payFlowSql"/> FROM pay_flow WHERE ID=#{id}
+    </select>
 
-    <!--添加-->
+    <!--通过流水号查询流水表-->
+    <select id="payFlowByFlowNum"  resultMap="payFlow" parameterType="java.lang.Long">
+        SELECT <include refid="payFlowSql"/> FROM pay_flow WHERE FLOW_NUM=#{FLOW_NUM,jdbcType=VARCHAR}
+    </select>
+
+    <!--添加全部-->
     <insert id="add">
-        INSERT INTO PAYFLOW(ID,FLOW_NUM,PEOPLE_ID,MONEY,FLOW_TYPE,CRATE_TIME,ORDER_DETAIL_ID,GOODS_ORDER_ID) VALUES(DEFAULT ,
-        ${payFlow.flowNum},${payFlow.peopleId},${payFlow.money},${payFlow.flowType},
-        ${payFlow.crateTime},${payFlow.orderDetailId},${payFlow.goodsOrderId})
+        INSERT INTO pay_flow(ID,FLOW_NUM,PEOPLE_ID,MONEY,FLOW_TYPE,CRATE_TIME,ORDER_DETAIL_ID,GOODS_ORDER_ID) VALUES(DEFAULT ,
+        ${pay_flow.flowNum},${pay_flow.peopleId},${pay_flow.money},${pay_flow.flowType},
+        ${pay_flow.crateTime},${pay_flow.orderDetailId},${pay_flow.goodsOrderId})
     </insert>
+
 
 </mapper>

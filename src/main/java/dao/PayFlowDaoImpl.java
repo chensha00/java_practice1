@@ -92,7 +92,7 @@ public class PayFlowDaoImpl extends BaseDaoImpl<PayFlow> implements PayFlowDao {
     @Override
     public PayFlow findPayFlowByFlowNum(String flowNum) throws SQLException {
         ResultSet resultSet = null;
-        String findSql = "SELECT ID,FLOW_NUM,PEOPLE_ID,MONEY,FLOW_TYPE,CREATE_TIME,ORDER_DETALL_ID,GOODS_ORDER_ID FROM PayFlow WHERE ID=?;";
+        String findSql = "SELECT ID,FLOW_NUM,PEOPLE_ID,MONEY,FLOW_TYPE,CREATE_TIME,ORDER_DETALL_ID,GOODS_ORDER_ID FROM PayFlow WHERE flowNum=?;";
         List<PayFlow> payFlows = jdbcTemplate.query(findSql, new ResultSetExtractor<List<PayFlow>>() {
             @Override
             public List<PayFlow> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
