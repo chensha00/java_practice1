@@ -23,7 +23,7 @@
 <jsp:include page="head_page.jsp" flush="true"/>
 
 <div class="cart_div">
-    <form action="pay/pay.htm?ob=money" method="post" class="form">
+    <form action="/pay/pay.htm?ob=money" method="post" class="form">
         <fieldset>
             <legend><img src="${basePath}../img/cart.jpg"></legend>
             <table class="cart_table" id="tab" border="1">
@@ -46,7 +46,12 @@
                         <td>
                             <p class="name">${cart.name}</p>
                             <span class="price">${cart.price}</span>
-                            <input type="hidden" name="numberName" value="${cart.number}">
+                            <%--为JS获取值--%>
+                            <input type="hidden" name="priceName" value="${entry.price}">
+                            <input type="hidden" name="nameName" value="${entry.name}">
+                            <input type="hidden" name="numberName" value="${entry.number}">
+                            <input type="hidden" name="storeNameName" value="${entry.storeName}">
+                            <%--加减按钮--%>
                             <input class="product_id" type="hidden" name="product_id" value="value"/>
                             <input class="min" name="" type="button" value="-"/>
                             <input class="text_box" name="name2" type="text" value="1"/>
@@ -112,7 +117,7 @@
                         numbers = 0;
                     }
 
-//                   //循环检查输入的商品数量和库存比较
+                   //循环检查输入的商品数量和库存比较
 //                    var array = document.getElementById("tr").rows;//所有tr
 //                    var numberstr1 = document.getElementsByName("numberName")[0].value;//所有商品库存
 //                    var numberstr2 = $(this).find('span[class*=price]').text();//所有输入的商品数量
@@ -146,11 +151,21 @@
         });
     </script>
 
-    <script>
+    <script type="text/javascript">
+        //向支付页面传输数据
         $('#cart').live("click", function () {
-            var url = 'pay/pay.htm?op=money';
+            var priceStr = document.getElementsByName("priceName")[0].value;
+            var nameStr = document.getElementsByName("nameName")[0].value;
+            var numberStr = document.getElementsByName("name2")[0].value;
+            var storeNameStr = document.getElementsByName("storeNameName")[0].value;
+            var totalStr = document.getElementsByName("total") [0].value();
+            var url = 'pay/pay.htm?ob=money';
             var data = {
-                'totalStr':document.getElementsByName("total") [0].valueOf(),
+                'priceStr':priceStr,
+                'nameStr':nameStr,
+                'numberStr':numberStr,
+                'storeNameStr':storeNameStr,
+                'totalStr':totalStr,
                 'ob': 'money'
             };
             var success = function (response) {

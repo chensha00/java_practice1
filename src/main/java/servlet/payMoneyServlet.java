@@ -8,7 +8,6 @@ package servlet;/***************************************************************
  * @version V1.0
  */
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import domain.GoodsOrder;
 import domain.OrderDetail;
 import service.*;
@@ -16,7 +15,10 @@ import tools.GoodsException;
 import tools.GoodsOrderException;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -46,6 +48,14 @@ public class payMoneyServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 //          http://localhost:8080/pay/pay.htm?peopeoId=1&&orderNum=OD&&isPay=true
+//        或者购物车的传值
+        String name = req.getParameter("nameStr");
+        String price = req.getParameter("priceStr");
+        String number = req.getParameter("numberStr");
+        String storeName = req.getParameter("storeNameStr");
+        String totalMoney = req.getParameter("totalStr");
+        System.out.println(totalMoney);
+
         //获取支付人id，支付订单编号，是否支付
         Long peopleId=Long.valueOf(req.getParameter("peopleId"));
         String orderNum=req.getParameter("orderNum");

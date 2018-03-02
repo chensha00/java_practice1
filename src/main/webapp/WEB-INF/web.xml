@@ -7,7 +7,7 @@
          version="3.0">
     
     <welcome-file-list>
-        <welcome-file>login_page.jsp</welcome-file>
+        <welcome-file>servlet/mainPage.htm</welcome-file>
     </welcome-file-list>
     
     <!--胡志强-->
