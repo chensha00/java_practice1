@@ -61,20 +61,20 @@
 <script type="text/javascript">
     $('#cart').live("click", function () {
         //获取商品的价格，名字，店铺，库存
-        var pricestr = document.getElementsByName("priceName")[0].value;
-        var namestr = document.getElementsByName("nameName")[0].value;
-        var numberstr = document.getElementsByName("numberName")[0].value;
-        var storeNamestr = document.getElementsByName("storeNameName")[0].value;
+        var priceStr = document.getElementsByName("priceName")[0].value;
+        var nameStr = document.getElementsByName("nameName")[0].value;
+        var numberStr = document.getElementsByName("numberName")[0].value;
+        var storeNameStr = document.getElementsByName("storeNameName")[0].value;
         //输出商品名
-        var goodsCart = "商品:" + namestr + "\n添加到购物车成功!";
+        var goodsCart = "商品:" + nameStr + "\n添加到购物车成功!";
         alert(goodsCart);
         //将数据传到另一个页面
         var url = 'servlet/cartPage.htm?op=add';
         var data = {
-            'namestr': entry.name,
-            'pricestr': entry.price,
-            'numberstr': entry.number,
-            'storeNamestr': entry.storeName,
+            'nameStr': entry.name,
+            'priceStr': entry.price,
+            'numberStr': entry.number,
+            'storeNameStr': entry.storeName,
             'op': 'add'
         };
         var success = function (response) {

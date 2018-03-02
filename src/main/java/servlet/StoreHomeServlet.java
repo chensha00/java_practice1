@@ -54,27 +54,19 @@ public class StoreHomeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         HttpSession session = req.getSession();
-        session.setAttribute("username","zhangsan1");
-        String username = (String) session.getAttribute("username");
+        Long  peopleId =Long.valueOf(req.getParameter("peopleId"));
 
-        String sqlUserName = " '" + username + "' ";
-        List<Map<String,Object>> map = new ArrayList<Map<String,Object>>();
-        map.add(AddConditionUtils.addCondition("username", "=", sqlUserName));
         try {
             //一个人只能同时拥有一个店
-            List<People> peoples = new ArrayList<People>();
-            peoples = peopleService.findPeopleByUnSureCondition(map);
-            if(peoples.get(0) != null ){
+            People people = new People();
+            people = peopleService.findPeopleById(peopleId);
+            if(people != null ){
                 List<Map<String,Object>> map1 = new ArrayList<Map<String,Object>>();
-                map1.add(AddConditionUtils.addCondition("people_Id", "=", peoples.get(0).getId()));
+                map1.add(AddConditionUtils.addCondition("people_Id", "=", peopleId));
                 List<Store> stores = new ArrayList<Store>();
                 stores = storeService.findStoreByUnSureCondition(map1);
-                //测试mybatis
-                Store store = new Store();
-                store = storeService.findStoreById(1L);
-                System.out.println(store.getStoreNum());
                 if (stores.get(0) == null){
-                    session.setAttribute("peoples",peoples);
+                    session.setAttribute("people",people);
                     req.getRequestDispatcher("../people_open_store.jsp").forward(req,resp);
                 }else{
                     //根据店铺id查找到库存信息
@@ -87,10 +79,11 @@ public class StoreHomeServlet extends HttpServlet {
                     for (int i = 0; i < invertories.size() ; i++) {
                         Goods good = new Goods();
                         good = goodsService.findGoodsById(invertories.get(i).getGoodsId());
+                        System.out.println(good.getName());
                         goods.add(good);
                     }
                     session.setAttribute("stores",stores);
-                    session.setAttribute("peoples",peoples);
+                    session.setAttribute("peoples",people);
                     session.setAttribute("invertorys",invertories);
                     session.setAttribute("goods",goods);
                     req.getRequestDispatcher("../store_home_page.jsp").forward(req,resp);

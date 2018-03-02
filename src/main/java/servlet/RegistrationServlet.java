@@ -11,7 +11,9 @@ package servlet;/**
  * @version V1.0
  */
 
+import common.util.SpringContextUtil;
 import domain.People;
+import service.PeopleService;
 import service.PeopleServiceImpl;
 
 import javax.servlet.ServletException;
@@ -82,8 +84,14 @@ public class RegistrationServlet extends HttpServlet {
         if (amt.equals("") != true && amt != null) {
             people1.setMoney(Double.valueOf(amt));
         }
-        new PeopleServiceImpl().showPeople(people1);
-        Integer line = new PeopleServiceImpl().savePeople(people1);
+        //
+
+//        new PeopleServiceImpl().showPeople(people1);
+        // 拿到PeopleService
+        PeopleService peopleService=(PeopleService) SpringContextUtil.getBean("peopleService");
+
+        Integer line = peopleService.savePeople(people1);
+
         System.out.println(line);
         if (line == null) {
             System.out.println("注册失败");
@@ -94,7 +102,7 @@ public class RegistrationServlet extends HttpServlet {
         } else {
             //注册成功直接转登录页面
             System.out.println("注册成功");
-            resp.sendRedirect("/servlet/loginPage.htm");
+            resp.sendRedirect(req.getContextPath()+"/login_page.jsp");
         }
     }
 }

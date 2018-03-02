@@ -146,6 +146,9 @@ public class PeopleServiceImpl implements PeopleService {
         // 1.创建自定义连接池对象
 //        return people;
     }
+    public List<People> getAllPeople(){
+        return peopleDao.getAllPeople();
+    }
 
     /**
      * @Title: savePeople

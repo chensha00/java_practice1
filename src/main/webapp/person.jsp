@@ -47,7 +47,7 @@
                     <td>持有金额：${person.money}</td>
                 </tr>
                 <tr>
-                    <td>地址：</td>
+                    <td>收货地址：</td>
                     <td><input type="text" name="address" value="${person.address}"></td>
                 </tr>
                 <tr>

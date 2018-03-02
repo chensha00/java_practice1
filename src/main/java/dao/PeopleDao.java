@@ -4,6 +4,8 @@ package dao;/**
 
 import domain.People;
 
+import java.util.List;
+
 /**
  * @author shangzhiqian
  * @InterfaceName PeopleDao
@@ -65,6 +67,8 @@ public interface PeopleDao {
      */
     public People findPeopleByUserName(String userName, String password);
 
+
+    public List<People> getAllPeople();
 
 
 //

@@ -77,6 +77,19 @@ public class LoginServlet extends HttpServlet {
             session.removeAttribute("LoginMessage");
             session.setAttribute("person", person);
             resp.sendRedirect("/servlet/mainPage.htm");
+//            resp.setCharacterEncoding("UTF-8");
+//            resp.setContentType("text/html;charset=UTF-8");
+//
+//            PrintWriter out = resp.getWriter();
+//
+//            HashMap<String,String> hashMap=new HashMap<String, String>();
+//            hashMap.put("MESSAGE","登陆成功");
+//            Gson gson=new Gson();
+//
+//            out.print(gson.toJson(hashMap));
+//            //关闭流
+//            out.flush();
+//            out.close();
         }
     }
 }

@@ -5,6 +5,11 @@
          xmlns="http://java.sun.com/xml/ns/javaee"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
+    
+    <welcome-file-list>
+        <welcome-file>servlet/mainPage.htm</welcome-file>
+    </welcome-file-list>
+    
     <!--胡志强-->
     <!--Spring配置-->
     <!-- 设置Spring的配置文件启动路径 -->
@@ -19,7 +24,6 @@
     <!--<param-name>spring.profiles.default</param-name>-->
     <!--<param-value>test</param-value>-->
     <!--</context-param>-->
-
 
     <!-- spring容器启动 -->
     <listener>

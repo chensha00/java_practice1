@@ -7,6 +7,7 @@ import domain.People;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -91,6 +92,11 @@ public class PeopleDaoImpl extends BaseDaoImpl<People> implements PeopleDao {
 //        People people=new People();
         return this.sqlSessionTemplate.selectOne(getMybaitsNameSpace()+"findPeopleByUserName",userMap);
 //        return people;
+    }
+
+    public List<People> getAllPeople(){
+        List<People> peopleList=this.sqlSessionTemplate.selectList(getMybaitsNameSpace()+"getAllPeople");
+        return peopleList;
     }
 
 
