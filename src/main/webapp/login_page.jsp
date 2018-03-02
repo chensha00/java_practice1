@@ -72,6 +72,7 @@
                 url:"${pageContext.request.contextPath}/servlet/loginPage.htm",
 //                contentType:"text",
                 success:function (x) {
+                    window.location.replace("/servlet/mainPage.htm");
                     alert(x.valueOf());
 
                 },

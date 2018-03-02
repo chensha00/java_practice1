@@ -9,6 +9,7 @@ package servlet;/***************************************************************
  */
 
 
+import com.google.gson.Gson;
 import common.util.SpringContextUtil;
 import domain.People;
 import service.PeopleService;
@@ -20,6 +21,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author yanyong
@@ -82,7 +86,12 @@ public class LoginServlet extends HttpServlet {
             resp.setContentType("text/html;charset=UTF-8");
 
             PrintWriter out = resp.getWriter();
-            out.print("登陆成功");
+
+            HashMap<String,String> hashMap=new HashMap<String, String>();
+            hashMap.put("MESSAGE","登陆成功");
+            Gson gson=new Gson();
+
+            out.print(gson.toJson(hashMap));
             //关闭流
             out.flush();
             out.close();
