@@ -143,16 +143,4 @@ public class InvertoryDaoImpl extends BaseDaoImpl<Invertory> implements Invertor
         return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findInvertoryByUnSureCondition",map);
     }
 
-
-//    /**
-//     * @Title: findMainPageInvertory
-//     * @Description: 查询所有订单的价格，数量，以及商品的ID
-//     * @author liukang
-//     * @date
-//     * @throw SQLException
-//     */
-//    @Override
-//    public List<javabean.MainPage> findMainPageInvertory() throws SQLException {
-//        return this.sqlSessionTemplate.selectOne(getMybaitsNameSpace() + "findMainPageInvertory");
-//    }
 }

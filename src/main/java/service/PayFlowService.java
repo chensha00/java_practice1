@@ -22,35 +22,6 @@ import java.util.Map;
  */
 public interface PayFlowService {
 
-//    /**
-//     * @Title: pay
-//     * @Description: 支付方法
-//     * @author liukang
-//     * @date 2018-1-21 22:17:28
-//     * @throw YnCorpSysException
-//     */
-//    public Boolean pay(GoodsOrder goodsOrder, People people) throws Exception;
-//
-//    /**
-//     * @Title: collect
-//     * @Description: 收款方法
-//     * @author liukang
-//     * @date 2018-1-21 22:17:33
-//     * @throw YnCorpSysException
-//     */
-//    public void collect(List<Goods> goods,Long orderDetailId, Boolean isRecv) throws Exception;
-//
-//    /**
-//     * @Title: collect
-//     * @Description: 收款方法
-//     * @author liukang
-//     * @date 2018-1-21 22:17:33
-//     * @throw YnCorpSysException
-//     */
-//    public void collect(OrderDetail orderDetail,Boolean isRecv) throws Exception;
-//
-//
-
     /**
      * @Title: findPayFlowById
      * @Description: 通过id查找流水信息
