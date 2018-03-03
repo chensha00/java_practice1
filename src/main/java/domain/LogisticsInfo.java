@@ -23,7 +23,7 @@ public class LogisticsInfo {
   /**
    * logistics_state 物流状态
    */
-  private Long logisticsState;
+  private Byte logisticsState;
 
   /**
    * order_detail_id 订单详情表
@@ -80,11 +80,11 @@ public class LogisticsInfo {
     this.logisticsNum = logisticsNum;
   }
 
-  public Long getLogisticsState() {
+  public Byte getLogisticsState() {
     return logisticsState;
   }
 
-  public void setLogisticsState(Long logisticsState) {
+  public void setLogisticsState(Byte logisticsState) {
     this.logisticsState = logisticsState;
   }
 

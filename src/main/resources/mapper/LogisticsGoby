@@ -3,7 +3,7 @@
 <!--jiangxiangwen-->
 <mapper namespace="domain.LogisticsGoby">
     <resultMap id="logisticsGoby" type="domain.LogisticsGoby">
-        <id column="ID" property="id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <id column="ID" property="id" jdbcType="BIGINT" javaType="java.lang.Long"/>
         <result column="LOGISTICS_INFO_ID" property="logisticsnfoId" jdbcType="BIGINT" javaType="java.lang.Long"/>
         <result column="GOBY_ADDRESS" property="gobyAddress" jdbcType="VARCHAR" javaType="java.lang.String"/>
     </resultMap>

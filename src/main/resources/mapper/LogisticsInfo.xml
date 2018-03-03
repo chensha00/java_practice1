@@ -3,7 +3,7 @@
 <!--jiangxiangwen-->
 <mapper namespace="domain.LogisticsInfo">
     <resultMap id="logisticsInfo" type="domain.LogisticsInfo">
-        <id column="ID" property="id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <id column="ID" property="id" jdbcType="BIGINT" javaType="java.lang.Long"/>
         <result column="LOGISTICS_NUM"     property="logisticsNum" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="LOGISTICS_STATE"   property="logisticsState" jdbcType="TINYINT" javaType="java.lang.Byte"/>
         <result column="ORDER_DETAIL_ID"   property="orderDetailId" jdbcType="BIGINT" javaType="java.lang.Long"/>
@@ -18,6 +18,11 @@
     <sql id="logisticsInfoSql">
         ID,LOGISTICS_NUM,LOGISTICS_STATE,ORDER_DETAIL_ID,DELIVER_NAME,DELIVER_PHONE,DELIVER_ADDRESS,CONSIGNEE_NAME,CONSIGNEE_PHONE,CONSIGNEE_ADDRESS
     </sql>
+
+    <!--查询所有的物流信息-->
+    <select id="findLogisticsInfoAll" resultMap="logisticsInfo">
+        SELECT <include refid="logisticsInfoSql"/> FROM logistics_info
+    </select>
 
     <!--通过查找orderDetailId（订单详情）查询-->
     <select id="findLogisticsInfoByOrderDetailId" resultMap="logisticsInfo">
@@ -39,7 +44,7 @@
     </delete>
 
     <!--添加物流信息-->
-    <insert id="save" parameterType="domain.LogisticsInfo">
+    <insert id="saveLogisticsInfo" parameterType="domain.LogisticsInfo">
         INSERT INTO logistics_info(<include refid="logisticsInfoSql"/>) VALUES (DEFAULT ,LOGISTICS_NUM=#{logisticsNum,jdbcType=VARCHAR},
         LOGISTICS_STATE=#{logisticsState,jdbcType=TINYINT},ORDER_DETAIL_ID=${orderDetailId},DELIVER_NAME=#{deliverName,jdbcType=VARCHAR},
         DELIVER_PHONE=#{deliverPhone,jdbcType=VARCHAR},DELIVER_ADDRESS=#{deliverAddress,jdbcType=VARCHAR},CONSIGNEE_NAME=#{consigneeName,jdbcType=VARCHAR},
