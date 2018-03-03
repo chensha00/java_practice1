@@ -18,12 +18,15 @@ public class LogisticsGoby {
   /**
    * logistics_info_id 物流信息表 外键
    */
-  private Long logistics_info_id;
+  private Long logisticsnfoId;
 
   /**
    * goby_address 经过地址
    */
-  private String goby_address;
+  private String gobyAddress;
+
+  //get & set
+
 
   public Long getId() {
     return id;
@@ -33,19 +36,19 @@ public class LogisticsGoby {
     this.id = id;
   }
 
-  public Long getLogistics_info_id() {
-    return logistics_info_id;
+  public Long getLogisticsnfoId() {
+    return logisticsnfoId;
   }
 
-  public void setLogistics_info_id(Long logistics_info_id) {
-    this.logistics_info_id = logistics_info_id;
+  public void setLogisticsnfoId(Long logisticsnfoId) {
+    this.logisticsnfoId = logisticsnfoId;
   }
 
-  public String getGoby_address() {
-    return goby_address;
+  public String getGobyAddress() {
+    return gobyAddress;
   }
 
-  public void setGoby_address(String goby_address) {
-    this.goby_address = goby_address;
+  public void setGobyAddress(String gobyAddress) {
+    this.gobyAddress = gobyAddress;
   }
 }

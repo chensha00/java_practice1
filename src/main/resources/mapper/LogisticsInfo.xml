@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--jiangxiangwen-->
+<mapper namespace="domain.LogisticsInfo">
+    <resultMap id="logisticsInfo" type="domain.LogisticsInfo">
+        <id column="ID" property="id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="LOGISTICS_NUM"     property="logisticsNum" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="LOGISTICS_STATE"   property="logisticsState" jdbcType="TINYINT" javaType="java.lang.Byte"/>
+        <result column="ORDER_DETAIL_ID"   property="orderDetailId" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <result column="DELIVER_NAME"      property="deliverName" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="DELIVER_PHONE"     property="deliverPhone" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="DELIVER_ADDRESS"   property="deliverAddress" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="CONSIGNEE_NAME"    property="consigneeName" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="CONSIGNEE_PHONE"   property="consigneePhone" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="CONSIGNEE_ADDRESS" property="consigneeAddress" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    </resultMap>
+    
+    <sql id="logisticsInfoSql">
+        ID,LOGISTICS_NUM,LOGISTICS_STATE,ORDER_DETAIL_ID,DELIVER_NAME,DELIVER_PHONE,DELIVER_ADDRESS,CONSIGNEE_NAME,CONSIGNEE_PHONE,CONSIGNEE_ADDRESS
+    </sql>
+
+    <!--通过查找orderDetailId（订单详情）查询-->
+    <select id="findLogisticsInfoByOrderDetailId" resultMap="logisticsInfo">
+        SELECT <include refid="logisticsInfoSql"/> FROM logistics_info WHERE ORDER_DETAIL_ID=${orderDetailId}
+    </select>
+
+    <!--通过查找orderDetailId（订单详情）更新-->
+    <update id="updateLogisticsInfoByOrderDetailId" >
+        UPDATE logistics_info
+        SET LOGISTICS_NUM=#{logisticsNum,jdbcType=VARCHAR},LOGISTICS_STATE=#{logisticsState,jdbcType=TINYINT},ORDER_DETAIL_ID=${orderDetailId},
+            DELIVER_NAME=#{deliverName,jdbcType=VARCHAR},DELIVER_PHONE=#{deliverPhone,jdbcType=VARCHAR},DELIVER_ADDRESS=#{deliverAddress,jdbcType=VARCHAR},
+            CONSIGNEE_NAME=#{consigneeName,jdbcType=VARCHAR},CONSIGNEE_PHONE=#{consigneePhone,jdbcType=VARCHAR},
+            CONSIGNEE_ADDRESS=#{consigneeAddress,jdbcType=VARCHAR} WHERE ORDER_DETAIL_ID=${orderDetailId}
+    </update>
+
+    <!--通过查找主键id删除-->
+    <delete id="deleteLogisticsInfoById">
+        DELETE FROM logistics_info WHERE ID=${id}
+    </delete>
+
+    <!--添加物流信息-->
+    <insert id="save" parameterType="domain.LogisticsInfo">
+        INSERT INTO logistics_info(<include refid="logisticsInfoSql"/>) VALUES (DEFAULT ,LOGISTICS_NUM=#{logisticsNum,jdbcType=VARCHAR},
+        LOGISTICS_STATE=#{logisticsState,jdbcType=TINYINT},ORDER_DETAIL_ID=${orderDetailId},DELIVER_NAME=#{deliverName,jdbcType=VARCHAR},
+        DELIVER_PHONE=#{deliverPhone,jdbcType=VARCHAR},DELIVER_ADDRESS=#{deliverAddress,jdbcType=VARCHAR},CONSIGNEE_NAME=#{consigneeName,jdbcType=VARCHAR},
+        CONSIGNEE_PHONE=#{consigneePhone,jdbcType=VARCHAR},CONSIGNEE_ADDRESS=#{consigneeAddress,jdbcType=VARCHAR})
+    </insert>
+
+</mapper>
