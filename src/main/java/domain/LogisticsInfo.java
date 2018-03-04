@@ -3,6 +3,8 @@ package domain;/**
  */
 
 
+import java.util.Date;
+
 /**
  * @author jiangxiangwen
  * @ClassName LogisticsInfo
@@ -19,6 +21,11 @@ public class LogisticsInfo {
    * logistics_num 物流单号
    */
   private String logisticsNum;
+
+  /**
+   * logisticsTime 物流信息生成时间
+   */
+  private Date logisticsTime;
 
   /**
    * logistics_state 物流状态
@@ -60,7 +67,20 @@ public class LogisticsInfo {
    */
   private String consigneeAddress;
 
+  /**
+   * message 备注信息 默认null
+   */
+  private String message;
 
+  /**
+   * userStar 用户评星 1-5 颗星 1-极差 2-差 3-一般 4-良 5-优 默认null
+   */
+  private Byte userStar;
+
+  /**
+   * userComment 用户评价内容 默认null
+   */
+  private String userComment;
 
   //get & set
 
@@ -142,5 +162,37 @@ public class LogisticsInfo {
 
   public void setConsigneeAddress(String consigneeAddress) {
     this.consigneeAddress = consigneeAddress;
+  }
+
+  public Date getLogisticsTime() {
+    return logisticsTime;
+  }
+
+  public void setLogisticsTime(Date logisticsTime) {
+    this.logisticsTime = logisticsTime;
+  }
+
+  public String getMessage() {
+    return message;
+  }
+
+  public void setMessage(String message) {
+    this.message = message;
+  }
+
+  public Byte getUserStar() {
+    return userStar;
+  }
+
+  public void setUserStar(Byte userStar) {
+    this.userStar = userStar;
+  }
+
+  public String getUserComment() {
+    return userComment;
+  }
+
+  public void setUserComment(String userComment) {
+    this.userComment = userComment;
   }
 }

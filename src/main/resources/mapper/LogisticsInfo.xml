@@ -5,6 +5,7 @@
     <resultMap id="logisticsInfo" type="domain.LogisticsInfo">
         <id column="ID" property="id" jdbcType="BIGINT" javaType="java.lang.Long"/>
         <result column="LOGISTICS_NUM"     property="logisticsNum" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="LOGISTICS_TIME"    property="logisticsTime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
         <result column="LOGISTICS_STATE"   property="logisticsState" jdbcType="TINYINT" javaType="java.lang.Byte"/>
         <result column="ORDER_DETAIL_ID"   property="orderDetailId" jdbcType="BIGINT" javaType="java.lang.Long"/>
         <result column="DELIVER_NAME"      property="deliverName" jdbcType="VARCHAR" javaType="java.lang.String"/>
@@ -13,10 +14,13 @@
         <result column="CONSIGNEE_NAME"    property="consigneeName" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="CONSIGNEE_PHONE"   property="consigneePhone" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="CONSIGNEE_ADDRESS" property="consigneeAddress" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="MESSAGE"            property="message"  jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="USER_STAR"          property="userStar" jdbcType="TINYINT" javaType="java.lang.Byte"/>
+        <result column="USER_COMMENT"       property="userComment" jdbcType="VARCHAR" javaType="java.lang.String"/>
     </resultMap>
     
     <sql id="logisticsInfoSql">
-        ID,LOGISTICS_NUM,LOGISTICS_STATE,ORDER_DETAIL_ID,DELIVER_NAME,DELIVER_PHONE,DELIVER_ADDRESS,CONSIGNEE_NAME,CONSIGNEE_PHONE,CONSIGNEE_ADDRESS
+        ID,LOGISTICS_NUM,LOGISTICS_TIME,LOGISTICS_STATE,ORDER_DETAIL_ID,DELIVER_NAME,DELIVER_PHONE,DELIVER_ADDRESS,CONSIGNEE_NAME,CONSIGNEE_PHONE,CONSIGNEE_ADDRESS,MESSAGE,USER_STAR,USER_COMMENT
     </sql>
 
     <!--查询所有的物流信息-->
@@ -32,10 +36,12 @@
     <!--通过查找 LOGISTICS_NUM（物流单号）更新-->
     <update id="updateLogisticsInfoByOrderDetailId" >
         UPDATE logistics_info
-        SET LOGISTICS_NUM=#{logisticsNum,jdbcType=VARCHAR},LOGISTICS_STATE=#{logisticsState,jdbcType=TINYINT},ORDER_DETAIL_ID=${orderDetailId},
-            DELIVER_NAME=#{deliverName,jdbcType=VARCHAR},DELIVER_PHONE=#{deliverPhone,jdbcType=VARCHAR},DELIVER_ADDRESS=#{deliverAddress,jdbcType=VARCHAR},
-            CONSIGNEE_NAME=#{consigneeName,jdbcType=VARCHAR},CONSIGNEE_PHONE=#{consigneePhone,jdbcType=VARCHAR},
-            CONSIGNEE_ADDRESS=#{consigneeAddress,jdbcType=VARCHAR} WHERE LOGISTICS_NUM=#{logisticsNum,jdbcType=VARCHAR}
+        SET LOGISTICS_NUM=#{logisticsNum,jdbcType=VARCHAR},LOGISTICS_TIME=#{logisticsTime,jdbcType=TIMESTAMP},LOGISTICS_STATE=#{logisticsState,jdbcType=TINYINT},
+            ORDER_DETAIL_ID=${orderDetailId},DELIVER_NAME=#{deliverName,jdbcType=VARCHAR},DELIVER_PHONE=#{deliverPhone,jdbcType=VARCHAR},
+            DELIVER_ADDRESS=#{deliverAddress,jdbcType=VARCHAR},CONSIGNEE_NAME=#{consigneeName,jdbcType=VARCHAR},CONSIGNEE_PHONE=#{consigneePhone,jdbcType=VARCHAR},
+            CONSIGNEE_ADDRESS=#{consigneeAddress,jdbcType=VARCHAR},MESSAGE=#{message,jdbcType=VARCHAR},USER_STAR=#{userStar,jdbcType=TINYINT},
+            USER_COMMENT=#{userComment,jdbcType=VARCHAR}
+        WHERE LOGISTICS_NUM=#{logisticsNum,jdbcType=VARCHAR}
     </update>
 
     <!--通过查找主键id删除-->
@@ -45,10 +51,10 @@
 
     <!--添加物流信息-->
     <insert id="saveLogisticsInfo" parameterType="domain.LogisticsInfo">
-        INSERT INTO logistics_info(<include refid="logisticsInfoSql"/>) VALUES (DEFAULT ,#{logisticsNum,jdbcType=VARCHAR},
-        #{logisticsState,jdbcType=TINYINT},${orderDetailId},#{deliverName,jdbcType=VARCHAR},
-        #{deliverPhone,jdbcType=VARCHAR},#{deliverAddress,jdbcType=VARCHAR},#{consigneeName,jdbcType=VARCHAR},
-        #{consigneePhone,jdbcType=VARCHAR},#{consigneeAddress,jdbcType=VARCHAR})
+        INSERT INTO logistics_info(<include refid="logisticsInfoSql"/>) VALUES (DEFAULT ,#{logisticsNum,jdbcType=VARCHAR},#{logisticsTime,jdbcType=TIMESTAMP},
+        #{logisticsState,jdbcType=TINYINT},${orderDetailId},#{deliverName,jdbcType=VARCHAR},#{deliverPhone,jdbcType=VARCHAR},#{deliverAddress,jdbcType=VARCHAR},
+        #{consigneeName,jdbcType=VARCHAR},#{consigneePhone,jdbcType=VARCHAR},#{consigneeAddress,jdbcType=VARCHAR},#{message,jdbcType=VARCHAR},#{userStar,jdbcType=TINYINT},
+        #{userComment,jdbcType=VARCHAR})
     </insert>
 
 </mapper>
