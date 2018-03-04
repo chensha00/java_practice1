@@ -11,6 +11,7 @@ package service; /**
 import dao.LogisticsInfoDao;
 import domain.LogisticsInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ import java.util.List;
  * @Description 类的描述
  * @date 2018/3/4
  */
+@Service("logisticsInfoService")
 public class LogisticsInfoServiceImpl implements LogisticsInfoService {
 
     @Autowired

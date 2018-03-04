@@ -216,4 +216,16 @@
         <!--<servlet-name>head</servlet-name>-->
         <!--<url-pattern>/servlet/headPage.htm</url-pattern>-->
     <!--</servlet-mapping>-->
+
+
+    <!--jiangxiangwen-->
+    <servlet>
+        <servlet-name>logistics</servlet-name>
+        <servlet-class>servlet.LogisticsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>logistics</servlet-name>
+        <url-pattern>/servlet/logistics.htm</url-pattern>
+    </servlet-mapping>
+
 </web-app>

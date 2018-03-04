@@ -3,6 +3,8 @@ package domain;/**
  */
 
 
+import tools.TimeFormat;
+
 import java.util.Date;
 
 /**
@@ -30,7 +32,7 @@ public class LogisticsGoby {
   /**
    * gobyTime 到达时间
    */
-  private Date gobyTime;
+  private String gobyTime;
 
   /**
    * goby_address 到达地址
@@ -46,11 +48,13 @@ public class LogisticsGoby {
 
 
   public Date getGobyTime() {
-    return gobyTime;
+    return new Date(gobyTime);
   }
 
   public void setGobyTime(Date gobyTime) {
-    this.gobyTime = gobyTime;
+    TimeFormat timeFormat=new TimeFormat(gobyTime);
+    timeFormat.format("yyyy-MM-dd HH:mm:ss");
+    this.gobyTime = timeFormat.format("yyyy-MM-dd HH:mm:ss");
   }
 
   public String getMessage() {
