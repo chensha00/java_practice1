@@ -5,7 +5,7 @@ package domain;/**
 
 /**
  * @author jiangxiangwen
- * @ClassName LogisticsGoby
+ * @ClassName LogisticsGoby.xml
  * @Description 物流过程表
  * @date 2018/3/2
  */
@@ -19,6 +19,11 @@ public class LogisticsGoby {
    * logistics_info_id 物流信息表 外键
    */
   private Long logisticsnfoId;
+
+  /**
+   * gobyOrderby 物流过程顺序
+   */
+  private Integer gobyOrderby;
 
   /**
    * goby_address 经过地址
@@ -42,6 +47,14 @@ public class LogisticsGoby {
 
   public void setLogisticsnfoId(Long logisticsnfoId) {
     this.logisticsnfoId = logisticsnfoId;
+  }
+
+  public Integer getGobyOrderby() {
+    return gobyOrderby;
+  }
+
+  public void setGobyOrderby(Integer gobyOrderby) {
+    this.gobyOrderby = gobyOrderby;
   }
 
   public String getGobyAddress() {
