@@ -26,7 +26,7 @@ public class LogisticsInfoServiceImpl implements LogisticsInfoService {
     private LogisticsInfoDao logisticsInfoDao;
 
     /**
-     * @param OrderDetailId 订单详情 主键id
+     * @param orderDetailId 订单详情 主键id
      * @return LogisticsInfo 物流信息实体
      * @Title: findLogisticsInfoByOrderDetailId
      * @Description: 通过传入orderDetailId（订单详情 主键id）查询物流信息实体
