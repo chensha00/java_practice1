@@ -26,7 +26,7 @@ import java.util.List;
 @Repository("LogisticsInfoDao")
 public class LogisticsInfoDaoImpl extends BaseDaoImpl<LogisticsInfo> implements LogisticsInfoDao {
     /**
-     * @param OrderDetailId 订单详情 主键id
+     * @param orderDetailId 订单详情 主键id
      * @return LogisticsInfo 物流信息实体
      * @Title: findLogisticsInfoByOrderDetailId
      * @Description: 通过传入orderDetailId（订单详情 主键id）查询物流信息实体
@@ -34,8 +34,10 @@ public class LogisticsInfoDaoImpl extends BaseDaoImpl<LogisticsInfo> implements 
      * @date 2018/3/3
      */
     @Override
-    public LogisticsInfo findLogisticsInfoByOrderDetailId(Long OrderDetailId) {
-        return this.sqlSessionTemplate.selectOne(getMybaitsNameSpace()+"findLogisticsInfoByOrderDetailId",OrderDetailId);
+    public LogisticsInfo findLogisticsInfoByOrderDetailId(Long orderDetailId) {
+        LogisticsInfo logisticsInfo=new LogisticsInfo();
+        logisticsInfo.setOrderDetailId(orderDetailId);
+        return this.sqlSessionTemplate.selectOne(getMybaitsNameSpace()+"findLogisticsInfoByOrderDetailId",logisticsInfo);
     }
 
     /**
@@ -90,10 +92,10 @@ public class LogisticsInfoDaoImpl extends BaseDaoImpl<LogisticsInfo> implements 
     }
 
     //本地测试
-//    public static void main(String[] args) {
-//        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("applicationContext.xml");
-//        LogisticsInfoDaoImpl logisticsInfoDao= (LogisticsInfoDaoImpl)applicationContext.getBean("LogisticsInfoDao");
-////        List<LogisticsInfo> logisticsInfo=logisticsInfoDao.findLogisticsInfoAll();
+    public static void main(String[] args) {
+        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("applicationContext.xml");
+        LogisticsInfoDaoImpl logisticsInfoDao= (LogisticsInfoDaoImpl)applicationContext.getBean("LogisticsInfoDao");
+//        List<LogisticsInfo> logisticsInfo=logisticsInfoDao.findLogisticsInfoAll();
 //        LogisticsInfo logisticsInfo=new LogisticsInfo();
 //        logisticsInfo.setLogisticsNum("78987545647875");
 //        logisticsInfo.setOrderDetailId(1l);
@@ -101,6 +103,6 @@ public class LogisticsInfoDaoImpl extends BaseDaoImpl<LogisticsInfo> implements 
 //        logisticsInfo.setDeliverPhone("13334555977");
 //        logisticsInfo.setDeliverAddress("weizhi");
 //        logisticsInfo.setId(3l);
-//        logisticsInfoDao.updateLogisticsInfoByOrderDetailId(logisticsInfo);
-//    }
+//        LogisticsInfo logisticsInfo=logisticsInfoDao.findLogisticsInfoByOrderDetailId(1l);
+    }
 }

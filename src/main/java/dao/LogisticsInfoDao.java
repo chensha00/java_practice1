@@ -57,7 +57,7 @@ public interface LogisticsInfoDao {
      * @Description: 删除物流信息
      * @author jiangxiangwen
      * @date 2018/3/3
-     * @param logisticsInfo 物流信息实体
+     * @param logisticsInfo 主键id
      * @return Integer 受影响的行数
      * 
      */
