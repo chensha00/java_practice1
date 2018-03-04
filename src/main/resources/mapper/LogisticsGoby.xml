@@ -6,18 +6,24 @@
         <id      column="ID"                   property="id"              jdbcType="BIGINT" javaType="java.lang.Long"/>
         <result column="LOGISTICS_INFO_ID"  property="logisticsnfoId" jdbcType="BIGINT" javaType="java.lang.Long"/>
         <result column="GOBY_ORDERBY"        property="gobyOrderby"    jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="GOBY_TIME"           property="gobyTime"        jdbcType="TIMESTAMP" javaType="java.util.Date"/>
         <result column="GOBY_ADDRESS"        property="gobyAddress"    jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="MESSAGE"             property="message"         jdbcType="VARCHAR" javaType="java.lang.String"/>
     </resultMap>
+
+    <sql id="logisticsGobySql">
+        ID,LOGISTICS_INFO_ID,GOBY_ORDERBY,GOBY_TIME,GOBY_ADDRESS,MESSAGE
+     </sql>
 
     <!--通过LOGISTICS_INFO_ID（物流信息 主键） 查询物流过程-->
     <select id="findLogisticsGobyLogisticsnfoId" resultMap="logisticsGoby">
-        SELECT ID,LOGISTICS_INFO_ID,GOBY_ORDERBY,GOBY_ADDRESS FROM logistics_goby WHERE LOGISTICS_INFO_ID=${logisticsnfoId}
+        SELECT <include refid="logisticsGobySql"/> FROM logistics_goby WHERE LOGISTICS_INFO_ID=${logisticsnfoId}
     </select>
 
     <!--通过LOGISTICS_INFO_ID（物流信息 主键）更新-->
     <update id="updateLogisticsGobyId" >
         UPDATE logistics_goby
-        SET LOGISTICS_INFO_ID=${logisticsnfoId},GOBY_ADDRESS=#{gobyAddress,jdbcType=VARCHAR}
+        SET LOGISTICS_INFO_ID=${logisticsnfoId},GOBY_ADDRESS=#{gobyAddress,jdbcType=VARCHAR},MESSAGE=#{message,jdbcType=VARCHAR}
         WHERE ID=${id} AND GOBY_ORDERBY=#{gobyOrderby,jdbcType=INTEGER}
     </update>
 
@@ -28,7 +34,11 @@
 
     <!--添加物流过程-->
     <insert id="saveLogisticsGoby" parameterType="domain.LogisticsInfo">
-        INSERT INTO logistics_goby(ID,LOGISTICS_INFO_ID,GOBY_ORDERBY,GOBY_ADDRESS) VALUES (DEFAULT ,${logisticsnfoId},#{gobyOrderby,jdbcType=INTEGER},#{gobyAddress,jdbcType=VARCHAR})
+        INSERT INTO logistics_goby(<include refid="logisticsGobySql"/>)
+        VALUES (
+        DEFAULT,${logisticsnfoId},#{gobyOrderby,jdbcType=INTEGER},#{gobyTime,jdbcType=TIMESTAMP},
+        #{gobyAddress,jdbcType=VARCHAR},#{message,jdbcType=VARCHAR}
+        )
     </insert>
 
 </mapper>
