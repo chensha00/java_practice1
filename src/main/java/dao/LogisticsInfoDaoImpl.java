@@ -13,6 +13,7 @@ import domain.LogisticsInfo;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Repository;
+import sun.rmi.runtime.Log;
 
 import java.util.List;
 
@@ -63,7 +64,7 @@ public class LogisticsInfoDaoImpl extends BaseDaoImpl<LogisticsInfo> implements 
     }
 
     /**
-     * @param id 主键id
+     * @param logisticsInfo 物流信息实体
      * @return Integer 受影响的行数
      * @Title: deleteLogisticsInfoById
      * @Description: 删除物流信息
@@ -71,8 +72,8 @@ public class LogisticsInfoDaoImpl extends BaseDaoImpl<LogisticsInfo> implements 
      * @date 2018/3/3
      */
     @Override
-    public Integer deleteLogisticsInfoById(Long id) {
-        return this.sqlSessionTemplate.delete(getMybaitsNameSpace()+"deleteLogisticsInfoById",id);
+    public Integer deleteLogisticsInfoById(LogisticsInfo logisticsInfo) {
+        return this.sqlSessionTemplate.delete(getMybaitsNameSpace()+"deleteLogisticsInfoById",logisticsInfo);
     }
 
     /**
@@ -88,9 +89,18 @@ public class LogisticsInfoDaoImpl extends BaseDaoImpl<LogisticsInfo> implements 
         return this.sqlSessionTemplate.update(getMybaitsNameSpace()+"updateLogisticsInfoByOrderDetailId",logisticsInfo);
     }
 
+    //本地测试
 //    public static void main(String[] args) {
 //        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("applicationContext.xml");
 //        LogisticsInfoDaoImpl logisticsInfoDao= (LogisticsInfoDaoImpl)applicationContext.getBean("LogisticsInfoDao");
-//        List<LogisticsInfo> logisticsInfo=logisticsInfoDao.findLogisticsInfoAll();
+////        List<LogisticsInfo> logisticsInfo=logisticsInfoDao.findLogisticsInfoAll();
+//        LogisticsInfo logisticsInfo=new LogisticsInfo();
+//        logisticsInfo.setLogisticsNum("78987545647875");
+//        logisticsInfo.setOrderDetailId(1l);
+//        logisticsInfo.setDeliverName("壮士");
+//        logisticsInfo.setDeliverPhone("13334555977");
+//        logisticsInfo.setDeliverAddress("weizhi");
+//        logisticsInfo.setId(3l);
+//        logisticsInfoDao.updateLogisticsInfoByOrderDetailId(logisticsInfo);
 //    }
 }

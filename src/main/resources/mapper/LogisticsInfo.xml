@@ -29,13 +29,13 @@
         SELECT <include refid="logisticsInfoSql"/> FROM logistics_info WHERE ORDER_DETAIL_ID=${orderDetailId}
     </select>
 
-    <!--通过查找orderDetailId（订单详情）更新-->
+    <!--通过查找 LOGISTICS_NUM（物流单号）更新-->
     <update id="updateLogisticsInfoByOrderDetailId" >
         UPDATE logistics_info
         SET LOGISTICS_NUM=#{logisticsNum,jdbcType=VARCHAR},LOGISTICS_STATE=#{logisticsState,jdbcType=TINYINT},ORDER_DETAIL_ID=${orderDetailId},
             DELIVER_NAME=#{deliverName,jdbcType=VARCHAR},DELIVER_PHONE=#{deliverPhone,jdbcType=VARCHAR},DELIVER_ADDRESS=#{deliverAddress,jdbcType=VARCHAR},
             CONSIGNEE_NAME=#{consigneeName,jdbcType=VARCHAR},CONSIGNEE_PHONE=#{consigneePhone,jdbcType=VARCHAR},
-            CONSIGNEE_ADDRESS=#{consigneeAddress,jdbcType=VARCHAR} WHERE ORDER_DETAIL_ID=${orderDetailId}
+            CONSIGNEE_ADDRESS=#{consigneeAddress,jdbcType=VARCHAR} WHERE LOGISTICS_NUM=#{logisticsNum,jdbcType=VARCHAR}
     </update>
 
     <!--通过查找主键id删除-->
@@ -45,10 +45,10 @@
 
     <!--添加物流信息-->
     <insert id="saveLogisticsInfo" parameterType="domain.LogisticsInfo">
-        INSERT INTO logistics_info(<include refid="logisticsInfoSql"/>) VALUES (DEFAULT ,LOGISTICS_NUM=#{logisticsNum,jdbcType=VARCHAR},
-        LOGISTICS_STATE=#{logisticsState,jdbcType=TINYINT},ORDER_DETAIL_ID=${orderDetailId},DELIVER_NAME=#{deliverName,jdbcType=VARCHAR},
-        DELIVER_PHONE=#{deliverPhone,jdbcType=VARCHAR},DELIVER_ADDRESS=#{deliverAddress,jdbcType=VARCHAR},CONSIGNEE_NAME=#{consigneeName,jdbcType=VARCHAR},
-        CONSIGNEE_PHONE=#{consigneePhone,jdbcType=VARCHAR},CONSIGNEE_ADDRESS=#{consigneeAddress,jdbcType=VARCHAR})
+        INSERT INTO logistics_info(<include refid="logisticsInfoSql"/>) VALUES (DEFAULT ,#{logisticsNum,jdbcType=VARCHAR},
+        #{logisticsState,jdbcType=TINYINT},${orderDetailId},#{deliverName,jdbcType=VARCHAR},
+        #{deliverPhone,jdbcType=VARCHAR},#{deliverAddress,jdbcType=VARCHAR},#{consigneeName,jdbcType=VARCHAR},
+        #{consigneePhone,jdbcType=VARCHAR},#{consigneeAddress,jdbcType=VARCHAR})
     </insert>
 
 </mapper>

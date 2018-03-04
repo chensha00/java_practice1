@@ -57,11 +57,11 @@ public interface LogisticsInfoDao {
      * @Description: 删除物流信息
      * @author jiangxiangwen
      * @date 2018/3/3
-     * @param id 主键id
+     * @param logisticsInfo 物流信息实体
      * @return Integer 受影响的行数
      * 
      */
-    public Integer deleteLogisticsInfoById(Long id);
+    public Integer deleteLogisticsInfoById(LogisticsInfo logisticsInfo);
 
     /**
      * @Title: updateLogisticsInfoByOrderDetailId
