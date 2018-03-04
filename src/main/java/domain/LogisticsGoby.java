@@ -3,6 +3,8 @@ package domain;/**
  */
 
 
+import java.util.Date;
+
 /**
  * @author jiangxiangwen
  * @ClassName LogisticsGoby.xml
@@ -26,12 +28,38 @@ public class LogisticsGoby {
   private Integer gobyOrderby;
 
   /**
-   * goby_address 经过地址
+   * gobyTime 到达时间
+   */
+  private Date gobyTime;
+
+  /**
+   * goby_address 到达地址
    */
   private String gobyAddress;
 
+  /**
+   * message 备注信息
+   */
+  private String message;
+
   //get & set
 
+
+  public Date getGobyTime() {
+    return gobyTime;
+  }
+
+  public void setGobyTime(Date gobyTime) {
+    this.gobyTime = gobyTime;
+  }
+
+  public String getMessage() {
+    return message;
+  }
+
+  public void setMessage(String message) {
+    this.message = message;
+  }
 
   public Long getId() {
     return id;
