@@ -65,7 +65,7 @@ public class StoreHomeServlet extends HttpServlet {
                 map1.add(AddConditionUtils.addCondition("people_Id", "=", peopleId));
                 List<Store> stores = new ArrayList<Store>();
                 stores = storeService.findStoreByUnSureCondition(map1);
-                if (stores.size()==0){
+                if (stores.get(0) == null){
                     session.setAttribute("people",people);
                     req.getRequestDispatcher("../people_open_store.jsp").forward(req,resp);
                 }else{

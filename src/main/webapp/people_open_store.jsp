@@ -15,9 +15,13 @@
 <body>
 <jsp:include page="head_page.jsp"></jsp:include>
 <div class="people_open_store">
-    <form name="openStore" action="/store/openStore.htm" method="post" align="center">
+    <%
+        //获得peopleId
+        Long peopleId = (Long) session.getAttribute("peopleId");
+        session.setAttribute("peopleId",1L);
+    %>
+    <form name="openStore" action="/store/storeHome.htm" method="post" align="center">
         <p>您还未开通店铺，如果需要开通店铺请输入店铺名，点击确认开通即可开通店铺</p>
-        <input type="hidden" name="peopleId" value="${person.id}">
         <input type="text" name="storeName">
         <input type="submit" value="开通">
         <a href="/store/storeHome.htm"> <input type="button" value="返回"></a>

@@ -87,11 +87,10 @@ public class StoreDaoImpl extends BaseDaoImpl<Store> implements StoreDao {
     @Override
     public Long saveStore(Store store) throws SQLException {
         //执行存储操作
-        this.sqlSessionTemplate.insert(getMybaitsNameSpace() + "saveStore",store);
+        this.sqlSessionTemplate.insert(getMybaitsNameSpace() + "saveStore", store);
         //调用不确定条件查询已保存的记录的id
         List<Map<String, Object>> map = new ArrayList<Map<String, Object>>();
-        String sqlStoreNum = "'"+store.getStoreNum()+"'";
-        map.add(AddConditionUtils.addCondition("store_num", "=", sqlStoreNum));
+        map.add(AddConditionUtils.addCondition("store_num", "=", store.getStoreNum()));
         return storeService.findStoreByUnSureCondition(map).get(0).getId();
     }
 
