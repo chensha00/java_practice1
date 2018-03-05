@@ -47,18 +47,18 @@
                 <li id="tab_1" class="selected">
                     <a href="#">宝贝</a>
                 </li>
-                <li id="tab_2" class="selected">
-                    <a href="#">店铺</a>
-                </li>
+                <%--<li id="tab_2" class="selected">--%>
+                    <%--<a href="#">店铺</a>--%>
+                <%--</li>--%>
             </ul>
         </div>
         <!--搜索框主体-->
         <div class="search-pannel">
             <form>
                 <div class="search-tips">
-                    <a href="#" target="_blank">
-                        高级<br>搜索
-                    </a>
+                    <%--<a href="#" target="_blank">--%>
+                        <%--高级<br>搜索--%>
+                    <%--</a>--%>
                 </div>
                 <div class="search-button">
                     <button class="btn-search" type="submit">

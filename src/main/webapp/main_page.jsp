@@ -14,7 +14,7 @@
     <meta charset="UTF-8">
     <title>大明星在线商城</title>
     <script src="${basePath}../js/jquery-1.7.2.min.js"></script>
-    <script src="${basePath}../js/jquery-1.7.2.js" type="text/javascript"></script>
+    <script src="${basePath}../js/jquery-1.7.2.js"></script>
     <link rel="stylesheet" href="${basePath}../css/main_page_css.css">
     <meta name="referrer" content="always">
 </head>

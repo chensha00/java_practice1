@@ -152,23 +152,24 @@
     </script>
 
     <script type="text/javascript" language="JavaScript">
-    //向支付页面传输数据
-    $('#submit').live("click", function () {
-    var olabel=document.querySelector("total"),
-    totalStr=olabel.innerText
-    alert(totalStr);
-    var url = '/pay/pay.htm?ob=money';
-    var data = {
-    'totalStr':total,
-    'ob': 'money'
-    };
-    var success = function (response) {
-    if (response.errno == 0) {
-    alert(response.errmsg);
-    }
-    };
-    $.post(url, data, success, 'json');
-    });
+        //向支付页面传输数据
+        $('#submit').live("click", function () {
+            var totalStr = document.getElementById("total").innerHTML;
+            $.ajax({
+                type: "POST",
+                url: '/pay/pay.htm',
+                data: {
+                    total: totalStr,
+                    ob: 'money'
+                },
+                dataType: 'json',
+                success: function (response) {
+                    if (response.errno == 0) {
+                        alert(response.errmsg);
+                    }
+                }
+            })
+        });
     </script>
 
 </div>
