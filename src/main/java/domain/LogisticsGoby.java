@@ -3,7 +3,7 @@ package domain;/**
  */
 
 
-import tools.TimeFormat;
+import tools.TimeConversion;
 
 import java.util.Date;
 
@@ -47,14 +47,17 @@ public class LogisticsGoby {
   //get & set
 
 
-  public Date getGobyTime() {
-    return new Date(gobyTime);
+  public String getGobyTime() {
+    return gobyTime;
   }
 
   public void setGobyTime(Date gobyTime) {
-    TimeFormat timeFormat=new TimeFormat(gobyTime);
-    timeFormat.format("yyyy-MM-dd HH:mm:ss");
-    this.gobyTime = timeFormat.format("yyyy-MM-dd HH:mm:ss");
+    try {
+      this.gobyTime = TimeConversion.getNewDate(gobyTime);
+    } catch (Exception e) {
+      System.out.println("LogisticsGoBy类时间转换出错！！！！！！！！！！");
+      e.printStackTrace();
+    }
   }
 
   public String getMessage() {

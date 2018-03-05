@@ -14,6 +14,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -82,7 +83,13 @@ public class LogisticsGobyDaoImpl extends BaseDaoImpl<LogisticsGoby> implements 
     public static void main(String[] args) {
         ApplicationContext applicationContext=new ClassPathXmlApplicationContext("applicationContext.xml");
         LogisticsGobyDaoImpl logisticsGobyDaoImpl = (LogisticsGobyDaoImpl) applicationContext.getBean("logisticsGobyDaoImpl");
-        List<LogisticsGoby> logisticsGobyLogisticsnfoId = logisticsGobyDaoImpl.findLogisticsGobyLogisticsnfoId(1l);
+        LogisticsGoby logisticsGoby=new LogisticsGoby();
+        logisticsGoby.setLogisticsnfoId((long) 1);
+        logisticsGoby.setGobyAddress("test");
+        logisticsGoby.setGobyOrderby(5);
+        logisticsGoby.setGobyTime(new Date());
+
+        logisticsGobyDaoImpl.saveLogisticsGoby(logisticsGoby);
 
 
     }
