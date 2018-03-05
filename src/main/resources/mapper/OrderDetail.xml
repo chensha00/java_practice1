@@ -18,6 +18,15 @@
         <result property="deliveryTime" column="DELIVERY_TIME" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
         <result property="orderStatus" column="ORDER_STATUS" jdbcType="TINYINT" javaType="java.lang.Byte"/>
         <result property="isInvalid" column="IS_INVALID" jdbcType="TINYINT" javaType="java.lang.Boolean"/>
+
+        <association property="people" column="PEOPLE_ID" javaType="domain.People" select="domain.People.getPoepleById">
+        </association>
+        <association property="store" column="STORE_ID" javaType="domain.Store" select="domain.Store.findStoreById">
+        </association>
+        <association property="goods" column="GOODS_ID" javaType="domain.Goods" select="domain.Goods.findGoodsById">
+        </association>
+        <association property="goodsOrder" column="GOODS_ORDER_ID" javaType="domain.GoodsOrder" select="domain.GoodsOrder.findGoodsOrderById">
+        </association>
     </resultMap>
 
 
