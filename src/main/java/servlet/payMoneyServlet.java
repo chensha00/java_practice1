@@ -53,8 +53,8 @@ public class payMoneyServlet extends HttpServlet {
 //        String price = req.getParameter("price");
 //        String number = req.getParameter("numberS");
 //        String storeName = req.getParameter("storeName");
-        String total = req.getParameter("totalStr");
-        System.out.println(total);
+//        String total = req.getParameter("totalStr");
+//        System.out.println(total);
 
         //获取支付人id，支付订单编号，是否支付
         Long peopleId=Long.valueOf(req.getParameter("peopleId"));
