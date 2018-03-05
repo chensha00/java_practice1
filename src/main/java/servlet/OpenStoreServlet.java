@@ -8,6 +8,7 @@ package servlet;/***************************************************************
  * @version V1.0
  */
 
+import common.util.SpringContextUtil;
 import domain.Invertory;
 import domain.Store;
 import service.*;
@@ -27,10 +28,14 @@ import java.util.UUID;
  * @date 2018/2/2
 */
 public class OpenStoreServlet extends HttpServlet {
-    static PeopleService peopleService = new PeopleServiceImpl();
-    static StoreService storeService = new StoreServiceImpl();
-    static InvertoryService invertoryService = new InvertoryServiceImpl();
-    static GoodsService goodsService = new GoodsServiceImpl();
+    //使用Spring调用service层
+    PeopleService peopleService = (PeopleService) SpringContextUtil.getBean("peopleService");
+
+    StoreService storeService = (StoreService) SpringContextUtil.getBean("storeService");
+
+    InvertoryService invertoryService = (InvertoryService) SpringContextUtil.getBean("invertoryService");
+
+    GoodsService goodsService = (GoodsService) SpringContextUtil.getBean("goodsService");
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -42,9 +47,11 @@ public class OpenStoreServlet extends HttpServlet {
         req.setCharacterEncoding("utf-8");
         //获取想要开通商品的人的id
         HttpSession session = req.getSession();
-        Long peopleId = (Long) session.getAttribute("peopleId");
+        Long peopleId = Long.valueOf(req.getParameter("peopleId"));
+        System.out.println(peopleId);
         //获取商铺名
         String storeName = req.getParameter("storeName");
+        System.out.println(storeName);
         //生成商铺编号
         String storeNum = UUID.randomUUID().toString().replaceAll("-", "");
         System.out.println(storeNum);
@@ -58,7 +65,7 @@ public class OpenStoreServlet extends HttpServlet {
 
         if (storeId != 0){
             System.out.println("开通成功");
-            resp.sendRedirect("/StoreServletStock.htm");
+            resp.sendRedirect("/store/storeHome.htm?peopleId=peopleId");
         }else {
             resp.sendRedirect("../people_open_store.jsp");
             System.out.println("插入失败");
