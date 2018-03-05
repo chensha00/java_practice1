@@ -49,9 +49,14 @@ public class payMoneyServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 //          http://localhost:8080/pay/pay.htm?peopeoId=1&&orderNum=OD&&isPay=true
 //        获取购物车的传值
+
+        String peopleId1 = req.getParameter("peopleId");
         String total = req.getParameter("total");
         String goodsName = req.getParameter("goodsName");
-        System.out.println(goodsName);
+        String storeName = req.getParameter("storeName");
+        String price = req.getParameter("price");
+        String number = req.getParameter("number");
+
 
 
         //获取支付人id，支付订单编号，是否支付

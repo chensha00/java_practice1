@@ -154,50 +154,23 @@
     <script type="text/javascript" language="JavaScript">
         //向支付页面传输数据
         $('#submit').live("click", function () {
-            <%--var peopleId = ${person.ID};--%>
+            var goodsNameArr = $("input[name='nameName']").val();
             var totalStr = document.getElementById("total").innerHTML;
-            var goodsName = "";
-            var storeName = "";
-            var price = "";
-            var number = "";
-            $("input[name='nameName']").each(
-                    function () {
-                        goodsName = goodsName + ($(this).val()) + ",";
+                $.ajax({
+                    type: "POST",
+                    url: '/pay/pay.htm',
+                    data: {
+                        total: totalStr,
+                        goodsName: goodsName,
+                        ob: 'money'
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.errno == 0) {
+                            alert(response.errmsg);
+                        }
                     }
-            );
-            $("input[name='storeNameName']").each(
-                    function () {
-                        storeName = storeName + ($(this).val()) + ",";
-                    }
-            );
-            $("input[name='priceName']").each(
-                    function () {
-                        price = price + ($(this).val()) + ",";
-                    }
-            );
-            $("input[name='name2']").each(
-                    function () {
-                        number = number + ($(this).val()) + ",";
-                    }
-            );
-            $.ajax({
-                type: "POST",
-                url: '/pay/pay.htm',
-                data: {
-//                    peopleId: peopleId,
-                    total: totalStr,
-                    goodsName: goodsName,
-                    storeName: storeName,
-                    price: price,
-                    number: number
-                },
-                dataType: 'json',
-                success: function (response) {
-                    if (response.errno == 0) {
-                        alert(response.errmsg);
-                    }
-                }
-            })
+                })
         })
     </script>
 
