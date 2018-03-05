@@ -61,10 +61,7 @@
 <script type="text/javascript">
     $('#cart').live("click", function () {
         //获取商品的价格，名字，店铺，库存
-        var priceStr = document.getElementsByName("priceName")[0].value;
         var nameStr = document.getElementsByName("nameName")[0].value;
-        var numberStr = document.getElementsByName("numberName")[0].value;
-        var storeNameStr = document.getElementsByName("storeNameName")[0].value;
         //输出商品名
         var goodsCart = "商品:" + nameStr + "\n添加到购物车成功!";
         alert(goodsCart);

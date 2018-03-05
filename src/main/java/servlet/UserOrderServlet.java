@@ -144,9 +144,9 @@ public class UserOrderServlet extends HttpServlet {
             //保存订单集合和订单详情集合到session中
             session.setAttribute("goodsOrderList",goodsOrderList);
             session.setAttribute("orderDetailList",orderDetailList);
-            resp.sendRedirect("../user_order_message.jsp");
+            resp.sendRedirect("/user_order_message.jsp");
         }else {
-            resp.sendRedirect("../user_order_message.jsp");
+            resp.sendRedirect("/user_order_message.jsp");
         }
 
 
