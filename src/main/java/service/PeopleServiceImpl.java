@@ -170,7 +170,7 @@ public class PeopleServiceImpl implements PeopleService {
         String orderNum = "GO" + System.currentTimeMillis();
         GoodsOrder goodsOrder = new GoodsOrder(orderNum, peopleId, sumMoney);
         goodsOrderService.showGoodsOrder(goodsOrder);
-        Integer num = goodsOrderService.addGoodsOrderById(goodsOrder);
+        Integer num = goodsOrderService.saveGoodsOrderById(goodsOrder);
         goodsOrder = goodsOrderService.findGoodsOrderByNum(goodsOrder.getOrderNum());
 
         for (int i = 0; i < idList.size(); i++) {
@@ -178,13 +178,13 @@ public class PeopleServiceImpl implements PeopleService {
             Invertory invertory = invertoryService.findInvertoryById(idList.get(i));
             Long buyerId = goodsOrder.getPeopleId();
             Long storeId = invertory.getStoreId();
-            Long goodsId = invertory.getGoods().getId();
+            Long goodsId = invertory.getGoodsId();
             Long goodsOrderId = goodsOrder.getId();
             Double number = buyNumList.get(i);
             Double goodsPrice = invertory.getPrice();
             Double goodsAmount = goodsMoneyList.get(i);
             OrderDetail orderDetail = new OrderDetail(orderDetailNum, buyerId, storeId, goodsId, goodsOrderId, number, goodsPrice, goodsAmount);
-            Integer number2 = orderDetailService.addOrderDetail(orderDetail);
+            Integer number2 = orderDetailService.saveOrderDetail(orderDetail);
             System.out.println(number2);
         }
         return goodsOrder;

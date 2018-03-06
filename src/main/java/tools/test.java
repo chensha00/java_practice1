@@ -8,9 +8,6 @@ package tools;/*****************************************************************
  * @version V1.0
  */
 
-import dao.InvertoryDao;
-import dao.InvertoryDaoImpl;
-
 /**
  * @author kang
  * @ClassName test
@@ -19,8 +16,6 @@ import dao.InvertoryDaoImpl;
  */
 public class test {
     public static void main(String[] args) {
-        InvertoryDao invertoryDao=new InvertoryDaoImpl();
-        Long a=1L;
-        invertoryDao.findInvertoryById(a);
+
     }
 }

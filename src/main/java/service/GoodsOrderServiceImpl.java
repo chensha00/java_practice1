@@ -11,8 +11,6 @@ package service;/**
  * @version V1.0
  */
 
-import common.util.DataSourceUtils;
-import common.util.JdbcUtils;
 import dao.GoodsOrderDao;
 import domain.GoodsOrder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tools.TimeFormat;
 
-import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -63,8 +56,8 @@ private  GoodsOrderDao goodsOrderDao;
      * @param: connection 连接对象
      */
     @Override
-    public Integer addGoodsOrderById(GoodsOrder goodsOrder) {
-            return goodsOrderDao.addGoodsOrderById(goodsOrder);
+    public Integer saveGoodsOrderById(GoodsOrder goodsOrder) {
+            return goodsOrderDao.saveGoodsOrderById(goodsOrder);
     }
 
     /**

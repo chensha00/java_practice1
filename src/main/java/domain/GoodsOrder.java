@@ -187,4 +187,6 @@ public class GoodsOrder {
     public GoodsOrder() {
 
     }
+
+
 }

@@ -40,7 +40,7 @@ public interface GoodsOrderService {
      * @param: id 指定id
      * @param: connection 连接对象
      */
-    public Integer addGoodsOrderById(GoodsOrder goodsOrder);
+    public Integer saveGoodsOrderById(GoodsOrder goodsOrder);
 
     /**
      * @return 受影响的行
