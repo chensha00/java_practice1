@@ -264,7 +264,7 @@ public class PeopleServiceImpl implements PeopleService {
             //生成流水信息
             PayFlow payFlow = new PayFlow(flowNum, people.getId(), goodsOrder.getTotalMoney(), (byte) 1, new Date(), goodsOrder.getId());
             //更新订单信息
-            goodsOrderService.updateGoodsOrderById(goodsOrder.getId(), goodsOrder);
+            goodsOrderService.updateGoodsOrder(goodsOrder);
             //保存流水信息
             payFlowService.savePayFlow(payFlow);
             for (int i = 0; i < orderDetailList.size(); i++) {
@@ -283,7 +283,7 @@ public class PeopleServiceImpl implements PeopleService {
             return true;
         } else {
             goodsOrder.setOrderStatus((byte) 2);
-            goodsOrderService.updateGoodsOrderById(goodsOrder.getId(), goodsOrder);
+            goodsOrderService.updateGoodsOrder(goodsOrder);
             return false;
         }
 

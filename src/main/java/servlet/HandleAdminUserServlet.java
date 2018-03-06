@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,9 +85,13 @@ public class HandleAdminUserServlet extends HttpServlet {
                 storeService.deleteStoreById(id);
                 //替换session storeList信息
                 List<Store> storeList=new ArrayList<Store>();
-                storeList=storeService.getStoreAll();
-                session.removeAttribute("storeList");
-                session.setAttribute("storeList",storeList);
+                try {
+                    storeList=storeService.findAllStore();
+                    session.removeAttribute("storeList");
+                    session.setAttribute("storeList",storeList);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
 
             }else if ("update".equals(handleWays)){
                 //修改store信息
