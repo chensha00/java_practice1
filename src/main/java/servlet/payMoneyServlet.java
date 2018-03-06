@@ -8,13 +8,13 @@ package servlet;/***************************************************************
  * @version V1.0
  */
 
+import common.util.SpringContextUtil;
 import dao.InvertoryDao;
 import domain.GoodsOrder;
 import domain.OrderDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import service.*;
 import tools.GoodsException;
-import tools.GoodsOrderException;
 import tools.PeopleException;
 import tools.StringToArray;
 
@@ -36,11 +36,11 @@ public class payMoneyServlet extends HttpServlet {
 
     StringToArray stringToArray = new StringToArray();
 
+    PeopleService peopleService= (PeopleService) SpringContextUtil.getBean("peopleService");
+
     @Autowired
     private InvertoryDao invertoryDao;
 
-    @Autowired
-    private PeopleService peopleService;
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doPost(req, resp);
@@ -61,56 +61,45 @@ public class payMoneyServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //          http://localhost:8080/pay/pay.htm?peopeoId=1&&orderNum=OD&&isPay=true
+        String peopleStr = req.getParameter("peopleId");
+        if (peopleStr == null) {
+            HttpSession session = req.getSession();
+            session.setAttribute("LoginMessage", "error");
+            resp.sendRedirect("../cart.jsp");
+        } else {
 //        获取购物车的传值
-        String idName = req.getParameter("idName");
-        String numberName = req.getParameter("number");
+            Long peopleId = Long.valueOf(peopleStr);
+            String idName = req.getParameter("idName");
+            String numberName = req.getParameter("number");
 //        把字符串转换为数组
-        List<Long> idList = stringToArray.toArrayLong(idName);
-        List<Double> number = stringToArray.toArrayDouble(numberName);
-        Long peopleId = Long.valueOf(req.getParameter("peopleId"));
+            List<Long> idList = stringToArray.toArrayLong(idName);
+            List<Double> number = stringToArray.toArrayDouble(numberName);
+
 //        生成订单
-        try {
-            peopleService.buyGoods(peopleId, idList, number);
-        } catch (PeopleException e) {
-            e.printStackTrace();
-        } catch (GoodsException e) {
-            e.printStackTrace();
-        }
-        //获取支付人id，支付订单编号，是否支付
-        String orderNum = req.getParameter("orderNum");
-        Boolean isPay = Boolean.valueOf(req.getParameter("isPay"));
-        System.out.println(peopleId + " " + orderNum + " " + isPay);
-        //定义订单信息操作对象，订单详情操作对象
-        GoodsOrderService goodsOrderService = new GoodsOrderServiceImpl();
-        OrderDetailService orderDetailService = new OrderDetailServiceImpl();
-        PeopleService peopleService = new PeopleServiceImpl();
-        HttpSession session = req.getSession();
-        //获取订单信息
-        GoodsOrder goodsOrderPay = goodsOrderService.findGoodsOrderByNum(orderNum);
-        if (goodsOrderPay == null) {
-            System.out.println("该订单不存在");
-        }
-        if (isPay == true) {
             try {
-                peopleService.payGoodsMoneyByOrderId(peopleId, goodsOrderPay.getId());
-                goodsOrderPay = goodsOrderService.findGoodsOrderById(goodsOrderPay.getId());
-            } catch (GoodsException e) {
+                GoodsOrder goodsOrder=peopleService.buyGoods(peopleId, idList, number);
+                //定义订单信息操作对象，订单详情操作对象
+                GoodsOrderService goodsOrderService = new GoodsOrderServiceImpl();
+                OrderDetailService orderDetailService = new OrderDetailServiceImpl();
+                PeopleService peopleService = new PeopleServiceImpl();
+                HttpSession session = req.getSession();
+                //获取需支付订单的订单详情
+                List<OrderDetail> orderDetailListPay = orderDetailService.getOrderDetailListByOrderId(goodsOrder.getId());
+                goodsOrderService.showGoodsOrder(goodsOrder);
+                System.out.println(orderDetailListPay.size());
+                for (int i = 0; i < orderDetailListPay.size(); i++) {
+                    orderDetailService.showOrderDetailMessage(orderDetailListPay.get(i));
+                }
+                session.removeAttribute("goodsOrderPay");
+                session.removeAttribute("orderDetailListPay");
+                session.setAttribute("goodsOrderPay", goodsOrder);
+                session.setAttribute("orderDetailListPay", orderDetailListPay);
+                resp.sendRedirect("../pay_money_jsp.jsp");
+            } catch (PeopleException e) {
                 e.printStackTrace();
-            } catch (GoodsOrderException e) {
+            } catch (GoodsException e) {
                 e.printStackTrace();
             }
         }
-        //获取需支付订单的订单详情
-        List<OrderDetail> orderDetailListPay = orderDetailService.getOrderDetailListByOrderId(goodsOrderPay.getId());
-        goodsOrderService.showGoodsOrder(goodsOrderPay);
-        System.out.println(orderDetailListPay.size());
-        for (int i = 0; i < orderDetailListPay.size(); i++) {
-            orderDetailService.showOrderDetailMessage(orderDetailListPay.get(i));
-        }
-        session.removeAttribute("goodsOrderPay");
-        session.removeAttribute("orderDetailListPay");
-        session.setAttribute("goodsOrderPay", goodsOrderPay);
-        session.setAttribute("orderDetailListPay", orderDetailListPay);
-        resp.sendRedirect("../pay_money_jsp.jsp");
     }
 }

@@ -54,8 +54,7 @@
 
 <script type="text/javascript">
     function toVaild() {
-        var test =
-        ${LoginMessage}
+        var test = ${LoginMessage}
         if (test == "error") {
             alert("用户名不存在或密码错误!\n请重新输入或注册");
         } else {

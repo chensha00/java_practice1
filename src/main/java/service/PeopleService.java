@@ -2,6 +2,7 @@ package service;/**
  * Created by HS on 2018/1/20.
  */
 
+import domain.GoodsOrder;
 import domain.People;
 import tools.GoodsException;
 import tools.GoodsOrderException;
@@ -107,7 +108,7 @@ public interface PeopleService {
      * @param: goodsList 商品集合
      * @param: buyNumList 购买数量集合
      */
-    public void buyGoods(long peopleId, List<Long> idList, List<Double> buyNumList) throws PeopleException, GoodsException;
+    public GoodsOrder buyGoods(long peopleId, List<Long> idList, List<Double> buyNumList) throws PeopleException, GoodsException;
 
     /**
      * @Title: judgeMoneyIsEnough

@@ -67,7 +67,7 @@ public class InvertoryDaoImpl extends BaseDaoImpl<Invertory> implements Invertor
      */
     @Override
     public Invertory findInvertoryById(Long id) {
-        return this.sqlSessionTemplate.selectOne(getMybaitsNameSpace() + "findInvertoryById");
+        return this.sqlSessionTemplate.selectOne(getMybaitsNameSpace() + "findInvertoryById",id);
     }
 
     /**

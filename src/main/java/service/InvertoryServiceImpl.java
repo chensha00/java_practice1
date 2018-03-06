@@ -70,9 +70,7 @@ public class InvertoryServiceImpl implements InvertoryService {
     @Override
     public Invertory findInvertoryById(Long id) {
 
-        Invertory invertory = null;
-
-        invertory = invertoryDao.findInvertoryById(id);
+        Invertory invertory = invertoryDao.findInvertoryById(id);
 
         return invertory;
     }
@@ -235,7 +233,7 @@ public class InvertoryServiceImpl implements InvertoryService {
      */
     @Override
     public Boolean judgeNumberIsEnough(Long id, Double needNumber) {
-        Invertory invertory = new InvertoryServiceImpl().findInvertoryById(id);
+        Invertory invertory = this.findInvertoryById(id);
         if (invertory.getNumber() >= needNumber) {
             return true;
         } else {

@@ -15,21 +15,21 @@
         ID,STORE_ID,GOODS_ID,PRICE,NUMBER
     </sql>
     <!--根据ID查询-->
-    <select id="findInvertoryById" resultType="java.util.Map" resultMap="invertory">
+    <select id="findInvertoryById" resultMap="invertory">
         SELECT
         <include refid="invertorySql"/>
         FROM INVERTORY
         WHERE ID=#{id}
     </select>
     <!--查询所有-->
-    <select id="findInvertoryAll" resultType="java.util.Map" resultMap="invertory">
+    <select id="findInvertoryAll" resultMap="invertory">
         SELECT
         <include refid="invertorySql"/>
         FROM INVERTORY
         GROUP BY ID
     </select>
     <!--根据店铺ID和商品ID查询库存-->
-    <select id="findInvertoryByStoreIdAndGoodsId" resultType="java.util.Map" resultMap="invertory">
+    <select id="findInvertoryByStoreIdAndGoodsId" resultMap="invertory">
         SELECT
         <include refid="invertorySql"/>
         FROM INVERTORY
@@ -38,7 +38,7 @@
     </select>
 
     <!--根据店铺ID查询店铺所有库存-->
-    <select id="findInvertoryByUnSureCondition" resultType="java.util.Map" resultMap="invertory">
+    <select id="findInvertoryByUnSureCondition" resultMap="invertory">
         SELECT
         <include refid="invertorySql"/>
         FROM INVERTORY WHERE 1=1

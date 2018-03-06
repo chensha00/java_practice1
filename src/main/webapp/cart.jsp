@@ -41,7 +41,7 @@
 
                 </thead>
                 <tbody>
-                <input type="hidden" name="peopleName" value="${people.id}">
+                <input type="hidden" name="peopleName" value="${person.id}">
                 <c:forEach items="${cartList}" var="cart">
                     <tr>
                         <td>
@@ -154,10 +154,6 @@
         //向支付页面传输数据
         $('#submit').live("click", function () {
             var peopleStr = document.getElementsByName("peopleName")[0].value;
-            alert(peopleStr);
-            if (peopleStr == null) {
-                alert("亲，您还没有登录哟！")
-            } else {
                 var idStr = "";
                 var number = "";
                 $("input[name='idName']").each(
@@ -182,10 +178,11 @@
                     success: function (response) {
                         if (response.errno == 0) {
                             alert(response.errmsg);
+                        }else{
+                            alert("亲，您还没登录哟！")
                         }
                     }
                 })
-            }
         })
     </script>
 
