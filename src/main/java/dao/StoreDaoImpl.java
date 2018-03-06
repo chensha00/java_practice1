@@ -142,7 +142,18 @@ public class StoreDaoImpl extends BaseDaoImpl<Store> implements StoreDao {
      */
     public List<Store> findStoreByUnSureCondition(List<Map<String, Object>> map)
             throws SQLException {
-
         return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findStoreByUnSureCondition", map);
+    }
+    /**
+     * @Title: findAllStore
+     * @Description: 查询全部商铺信息
+     * @author hzq
+     * @date 2018/01/30
+     * @throw SQLException
+     */
+    @Override
+    public List<Store> findAllStore() throws SQLException {
+
+        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findAllStore");
     }
 }
