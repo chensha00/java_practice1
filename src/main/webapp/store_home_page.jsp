@@ -24,7 +24,7 @@
             <h4>${stores[0].storeName} </h4>
             <br><br>
             <div class="storeInfo_font">
-                店主：${people.name}
+                店主：${person.name}
             </div>
         </div>
         <div class="store_home_delivery">
