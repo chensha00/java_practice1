@@ -207,6 +207,39 @@
         <servlet-name>goodsTest</servlet-name>
         <url-pattern>/test/goodsTest.htm</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>adminUser</servlet-name>
+        <servlet-class>servlet.AdminUseServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>adminUser</servlet-name>
+        <url-pattern>/test/adminUser.htm</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>handleAdminUser</servlet-name>
+        <servlet-class>servlet.HandleAdminUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>handleAdminUser</servlet-name>
+        <url-pattern>/test/handleAdmin.htm</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>updatePeople</servlet-name>
+        <servlet-class>servlet.UpdatePeopleServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>updatePeople</servlet-name>
+        <url-pattern>/test/updatePeople.htm</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>updateStore</servlet-name>
+        <servlet-class>servlet.UpdateStoreServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>updateStore</servlet-name>
+        <url-pattern>/test/updateStore.htm</url-pattern>
+    </servlet-mapping>
+
     <!--&lt;!&ndash;排头信息&ndash;&gt;-->
     <!--<servlet>-->
         <!--<servlet-name>head</servlet-name>-->
