@@ -17,6 +17,10 @@ package javabean;/**************************************************************
 public class MainPage {
 
     /**
+     * 库存ID
+     */
+    private Long invertoryId;
+    /**
      * price 商品价格
      */
     private Double price;
@@ -35,6 +39,14 @@ public class MainPage {
      * storeName 店铺名称
      */
     private String storeName;
+
+    public Long getInvertoryId() {
+        return invertoryId;
+    }
+
+    public void setInvertoryId(Long invertoryId) {
+        this.invertoryId = invertoryId;
+    }
 
     public Double getPrice() {
         return price;

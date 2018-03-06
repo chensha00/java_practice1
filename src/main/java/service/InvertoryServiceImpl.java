@@ -53,9 +53,9 @@ public class InvertoryServiceImpl implements InvertoryService {
 
         Integer number = 0;
 
-            number = invertoryDao.saveInvertory(invertory);
+        number = invertoryDao.saveInvertory(invertory);
 
-            return number;
+        return number;
 
     }
 
@@ -72,9 +72,9 @@ public class InvertoryServiceImpl implements InvertoryService {
 
         Invertory invertory = null;
 
-        invertory = invertoryDao.findInvertoryById(id).get(0);
+        invertory = invertoryDao.findInvertoryById(id);
 
-            return invertory;
+        return invertory;
     }
 
 

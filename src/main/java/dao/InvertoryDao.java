@@ -40,7 +40,7 @@ public interface InvertoryDao {
      * @param: id 指定id
      * @return: 库存对象
      */
-    public List<Invertory> findInvertoryById(Long id);
+    public Invertory findInvertoryById(Long id);
 
     /**
      * @Title: findInvertoryById

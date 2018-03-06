@@ -41,16 +41,15 @@
 
                 </thead>
                 <tbody>
+                <input type="hidden" name="peopleName" value="${people.id}">
                 <c:forEach items="${cartList}" var="cart">
                     <tr>
                         <td>
                             <p class="name">${cart.name}</p>
                             <span class="price">${cart.price}</span>
                                 <%--为JS获取值--%>
-                            <input type="hidden" name="priceName" value="${cart.price}">
-                            <input type="hidden" name="nameName" value="${cart.name}">
+                            <input type="hidden" name="idName" value="${cart.invertoryId}">
                             <input type="hidden" name="numberName" value="${cart.number}">
-                            <input type="hidden" name="storeNameName" value="${cart.storeName}">
                                 <%--加减按钮--%>
                             <input class="product_id" type="hidden" name="product_id" value="value"/>
                             <input class="min" name="" type="button" value="-"/>
@@ -154,50 +153,39 @@
     <script type="text/javascript" language="JavaScript">
         //向支付页面传输数据
         $('#submit').live("click", function () {
-            <%--var peopleId = ${person.ID};--%>
-            var totalStr = document.getElementById("total").innerHTML;
-            var goodsName = "";
-            var storeName = "";
-            var price = "";
-            var number = "";
-            $("input[name='nameName']").each(
-                    function () {
-                        goodsName = goodsName + ($(this).val()) + ",";
+            var peopleStr = document.getElementsByName("peopleName")[0].value;
+            alert(peopleStr);
+            if (peopleStr == null) {
+                alert("亲，您还没有登录哟！")
+            } else {
+                var idStr = "";
+                var number = "";
+                $("input[name='idName']").each(
+                        function () {
+                            idStr = idStr + ($(this).val()) + ",";
+                        }
+                );
+                $("input[name='name2']").each(
+                        function () {
+                            number = number + ($(this).val()) + ",";
+                        }
+                );
+                $.ajax({
+                    type: "POST",
+                    url: '/pay/pay.htm',
+                    data: {
+                        peopleId: peopleStr,
+                        idName: idStr,
+                        number: number
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.errno == 0) {
+                            alert(response.errmsg);
+                        }
                     }
-            );
-            $("input[name='storeNameName']").each(
-                    function () {
-                        storeName = storeName + ($(this).val()) + ",";
-                    }
-            );
-            $("input[name='priceName']").each(
-                    function () {
-                        price = price + ($(this).val()) + ",";
-                    }
-            );
-            $("input[name='name2']").each(
-                    function () {
-                        number = number + ($(this).val()) + ",";
-                    }
-            );
-            $.ajax({
-                type: "POST",
-                url: '/pay/pay.htm',
-                data: {
-//                    peopleId: peopleId,
-                    total: totalStr,
-                    goodsName: goodsName,
-                    storeName: storeName,
-                    price: price,
-                    number: number
-                },
-                dataType: 'json',
-                success: function (response) {
-                    if (response.errno == 0) {
-                        alert(response.errmsg);
-                    }
-                }
-            })
+                })
+            }
         })
     </script>
 

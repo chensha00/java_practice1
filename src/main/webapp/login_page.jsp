@@ -37,7 +37,7 @@
                 </tr>
             </table>
             <br>
-            <input type="submit" name="login" value="登录" onsubmit="return toVaild"/>
+            <input type="submit" name="login" value="登录" id="submit" onclick="submit"/>
             <%--<button type="button" id="login_button" >登录</button>--%>
             <input formaction="../registration_page.jsp" type="submit" value="注册"/>
         </form>
@@ -54,31 +54,32 @@
 
 <script type="text/javascript">
     function toVaild() {
-        var test= ${LoginMessage}
-        if (test=="error") {
+        var test =
+        ${LoginMessage}
+        if (test == "error") {
             alert("用户名不存在或密码错误!\n请重新输入或注册");
         } else {
             alert("成功登录");
         }
     }
     <%--$(function () {--%>
-        <%--$("#login_button").click(function () {--%>
-            <%--var username=$("input[name='username']").val();--%>
-            <%--var password=$("input[name='password']").val();--%>
-            <%--$.ajax({--%>
-                <%--type:"post",--%>
-                <%--dataType:"json",--%>
-                <%--data:"username="+username+"&password="+password,--%>
-                <%--url:"${pageContext.request.contextPath}/servlet/loginPage.htm",--%>
-<%--//                contentType:"text",--%>
-                <%--success:function (x) {--%>
-                    <%--window.location.replace("/servlet/mainPage.htm");--%>
-                    <%--alert(x.valueOf());--%>
+    <%--$("#login_button").click(function () {--%>
+    <%--var username=$("input[name='username']").val();--%>
+    <%--var password=$("input[name='password']").val();--%>
+    <%--$.ajax({--%>
+    <%--type:"post",--%>
+    <%--dataType:"json",--%>
+    <%--data:"username="+username+"&password="+password,--%>
+    <%--url:"${pageContext.request.contextPath}/servlet/loginPage.htm",--%>
+    <%--//                contentType:"text",--%>
+    <%--success:function (x) {--%>
+    <%--window.location.replace("/servlet/mainPage.htm");--%>
+    <%--alert(x.valueOf());--%>
 
-                <%--},--%>
-                <%--error:function(XMLResponse){alert(XMLResponse.responseText)}--%>
-            <%--})--%>
-        <%--})--%>
+    <%--},--%>
+    <%--error:function(XMLResponse){alert(XMLResponse.responseText)}--%>
+    <%--})--%>
+    <%--})--%>
     })
 
 </script>

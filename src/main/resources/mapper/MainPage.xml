@@ -14,6 +14,7 @@
     <!--</resultMap>-->
 
     <resultMap id="mainPage" type="javabean.MainPage">
+        <result property="invertoryId" column="ID" jdbcType="BIGINT" javaType="java.lang.Long"/>
         <result property="price" column="PRICE" jdbcType="DECIMAL" javaType="java.lang.Double"/>
         <result property="number" column="NUMBER" jdbcType="DOUBLE" javaType="java.lang.Double"/>
         <result property="name" column="NAME" jdbcType="VARCHAR" javaType="java.lang.String"/>
@@ -23,7 +24,7 @@
     <!--查询主页需要显示的数据-->
     <select id="findMainPageInvertory" resultType="java.util.Map" resultMap="mainPage">
         SELECT
-        PRICE,NUMBER,NAME,STORE_NAME
+        invertory.ID,PRICE,NUMBER,NAME,STORE_NAME
         FROM GOODS,STORE,INVERTORY
         WHERE INVERTORY.STORE_ID = STORE.ID
         AND INVERTORY.GOODS_ID = GOODS.ID

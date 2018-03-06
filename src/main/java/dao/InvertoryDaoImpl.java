@@ -66,8 +66,8 @@ public class InvertoryDaoImpl extends BaseDaoImpl<Invertory> implements Invertor
      * @return: 库存对象
      */
     @Override
-    public List<Invertory> findInvertoryById(Long id) {
-        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findInvertoryById");
+    public Invertory findInvertoryById(Long id) {
+        return this.sqlSessionTemplate.selectOne(getMybaitsNameSpace() + "findInvertoryById");
     }
 
     /**
