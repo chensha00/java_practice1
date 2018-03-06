@@ -3,7 +3,6 @@ package service;/**
  */
 
 import dao.OrderDetailDao;
-import dao.OrderDetailDaoImpl;
 import domain.OrderDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -105,9 +104,8 @@ public class OrderDetailServiceImpl implements OrderDetailService {
      * @param: orderId 指定订单id
      * @return: 订单详情集合
      */
-    public List<OrderDetail> getOrderDetailListByOrderId(Long orderId) {
-        OrderDetailDao orderDetailDao1 = new OrderDetailDaoImpl();
-        List<OrderDetail> orders = orderDetailDao1.findOrderDetailListByOrderId(orderId);
+    public List<OrderDetail> findOrderDetailListByOrderId(Long orderId) {
+        List<OrderDetail> orders = orderDetailDao.findOrderDetailListByOrderId(orderId);
         return orders;
     }
 

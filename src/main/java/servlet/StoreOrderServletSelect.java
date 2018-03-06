@@ -5,7 +5,6 @@ package servlet;/**
 import common.util.SpringContextUtil;
 import domain.OrderDetail;
 import service.OrderDetailService;
-import service.OrderDetailServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -47,7 +46,7 @@ public class StoreOrderServletSelect extends HttpServlet{
             out.println(selectString);
         }else {
             OrderDetailService orderDetailService = (OrderDetailService) SpringContextUtil.getBean("orderDetailService");
-            List<OrderDetail> orderDetail=orderDetailService.getOrderDetailListByOrderId(Long.valueOf(selectString));
+            List<OrderDetail> orderDetail=orderDetailService.findOrderDetailListByOrderId(Long.valueOf(selectString));
             session.setAttribute("orderDetail",orderDetail);
             request.getRequestDispatcher("store_order.jsp").forward(request, response);
         }

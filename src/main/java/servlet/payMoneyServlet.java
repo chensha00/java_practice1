@@ -12,8 +12,9 @@ import common.util.SpringContextUtil;
 import dao.InvertoryDao;
 import domain.GoodsOrder;
 import domain.OrderDetail;
-import org.springframework.beans.factory.annotation.Autowired;
-import service.*;
+import service.GoodsOrderService;
+import service.OrderDetailService;
+import service.PeopleService;
 import tools.GoodsException;
 import tools.PeopleException;
 import tools.StringToArray;
@@ -36,16 +37,14 @@ public class payMoneyServlet extends HttpServlet {
 
     StringToArray stringToArray = new StringToArray();
 
-    PeopleService peopleService= (PeopleService) SpringContextUtil.getBean("peopleService");
-
-    @Autowired
-    private InvertoryDao invertoryDao;
+    PeopleService peopleService = (PeopleService) SpringContextUtil.getBean("peopleService");
+    GoodsOrderService goodsOrderService = (GoodsOrderService) SpringContextUtil.getBean("goodsOrderService");
+    OrderDetailService orderDetailService = (OrderDetailService) SpringContextUtil.getBean("orderDetailService");
+    InvertoryDao invertoryDao = (InvertoryDao) SpringContextUtil.getBean("invertoryDao");
 
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doPost(req, resp);
-        //req.getRequestDispatcher("../user_order_message.jsp").forward(req,resp);
-        //System.out.println(req.getParameter("way")+"11");
     }
 
     /**
@@ -76,30 +75,28 @@ public class payMoneyServlet extends HttpServlet {
             List<Double> number = stringToArray.toArrayDouble(numberName);
 
 //        生成订单
+            GoodsOrder goodsOrder = null;
             try {
-                GoodsOrder goodsOrder=peopleService.buyGoods(peopleId, idList, number);
-                //定义订单信息操作对象，订单详情操作对象
-                GoodsOrderService goodsOrderService = new GoodsOrderServiceImpl();
-                OrderDetailService orderDetailService = new OrderDetailServiceImpl();
-                PeopleService peopleService = new PeopleServiceImpl();
-                HttpSession session = req.getSession();
-                //获取需支付订单的订单详情
-                List<OrderDetail> orderDetailListPay = orderDetailService.getOrderDetailListByOrderId(goodsOrder.getId());
-                goodsOrderService.showGoodsOrder(goodsOrder);
-                System.out.println(orderDetailListPay.size());
-                for (int i = 0; i < orderDetailListPay.size(); i++) {
-                    orderDetailService.showOrderDetailMessage(orderDetailListPay.get(i));
-                }
-                session.removeAttribute("goodsOrderPay");
-                session.removeAttribute("orderDetailListPay");
-                session.setAttribute("goodsOrderPay", goodsOrder);
-                session.setAttribute("orderDetailListPay", orderDetailListPay);
-                resp.sendRedirect("../pay_money_jsp.jsp");
+                goodsOrder = peopleService.buyGoods(peopleId, idList, number);
             } catch (PeopleException e) {
                 e.printStackTrace();
             } catch (GoodsException e) {
                 e.printStackTrace();
             }
+            //定义订单信息操作对象，订单详情操作对象
+            HttpSession session = req.getSession();
+            //获取需支付订单的订单详情
+            List<OrderDetail> orderDetailListPay = orderDetailService.findOrderDetailListByOrderId(goodsOrder.getId());
+            goodsOrderService.showGoodsOrder(goodsOrder);
+            System.out.println(orderDetailListPay.size());
+            for (int i = 0; i < orderDetailListPay.size(); i++) {
+                orderDetailService.showOrderDetailMessage(orderDetailListPay.get(i));
+            }
+            session.removeAttribute("goodsOrderPay");
+            session.removeAttribute("orderDetailListPay");
+            session.setAttribute("goodsOrderPay", goodsOrder);
+            session.setAttribute("orderDetailListPay", orderDetailListPay);
+            resp.sendRedirect("../pay_money_jsp.jsp");
         }
     }
 }

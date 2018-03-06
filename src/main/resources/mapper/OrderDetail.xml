@@ -38,7 +38,8 @@
     <select id="findOrderDetailListByOrderId" resultMap="orderDetail">
         SELECT
         <include refid="OrderDetailSql"/>
-        FROM ORDER_DETAIL WHERE GOODS_ORDER_ID=#{goodsOrderId}
+        FROM ORDER_DETAIL
+        WHERE GOODS_ORDER_ID=#{goodsOrderId}
         GROUP BY ID
     </select>
 

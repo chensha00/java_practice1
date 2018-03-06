@@ -61,7 +61,7 @@ public interface OrderDetailService {
      * @param: orderId 指定订单id
      * @return: 订单详情集合
      */
-    public List<OrderDetail> getOrderDetailListByOrderId(Long orderId);
+    public List<OrderDetail> findOrderDetailListByOrderId(Long orderId);
 
     /**
      * @Title: findOrderDetailByPeopleId

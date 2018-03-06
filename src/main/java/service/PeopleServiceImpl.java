@@ -252,7 +252,7 @@ public class PeopleServiceImpl implements PeopleService {
             throw new GoodsException("id为" + goodsOrder.getPeopleId() + "人员余额不够，无法购买");
         }
         //获取指定订单的订单详情
-        orderDetailList = orderDetailService.getOrderDetailListByOrderId(orderId);
+        orderDetailList = orderDetailService.findOrderDetailListByOrderId(orderId);
         //支付订单金额
         isPay = peopleService.descMoney(people.getId(), goodsOrder.getTotalMoney());
         if (isPay == true) {
@@ -276,7 +276,6 @@ public class PeopleServiceImpl implements PeopleService {
                 String flowNum1 = "POD" + System.currentTimeMillis();
                 //生成流水信息
                 PayFlow payFlow1 = new PayFlow(flowNum1, orderDetailList.get(i).getStore().getPeopleId(), orderDetailList.get(i).getGoodsAmount(), (byte) 2, new Date(), orderDetailList.get(i).getId(), orderDetailList.get(i).getGoodsOrderId());
-
                 orderDetailService.updateOrderDetailById(orderDetailList.get(i).getId(), orderDetailList.get(i));
                 payFlowService.savePayFlow(payFlow1);
             }
