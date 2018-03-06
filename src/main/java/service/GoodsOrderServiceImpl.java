@@ -49,32 +49,8 @@ private  GoodsOrderDao goodsOrderDao;
      */
     @Override
     public GoodsOrder findGoodsOrderById(Long id) {
+            return goodsOrderDao.findGoodsOrderById(id);
 
-        //定义商品订单对象
-        GoodsOrder goodsOrder = null;
-        //定义连接对象
-        Connection connection = null;
-        //定义预编译Statement对象
-        PreparedStatement preparedStatement = null;
-        // 1.创建自定义连接池对象
-        DataSource dataSource = new DataSourceUtils();
-        try {
-            //获取连接对象
-            connection = dataSource.getConnection();
-            //关闭连接 自动提交
-            connection.setAutoCommit(false);
-            goodsOrder = goodsOrderDao.findGoodsOrderById(id, connection, preparedStatement);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            //释放连接资源
-            JdbcUtils.release(connection, preparedStatement, null);
-            //返回商品订单对象
-            if (goodsOrder != null) {
-                goodsOrder.setPeople(new PeopleServiceImpl().findPeopleById(goodsOrder.getPeopleId()));
-            }
-            return goodsOrder;
-        }
     }
 
     /**
@@ -88,31 +64,7 @@ private  GoodsOrderDao goodsOrderDao;
      */
     @Override
     public Integer addGoodsOrderById(GoodsOrder goodsOrder) {
-        //定义受影响行数
-        Integer number = 0;
-        //定义连接对象
-        Connection connection = null;
-        //定义预编译Statement对象
-        PreparedStatement preparedStatement = null;
-        // 1.创建自定义连接池对象
-        DataSource dataSource = new DataSourceUtils();
-        try {
-            //获取连接对象
-            connection = dataSource.getConnection();
-            //关闭连接 自动提交
-            connection.setAutoCommit(false);
-            number = goodsOrderDao.addGoodsOrderById(goodsOrder, connection, preparedStatement);
-            System.out.println(number);
-        } catch (SQLException e) {
-            //回滚
-            connection.rollback();
-            e.printStackTrace();
-        } finally {
-            //释放连接资源
-            JdbcUtils.release(connection, preparedStatement, null);
-            //返回受影响行数
-            return number;
-        }
+            return goodsOrderDao.addGoodsOrderById(goodsOrder);
     }
 
     /**
@@ -125,41 +77,8 @@ private  GoodsOrderDao goodsOrderDao;
      * @param: goodsOrder 订单信息
      */
     @Override
-    public Integer updateGoodsOrderById(Long id, GoodsOrder goodsOrder) {
-        //定义受影响行数
-        Integer number = 0;
-        //定义连接对象
-        Connection connection = null;
-        //定义预编译Statement对象
-        PreparedStatement preparedStatement = null;
-        GoodsOrder oldOrder = this.findGoodsOrderById(id);
-        if (goodsOrder.getSuccessTime() != null) {
-            oldOrder.setSuccessTime(goodsOrder.getSuccessTime());
-        }
-        if (goodsOrder.getOrderStatus() != null) {
-            oldOrder.setOrderStatus(goodsOrder.getOrderStatus());
-        }
-        if (goodsOrder.getIsInvalid() != null) {
-            oldOrder.setIsInvalid(goodsOrder.getIsInvalid());
-        }
-        // 1.创建自定义连接池对象
-        DataSource dataSource = new DataSourceUtils();
-        try {
-            //获取连接对象
-            connection = dataSource.getConnection();
-            //关闭连接 自动提交
-            connection.setAutoCommit(false);
-            number = goodsOrderDao.updateGoodsOrderById(id, oldOrder, connection, preparedStatement);
-        } catch (SQLException e) {
-            //回滚
-            connection.rollback();
-            e.printStackTrace();
-        } finally {
-            //释放连接资源
-            JdbcUtils.release(connection, preparedStatement, null);
-            //返回受影响行数
-            return number;
-        }
+    public Integer updateGoodsOrder(GoodsOrder goodsOrder) {
+            return goodsOrderDao.updateGoodsOrder(goodsOrder);
     }
 
     /**
@@ -169,19 +88,19 @@ private  GoodsOrderDao goodsOrderDao;
      * @date 2018-01-26
      * @param: goodsOrder 订单实体
      */
+@Override
+public void showGoodsOrder(GoodsOrder goodsOrder){
 
-    public void showGoodsOrder(GoodsOrder goodsOrder) {
         System.out.print("主键ID：" + goodsOrder.getId() + " ");
         System.out.print("订单编号：" + goodsOrder.getOrderNum() + " ");
         System.out.print("人员外键：" + goodsOrder.getPeopleId() + " ");
         System.out.print("添加添加时间：" + new TimeFormat(goodsOrder.getAddTime()).format() + " ");
-        ;
+
         System.out.print("交易成功时间：" + goodsOrder.getSuccessTime() + " ");
         System.out.print("总金额：" + goodsOrder.getTotalMoney() + " ");
         System.out.print("订单状态：" + goodsOrder.getOrderStatus() + " ");
         System.out.print("是否作废：" + goodsOrder.getIsInvalid() + " ");
         System.out.println();
-
     }
 
     /**
@@ -192,33 +111,10 @@ private  GoodsOrderDao goodsOrderDao;
      * @param: goodsNum 商品编号
      * @return:
      */
-
+@Override
     public GoodsOrder findGoodsOrderByNum(String goodsNum) {
-        //定义商品订单对象
-        GoodsOrder goodsOrder = null;
-        //定义连接对象
-        Connection connection = null;
-        //定义预编译Statement对象
-        PreparedStatement preparedStatement = null;
-        // 1.创建自定义连接池对象
-        DataSource dataSource = new DataSourceUtils();
-        try {
-            //获取连接对象
-            connection = dataSource.getConnection();
-            //关闭连接 自动提交
-            connection.setAutoCommit(false);
-            goodsOrder = goodsOrderDao.findGoodsOrderByNum(goodsNum, connection, preparedStatement);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            //释放连接资源
-            JdbcUtils.release(connection, preparedStatement, null);
-            //返回商品订单对象
-            if (goodsOrder != null) {
-                goodsOrder.setPeople(new PeopleServiceImpl().findPeopleById(goodsOrder.getPeopleId()));
-            }
-            return goodsOrder;
-        }
+            return goodsOrderDao.findGoodsOrderByNum(goodsNum);
+
     }
 
     /**
@@ -230,33 +126,7 @@ private  GoodsOrderDao goodsOrderDao;
      * @return: 订单信息集合
      */
     public List<GoodsOrder> findGoodsOrderByPeopleId(Long peopleId){
-        //定义订单对象集合
-        List<GoodsOrder> goodsOrderList = new ArrayList<GoodsOrder>();
-        //定义连接对象
-        Connection connection = null;
-        //定义预编译Statement对象
-        PreparedStatement preparedStatement = null;
-        // 1.创建自定义连接池对象
-        DataSource dataSource = new DataSourceUtils();
-        try {
-            //获取连接对象
-            connection = dataSource.getConnection();
-            //关闭连接 自动提交
-            connection.setAutoCommit(false);
-            goodsOrderList = goodsOrderDao.findGoodsOrderByPeopleId(peopleId, connection, preparedStatement);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            //释放连接资源
-            JdbcUtils.release(connection, preparedStatement, null);
-            //返回商品订单对象
-            if (goodsOrderList != null) {
-                for (int i=0;i<goodsOrderList.size();i++){
-                    goodsOrderList.get(i).setPeople(new PeopleServiceImpl().findPeopleById(goodsOrderList.get(i).getPeopleId()));
-                }
-//                goodsOrder.setPeople(new PeopleServiceImpl().findPeopleById(goodsOrder.getPeopleId()));
-            }
-            return goodsOrderList;
-        }
+            return goodsOrderDao.findGoodsOrderByPeopleId(peopleId);
+
     }
 }

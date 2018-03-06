@@ -40,7 +40,7 @@ public class GoodsOrderDaoImpl extends BaseDaoImpl<GoodsOrder> implements GoodsO
      * @param: preparedStatement 预编译Statement对象
      */
     @Override
-    public GoodsOrder findGoodsOrderById(Long id, Connection connection, PreparedStatement preparedStatement) throws SQLException {
+    public GoodsOrder findGoodsOrderById(Long id) {
         return this.sqlSessionTemplate.selectOne(getMybaitsNameSpace()+"findGoodsOrderById",id);
     }
     /**
@@ -54,7 +54,7 @@ public class GoodsOrderDaoImpl extends BaseDaoImpl<GoodsOrder> implements GoodsO
      * @param: preparedStatement 预编译Statement对象
      */
     @Override
-    public Integer addGoodsOrderById(GoodsOrder goodsOrder, Connection connection, PreparedStatement preparedStatement) throws SQLException {
+    public Integer addGoodsOrderById(GoodsOrder goodsOrder){
         return this.sqlSessionTemplate.insert(getMybaitsNameSpace()+"addGoodsOrderById",goodsOrder);
     }
     /**
@@ -68,8 +68,8 @@ public class GoodsOrderDaoImpl extends BaseDaoImpl<GoodsOrder> implements GoodsO
      * @param: preparedStatement 预编译Statement对象
      */
     @Override
-    public Integer updateGoodsOrderById(Long id, GoodsOrder goodsOrder, Connection connection, PreparedStatement preparedStatement) throws SQLException {
-        return this.sqlSessionTemplate.update(getMybaitsNameSpace()+"updateGoodsOrderById",id);
+    public Integer updateGoodsOrder(GoodsOrder goodsOrder){
+        return this.sqlSessionTemplate.update(getMybaitsNameSpace()+"updateGoodsOrderById",goodsOrder);
     }
     /**
      * @throws java.sql.SQLException
@@ -82,7 +82,7 @@ public class GoodsOrderDaoImpl extends BaseDaoImpl<GoodsOrder> implements GoodsO
      * @param: preparedStatement 预编译Statement对象
      */
     @Override
-    public GoodsOrder findGoodsOrderByNum(String goodsNum, Connection connection, PreparedStatement preparedStatement) throws SQLException {
+    public GoodsOrder findGoodsOrderByNum(String goodsNum){
         return this.sqlSessionTemplate.selectOne(getMybaitsNameSpace() + "findGoodsOrderByNum",goodsNum);
     }
     /**
@@ -96,7 +96,7 @@ public class GoodsOrderDaoImpl extends BaseDaoImpl<GoodsOrder> implements GoodsO
      * @param: preparedStatement 预编译Statement对象
      */
     @Override
-    public List<GoodsOrder> findGoodsOrderByPeopleId(Long peopleId, Connection connection, PreparedStatement preparedStatement) throws SQLException {
+    public List<GoodsOrder> findGoodsOrderByPeopleId(Long peopleId){
         return this.sqlSessionTemplate.selectList(getMybaitsNameSpace()+"findGoodsOrderByPeopleId",peopleId);
     }
 }

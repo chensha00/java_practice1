@@ -37,7 +37,7 @@ public interface GoodsOrderDao {
      * @param: preparedStatement 预编译Statement对象
      * @throws: SQLException
      */
-    public GoodsOrder findGoodsOrderById(Long id, Connection connection, PreparedStatement preparedStatement) throws SQLException;
+    public GoodsOrder findGoodsOrderById(Long id);
 
     /**
      * @return 受影响的行
@@ -50,21 +50,17 @@ public interface GoodsOrderDao {
      * @param: connection 连接对象
      * @param: preparedStatement 预编译Statement对象
      */
-    public Integer addGoodsOrderById(GoodsOrder goodsOrder, Connection connection, PreparedStatement preparedStatement) throws SQLException;
+    public Integer addGoodsOrderById(GoodsOrder goodsOrder);
 
     /**
      * @return 受影响的行
-     * @throws java.sql.SQLException
      * @Title 修改订单信息
-     * @Description
+     * @Description updateGoodsOrder
      * @author zuorui
      * @date 2018-01-22
-     * @param: id 指定id
-     * @param: connection 连接对象
-     * @param: preparedStatement 预编译Statement对象
-     * @throws: SQLException
+     * @param: goodsOrde 订单对象
      */
-    public Integer updateGoodsOrderById(Long id, GoodsOrder goodsOrder, Connection connection, PreparedStatement preparedStatement) throws SQLException;
+    public Integer updateGoodsOrder(GoodsOrder goodsOrde);
 
     /**
      * @Title: findGoodsOrderByNum
@@ -77,11 +73,11 @@ public interface GoodsOrderDao {
      * @throws: SQLException
      */
 
-    public GoodsOrder findGoodsOrderByNum(String goodsNum, Connection connection, PreparedStatement preparedStatement) throws SQLException;
+    public GoodsOrder findGoodsOrderByNum(String goodsNum);
 
     /**
      * @Title: findGoodsOrderByPeopleId
-     * @Description: 获取订单信息通过人员id
+     * @Description:  通过人员id  获取订单信息
      * @author yanyong
      * @date 2018-01-31
      * @param: peopleId指定人员id
@@ -90,7 +86,7 @@ public interface GoodsOrderDao {
      * @return: 订单信息集合
      * @throws: SQLException
      */
-    public List<GoodsOrder> findGoodsOrderByPeopleId(Long peopleId, Connection connection, PreparedStatement preparedStatement) throws SQLException;
+    public List<GoodsOrder> findGoodsOrderByPeopleId(Long peopleId);
 
 
 }
