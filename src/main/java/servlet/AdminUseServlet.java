@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,7 +63,11 @@ public class AdminUseServlet extends HttpServlet {
 //            req.setAttribute("peopleList",peopleList);
 //            resp.sendRedirect("../administrator_page.jsp");
         }else if(command.equals("findStore")){
-            storeList=storeService.getStoreAll();
+            try {
+                storeList=storeService.findAllStore();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             HttpSession session=req.getSession();
             session.setAttribute("storeList",storeList);
 //            req.setAttribute("storeList",storeList);
