@@ -23,7 +23,7 @@
 <jsp:include page="head_page.jsp" flush="true"/>
 
 <div class="cart_div">
-    <form action="/pay/pay.htm" method="post" class="form">
+    <form action="/pay_money_jsp.jsp" method="post" class="form">
         <fieldset>
             <legend><img src="${basePath}../img/cart.jpg"></legend>
             <table class="cart_table" id="tab" border="1">
