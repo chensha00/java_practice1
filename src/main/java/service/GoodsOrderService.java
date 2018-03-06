@@ -51,7 +51,7 @@ public interface GoodsOrderService {
      * @param: id 指定id
      * @param: goodsOrder 订单信息
      */
-    public Integer updateGoodsOrderById(Long id, GoodsOrder goodsOrder);
+    public Integer updateGoodsOrder(GoodsOrder goodsOrder);
 
     /**
      * @Title: showGoodsOrder
