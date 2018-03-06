@@ -260,5 +260,17 @@
         <servlet-name>logistics</servlet-name>
         <url-pattern>/servlet/logistics.htm</url-pattern>
     </servlet-mapping>
-
+    <!-- 胡志强 struts2配置-->
+    <filter>
+        <filter-name>struts2</filter-name>
+        <filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>struts2</filter-name>
+        <url-pattern>*.do</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>struts2</filter-name>
+        <url-pattern>*.jsp</url-pattern>
+    </filter-mapping>
 </web-app>

@@ -17,7 +17,7 @@
         http://www.springframework.org/schema/tx/spring-tx.xsd"
        default-lazy-init="false">
     <!-- 注解装载 -->
-    <context:component-scan base-package="common,dao,service" >
+    <context:component-scan base-package="common,dao,service,controller" >
 
         <!--<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>-->
         <!--<context:include-filter type="annotation" expression="org.springframework.transaction.annotation.Transactional"/>-->

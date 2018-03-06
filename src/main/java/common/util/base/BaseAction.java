@@ -25,9 +25,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class BaseAction extends ActionSupport implements ServletContextAware,ServletResponseAware,ServletRequestAware {
 
-    protected HttpServletResponse response;
+    protected HttpServletResponse resp;
 
-    protected HttpServletRequest request;
+    protected HttpServletRequest req;
 
     protected ServletContext servletContext;
 
@@ -38,11 +38,11 @@ public class BaseAction extends ActionSupport implements ServletContextAware,Ser
 
     @Override
     public void setServletRequest(HttpServletRequest request) {
-        this.request=request;
+        this.req=request;
     }
 
     @Override
     public void setServletResponse(HttpServletResponse response) {
-        this.response=response;
+        this.resp=response;
     }
 }

@@ -8,7 +8,27 @@ package controller;/************************************************************
  * @version V1.0
  */
 
+import common.util.AddConditionUtils;
+import common.util.SpringContextUtil;
 import common.util.base.BaseAction;
+import domain.Goods;
+import domain.Invertory;
+import domain.People;
+import domain.Store;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
+import org.springframework.beans.factory.annotation.Autowired;
+import service.GoodsService;
+import service.InvertoryService;
+import service.PeopleService;
+import service.StoreService;
+
+import javax.servlet.http.HttpSession;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName StoreAction
@@ -16,5 +36,71 @@ import common.util.base.BaseAction;
  * @author 胡志强
  * @date 2018/3/6
 */
+@Action( value = "storeAction")
+
+@Results({
+        @Result( name="storeHome",location="/storeHome.jsp"),
+})
 public class StoreAction extends BaseAction{
+
+    @Autowired
+    private PeopleService peopleService;
+    @Autowired
+    private StoreService storeService;
+    @Autowired
+    private InvertoryService invertoryService;
+    @Autowired
+    private GoodsService goodsService;
+    /**
+     * @Title: storeHome
+     * @Description: 跳转到store的主页
+     * @author hzq
+     * @date
+     * @throw YnCorpSysException
+     */
+    public String storeHome(){
+
+        HttpSession session = req.getSession();
+        Long  peopleId =Long.valueOf(req.getParameter("peopleId"));
+        String result = "";
+
+        try {
+            //一个人只能同时拥有一个店
+            People people = new People();
+            people = peopleService.findPeopleById(peopleId);
+            if(people != null ){
+                List<Map<String,Object>> map1 = new ArrayList<Map<String,Object>>();
+                map1.add(AddConditionUtils.addCondition("people_Id", "=", peopleId));
+                List<Store> stores = new ArrayList<Store>();
+                stores = storeService.findStoreByUnSureCondition(map1);
+                if (stores.size()==0){
+                    session.setAttribute("people",people);
+                    result = "storeHome";
+                }else{
+                    //根据店铺id查找到库存信息
+                    List<Invertory> invertories = new ArrayList<Invertory>();
+                    List<Map<String,Object>> map2 = new ArrayList<Map<String,Object>>();
+                    map2.add(AddConditionUtils.addCondition("store_id","=",stores.get(0).getId()));
+                    invertories = invertoryService.findInvertoryByUnSureCondition(map2);
+                    //再根据库存编号中的商品id查找商品信息
+                    List<Goods> goods = new ArrayList<Goods>();
+                    for (int i = 0; i < invertories.size() ; i++) {
+                        Goods good = new Goods();
+                        good = goodsService.findGoodsById(invertories.get(i).getGoodsId());
+                        System.out.println(good.getName());
+                        goods.add(good);
+                    }
+                    session.setAttribute("stores",stores);
+                    session.setAttribute("peoples",people);
+                    session.setAttribute("invertorys",invertories);
+                    session.setAttribute("goods",goods);
+                    result = "storeHome";
+
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return  result;
+    }
 }
