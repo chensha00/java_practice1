@@ -22,7 +22,7 @@
     <insert id="addGoodsOrderById">
         INSERT INTO goods_order(ID,ORDER_NUM ,PEOPLE_ID,TOTAL_MONEY,ADD_TIME,SUCCESS_TIME,ORDER_STATUS,IS_INVALID)
                 VALUES(DEFAULT,#{orderNum,jdbcType=VARCHAR},#{peopleId,jdbcType=BIGINT},#{totalMoney,jdbcType=DECIMAL},
-                #{addTime,jdbcType=TIMESTAMP},#{successTime,jdbcType=TIMESTAMP},#{orderStatus,jdbcType=TINYINT},#{isInvalid,jdbcType=TINYINT}
+                #{addTime,jdbcType=TIMESTAMP},#{successTime,jdbcType=TIMESTAMP},#{orderStatus,jdbcType=TINYINT},#{isInvalid,jdbcType=TINYINT})
     </insert>
 
     <update id="updateGoodsOrderById">
