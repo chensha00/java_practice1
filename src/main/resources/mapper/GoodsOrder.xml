@@ -26,7 +26,9 @@
     </insert>
 
     <update id="updateGoodsOrderById">
-        UPDATE goods_order SET ORDER_NUM=${map.goodsOrder.orderNum},PEOPLE_ID=${map.goodsorder.peopleId} ,TOTAL_MONEY=${map.goodsorder.totalMoney} ,ADD_TIME=${map.goodsorder.addTime} ,SUCCESS_TIME=${map.goodsorder.successTime} ,ORDER_STATUS=${map.goodsorder.orderStatus} ,IS_INVALID=${map.goodsorder.isInvalid} WHERE ID=${map.id};
+        UPDATE goods_order SET ORDER_NUM=${map.goodsOrder.orderNum},PEOPLE_ID=${map.goodsorder.peopleId} ,TOTAL_MONEY=${map.goodsorder.totalMoney} ,
+        ADD_TIME=${map.goodsorder.addTime} ,SUCCESS_TIME=${map.goodsorder.successTime} ,ORDER_STATUS=${map.goodsorder.orderStatus} ,IS_INVALID=${map.goodsorder.isInvalid}
+        WHERE ID=${map.id}
     </update>
 
     <select id="findGoodsOrderByNum" resultType="java.util.Map" resultMap="goodsOrder">
