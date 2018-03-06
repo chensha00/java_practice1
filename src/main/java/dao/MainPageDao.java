@@ -8,7 +8,7 @@ package dao;/*******************************************************************
  * @version V1.0
  */
 
-import javabean.MainPage;
+import controller.MainPage;
 
 import java.sql.SQLException;
 import java.util.List;

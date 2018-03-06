@@ -25,7 +25,8 @@
         </association>
         <association property="goods" column="GOODS_ID" javaType="domain.Goods" select="domain.Goods.findGoodsById">
         </association>
-        <association property="goodsOrder" column="GOODS_ORDER_ID" javaType="domain.GoodsOrder" select="domain.GoodsOrder.findGoodsOrderById">
+        <association property="goodsOrder" column="GOODS_ORDER_ID" javaType="domain.GoodsOrder"
+                     select="domain.GoodsOrder.findGoodsOrderById">
         </association>
     </resultMap>
 
@@ -34,24 +35,33 @@
         ID,ORDER_NUM,PEOPLE_ID,STORE_ID,GOODS_ID,GOODS_ORDER_ID,NUMBER,GOODS_PRICE,GOODS_AMOUNT,ADD_TIME,SUCCESS_TIME,DELIVERY_TIME,ORDER_STATUS,IS_INVALID
     </sql>
     <!--通过订单id查找订单详情-->
-    <select id="getOrderDetailListByOrderId" resultType="java.util.Map" resultMap="orderDetail">
-        SELECT <include refid="OrderDetailSql"/> FROM ORDER_DETAIL WHERE GOODS_ORDER_ID=#{goodsOrderId}
+    <select id="findOrderDetailListByOrderId" resultMap="orderDetail">
+        SELECT
+        <include refid="OrderDetailSql"/>
+        FROM ORDER_DETAIL WHERE GOODS_ORDER_ID=#{goodsOrderId}
+        GROUP BY ID
     </select>
 
     <!--通过人员id查找订单详情-->
-    <select id="findOrderDetailByPeopleId" resultType="java.util.Map" resultMap="orderDetail">
-        SELECT <include refid="OrderDetailSql"/> FROM ORDER_DETAIL WHERE PEOPLE_ID=#{peopleId}
+    <select id="findOrderDetailByPeopleId" resultMap="orderDetail">
+        SELECT
+        <include refid="OrderDetailSql"/>
+        FROM ORDER_DETAIL WHERE PEOPLE_ID=#{peopleId}
     </select>
 
     <!--通过指定订单编号查找相应订单详情ID-->
     <select id="findOrderDetailIdByOrderNum" resultType="java.util.Map" resultMap="orderDetail">
-        SELECT <include refid="OrderDetailSql"/> FROM ORDER_DETAIL WHERE ORDER_NUM=#{orderNum}
+        SELECT
+        <include refid="OrderDetailSql"/>
+        FROM ORDER_DETAIL WHERE ORDER_NUM=#{orderNum}
     </select>
 
 
     <!--通过指定ID查找相应订单详情-->
     <select id="findOrderDetailById" resultType="java.util.Map" resultMap="orderDetail">
-        SELECT <include refid="OrderDetailSql"/> FROM ORDER_DETAIL WHERE ID=#{id}
+        SELECT
+        <include refid="OrderDetailSql"/>
+        FROM ORDER_DETAIL WHERE ID=#{id}
     </select>
 
     <!--更新操作-->
@@ -62,7 +72,7 @@
     </update>
 
     <!--添加-->
-    <insert id="add" parameterType="domain.OrderDetail">
+    <insert id="saveOrderDetail">
         INSERT INTO ORDER_DETAIL(ID,ORDER_NUM,PEOPLE_ID,STORE_ID,GOODS_ID,GOODS_ORDER_ID,NUMBER,GOODS_PRICE,GOODS_AMOUNT,ADD_TIME,SUCCESS_TIME,DELIVERY_TIME,ORDER_STATUS,IS_INVALID)
          VALUES
          (DEFAULT

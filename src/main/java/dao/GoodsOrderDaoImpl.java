@@ -15,9 +15,6 @@ import common.util.base.BaseDaoImpl;
 import domain.GoodsOrder;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -44,18 +41,15 @@ public class GoodsOrderDaoImpl extends BaseDaoImpl<GoodsOrder> implements GoodsO
         return this.sqlSessionTemplate.selectOne(getMybaitsNameSpace()+"findGoodsOrderById",id);
     }
     /**
-     * @throws java.sql.SQLException
      * @Title: addGoodsOrderById
      * @Description: 通过id添加订单详情
      * @author zuorui
      * @date 2018-02-26
-     * @param: id 指定id
-     * @param: connection 连接对象
-     * @param: preparedStatement 预编译Statement对象
+     * @param: goodsOrder 指定goodsOrder
      */
     @Override
-    public Integer addGoodsOrderById(GoodsOrder goodsOrder){
-        return this.sqlSessionTemplate.insert(getMybaitsNameSpace()+"addGoodsOrderById",goodsOrder);
+    public Integer saveGoodsOrderById(GoodsOrder goodsOrder){
+        return this.sqlSessionTemplate.insert(getMybaitsNameSpace()+"saveGoodsOrderById",goodsOrder);
     }
     /**
      * @throws java.sql.SQLException

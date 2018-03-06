@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface OrderDetailService {
     /**
-     * @Title: addOrderDetail
+     * @Title: saveOrderDetail
      * @Description: 新增订单详情信息
      * @author yuweiyang
      * @date 2018-01-21
@@ -27,7 +27,7 @@ public interface OrderDetailService {
     public OrderDetail findOrderDetailById(Long id);
 
     /**
-     * @Title: addOrderDetail
+     * @Title: saveOrderDetail
      * @Description: 新增订单详情信息
      * @author yuweiyang
      * @date 2018-01-21
@@ -37,7 +37,7 @@ public interface OrderDetailService {
      * @param: preparedStatement 预编译Statement
      * @return: 受影响行数
      */
-    public Integer addOrderDetail(OrderDetail orderDetail);
+    public Integer saveOrderDetail(OrderDetail orderDetail);
 
 
     /**

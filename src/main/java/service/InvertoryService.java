@@ -8,6 +8,7 @@ package service;/***************************************************************
  * @version V1.0
  */
 
+import controller.MainPage;
 import domain.Goods;
 import domain.Invertory;
 import domain.Store;
@@ -169,7 +170,7 @@ public interface InvertoryService {
      * @date
      * @throw YnCorpSysException
      */
-    public List<javabean.MainPage> findMainPageInvertory();
+    public List<MainPage> findMainPageInvertory();
 
 
 }

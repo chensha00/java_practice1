@@ -9,7 +9,7 @@ package dao;/*******************************************************************
  */
 
 import common.util.base.BaseDaoImpl;
-import javabean.MainPage;
+import controller.MainPage;
 import org.springframework.stereotype.Repository;
 
 import java.sql.SQLException;

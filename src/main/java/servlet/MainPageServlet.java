@@ -9,6 +9,7 @@ package servlet;/***************************************************************
  */
 
 import common.util.SpringContextUtil;
+import controller.MainPage;
 import domain.People;
 import org.springframework.beans.factory.annotation.Autowired;
 import service.InvertoryService;
@@ -56,7 +57,7 @@ public class MainPageServlet extends HttpServlet {
 
         InvertoryService invertoryService= (InvertoryService) SpringContextUtil.getBean("invertoryService");
         //从数据库获取商品信息，显示在主页上
-        List<javabean.MainPage> list = invertoryService.findMainPageInvertory();
+        List<MainPage> list = invertoryService.findMainPageInvertory();
         req.setAttribute("mainList", list);
         req.getRequestDispatcher("/main_page.jsp").forward(req, resp);
     }

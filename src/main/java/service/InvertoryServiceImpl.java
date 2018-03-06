@@ -8,6 +8,7 @@ package service;/***************************************************************
  * @version V1.0
  */
 
+import controller.MainPage;
 import dao.InvertoryDao;
 import dao.MainPageDao;
 import domain.Goods;
@@ -290,8 +291,8 @@ public class InvertoryServiceImpl implements InvertoryService {
      * @throw YnCorpSysException
      */
     @Override
-    public List<javabean.MainPage> findMainPageInvertory() {
-        List<javabean.MainPage> mainPages = new ArrayList<javabean.MainPage>();
+    public List<MainPage> findMainPageInvertory() {
+        List<MainPage> mainPages = new ArrayList<MainPage>();
         try {
             mainPages = mainPageDao.findMainPageInvertory();
         } catch (SQLException e) {

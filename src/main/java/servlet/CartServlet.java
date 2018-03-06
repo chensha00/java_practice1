@@ -9,6 +9,8 @@ package servlet;/***************************************************************
  */
 
 
+import controller.MainPage;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -69,7 +71,7 @@ public class CartServlet extends HttpServlet {
         String price = req.getParameter("priceName");
         String number = req.getParameter("numberName");
         String storeName = req.getParameter("storeNameName");
-        javabean.MainPage mainPage = new javabean.MainPage();
+        MainPage mainPage = new MainPage();
         mainPage.setInvertoryId(Long.valueOf(invertoryId));
         mainPage.setName(name);
         mainPage.setPrice(Double.valueOf(price));
@@ -78,10 +80,10 @@ public class CartServlet extends HttpServlet {
 
 
         HttpSession session = req.getSession();
-        List<javabean.MainPage> cartList = new ArrayList<javabean.MainPage>();
-        cartList = (List<javabean.MainPage>) session.getAttribute("cartList");
+        List<MainPage> cartList = new ArrayList<MainPage>();
+        cartList = (List<MainPage>) session.getAttribute("cartList");
         if (cartList == null) {
-            cartList = new ArrayList<javabean.MainPage>();
+            cartList = new ArrayList<MainPage>();
         }
         cartList.add(mainPage);
 
@@ -94,8 +96,8 @@ public class CartServlet extends HttpServlet {
     public void list(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         HttpSession session = req.getSession();
-        List<javabean.MainPage> cartList = new ArrayList<javabean.MainPage>();
-        cartList = (List<javabean.MainPage>) session.getAttribute("cartList");
+        List<MainPage> cartList = new ArrayList<MainPage>();
+        cartList = (List<MainPage>) session.getAttribute("cartList");
         req.setAttribute("cartList", cartList);
         System.out.println(cartList);
         req.getRequestDispatcher("/cart.jsp").forward(req, resp);

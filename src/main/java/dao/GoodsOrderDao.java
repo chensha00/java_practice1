@@ -13,9 +13,6 @@ package dao;/**
 
 import domain.GoodsOrder;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -46,11 +43,9 @@ public interface GoodsOrderDao {
      * @Description 根据ID增加订单信息
      * @author zuorui
      * @date 2018-01-22
-     * @param: id 指定id
-     * @param: connection 连接对象
-     * @param: preparedStatement 预编译Statement对象
+     * @param: goodsOrder goodsOrder
      */
-    public Integer addGoodsOrderById(GoodsOrder goodsOrder);
+    public Integer saveGoodsOrderById(GoodsOrder goodsOrder);
 
     /**
      * @return 受影响的行
