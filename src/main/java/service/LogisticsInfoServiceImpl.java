@@ -12,6 +12,7 @@ import dao.LogisticsInfoDao;
 import domain.LogisticsInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ import java.util.List;
  * @date 2018/3/4
  */
 @Service("logisticsInfoService")
+@Transactional
 public class LogisticsInfoServiceImpl implements LogisticsInfoService {
 
     @Autowired

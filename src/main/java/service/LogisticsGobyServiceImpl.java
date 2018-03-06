@@ -12,6 +12,7 @@ import dao.LogisticsGobyDao;
 import domain.LogisticsGoby;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ import java.util.List;
  * @date 2018/3/4
  */
 @Service("logisticsGobyService")
+@Transactional
 public class LogisticsGobyServiceImpl implements LogisticsGobyService{
 
     @Autowired
