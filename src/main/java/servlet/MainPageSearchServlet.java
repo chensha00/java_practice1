@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 /**
@@ -52,17 +53,21 @@ public class MainPageSearchServlet extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
 
         //获取信息
-        String condition = req.getParameter("condition");
+        String condition = req.getParameter("search");
         InvertoryService invertoryService = (InvertoryService) SpringContextUtil.getBean("invertoryService");
         //从数据库获取商品信息，显示在主页上
         List<MainPage> list = invertoryService.findMainPageCondition(condition);
 
         HttpSession session = req.getSession();
         session.setAttribute("mainList", list);
-//        req.setAttribute("mainList", list);
-//        req.getRequestDispatcher("/helloWord.jsp").forward(req, resp);
-//        resp.sendRedirect("/main_page_search.jsp");
-        resp.sendRedirect("../helloWord.jsp");
-
+        if (list != null && list.size() != 0) {
+            session.setAttribute("mainList", list);
+            resp.sendRedirect("../main_page_search.jsp");
+        } else {
+            resp.setContentType("text/html;charset=utf-8");
+            PrintWriter out = resp.getWriter();
+            out.println("您所搜索的商品或者店铺不存在！");
+            out.close();//关闭输出流
+        }
     }
 }
