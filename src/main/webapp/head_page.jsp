@@ -45,21 +45,13 @@
         <div id="search_tab" class="search-list">
             <ul>
                 <li id="tab_1" class="selected">
-                    <a href="#">宝贝</a>
-                </li>
-                <li id="tab_2" class="selected">
-                <a href="#">店铺</a>
+                    <a href="#">宝贝|店铺</a>
                 </li>
             </ul>
         </div>
         <!--搜索框主体-->
         <div class="search-pannel">
             <form action="/mainAction!search.do" method="post" target="_blank">
-                <div class="search-tips">
-                    <%--<a href="#" target="_blank">--%>
-                    <%--高级<br>搜索--%>
-                    <%--</a>--%>
-                </div>
                 <div class="search-button">
                     <button class="btn-search" id="submit">
                         <li style="color: #cccccc">搜索</li>
@@ -77,65 +69,6 @@
 <br>
 <br>
 </body>
-<script type="text/javascript">
-    var getDOM = function (id) {
-        return document.getElementById(id);
-    }
-    var addEvent = function (id, event, fn) {
-        //这里用一个 ||document，为了防止getDOM为null的时候程序会报错
-        var el = getDOM(id) || document;
-        /*
-         el.addEventListener适用于非IE浏览器，el.attachEvent适用于IE浏览器
-         */
-        if (el.addEventListener) {
-            el.addEventListener(event, fn, false);
-        } else if (el.attachEvent) {
-            el.attachEvent("on" + event, fn);
-        }
-    }
-    var flag = true;
-    addEvent("search_tab", "mouseover", function () {
-        if (this.className.indexOf("trigger-hover") < 0) {
-            this.className += " trigger-hover";
-        }
-    })
-    addEvent("tab_1", "mouseover", function () {
-        if (this.className.indexOf("selected") < 0) {
-            this.className += " selected";
-        }
-    })
-    addEvent("tab_1", "mouseout", function () {
-        if (flag) {
-            this.className = " ";
-        }
-        flag = true;
-    })
-    addEvent("tab_1", "click", function () {
-        getDOM("search_tab").className = "search-list";
-        this.className = "selected";
-        flag = false;
-    })
-        addEvent("tab_2", "mouseover", function () {
-            if (this.className.indexOf("selected") < 0) {
-                this.className += " selected";
-            }
-        })
-    addEvent("tab_2", "mouseout", function () {
-        if (flag) {
-            this.className = " ";
-        }
-        flag = true;
-    })
-    /*每点击一次，都会出发onmouseout事件，
-     所以要设计一个标记来表示是否是出发了点击事件，
-     如果是，那么onmouseout将不会清除样式*/
-    addEvent("tab_2", "click", function () {
-        getDOM("search_tab").className = "search-list";
-        this.className = "selected";
-        console.log(this.className);
-        flag = false;
-    })
-</script>
 
 <%--搜索框的实现--%>
 <script type="text/javascript">
