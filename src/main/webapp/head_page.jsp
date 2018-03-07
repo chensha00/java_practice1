@@ -21,9 +21,9 @@
             <li><a href="../person.jsp" target="_blank">用户：${person.name}</a></li>
             <li><a href="/order/order.htm?way=all&&peopleId=${person.id}" target="_blank">查看订单</a></li>
             <li><a href="/${basePath}storeAction!storeHome.do?peopleId=${person.id}" target="_blank">卖家中心</a></li>
-            <li><a href="/servlet/mainPage.htm" target="_blank">商品分类</a></li>
-            <li><a href="/servlet/cartPage.htm?op=list" target="_blank">购物车</a></li>
-            <li><a href="/servlet/mainPage.htm" target="_blank">淘宝网首页</a></li>
+            <li><a href="/mainAction!main.do" target="_blank">商品分类</a></li>
+            <li><a href="/mainAction!cart.do?op=list" target="_blank">购物车</a></li>
+            <li><a href="/mainAction!main.do" target="_blank">淘宝网首页</a></li>
         </ul>
     </div>
     <div class="site-nav-two">
@@ -47,14 +47,14 @@
                 <li id="tab_1" class="selected">
                     <a href="#">宝贝</a>
                 </li>
-                <%--<li id="tab_2" class="selected">--%>
-                <%--<a href="#">店铺</a>--%>
-                <%--</li>--%>
+                <li id="tab_2" class="selected">
+                <a href="#">店铺</a>
+                </li>
             </ul>
         </div>
         <!--搜索框主体-->
         <div class="search-pannel">
-            <form action="/servlet/mainPageSearch.htm" method="post" target="_blank">
+            <form action="/mainAction!search.do" method="post" target="_blank">
                 <div class="search-tips">
                     <%--<a href="#" target="_blank">--%>
                     <%--高级<br>搜索--%>
@@ -115,11 +115,11 @@
         this.className = "selected";
         flag = false;
     })
-    //    addEvent("tab_2", "mouseover", function () {
-    //        if (this.className.indexOf("selected") < 0) {
-    //            this.className += " selected";
-    //        }
-    //    })
+        addEvent("tab_2", "mouseover", function () {
+            if (this.className.indexOf("selected") < 0) {
+                this.className += " selected";
+            }
+        })
     addEvent("tab_2", "mouseout", function () {
         if (flag) {
             this.className = " ";
@@ -141,7 +141,7 @@
 <script type="text/javascript">
     $('#submit').live("click", function () {
         var condition = document.getElementById("search").value;
-        var url = '/servlet/mainPageSearch.htm';
+        var url = '/mainAction!search.do';
         var data = {
             condition: condition
         };

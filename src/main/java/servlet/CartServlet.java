@@ -1,12 +1,12 @@
 package servlet;/********************************************************************
- /**
- * @Project: bigstar_online_mall
- * @Package servlet
- * @author liukang
- * @date 2018/1/31 9:56
- * @Copyright: 2018 www.zyht.com Inc. All rights reserved.
- * @version V1.0
- */
+/**
+* @Project: bigstar_online_mall
+* @Package servlet
+* @author liukang
+* @date 2018/1/31 9:56
+* @Copyright: 2018 www.zyht.com Inc. All rights reserved.
+* @version V1.0
+*/
 
 
 import Entity.MainPage;
@@ -21,11 +21,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author liukang
- * @ClassName CartServlet
- * @Description 购物车的servlet
- * @date 2018/1/31
- */
+* @author liukang
+* @ClassName CartServlet
+* @Description 购物车的servlet
+* @date 2018/1/31
+*/
 public class CartServlet extends HttpServlet {
 
 
