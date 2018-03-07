@@ -39,7 +39,7 @@ import java.util.Map;
 @Action( value = "storeAction")
 
 @Results({
-        @Result( name="storeHome",location="/storeHome.jsp"),
+        @Result( name="storeHome",location="/store_home_page.jsp"),
 })
 public class StoreAction extends BaseAction{
 
