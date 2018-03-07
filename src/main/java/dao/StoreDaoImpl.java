@@ -124,11 +124,9 @@ public class StoreDaoImpl extends BaseDaoImpl<Store> implements StoreDao {
      */
     @Override
     public Integer updateStoreById(Long id, Store store) throws SQLException {
-        List<Map<String, Object>> map = new ArrayList<Map<String, Object>>();
-        Map map1 = new HashMap();
-        Map map2 = new HashMap();
-        map1.put("store", store);
-        map2.put("id", id);
+        Map map = new HashMap();
+        map.put("store", store);
+        map.put("id", id);
         return this.sqlSessionTemplate.update(getMybaitsNameSpace() + "updateStoreById", map);
     }
 

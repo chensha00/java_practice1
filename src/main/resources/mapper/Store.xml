@@ -37,9 +37,9 @@
     <delete id="deleteStoreById">
         DELETE FROM store WHERE ID=#{id}
     </delete>
-    <update id="updateStoreById">
-        UPDATE store SET STORE_NUM=${map.store.storeNum},STORE_NAME=${map.store.storeName},
-        CREDIT=${map.store.credit},PEOPLE_ID=${map.store.peopleId} WHERE ID=${map.id};
+    <update id="updateStoreById" parameterType="java.util.Map">
+        UPDATE store SET STORE_NUM=#{store.storeNum},STORE_NAME=#{store.storeName},
+        CREDIT=#{store.credit},PEOPLE_ID=${store.peopleId} WHERE ID=${id};
     </update>
     <select id="findAllStore" resultMap="storeMap" parameterType="domain.Store">
         SELECT ID,STORE_NUM,STORE_NAME,CREDIT,PEOPLE_ID FROM store

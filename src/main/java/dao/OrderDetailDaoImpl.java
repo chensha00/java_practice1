@@ -75,7 +75,7 @@ public class OrderDetailDaoImpl extends BaseDaoImpl<OrderDetail> implements Orde
 //        List<Map<String, Object>> map = new ArrayList<Map<String, Object>>();
 //        Map map1 = new HashMap();
 //        Map map2 = new HashMap();
-        Map map=new HashMap<>();
+        Map map=new HashMap();
         map.put("orderDetail", orderDetail);
         map.put("id", id);
         return this.sqlSessionTemplate.update(getMybaitsNameSpace() + "updateOrderDetailById", map);
