@@ -129,6 +129,7 @@ public class InvertoryDaoImpl extends BaseDaoImpl<Invertory> implements Invertor
         Map map = new HashMap();
         map.put("storeId",storeId);
         map.put("goodsId", goodsId);
+        System.out.println(map);
         return this.sqlSessionTemplate.selectOne(getMybaitsNameSpace() + "findInvertoryByStoreIdAndGoodsId",map);
     }
 

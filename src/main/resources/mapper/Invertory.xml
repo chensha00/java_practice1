@@ -33,8 +33,8 @@
         SELECT
         <include refid="invertorySql"/>
         FROM INVERTORY
-        WHERE STORE_ID=#{map.storeId,jdbcType=BIGINT} AND GOODS_ID=#{map.goodsId,jdbcType=BIGINT}
-        GROUP BY ID
+        WHERE STORE_ID=#{storeId,jdbcType=BIGINT}
+        AND GOODS_ID=#{goodsId,jdbcType=BIGINT}
     </select>
 
     <!--根据店铺ID查询店铺所有库存-->
