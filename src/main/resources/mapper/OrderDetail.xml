@@ -66,10 +66,10 @@
     </select>
 
     <!--更新操作-->
-    <update id="updateOrderDetailById">
-        UPDATE ORDER_DETAIL SET ORDER_NUM=${map.orderdetail.orderNum}
-        ,SUCCESS_TIME=${map.orderdetail.successTime},DELIVERY_TIME=${map.orderdetail.deliveryTime}
-        ,ORDER_STATUS=${map.orderdetail.orderStatus},IS_INVALID=${map.orderdetail.isInvalid} WHERE ID=${map.id};
+    <update id="updateOrderDetailById" parameterType="java.util.Map">
+        UPDATE ORDER_DETAIL SET ORDER_NUM=${orderDetail.orderNum}
+        ,SUCCESS_TIME=#{orderDetail.successTime,jdbcType=TIMESTAMP},DELIVERY_TIME=#{orderDetail.deliveryTime,jdbcType=TIMESTAMP}
+        ,ORDER_STATUS=${orderDetail.orderStatus},IS_INVALID=${orderDetail.isInvalid} WHERE ID=#{id};
     </update>
 
     <!--添加-->

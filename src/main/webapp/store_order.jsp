@@ -116,10 +116,10 @@
                         </td>
                         <td width="100" align="center">
                             <c:choose>
-                                <c:when test="${od.orderStatus>1}">
+                                <c:when test="${od.orderStatus > 1}">
                                     <p>已发货</p>
                                 </c:when>
-                                <c:when test="${od.orderStatus==0}">
+                                <c:when test="${od.orderStatus ==0}">
                                     <p>买家未付款</p>
                                 </c:when>
                                 <c:otherwise>

@@ -47,8 +47,7 @@ public class StoreServletDelivery extends HttpServlet {
 
         StoreService storeService= (StoreService) SpringContextUtil.getBean("storeService");
         storeService.delivery(id);
-        out.println("您已经成功发货");
-
+        out.print("您已经成功发货");
 
         out.close();//关闭输出流
     }
