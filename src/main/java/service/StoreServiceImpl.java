@@ -188,7 +188,7 @@ public class StoreServiceImpl implements StoreService {
         if (store.getPeopleId() != null) {
             oldStore.setPeopleId(store.getPeopleId());
         }
-        DataSource dataSource = new DataSourceUtils();
+//        DataSource dataSource = new DataSourceUtils();
         try {
 
             number = storeDao.updateStoreById(id, oldStore);

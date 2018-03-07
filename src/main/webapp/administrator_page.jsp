@@ -95,143 +95,269 @@
             </c:if>
         </div>
     </div>
+    <div id="result">
+
+    </div>
 </div>
 <script type="text/javascript">
     $("#admin-user").click(function(){
-        $.ajax({
-            type:'POST',
-            url:"${basePath}/test/adminUser.htm",
-            data:{command:"findPeople"},
-            dataType:"text",
-            success:function(){
-//                alert(data);
-                alert("success");
-                window.location.reload();
-            },
-            error:function(data){
-                alert(data);
-                alert("error");
-            }
-        })
+        window.location.href="${basePath}/action/adminUserAction!findPeopleAll.do?";
     });
     $("#admin-seller").click(function(){
-        $.ajax({
-            type:'POST',
-            url:"${basePath}/test/adminUser.htm",
-            data:{command:"findStore"},
-            dataType:"text",
-            success:function(){
-//                alert(data);
-                alert("success");
-                window.location.reload();
-            },
-            error:function(data){
-                alert(data);
-                alert("error");
-            }
-        })
+        window.location.href="${basePath}/action/adminUserAction!findStoreAll.do";
     });
     $("#table_people").find(".del_btn").click(function(){
         alert("del_btn");
         var people_id=$(this).parent("td").siblings(".people_id").text();
         alert(people_id);
-        $.ajax({
-            type:'POST',
-            url:"${basePath}/test/handleAdmin.htm",
-            data:{useClass:"people",id:people_id,handleWays:"delete"},
-            dataType:"text",
-            success:function(){
-                window.location.reload();
-            },
-            error:function(){
-                alert("信息错误")
-            }
-        });
-
+        window.location.href="${basePath}/action/adminUserAction!deletePeople.do?peopleId="+people_id;
     });
     $("#table_people").find(".upd_btn").click(function(){
         alert("upd_btn");
         var people_id=$(this).parent("td").siblings(".people_id").text();
         alert(people_id);
-        $.ajax({
-            type:'POST',
-            url:"${basePath}/test/handleAdmin.htm",
-            data:{useClass:"people",id:people_id,handleWays:"update"},
-            dataType:"text",
-            success:function(data){
-//                alert(data);
-                window.location.href="${basePath}/update_people.jsp";
-            },
-            error:function(data){
-                alert(data)
-                alert("信息错误")
-            }
-        });
+        window.location.href="${basePath}/action/adminUserAction!updatePeople.do?peopleId="+people_id
     });
     $("#table_store").find(".del_btn").click(function(){
         alert("del_btn");
         var store_id=$(this).parent("td").siblings(".store_id").text();
         alert(store_id);
-        $.ajax({
-            type:'POST',
-            url:"${basePath}/test/handleAdmin.htm",
-            data:{useClass:"store",id:store_id,handleWays:"delete"},
-            dataType:"text",
-            success:function(data){
-                alert(data)
-                window.location.reload();
-            },
-            error:function(data){
-                alert(data)
-                alert("信息错误")
-            }
-        });
+        window.location.href="${basePath}/action/adminUserAction!deleteStore.do?storeId="+store_id;
     });
     $("#table_store").find(".upd_btn").click(function(){
         alert("upd_btn");
         var store_id=$(this).parent("td").siblings(".store_id").text();
         alert(store_id);
-        $.ajax({
-            type:'POST',
-            url:"${basePath}/test/handleAdmin.htm",
-            data:{useClass:"store",id:store_id,handleWays:"update"},
-            dataType:"text",
-            success:function(data){
-//                alert(data)
-//                window.location.reload();
-                window.location.href="${basePath}/update_store.jsp";
-            },
-            error:function(data){
-                alert(data)
-                alert("信息错误")
-            }
-        });
+        window.location.href="${basePath}/action/adminUserAction!updateStore.do?storeId="+store_id;
     });
 </script>
 
 <%--<script type="text/javascript">--%>
-    <%--$(document).ready(function(){--%>
-        <%--alert("开始");--%>
-    <%--});--%>
     <%--$("#admin-user").click(function(){--%>
+        <%--window.location.href="${basePath}/action/adminUserAction!findPeopleAll.do?"--%>
         <%--$.ajax({--%>
             <%--type:'POST',--%>
-            <%--url:'/test/adminUser.htm',--%>
-            <%--data:{command:"findPeople"},--%>
+            <%--url:"${basePath}/action/adminUserAction!findPeopleAll.do",--%>
+<%--//            data:{command:"findPeople"},--%>
             <%--dataType:"text",--%>
-            <%--success:function(data){--%>
-                <%--alert(data)--%>
+            <%--success:function(){--%>
+<%--//                alert(data);--%>
                 <%--alert("success");--%>
+                <%--window.location.reload();--%>
             <%--},--%>
             <%--error:function(data){--%>
                 <%--alert(data);--%>
-                <%--alert("error")--%>
+                <%--alert("error");--%>
             <%--}--%>
-
         <%--});--%>
     <%--});--%>
-    <%--$("admin-seller").click(function(){--%>
+    <%--$("#admin-seller").click(function(){--%>
+        <%--$.ajax({--%>
+            <%--type:'POST',--%>
+            <%--url:"${basePath}/action/adminUserAction!findStoreAll.do",--%>
+<%--//            data:{command:"findStore"},--%>
+            <%--dataType:"text",--%>
+            <%--success:function(){--%>
+<%--//                alert(data);--%>
+                <%--alert("success");--%>
+                <%--window.location.reload();--%>
+            <%--},--%>
+            <%--error:function(data){--%>
+                <%--alert(data);--%>
+                <%--alert("error");--%>
+            <%--}--%>
+        <%--})--%>
+    <%--});--%>
+    <%--$("#table_people").find(".del_btn").click(function(){--%>
+        <%--alert("del_btn");--%>
+        <%--var people_id=$(this).parent("td").siblings(".people_id").text();--%>
+        <%--alert(people_id);--%>
+        <%--$.ajax({--%>
+            <%--type:'POST',--%>
+            <%--url:"${basePath}/action/adminUserAction!deletePeople.do",--%>
+            <%--data:{id:people_id},--%>
+            <%--dataType:"text",--%>
+            <%--success:function(){--%>
+                <%--window.location.reload();--%>
+            <%--},--%>
+            <%--error:function(){--%>
+                <%--alert("信息错误")--%>
+            <%--}--%>
+        <%--});--%>
 
+    <%--});--%>
+    <%--$("#table_people").find(".upd_btn").click(function(){--%>
+        <%--alert("upd_btn");--%>
+        <%--var people_id=$(this).parent("td").siblings(".people_id").text();--%>
+        <%--alert(people_id);--%>
+        <%--$.ajax({--%>
+            <%--type:'POST',--%>
+            <%--url:"${basePath}/action/adminUserAction!updatePeople.do",--%>
+            <%--data:{peopleId:people_id},--%>
+            <%--dataType:"text",--%>
+            <%--success:function(data){--%>
+
+                <%--$("#result").html(data);--%>
+                <%--alert("success");--%>
+                <%--&lt;%&ndash;window.location.href="${basePath}/update_people.jsp";&ndash;%&gt;--%>
+            <%--},--%>
+            <%--error:function(data){--%>
+                <%--alert(data)--%>
+                <%--alert("信息错误")--%>
+            <%--}--%>
+        <%--});--%>
+    <%--});--%>
+    <%--$("#table_store").find(".del_btn").click(function(){--%>
+        <%--alert("del_btn");--%>
+        <%--var store_id=$(this).parent("td").siblings(".store_id").text();--%>
+        <%--alert(store_id);--%>
+        <%--$.ajax({--%>
+            <%--type:'POST',--%>
+            <%--url:"${basePath}/action/adminUserAction!deleteStore.do",--%>
+            <%--data:{useClass:"store",id:store_id,handleWays:"delete"},--%>
+            <%--dataType:"text",--%>
+            <%--success:function(data){--%>
+                <%--alert(data)--%>
+                <%--window.location.reload();--%>
+            <%--},--%>
+            <%--error:function(data){--%>
+                <%--alert(data)--%>
+                <%--alert("信息错误")--%>
+            <%--}--%>
+        <%--});--%>
+    <%--});--%>
+    <%--$("#table_store").find(".upd_btn").click(function(){--%>
+        <%--alert("upd_btn");--%>
+        <%--var store_id=$(this).parent("td").siblings(".store_id").text();--%>
+        <%--alert(store_id);--%>
+        <%--$.ajax({--%>
+            <%--type:'POST',--%>
+            <%--url:"${basePath}/test/handleAdmin.htm",--%>
+            <%--data:{useClass:"store",id:store_id,handleWays:"update"},--%>
+            <%--dataType:"text",--%>
+            <%--success:function(data){--%>
+<%--//                alert(data)--%>
+<%--//                window.location.reload();--%>
+                <%--window.location.href="${basePath}/update_store.jsp";--%>
+            <%--},--%>
+            <%--error:function(data){--%>
+                <%--alert(data)--%>
+                <%--alert("信息错误")--%>
+            <%--}--%>
+        <%--});--%>
+    <%--});--%>
+<%--</script>--%>
+
+<%--<script type="text/javascript">--%>
+    <%--$("#admin-user").click(function(){--%>
+        <%--$.ajax({--%>
+            <%--type:'POST',--%>
+            <%--url:"${basePath}/test/adminUser.htm",--%>
+            <%--data:{command:"findPeople"},--%>
+            <%--dataType:"text",--%>
+            <%--success:function(){--%>
+<%--//                alert(data);--%>
+                <%--alert("success");--%>
+                <%--window.location.reload();--%>
+            <%--},--%>
+            <%--error:function(data){--%>
+                <%--alert(data);--%>
+                <%--alert("error");--%>
+            <%--}--%>
+        <%--})--%>
+    <%--});--%>
+    <%--$("#admin-seller").click(function(){--%>
+        <%--$.ajax({--%>
+            <%--type:'POST',--%>
+            <%--url:"${basePath}/test/adminUser.htm",--%>
+            <%--data:{command:"findStore"},--%>
+            <%--dataType:"text",--%>
+            <%--success:function(){--%>
+<%--//                alert(data);--%>
+                <%--alert("success");--%>
+                <%--window.location.reload();--%>
+            <%--},--%>
+            <%--error:function(data){--%>
+                <%--alert(data);--%>
+                <%--alert("error");--%>
+            <%--}--%>
+        <%--})--%>
+    <%--});--%>
+    <%--$("#table_people").find(".del_btn").click(function(){--%>
+        <%--alert("del_btn");--%>
+        <%--var people_id=$(this).parent("td").siblings(".people_id").text();--%>
+        <%--alert(people_id);--%>
+        <%--$.ajax({--%>
+            <%--type:'POST',--%>
+            <%--url:"${basePath}/test/handleAdmin.htm",--%>
+            <%--data:{useClass:"people",id:people_id,handleWays:"delete"},--%>
+            <%--dataType:"text",--%>
+            <%--success:function(){--%>
+                <%--window.location.reload();--%>
+            <%--},--%>
+            <%--error:function(){--%>
+                <%--alert("信息错误")--%>
+            <%--}--%>
+        <%--});--%>
+
+    <%--});--%>
+    <%--$("#table_people").find(".upd_btn").click(function(){--%>
+        <%--alert("upd_btn");--%>
+        <%--var people_id=$(this).parent("td").siblings(".people_id").text();--%>
+        <%--alert(people_id);--%>
+        <%--$.ajax({--%>
+            <%--type:'POST',--%>
+            <%--url:"${basePath}/test/handleAdmin.htm",--%>
+            <%--data:{useClass:"people",id:people_id,handleWays:"update"},--%>
+            <%--dataType:"text",--%>
+            <%--success:function(data){--%>
+<%--//                alert(data);--%>
+                <%--window.location.href="${basePath}/update_people.jsp";--%>
+            <%--},--%>
+            <%--error:function(data){--%>
+                <%--alert(data)--%>
+                <%--alert("信息错误")--%>
+            <%--}--%>
+        <%--});--%>
+    <%--});--%>
+    <%--$("#table_store").find(".del_btn").click(function(){--%>
+        <%--alert("del_btn");--%>
+        <%--var store_id=$(this).parent("td").siblings(".store_id").text();--%>
+        <%--alert(store_id);--%>
+        <%--$.ajax({--%>
+            <%--type:'POST',--%>
+            <%--url:"${basePath}/test/handleAdmin.htm",--%>
+            <%--data:{useClass:"store",id:store_id,handleWays:"delete"},--%>
+            <%--dataType:"text",--%>
+            <%--success:function(data){--%>
+                <%--alert(data)--%>
+                <%--window.location.reload();--%>
+            <%--},--%>
+            <%--error:function(data){--%>
+                <%--alert(data)--%>
+                <%--alert("信息错误")--%>
+            <%--}--%>
+        <%--});--%>
+    <%--});--%>
+    <%--$("#table_store").find(".upd_btn").click(function(){--%>
+        <%--alert("upd_btn");--%>
+        <%--var store_id=$(this).parent("td").siblings(".store_id").text();--%>
+        <%--alert(store_id);--%>
+        <%--$.ajax({--%>
+            <%--type:'POST',--%>
+            <%--url:"${basePath}/test/handleAdmin.htm",--%>
+            <%--data:{useClass:"store",id:store_id,handleWays:"update"},--%>
+            <%--dataType:"text",--%>
+            <%--success:function(data){--%>
+<%--//                alert(data)--%>
+<%--//                window.location.reload();--%>
+                <%--window.location.href="${basePath}/update_store.jsp";--%>
+            <%--},--%>
+            <%--error:function(data){--%>
+                <%--alert(data)--%>
+                <%--alert("信息错误")--%>
+            <%--}--%>
+        <%--});--%>
     <%--});--%>
 <%--</script>--%>
 
