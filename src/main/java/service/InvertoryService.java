@@ -8,7 +8,7 @@ package service;/***************************************************************
  * @version V1.0
  */
 
-import controller.MainPage;
+import Entity.MainPage;
 import domain.Goods;
 import domain.Invertory;
 import domain.Store;
@@ -172,5 +172,13 @@ public interface InvertoryService {
      */
     public List<MainPage> findMainPageInvertory();
 
+    /**
+     * @Title: findMainPageCondition
+     * @Description: 根据条件查询主页面的显示
+     * @author kang
+     * @date 2018-03-06
+     * @throw YnCorpSysException
+     */
+    public List<MainPage> findMainPageCondition(String condition);
 
 }

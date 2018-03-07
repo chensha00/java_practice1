@@ -8,11 +8,10 @@ package dao;/*******************************************************************
  * @version V1.0
  */
 
+import Entity.MainPage;
 import common.util.base.BaseDaoImpl;
-import controller.MainPage;
 import org.springframework.stereotype.Repository;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -32,7 +31,14 @@ public class MaiPageDaoImpl extends BaseDaoImpl<MainPage> implements MainPageDao
      * @throw SQLException
      */
     @Override
-    public List<MainPage> findMainPageInvertory() throws SQLException {
+    public List<MainPage> findMainPageInvertory() {
         return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findMainPageInvertory");
     }
+
+    @Override
+    public List<MainPage> findMainPageCondition(String condition) {
+        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findMainPageCondition", condition);
+    }
+
+
 }

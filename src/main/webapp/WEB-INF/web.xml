@@ -170,6 +170,15 @@
     </servlet-mapping>
 
     <!--刘康-->
+    <!--搜索页面-->
+    <servlet>
+        <servlet-name>mainPageSearch</servlet-name>
+        <servlet-class>servlet.MainPageSearchServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>mainPageSearch</servlet-name>
+        <url-pattern>/servlet/mainPageSearch.htm</url-pattern>
+    </servlet-mapping>
     <!--主页serv-->
     <servlet>
         <servlet-name>mainPage</servlet-name>

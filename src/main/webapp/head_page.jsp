@@ -48,7 +48,7 @@
                     <a href="#">宝贝</a>
                 </li>
                 <%--<li id="tab_2" class="selected">--%>
-                    <%--<a href="#">店铺</a>--%>
+                <%--<a href="#">店铺</a>--%>
                 <%--</li>--%>
             </ul>
         </div>
@@ -57,16 +57,16 @@
             <form>
                 <div class="search-tips">
                     <%--<a href="#" target="_blank">--%>
-                        <%--高级<br>搜索--%>
+                    <%--高级<br>搜索--%>
                     <%--</a>--%>
                 </div>
                 <div class="search-button">
-                    <button class="btn-search" type="submit">
+                    <button class="btn-search" id="submit" onclick="window.location.href = 'https://localhost:8132/servlet/mainPageSearch.htm'">
                         <li style="color: #cccccc">搜索</li>
                     </button>
                 </div>
                 <div class="search-common-panel">
-                    <input type="text" x-webkit-speech=" ">
+                    <input type="text" x-webkit-speech=" " name="search" id="search">
                     <i class="iconfont">ő</i>
                 </div>
             </form>
@@ -135,5 +135,29 @@
         console.log(this.className);
         flag = false;
     })
+</script>
+
+<%--搜索框的实现--%>
+<script type="text/javascript">
+    $(function () {
+        $('#submit').click(function () {
+            var condition = document.getElementById("search").value;
+            $.ajax({
+                type: "POST",
+                url: '/servlet/mainPageSearch.htm',
+                data: {
+                    condition: condition
+                },
+                dataType: 'json',
+                success: function (response) {
+                    if (response.errno == 0) {
+                        alert(response.errmsg);
+                    } else {
+                        alert("亲，没有您要搜索的商品！")
+                    }
+                }
+            })
+        });
+    });
 </script>
 </html>

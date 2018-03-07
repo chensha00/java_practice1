@@ -1,16 +1,15 @@
 package servlet;/********************************************************************
  /**
- * @Project: bigstar_online_mall
+ * @Project: zyht_web
  * @Package servlet
- * @author liukang
- * @date 2018/1/31 9:56
+ * @author kang
+ * @date 2018/3/6 16:39
  * @Copyright: 2018 www.zyht.com Inc. All rights reserved.
  * @version V1.0
  */
 
 import common.util.SpringContextUtil;
 import Entity.MainPage;
-import domain.People;
 import org.springframework.beans.factory.annotation.Autowired;
 import service.InvertoryService;
 
@@ -22,12 +21,12 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * @author liukang
- * @ClassName MainPageServlet
- * @Description 主页的servlet
- * @date 2018/1/31
+ * @author kang
+ * @ClassName MainPageSearch
+ * @Description 搜索页面
+ * @date 2018/3/6
  */
-public class MainPageServlet extends HttpServlet {
+public class MainPageSearchServlet extends HttpServlet {
 
     @Autowired
     private InvertoryService invertoryService;
@@ -51,15 +50,12 @@ public class MainPageServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
 
-        //登录人员的信息
-        People person = (People) req.getAttribute("person");
-        req.setAttribute("person", person);
-
-        InvertoryService invertoryService= (InvertoryService) SpringContextUtil.getBean("invertoryService");
+        //获取信息
+        String condition = req.getParameter("condition");
+        InvertoryService invertoryService = (InvertoryService) SpringContextUtil.getBean("invertoryService");
         //从数据库获取商品信息，显示在主页上
-        List<MainPage> list = invertoryService.findMainPageInvertory();
+        List<MainPage> list = invertoryService.findMainPageCondition(condition);
         req.setAttribute("mainList", list);
         req.getRequestDispatcher("/main_page.jsp").forward(req, resp);
     }
-
 }

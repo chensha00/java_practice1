@@ -139,7 +139,8 @@ a {
 .search-common-panel input {
     height: 39px;
     line-height: 39px;
-    width: 100%;
+    width: 96%;
+    float: right;
     border: none;
     outline: 0;
     background-color: #FFFFFF;

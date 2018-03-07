@@ -8,9 +8,8 @@ package dao;/*******************************************************************
  * @version V1.0
  */
 
-import controller.MainPage;
+import Entity.MainPage;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -27,6 +26,15 @@ public interface MainPageDao {
      * @date
      * @throw YnCorpSysException
      */
-    public List<MainPage> findMainPageInvertory() throws SQLException;
+    public List<MainPage> findMainPageInvertory();
+
+    /**
+     * @Title: findMainPageCondition
+     * @Description: 根据条件查询主页面的显示
+     * @author kang
+     * @date 2018-03-06
+     * @throw YnCorpSysException
+     */
+    public List<MainPage> findMainPageCondition(String condition);
 
 }

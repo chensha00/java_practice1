@@ -8,7 +8,7 @@ package service;/***************************************************************
  * @version V1.0
  */
 
-import controller.MainPage;
+import Entity.MainPage;
 import dao.InvertoryDao;
 import dao.MainPageDao;
 import domain.Goods;
@@ -293,12 +293,19 @@ public class InvertoryServiceImpl implements InvertoryService {
     @Override
     public List<MainPage> findMainPageInvertory() {
         List<MainPage> mainPages = new ArrayList<MainPage>();
-        try {
-            mainPages = mainPageDao.findMainPageInvertory();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
+        mainPages = mainPageDao.findMainPageInvertory();
+
         return mainPages;
 
+    }
+
+    @Override
+    public List<MainPage> findMainPageCondition(String condition) {
+        List<MainPage> mainPages = new ArrayList<MainPage>();
+
+        mainPages = mainPageDao.findMainPageCondition(condition);
+
+        return mainPages;
     }
 }

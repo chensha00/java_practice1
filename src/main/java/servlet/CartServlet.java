@@ -9,7 +9,7 @@ package servlet;/***************************************************************
  */
 
 
-import controller.MainPage;
+import Entity.MainPage;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
