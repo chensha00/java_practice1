@@ -15,7 +15,10 @@ import domain.LogisticsInfo;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
+import org.springframework.beans.factory.annotation.Autowired;
+import service.LogisticsGobyService;
 import service.LogisticsGobyServiceImpl;
+import service.LogisticsInfoService;
 import service.LogisticsInfoServiceImpl;
 
 import java.util.List;
@@ -33,19 +36,28 @@ import java.util.List;
 })
 public class LogisticsAction extends BaseAction {
 
+    // 物流信息的service层
+    @Autowired
+    private LogisticsInfoService logisticsInfoService;
+
+    // 物流过程的service层
+    @Autowired
+    private LogisticsGobyService logisticsGobyService;
+
     public String logisticsPage(){
          req.setAttribute("orderDetailId","1");
         // 获得订单详情的 id
         String orderDetailId= (String) req.getAttribute("orderDetailId");
         // 查询出物流信息
-        LogisticsInfoServiceImpl logisticsInfoService= (LogisticsInfoServiceImpl) SpringContextUtil.getBean("logisticsInfoService");
         LogisticsInfo logisticsInfo = logisticsInfoService.findLogisticsInfoByOrderDetailId(Long.valueOf(orderDetailId));
-        // 查询出物流过程
-        LogisticsGobyServiceImpl logisticsGobyService= (LogisticsGobyServiceImpl) SpringContextUtil.getBean("logisticsGobyService");
-        List<LogisticsGoby> gobyList=logisticsGobyService.findLogisticsGobyLogisticsnfoId(logisticsInfo.getId());
+        if (logisticsInfo!=null) {
+            // 查询出物流过程
+            List<LogisticsGoby> gobyList = logisticsGobyService.findLogisticsGobyLogisticsnfoId(logisticsInfo.getId());
 
-            req.setAttribute("logisticsInfo",logisticsInfo);
-            req.setAttribute("gobyList",gobyList);
+            req.setAttribute("logisticsInfo", logisticsInfo);
+            req.setAttribute("gobyList", gobyList);
+
+        }
         return "logisticsPage";
     }
 }
