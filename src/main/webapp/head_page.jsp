@@ -20,7 +20,7 @@
             <li><a href="../login_page.jsp" target="_top">登录/注册</a></li>
             <li><a href="../person.jsp" target="_blank">用户：${person.name}</a></li>
             <li><a href="/order/order.htm?way=all&&peopleId=${person.id}" target="_blank">查看订单</a></li>
-            <li><a href="/store/storeHome.htm?peopleId=${person.id}" target="_blank">卖家中心</a></li>
+            <li><a href="/${basePath}storeAction!storeHome.do?peopleId=${person.id}" target="_blank">卖家中心</a></li>
             <li><a href="/servlet/mainPage.htm" target="_blank">商品分类</a></li>
             <li><a href="/servlet/cartPage.htm?op=list" target="_blank">购物车</a></li>
             <li><a href="/servlet/mainPage.htm" target="_blank">淘宝网首页</a></li>
