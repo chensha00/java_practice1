@@ -108,9 +108,6 @@ public class InvertoryDaoImpl extends BaseDaoImpl<Invertory> implements Invertor
     @Override
     public Integer updateInvertorById(Long id, Invertory invertory) throws SQLException {
         Map map=new HashMap<>();
-//        List<Map<String, Object>> map = new ArrayList<Map<String, Object>>();
-//        Map map1 = new HashMap();
-//        Map map2 = new HashMap();
         map.put("invertory", invertory);
         map.put("id", id);
         return this.sqlSessionTemplate.update(getMybaitsNameSpace() + "updateInvertorById", map);
