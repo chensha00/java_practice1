@@ -95,8 +95,8 @@
             <tr>
                 <td colspan="5">
                     <button id="pay-money">
-                        <a href="http://localhost:8080/pay/pay.htm?peopleId=1&&orderNum=${goodsOrderPay.orderNum}&&isPay=true">
-                            支付</a>
+                        <a href="http://localhost:8132/pay/pay.htm?peopleId=1&&orderNum=${goodsOrderPay.orderNum}&&isPay=true">
+                            确认支付</a>
                     </button>
                 </td>
             </tr>
