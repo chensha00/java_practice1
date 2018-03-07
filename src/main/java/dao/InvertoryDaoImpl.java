@@ -125,9 +125,11 @@ public class InvertoryDaoImpl extends BaseDaoImpl<Invertory> implements Invertor
      * @throw RuntimeException
      */
     @Override
-    public Invertory findInvertoryByStoreIdAndGoodsId(Long storeId, Long goodsId)
-            throws SQLException {
-        return this.sqlSessionTemplate.selectOne(getMybaitsNameSpace() + "findInvertoryByStoreIdAndGoodsId");
+    public Invertory findInvertoryByStoreIdAndGoodsId(Long storeId, Long goodsId) {
+        Map map = new HashMap();
+        map.put("storeId",storeId);
+        map.put("goodsId", goodsId);
+        return this.sqlSessionTemplate.selectOne(getMybaitsNameSpace() + "findInvertoryByStoreIdAndGoodsId",map);
     }
 
     /**

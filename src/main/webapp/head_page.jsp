@@ -61,7 +61,7 @@
                     <%--</a>--%>
                 </div>
                 <div class="search-button">
-                    <button class="btn-search" id="submit" onclick="window.location.href = 'https://localhost:8132/servlet/mainPageSearch.htm'">
+                    <button class="btn-search" id="submit">
                         <li style="color: #cccccc">搜索</li>
                     </button>
                 </div>

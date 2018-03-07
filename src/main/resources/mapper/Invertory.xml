@@ -33,7 +33,7 @@
         SELECT
         <include refid="invertorySql"/>
         FROM INVERTORY
-        WHERE STORE_ID=#{storeId} AND GOODS_ID=#{goodsId}
+        WHERE STORE_ID=#{storeId,jdbcType=BUGINT} AND GOODS_ID=#{goodsId,jdbcType=BUGINT}
         GROUP BY ID
     </select>
 
