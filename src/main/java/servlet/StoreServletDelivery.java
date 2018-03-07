@@ -2,6 +2,7 @@ package servlet;/**
  * Created by Roger_yu on 2018/2/1.
  */
 
+import common.util.SpringContextUtil;
 import domain.Goods;
 import domain.OrderDetail;
 import domain.Store;
@@ -44,7 +45,7 @@ public class StoreServletDelivery extends HttpServlet {
         String orderDId=request.getParameter("odId");
         Long id=Long.parseLong(orderDId);//获取orderDetailId
 
-        StoreService storeService=new StoreServiceImpl();
+        StoreService storeService= (StoreService) SpringContextUtil.getBean("storeService");
         storeService.delivery(id);
         out.println("您已经成功发货");
 

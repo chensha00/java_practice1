@@ -86,8 +86,7 @@ public interface InvertoryDao {
      * @date 2018-01-26
      * @throw RuntimeException
      */
-    public Invertory findInvertoryByStoreIdAndGoodsId(Long storeId, Long goodsId)
-            throws SQLException;
+    public Invertory findInvertoryByStoreIdAndGoodsId(Long storeId, Long goodsId);
 
     /**
      * @param map 条件和值对应key和value

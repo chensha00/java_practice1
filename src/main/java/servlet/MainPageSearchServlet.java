@@ -8,8 +8,8 @@ package servlet;/***************************************************************
  * @version V1.0
  */
 
-import common.util.SpringContextUtil;
 import Entity.MainPage;
+import common.util.SpringContextUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import service.InvertoryService;
 
@@ -17,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -55,7 +56,11 @@ public class MainPageSearchServlet extends HttpServlet {
         InvertoryService invertoryService = (InvertoryService) SpringContextUtil.getBean("invertoryService");
         //从数据库获取商品信息，显示在主页上
         List<MainPage> list = invertoryService.findMainPageCondition(condition);
-        req.setAttribute("mainList", list);
-        req.getRequestDispatcher("/main_page.jsp").forward(req, resp);
+
+        HttpSession session = req.getSession();
+        session.setAttribute("mainList", list);
+//        req.getRequestDispatcher("/main_page.jsp").forward(req, resp);
+        resp.sendRedirect("/main_page_search.jsp");
+
     }
 }
