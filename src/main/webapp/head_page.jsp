@@ -54,7 +54,7 @@
         </div>
         <!--搜索框主体-->
         <div class="search-pannel">
-            <form>
+            <form action="/main_page_search.jsp" method="post" target="_blank">
                 <div class="search-tips">
                     <%--<a href="#" target="_blank">--%>
                     <%--高级<br>搜索--%>
@@ -115,11 +115,11 @@
         this.className = "selected";
         flag = false;
     })
-    addEvent("tab_2", "mouseover", function () {
-        if (this.className.indexOf("selected") < 0) {
-            this.className += " selected";
-        }
-    })
+//    addEvent("tab_2", "mouseover", function () {
+//        if (this.className.indexOf("selected") < 0) {
+//            this.className += " selected";
+//        }
+//    })
     addEvent("tab_2", "mouseout", function () {
         if (flag) {
             this.className = " ";
@@ -151,7 +151,7 @@
                 dataType: 'json',
                 success: function (response) {
                     if (response.errno == 0) {
-                        alert(response.errmsg);
+                        window.location.href="http://localhost:8132/helloWord.jsp"
                     } else {
                         alert("亲，没有您要搜索的商品！")
                     }

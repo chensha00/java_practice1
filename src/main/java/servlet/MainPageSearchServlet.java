@@ -59,8 +59,10 @@ public class MainPageSearchServlet extends HttpServlet {
 
         HttpSession session = req.getSession();
         session.setAttribute("mainList", list);
-//        req.getRequestDispatcher("/main_page.jsp").forward(req, resp);
-        resp.sendRedirect("/main_page_search.jsp");
+//        req.setAttribute("mainList", list);
+//        req.getRequestDispatcher("/helloWord.jsp").forward(req, resp);
+//        resp.sendRedirect("/main_page_search.jsp");
+        resp.sendRedirect("../helloWord.jsp");
 
     }
 }
