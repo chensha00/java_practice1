@@ -86,10 +86,33 @@
                                 ${od.deliveryTime}
                         </td>
                         <td width="100">
-                                ${od.orderStatus}
+                            <c:choose>
+                                <c:when test="${od.orderStatus==0}">
+                                    <p>未支付</p>
+                                </c:when>
+                                <c:when test="${od.orderStatus==1}">
+                                    <p>支付成功</p>
+                                </c:when>
+                                <c:when test="${od.orderStatus==2}">
+                                    <p>支付失败</p>
+                                </c:when>
+                                <c:when test="${od.orderStatus==3}">
+                                    <p>等待收货</p>
+                                </c:when>
+                                <c:otherwise>
+                                    <p>订单已经完成</p>
+                                </c:otherwise>
+                            </c:choose>
                         </td>
                         <td width="100">
-                                ${od.isInvalid}
+                            <c:choose>
+                                <c:when test="${od.isInvalid==true}">
+                                    <p>订单正常</p>
+                                </c:when>
+                                <c:otherwise>
+                                    <p>订单作废</p>
+                                </c:otherwise>
+                            </c:choose>
                         </td>
                         <td width="100" align="center">
                             <c:choose>
@@ -97,7 +120,7 @@
                                     <p>已发货</p>
                                 </c:when>
                                 <c:when test="${od.orderStatus==0}">
-                                    <p>未付款</p>
+                                    <p>买家未付款</p>
                                 </c:when>
                                 <c:otherwise>
                                     <form action="StoreServletDelivery.htm" method="post">
