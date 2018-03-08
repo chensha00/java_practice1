@@ -21,8 +21,8 @@
 <div class="divForm">
     <h2 style="background-color: darkturquoise" align="center">本商铺订单信息</h2>
     <div align="center">
-        <form action="StoreOrderServletSelect.htm" method="post">
-            请输入订单ID:<input type="text" name="select"/>
+        <form action="StoreOrderServletSelect.htm" method="post" >
+            <input type="text" name="select" value="${stores[0].id}" hidden="hidden"/>
             <input type="submit" value="点击查询">
         </form>
     </div>

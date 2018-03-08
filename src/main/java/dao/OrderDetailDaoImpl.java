@@ -114,6 +114,22 @@ public class OrderDetailDaoImpl extends BaseDaoImpl<OrderDetail> implements Orde
 
     /**
      * @Title: findOrderDetailByPeopleId
+     * @Description: 通过商铺id查找订单详情
+     * @author yanyong
+     * @date 2018-01-31
+     * @param: peopleId 指定人员id
+     * @param: connection 连接对象
+     * @param: preparedStatement 预编译Statement对象
+     * @return: 订单详情集合
+     * @throws: SQLException
+     */
+    @Override
+    public List<OrderDetail> findOrderDetailByStoreId(Long storeId) throws SQLException {
+        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findOrderDetailByStoreId", storeId);
+    }
+
+    /**
+     * @Title: findOrderDetailByPeopleId
      * @Description: 通过人员id查找订单详情
      * @author yanyong
      * @date 2018-01-31
