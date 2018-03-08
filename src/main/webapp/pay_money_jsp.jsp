@@ -49,12 +49,14 @@
                 </c:choose>
                 <%--<td width="30%">订单状态:${order.orderStatus}</td>--%>
                 <td width="30%">总金额:${goodsOrderPay.totalMoney}</td>
+                <td colspan="2">订单详情数：${fn:length(orderDetailListPay)}</td>
             </tr>
-            <tr><td>订单详情数：${fn:length(orderDetailListPay)}</td></tr>
+            <tr></tr>
+            <form action="" method="post">
             <c:forEach var="detailPay" items="${orderDetailListPay}" varStatus="detail_index">
                 <tr>
                     <td>订单详情编号：${detailPay.orderNum}</td>
-                    <td>订单详情编号:${detailPay.goods.name}</td>
+                    <td>商品名:${detailPay.goods.name}</td>
                     <td>价格:${detailPay.goodsPrice}</td>
                     <td>数量:${detailPay.number}</td>
                     <td>商品总价:${detailPay.goodsAmount}</td>
@@ -70,15 +72,15 @@
                 <%--</td>--%>
             <%--</tr>--%>
 
-            <tr>
-                <td height="10px" colspan="5"></td>
-            </tr>
-            </tbody>
+            <%--<tr>--%>
+                <%--<td height="10px" colspan="5"></td>--%>
+            <%--</tr>--%>
+            <%--</tbody>--%>
 
 
 
             <%----%>
-            <tbody>
+            <%--<tbody>--%>
             <%--<tr>--%>
                 <%--<td colspan="3">支付订单</td>--%>
             <%--</tr>--%>
@@ -95,11 +97,12 @@
             <tr>
                 <td colspan="5">
                     <button id="pay-money">
-                        <a href="http://localhost:8132/pay/pay.htm?peopleId=1&&orderNum=${goodsOrderPay.orderNum}&&isPay=true">
-                            确认支付</a>
+                        <%--<a href="http://localhost:8132/pay/pay.htm?peopleId=1&&orderNum=${goodsOrderPay.orderNum}&&isPay=true">--%>
+                            确认支付
                     </button>
                 </td>
             </tr>
+            </form>
             </tbody>
         </table>
     </div>
