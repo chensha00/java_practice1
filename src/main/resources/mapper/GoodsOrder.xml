@@ -35,8 +35,8 @@
         SELECT ID,ORDER_NUM ,PEOPLE_ID ,TOTAL_MONEY ,ADD_TIME ,SUCCESS_TIME ,ORDER_STATUS ,IS_INVALID FROM goods_order WHERE ORDER_NUM=#{orderNum}
     </select>
     <!--通过人员id获取订单信息-->
-    <select id="findGoodsOrderByPeopleId" resultType="java.util.Map" resultMap="goodsOrder">
-        SELECT ID,ORDER_NUM ,PEOPLE_ID ,TOTAL_MONEY ,ADD_TIME ,SUCCESS_TIME ,ORDER_STATUS ,IS_INVALID FROM goods_order WHERE PEOPLE_ID=#(peopleId)
+    <select id="findGoodsOrderByPeopleId" parameterType="java.lang.Long" resultType="java.util.Map" resultMap="goodsOrder">
+        SELECT ID,ORDER_NUM ,PEOPLE_ID ,TOTAL_MONEY ,ADD_TIME ,SUCCESS_TIME ,ORDER_STATUS ,IS_INVALID FROM goods_order WHERE PEOPLE_ID=#{peopleId}
     </select>
 
 
