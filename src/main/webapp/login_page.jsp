@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>大明星商城之登录界面</title>
+    <title>登录界面</title>
     <script src="${basePath}../js/jquery-1.7.2.min.js"></script>
     <script src="${basePath}../js/jquery-1.7.2.js" type="text/javascript"></script>
     <link rel="stylesheet" href="${basePath}../css/login_page_css.css">

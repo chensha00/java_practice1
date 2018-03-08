@@ -14,7 +14,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>大明星在线商城</title>
+    <title>个人信息</title>
     <script src="${basePath}../js/jquery-1.7.2.min.js"></script>
     <script src="${basePath}../js/jquery-1.7.2.js" type="text/javascript"></script>
     <link rel="stylesheet" href="${basePath}../css/person_css.css">

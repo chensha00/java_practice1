@@ -9,8 +9,9 @@
 <%@include file="common.jsp"%>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <title>支付页面</title>
     <link href="css/order_page_css.css" rel="stylesheet" type="text/css"/>
-    <title></title>
 </head>
 <body>
 <jsp:include page="head_page.jsp"></jsp:include>
@@ -52,7 +53,7 @@
                 <td colspan="2">订单详情数：${fn:length(orderDetailListPay)}</td>
             </tr>
             <tr></tr>
-            <form action="" method="post">
+            <form action="/pay/pay.htm?peopleId=1&&orderNum=${goodsOrderPay.orderNum}&&isPay=true" method="post">
             <c:forEach var="detailPay" items="${orderDetailListPay}" varStatus="detail_index">
                 <tr>
                     <td>订单详情编号：${detailPay.orderNum}</td>

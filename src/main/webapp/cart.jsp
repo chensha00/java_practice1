@@ -12,7 +12,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>大明星在线商城之购物车</title>
+    <title>购物车</title>
     <script src="${basePath}../js/jquery-1.7.2.min.js"></script>
     <script src="${basePath}../js/jquery-1.7.2.js" type="text/javascript"></script>
     <link rel="stylesheet" href="${basePath}../css/cart_css.css">

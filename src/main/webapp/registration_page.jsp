@@ -9,7 +9,7 @@
 <%@ include file="common.jsp" %>
 <html>
 <head>
-    <title>大明星商城之注册页面</title>
+    <title>注册页面</title>
     <link rel="stylesheet" href="${basePath}../css/registration_page_css.css">
 </head>
 <body>

@@ -23,12 +23,12 @@
             <li><a href="/${basePath}storeAction!storeHome.do?peopleId=${person.id}" target="_blank">卖家中心</a></li>
             <li><a href="/mainAction!main.do" target="_blank">商品分类</a></li>
             <li><a href="/mainAction!cart.do?op=list" target="_blank">购物车</a></li>
-            <li><a href="/mainAction!main.do" target="_blank">淘宝网首页</a></li>
+            <li><a href="/mainAction!main.do" target="_blank">商城首页</a></li>
         </ul>
     </div>
     <div class="site-nav-two">
         <marquee scrollAmount=2 width=100% direction="left" behavior="scroll" onmouseover=stop() onmouseout=start()>
-            <li style="color: #6C6C6C">欢迎${person.name}光临大明星购物平台，祝您生活愉快，激情购物！</li>
+            <li style="color: #6C6C6C">欢迎${person.name}光临星光购物平台，祝您生活愉快，购物开心！</li>
         </marquee>
     </div>
 </div>
