@@ -36,10 +36,12 @@
                     </td>
                 </tr>
             </table>
-            <br>
-            <input type="button" name="login" value="登录" id="submit1" onclick="submit"/>
+            <br>&nbsp;&nbsp;
             <%--<button type="button" id="login_button" >登录</button>--%>
-            <input formaction="../registration_page.jsp" type="submit" value="注册"/>
+            <%--<input formaction="../registration_page.jsp" type="submit1" value="注册"/>--%>
+            <input type="button" onclick='location.href=("../registration_page.jsp")' value="注册"/>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <input type="submit" name="login" value="登录" id="submit" onclick="submit"/>
         </form>
         <%--<c:choose>--%>
         <%--<c:when test="${LoginMessage eq 'error'}">--%>
@@ -54,34 +56,34 @@
 
 <script type="text/javascript">
     <%--function toVaild() {--%>
-        <%--var test = ${LoginMessage}--%>
-        <%--if (test == "error") {--%>
-            <%--alert("用户名不存在或密码错误!\n请重新输入或注册");--%>
-        <%--} else {--%>
-            <%--alert("成功登录");--%>
-        <%--}--%>
+    <%--var test = ${LoginMessage}--%>
+    <%--if (test == "error") {--%>
+    <%--alert("用户名不存在或密码错误!\n请重新输入或注册");--%>
+    <%--} else {--%>
+    <%--alert("成功登录");--%>
+    <%--}--%>
     <%--}--%>
     $(function () {
-    $("#submit1").click(function () {
-    var username=$("input[name='username']").val();
-    var password=$("input[name='password']").val();
-    $.ajax({
-    type:"post",
-    dataType:"json",
-    data:{
-        username:username,password:password
-    },
-    url:"${pageContext.request.contextPath}/servlet/loginPage.htm",
-    //                contentType:"text",
-    success:function (x) {
-        alert("登陆成功！！！");
-    window.location.replace("/servlet/mainPage.htm");
-    },
-    error:function(XMLResponse){
-        alert("登陆失败！！！")
-    }
-    })
-    })
+        $('#submit').live("click", function ()  {
+            var username = $("input[name='username']").val();
+            var password = $("input[name='password']").val();
+            $.ajax({
+                type: "post",
+                dataType: "json",
+                data: {
+                    username: username, password: password
+                },
+                url: "${pageContext.request.contextPath}/servlet/loginPage.htm",
+                //                contentType:"text",
+                success: function (x) {
+                    alert("登陆成功！！！");
+                    window.location.replace("/mainAction!main.do");
+                },
+                error: function (XMLResponse) {
+                    alert("登陆失败！！！")
+                }
+            })
+        })
     })
 
 </script>

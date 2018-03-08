@@ -76,7 +76,7 @@ public class LoginServlet extends HttpServlet {
         } else {
             session.removeAttribute("LoginMessage");
             session.setAttribute("person", person);
-//            resp.sendRedirect("/servlet/mainPage.htm");
+//            resp.sendRedirect("/mainAction!main.do");
 //            resp.setCharacterEncoding("UTF-8");
 //            resp.setContentType("text/html;charset=UTF-8");
 //
