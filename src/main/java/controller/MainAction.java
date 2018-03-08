@@ -61,16 +61,16 @@ public class MainAction extends BaseAction {
 
     /**
      * @Title:
-     * @Description: 分页
+     * @Description: 主页分页
      * @author kang
      * @date 2018-03-08
      * @throw YnCorpSysException
      */
     public String limit() {
         String result = "";
-        String page = req.getParameter("page");
         Integer present = Integer.valueOf(req.getParameter("present"));
         Integer total = Integer.valueOf(req.getParameter("total"));
+        String page = req.getParameter("page");
         Integer totalNum = invertoryService.findInvertoryAll().size();
         Long start = 0l;
         Long end = 0l;
