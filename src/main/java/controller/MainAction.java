@@ -61,7 +61,7 @@ public class MainAction extends BaseAction {
 
     /**
      * @Title:
-     * @Description: 方法描述
+     * @Description: 分页
      * @author kang
      * @date 2018-03-08
      * @throw YnCorpSysException
