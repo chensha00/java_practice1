@@ -287,15 +287,22 @@ public class InvertoryServiceImpl implements InvertoryService {
      * @throw YnCorpSysException
      */
     @Override
-    public List<MainPage> findMainPageInvertory() {
+    public List<MainPage> findMainPageInvertory(Long start,Long end) {
         List<MainPage> mainPages = new ArrayList<MainPage>();
 
-        mainPages = mainPageDao.findMainPageInvertory();
+        mainPages = mainPageDao.findMainPageInvertory(start,end);
 
         return mainPages;
 
     }
 
+    /**
+     * @Title: findMainPageCondition
+     * @Description: 根据条件查询主页面的显示
+     * @author kang
+     * @date 2018-03-06
+     * @throw YnCorpSysException
+     */
     @Override
     public List<MainPage> findMainPageCondition(String condition) {
         List<MainPage> mainPages = new ArrayList<MainPage>();
@@ -303,5 +310,32 @@ public class InvertoryServiceImpl implements InvertoryService {
         mainPages = mainPageDao.findMainPageCondition(condition);
 
         return mainPages;
+    }
+
+    /**
+     * @Title: findInvertoryById
+     * @Description: 查找库存信息通过指定id
+     * @author yanyong
+     * @date 2018-01-25
+     * @param: id 指定id
+     * @return: 库存对象
+     */
+    @Override
+    public List<Invertory> findInvertoryAll(){
+        return invertoryDao.findInvertoryAll();
+    }
+
+    /**
+     * @Title: limitMainPage
+     * @Description: 分页页数
+     * @author kang
+     * @date 2018-03-08
+     * @throw YnCorpSysException
+     */
+    public Integer limitMainPage(){
+        List<Invertory> list=this.findInvertoryAll();
+        int count=list.size();
+        int pageNum=count/20+1;
+        return pageNum;
     }
 }

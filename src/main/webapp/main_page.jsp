@@ -87,14 +87,17 @@
 
 <div class="wit">
     <div class="limit">
-        <form class="form" name="f1" method="POST" action="index.jsp" onSubmit="return checknum()">
+        <form class="form" name="f1" method="POST" action="/mainAction!limit.do?present=${present}&&total=${total}">
             <table border="0" align="center" class="tb">
                 <tr>
-                    <td>第1页 共10页 <a href="index.jsp?pages=1">首页</a></td>
-                    <td><a href=""> 上一页</a></td>
-                    <td><a href=""> 下一页</a></td>
-                    <td><a href="">最后一页</a></td>
-                    <td>转到第:<input type="text" name="page" size="8">页<input type="submit" value="GO" name="cndok"></td>
+                    <td><span class="page-size">当前第${present}页  共${total}页</span>></td>
+                    <td><a href="mainAction!limit.do?page=start&&present=${present}&&total=${total}">首页</a></td>
+                    <td><a href="mainAction!limit.do?page=last&&present=${present}&&total=${total}"> 上一页</a></td>
+                    <td><a href="mainAction!limit.do?page=next&&present=${present}&&total=${total}"> 下一页</a></td>
+                    <td><a href="mainAction!limit.do?page=end&&present=${present}&&total=${total}">最后一页</a></td>
+                    <td>转到第:<input type="text" name="page" size="8"
+                                   onkeypress="return event.keyCode>=48&&event.keyCode<=57" ng-pattern="/[^a-zA-Z]/"/>页
+                        <input type="submit" value="GO" name="GO"></td>
                 </tr>
             </table>
         </form>

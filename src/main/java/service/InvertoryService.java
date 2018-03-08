@@ -170,7 +170,7 @@ public interface InvertoryService {
      * @date
      * @throw YnCorpSysException
      */
-    public List<MainPage> findMainPageInvertory();
+    public List<MainPage> findMainPageInvertory(Long start,Long end);
 
     /**
      * @Title: findMainPageCondition
@@ -180,5 +180,24 @@ public interface InvertoryService {
      * @throw YnCorpSysException
      */
     public List<MainPage> findMainPageCondition(String condition);
+
+    /**
+     * @Title: findInvertoryById
+     * @Description: 查找库存信息通过指定id
+     * @author yanyong
+     * @date 2018-01-25
+     * @param: id 指定id
+     * @return: 库存对象
+     */
+    public List<Invertory> findInvertoryAll();
+
+    /**
+     * @Title: limitMainPage
+     * @Description: 分页页数
+     * @author kang
+     * @date 2018-03-08
+     * @throw YnCorpSysException
+     */
+    public Integer limitMainPage();
 
 }

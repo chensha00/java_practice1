@@ -8,10 +8,9 @@ package servlet;/***************************************************************
 * @version V1.0
 */
 
-import common.util.SpringContextUtil;
 import Entity.MainPage;
+import common.util.SpringContextUtil;
 import domain.People;
-import org.springframework.beans.factory.annotation.Autowired;
 import service.InvertoryService;
 
 import javax.servlet.ServletException;
@@ -29,8 +28,7 @@ import java.util.List;
 */
 public class MainPageServlet extends HttpServlet {
 
-    @Autowired
-    private InvertoryService invertoryService;
+    InvertoryService invertoryService= (InvertoryService) SpringContextUtil.getBean("invertoryService");
 
 
     @Override
@@ -55,10 +53,13 @@ public class MainPageServlet extends HttpServlet {
         People person = (People) req.getAttribute("person");
         req.setAttribute("person", person);
 
-        InvertoryService invertoryService= (InvertoryService) SpringContextUtil.getBean("invertoryService");
         //从数据库获取商品信息，显示在主页上
-        List<MainPage> list = invertoryService.findMainPageInvertory();
+        List<MainPage> list = invertoryService.findMainPageInvertory(0L,20L);
+        Integer total = invertoryService.limitMainPage();
+        Integer present = 1;
         req.setAttribute("mainList", list);
+        req.setAttribute("total", total);
+        req.setAttribute("present", present);
         req.getRequestDispatcher("/main_page.jsp").forward(req, resp);
     }
 

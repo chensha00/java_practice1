@@ -19,6 +19,7 @@
         AND INVERTORY.GOODS_ID = GOODS.ID
         AND NUMBER > 0
         GROUP BY INVERTORY.ID
+        LIMIT #{start},#{end}
     </select>
 
     <!--条件查询-->
@@ -33,5 +34,6 @@
 		OR STORE_NAME LIKE CONCAT('%',#{condition},'%')
         GROUP BY invertory.ID
     </select>
-    
+
+
 </mapper>

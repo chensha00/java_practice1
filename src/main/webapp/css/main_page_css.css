@@ -93,10 +93,17 @@
 
 .form {
     height: 45px;
+    width: 50%;
     color: #ff4400;
     float: right;
 }
 
 .tb {
     height: 45px;
+    width: 80%;
+}
+
+.page-size{
+    height:45px;
+    color: blue;
 }
