@@ -3,7 +3,6 @@
     width: 90%;
     margin: auto;
     margin: 0 auto;
-    padding-bottom: 40px;
 }
 
 /*!*商品横排成列*!*/
@@ -14,7 +13,7 @@
 /*商品窗口*/
 .view {
     width: 25%;
-    height: 400px;
+    height: 360px;
     margin: 1px auto;
     float: left;
     list-style-type: none;

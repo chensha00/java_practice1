@@ -34,7 +34,6 @@
 </div>
 <br>
 <br>
-<br>
 <!--搜索框-->
 <div class="search-entirety">
     <div class="search-logo">
@@ -65,8 +64,6 @@
         </div>
     </div>
 </div>
-<br>
-<br>
 <br>
 </body>
 
