@@ -80,7 +80,7 @@
                     window.location.replace("/mainAction!main.do");
                 },
                 error: function (XMLResponse) {
-                    alert("登陆失败！！！")
+                    alert("登陆失败！用户名或者密码错误！或者该账户未注册！")
                 }
             })
         })
