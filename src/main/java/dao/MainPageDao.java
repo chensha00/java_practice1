@@ -26,6 +26,15 @@ public interface MainPageDao {
      * @date
      * @throw YnCorpSysException
      */
+    public List<MainPage> findMainPageInvertoryAll();
+
+    /**
+     * @Title: findMainPageInvertory
+     * @Description: 查询指定订单的价格，数量，以及商品的ID
+     * @author liukang
+     * @date
+     * @throw YnCorpSysException
+     */
     public List<MainPage> findMainPageInvertory(Long start,Long end);
 
     /**

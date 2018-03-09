@@ -33,6 +33,18 @@ public class MaiPageDaoImpl extends BaseDaoImpl<MainPage> implements MainPageDao
      * @throw SQLException
      */
     @Override
+    public List<MainPage> findMainPageInvertoryAll() {
+        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findMainPageInvertoryAll");
+    }
+
+    /**
+     * @Title: findMainPageInvertory
+     * @Description: 查询指定订单的价格，数量，以及商品的ID
+     * @author liukang
+     * @date
+     * @throw SQLException
+     */
+    @Override
     public List<MainPage> findMainPageInvertory(Long start,Long end) {
         Map map = new HashMap();
         map.put("start",start);

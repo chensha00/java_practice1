@@ -65,7 +65,7 @@
         var nameStr = document.getElementsByName("nameName")[0].value;
         //输出商品名
         var goodsCart = "商品:" + nameStr + "\n添加到购物车成功!";
-        alert(goodsCart);
+//        alert(goodsCart);
         //将数据传到另一个页面
         var url = 'mainAction!cart?op=add';
         var data = {
@@ -78,7 +78,7 @@
         };
         var success = function (response) {
             if (response.errno == 0) {
-                alert(response.errmsg);
+                alert(goodsCart);;
             }
         };
         $.post(url, data, success, 'json');

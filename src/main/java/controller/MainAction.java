@@ -167,6 +167,14 @@ public class MainAction extends BaseAction {
             cartList = (List<MainPage>) session.getAttribute("cartList");
             req.setAttribute("cartList", cartList);
         }
+        PrintWriter writer = null;
+        try {
+            writer = resp.getWriter();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        writer.write();
+        writer.flush();
         result = "cart";
         return result;
     }
