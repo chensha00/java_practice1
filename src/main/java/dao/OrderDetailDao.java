@@ -82,6 +82,19 @@ public interface OrderDetailDao {
 
     /**
      * @Title: findOrderDetailByPeopleId
+     * @Description: 通过商铺id查找订单详情
+     * @author yanyong
+     * @date 2018-01-31
+     * @param: peopleId 指定商铺id
+     * @param: connection 连接对象
+     * @param: preparedStatement 预编译Statement对象
+     * @return: 订单详情集合
+     * @throws: SQLException
+     */
+    public List<OrderDetail> findOrderDetailByStoreId(Long storeId) throws SQLException;
+
+    /**
+     * @Title: findOrderDetailByPeopleId
      * @Description: 通过人员id查找订单详情
      * @author yanyong
      * @date 2018-01-31

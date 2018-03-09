@@ -10,7 +10,18 @@
         <result property="storeName" column="STORE_NAME" jdbcType="VARCHAR" javaType="java.lang.String"/>
     </resultMap>
 
-    <!--查询主页需要显示的数据-->
+    <!--查询所有显示的数据-->
+    <select id="findMainPageInvertoryAll" resultType="java.util.Map" resultMap="mainPage">
+        SELECT
+        invertory.ID,PRICE,NUMBER,NAME,STORE_NAME
+        FROM GOODS,STORE,INVERTORY
+        WHERE INVERTORY.STORE_ID = STORE.ID
+        AND INVERTORY.GOODS_ID = GOODS.ID
+        AND NUMBER > 0
+        GROUP BY INVERTORY.ID
+    </select>
+
+    <!--查询指定分页显示的数据-->
     <select id="findMainPageInvertory" resultType="java.util.Map" resultMap="mainPage">
         SELECT
         invertory.ID,PRICE,NUMBER,NAME,STORE_NAME

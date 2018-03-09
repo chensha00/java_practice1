@@ -65,7 +65,7 @@
         var nameStr = document.getElementsByName("nameName")[0].value;
         //输出商品名
         var goodsCart = "商品:" + nameStr + "\n添加到购物车成功!";
-        alert(goodsCart);
+//        alert(goodsCart);
         //将数据传到另一个页面
         var url = 'mainAction!cart?op=add';
         var data = {
@@ -78,7 +78,7 @@
         };
         var success = function (response) {
             if (response.errno == 0) {
-                alert(response.errmsg);
+                alert(goodsCart);;
             }
         };
         $.post(url, data, success, 'json');
@@ -90,7 +90,7 @@
         <form class="form" name="f1" method="POST" action="/mainAction!limit.do?present=${present}&&total=${total}">
             <table border="0" align="center" class="tb">
                 <tr>
-                    <td><span class="page-size">当前第${present}页  共${total}页</span>></td>
+                    <td><span class="page-size">当前第 ${present} 页       共 ${total} 页</span>></td>
                     <td><a href="mainAction!limit.do?page=start&&present=${present}&&total=${total}">首页</a></td>
                     <td><a href="mainAction!limit.do?page=last&&present=${present}&&total=${total}"> 上一页</a></td>
                     <td><a href="mainAction!limit.do?page=next&&present=${present}&&total=${total}"> 下一页</a></td>
@@ -103,7 +103,6 @@
         </form>
     </div>
 </div>
-
 
 </body>
 </html>

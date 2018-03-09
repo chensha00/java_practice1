@@ -43,6 +43,13 @@
         GROUP BY ID
     </select>
 
+    <!--通过商铺id查找订单详情-->
+    <select id="findOrderDetailByStoreId" resultMap="orderDetail">
+        SELECT
+        <include refid="OrderDetailSql"/>
+        FROM ORDER_DETAIL WHERE STORE_ID=#{storeId}
+    </select>
+
     <!--通过人员id查找订单详情-->
     <select id="findOrderDetailByPeopleId" resultMap="orderDetail">
         SELECT
