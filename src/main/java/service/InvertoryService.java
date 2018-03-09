@@ -180,6 +180,14 @@ public interface InvertoryService {
      * @throw YnCorpSysException
      */
     public List<MainPage> findMainPageCondition(String condition);
+    /**
+     * @Title: findMainPageByStoreId
+     * @Description: 根据条件查询主页面的显示
+     * @author kang
+     * @date 2018-03-06
+     * @throw YnCorpSysException
+     */
+    public List<MainPage> findMainPageByStoreId(Long storeId);
 
     /**
      * @Title: findInvertoryById

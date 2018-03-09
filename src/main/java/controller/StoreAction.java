@@ -8,6 +8,7 @@ package controller;/************************************************************
  * @version V1.0
  */
 
+import Entity.MainPage;
 import common.util.AddConditionUtils;
 import common.util.SpringContextUtil;
 import common.util.base.BaseAction;
@@ -77,23 +78,13 @@ public class StoreAction extends BaseAction{
                     session.setAttribute("people",people);
                     result = "storeHome";
                 }else{
-                    //根据店铺id查找到库存信息
-                    List<Invertory> invertories = new ArrayList<Invertory>();
-                    List<Map<String,Object>> map2 = new ArrayList<Map<String,Object>>();
-                    map2.add(AddConditionUtils.addCondition("store_id","=",stores.get(0).getId()));
-                    invertories = invertoryService.findInvertoryByUnSureCondition(map2);
+                    //根据店铺id查找到商品信息
+                    List<MainPage> mainPages = new ArrayList<MainPage>();
+                    mainPages = invertoryService.findMainPageByStoreId(stores.get(0).getId());
                     //再根据库存编号中的商品id查找商品信息
-                    List<Goods> goods = new ArrayList<Goods>();
-                    for (int i = 0; i < invertories.size() ; i++) {
-                        Goods good = new Goods();
-                        good = goodsService.findGoodsById(invertories.get(i).getGoodsId());
-                        System.out.println(good.getName());
-                        goods.add(good);
-                    }
                     session.setAttribute("stores",stores);
                     session.setAttribute("peoples",people);
-                    session.setAttribute("invertorys",invertories);
-                    session.setAttribute("goods",goods);
+                    session.setAttribute("mainPages",mainPages);
                     result = "storeHome";
 
                 }

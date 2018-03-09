@@ -41,35 +41,48 @@
                 <a href="${basePath}/orderDetailAction!storeOrder.do?storeId=${stores[0].id}"><h4>最近订单</h4></a>
             </div>
         </div>
-        <div class="store_home-right">
-            <div class="store_home_goodsListHead">
-                商品列表
-            </div>
-            <div class="store_home_goods">
-                <c:if test="${goods==null||fn:length(goods)==0}">
-                    <h2>你还没有商品上架！</h2>
-                </c:if>
-                <%--<c:forEach items="${goods}" var="good" varStatus="status">--%>
-                    <c:forEach items="${invertorys}" var="invertory" varStatus="status">
-                        <div class="store_home_good">
-                            <div class="store_home_goodImg">
-                                <img src="${basePath}/img/1.jpg"></src>
-                            </div>
-                            <div class="store_home_goodInfo">
-                                <div class="store_home_goodName">
-                                        ${good.name}
-                                </div>
-                                <div class="store_home_goodPrice">
-                                        ${invertory.price}
-                                </div>
-                                <div class="store_home_goodPrice">
-                                    商品下架
-                                </div>
-                            </div>
+
+        <div class="store_home_delivery">
+            <a href="/StoreServletStock.htm"> <h4>我要进货</h4></a>
+        </div>
+        <div class="store_home_delivery">
+            <a href="store_order.jsp"> <h4>我要发货</h4></a>
+        </div>
+        <div class="store_home_delivery">
+            <a href="store_order.jsp"> <h4>历史订单</h4></a>
+        </div>
+        <div class="store_home_delivery">
+             <a href="store_order.jsp"> <h4>最近订单</h4></a>
+        </div>
+    </div>
+    <div class="store_home-right">
+        <div class="store_home_goodsListHead">
+            商品列表
+        </div>
+        <div class="store_home_goods">
+           <c:if test="${mainPages==null||fn:length(mainPages)==0}" >
+               <h2>你还没有商品上架！</h2>
+           </c:if>
+            <c:forEach items="${mainPages}" var="mainPages" varStatus="status">
+                <div class="store_home_good">
+                    <div class="store_home_goodImg">
+                        <img src="${basePath}/img/1.jpg"></src>
+                    </div>
+                    <div class="store_home_goodInfo">
+                        <div class="store_home_goodName">
+                                ${mainPages.name}
                         </div>
-                    <%--</c:forEach>--%>
-                </c:forEach>
-            </div>
+                        <div class="store_home_goodPrice">
+                                ${mainPages.price}
+                        </div>
+                        <div class="store_home_goodName">
+                                商品下架
+                        </div>
+                    </div>
+                </div>
+                    </c:forEach>
+
+
         </div>
     </div>
 </div>

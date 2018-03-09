@@ -46,7 +46,14 @@ public interface MainPageDao {
      */
     public List<MainPage> findMainPageCondition(String condition);
 
-
+    /**
+     * @Title: findMainPageByStoreId
+     * @Description: 根据商品id查找商品信息
+     * @author hzq
+     * @date 2018-03-06
+     * @throw YnCorpSysException
+     */
+    public List<MainPage> findMainPageByStoreId(Long storeId);
 
 
 }
