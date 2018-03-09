@@ -12,7 +12,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>星光购物</title>
+    <title>商城首页</title>
     <script src="${basePath}../js/jquery-1.7.2.min.js"></script>
     <script src="${basePath}../js/jquery-1.7.2.js"></script>
     <link rel="stylesheet" href="${basePath}../css/main_page_css.css">
@@ -91,14 +91,14 @@
 
 <div class="wit">
     <div class="limit">
-        <form class="form" name="f1" method="POST" action="/mainAction!limit.do?present=${present}&&total=${total}">
+        <form class="form" name="f1" method="POST" action="/mainAction!limit.do?present=${present}">
             <table border="0" align="center" class="tb">
                 <tr>
                     <td><span class="page-size">当前第 ${present} 页       共 ${total} 页</span>></td>
-                    <td><a href="mainAction!limit.do?page=start&&present=${present}&&total=${total}">首页</a></td>
-                    <td><a href="mainAction!limit.do?page=last&&present=${present}&&total=${total}"> 上一页</a></td>
-                    <td><a href="mainAction!limit.do?page=next&&present=${present}&&total=${total}"> 下一页</a></td>
-                    <td><a href="mainAction!limit.do?page=end&&present=${present}&&total=${total}">最后一页</a></td>
+                    <td><a href="mainAction!limit.do?page=start&&present=${present}">首页</a></td>
+                    <td><a href="mainAction!limit.do?page=last&&present=${present}"> 上一页</a></td>
+                    <td><a href="mainAction!limit.do?page=next&&present=${present}"> 下一页</a></td>
+                    <td><a href="mainAction!limit.do?page=end&&present=${present}">最后一页</a></td>
                     <td>转到第:<input type="text" name="page" size="8"
                                    onkeypress="return event.keyCode>=48&&event.keyCode<=57" ng-pattern="/[^a-zA-Z]/"/>页
                         <input type="submit" value="GO" name="GO"></td>

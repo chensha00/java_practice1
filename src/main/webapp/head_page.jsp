@@ -68,19 +68,19 @@
 </body>
 
 <%--搜索框的实现--%>
-<script type="text/javascript">
-    $('#submit').live("click", function () {
-        var condition = document.getElementById("search").value;
-        var url = '/mainAction!search.do';
-        var data = {
-            condition: condition
-        };
-        var success = function (response) {
-            if (response.errno == 0) {
-                alert(response.errmsg);
-            }
-        };
-        $.post(url, data, success, 'json');
-    });
-</script>
+<%--<script type="text/javascript">--%>
+    <%--$('#submit').live("click", function () {--%>
+        <%--var condition = document.getElementById("search").value;--%>
+        <%--var url = '/mainAction!search.do';--%>
+        <%--var data = {--%>
+            <%--condition: condition--%>
+        <%--};--%>
+        <%--var success = function (response) {--%>
+            <%--if (response.errno == 0) {--%>
+                <%--alert(response.errmsg);--%>
+            <%--}--%>
+        <%--};--%>
+        <%--$.post(url, data, success, 'json');--%>
+    <%--});--%>
+<%--</script>--%>
 </html>

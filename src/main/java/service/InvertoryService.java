@@ -200,4 +200,13 @@ public interface InvertoryService {
      */
     public Integer limitMainPage();
 
+    /**
+     * @Title: findMainPageInvertoryAll
+     * @Description: 查询所有订单的价格，数量，以及商品的ID
+     * @author liukang
+     * @date
+     * @throw SQLException
+     */
+    public List<MainPage> findMainPageInvertoryAll();
+
 }

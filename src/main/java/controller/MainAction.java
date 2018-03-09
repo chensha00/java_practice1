@@ -9,7 +9,6 @@ package controller;/************************************************************
  */
 
 import Entity.MainPage;
-import common.util.SpringContextUtil;
 import common.util.base.BaseAction;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
@@ -36,7 +35,8 @@ import java.util.Map;
         @Result(name = "main", location = "/main_page.jsp"),
         @Result(name = "limit", location = "/main_page.jsp"),
         @Result(name = "cart", location = "/cart.jsp"),
-        @Result(name = "search", location = "/main_page_search.jsp")
+        @Result(name = "search", location = "/main_page_search.jsp"),
+        @Result(name = "searchLimit", location = "/main_page_search.jsp")
 })
 public class MainAction extends BaseAction {
 
@@ -74,13 +74,13 @@ public class MainAction extends BaseAction {
     public String limit() {
         String result = "";
         String present = req.getParameter("present");
-        String total = req.getParameter("total");
         String page = req.getParameter("page");
-        Integer totalNum = invertoryService.findInvertoryAll().size();
+        List<MainPage> list = invertoryService.findMainPageInvertoryAll();
+        Integer totalNum = list.size();
         LimitMethod limitMethod = new LimitMethod();
-        Map map = limitMethod.limitMethods(present, total, page, totalNum);
-        List<MainPage> list = invertoryService.findMainPageInvertory((Long) map.get("start"), (Long) map.get("end"));
-        req.setAttribute("mainList", list);
+        Map map = limitMethod.limitMethods(present, page, totalNum);
+        List<MainPage> list1 = list.subList((int) map.get("start"), (int) map.get("end"));
+        req.setAttribute("mainList", list1);
         req.setAttribute("total", map.get("total"));
         req.setAttribute("present", map.get("present"));
         result = "limit";
@@ -133,8 +133,8 @@ public class MainAction extends BaseAction {
     }
 
     /**
-     * @Title: main
-     * @Description: 主页显示商品
+     * @Title: search
+     * @Description: 搜索页显示商品
      * @author kang
      * @date 2018-03-07
      * @throw YnCorpSysException
@@ -142,14 +142,22 @@ public class MainAction extends BaseAction {
     public String search() {
         String result = "";
         String condition = req.getParameter("search");
-        InvertoryService invertoryService = (InvertoryService) SpringContextUtil.getBean("invertoryService");
-        //从数据库获取商品信息，显示在主页上
+        //从数据库获取商品信息，显示在搜索页上
         List<MainPage> list = invertoryService.findMainPageCondition(condition);
-
-        HttpSession session = req.getSession();
-        session.setAttribute("mainList", list);
         if (list != null && list.size() != 0) {
-            session.setAttribute("mainList", list);
+            int total = list.size();
+            List<MainPage> list1 = null;
+            if (total > 20) {
+                list1 = list.subList(0, 20);
+            } else {
+                list1 = list;
+            }
+            Integer present = 1;
+            int total1 = total / 20 + 1;
+            req.setAttribute("total", total1);
+            req.setAttribute("present", present);
+            req.setAttribute("search", condition);
+            req.setAttribute("mainList", list1);
         } else {
             resp.setContentType("text/html;charset=utf-8");
             PrintWriter out = null;
@@ -165,4 +173,28 @@ public class MainAction extends BaseAction {
         return result;
     }
 
+    /**
+     * @Title:
+     * @Description: 搜索分页
+     * @author kang
+     * @date 2018-03-08
+     * @throw YnCorpSysException
+     */
+    public String SearchLimit() {
+        String result = "";
+        String condition = req.getParameter("search");
+        String present = req.getParameter("present");
+        String page = req.getParameter("page");
+        List<MainPage> list = invertoryService.findMainPageCondition(condition);
+        Integer totalNum = list.size();
+        LimitMethod limitMethod = new LimitMethod();
+        Map map = limitMethod.limitMethods(present, page, totalNum);
+        List<MainPage> list1 = list.subList((int) map.get("start"), (int) map.get("end"));
+        req.setAttribute("mainList", list1);
+        req.setAttribute("search", condition);
+        req.setAttribute("total", map.get("total"));
+        req.setAttribute("present", map.get("present"));
+        result = "limit";
+        return result;
+    }
 }

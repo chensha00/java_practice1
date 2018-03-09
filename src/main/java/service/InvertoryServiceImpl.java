@@ -338,4 +338,16 @@ public class InvertoryServiceImpl implements InvertoryService {
         int pageNum=count/20+1;
         return pageNum;
     }
+
+    /**
+     * @Title: findMainPageInvertoryAll
+     * @Description: 查询所有订单的价格，数量，以及商品的ID
+     * @author liukang
+     * @date
+     * @throw SQLException
+     */
+    @Override
+    public List<MainPage> findMainPageInvertoryAll(){
+        return mainPageDao.findMainPageInvertoryAll();
+    }
 }
