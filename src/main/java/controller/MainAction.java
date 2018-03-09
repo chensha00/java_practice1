@@ -14,13 +14,16 @@ import common.util.base.BaseAction;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
+import org.springframework.beans.factory.annotation.Autowired;
 import service.InvertoryService;
+import tools.LimitMethod;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author kang
@@ -37,7 +40,9 @@ import java.util.List;
 })
 public class MainAction extends BaseAction {
 
-    InvertoryService invertoryService = (InvertoryService) SpringContextUtil.getBean("invertoryService");
+    @Autowired
+    private InvertoryService invertoryService;
+
 
     /**
      * @Title: main
@@ -68,64 +73,20 @@ public class MainAction extends BaseAction {
      */
     public String limit() {
         String result = "";
-        Integer present = Integer.valueOf(req.getParameter("present"));
-        Integer total = Integer.valueOf(req.getParameter("total"));
+        String present = req.getParameter("present");
+        String total = req.getParameter("total");
         String page = req.getParameter("page");
         Integer totalNum = invertoryService.findInvertoryAll().size();
-        Long start = 0l;
-        Long end = 0l;
-        out:
-        if (page.equals("start")) {
-            end = 20l;
-            break out;
-        } else if (page.equals("last")) {
-            if (present > 1) {
-                start = Long.valueOf((present - 2) * 20);
-                end = Long.valueOf((present - 1) * 20);
-                break out;
-            } else {
-                end = 20l;
-                break out;
-            }
-        } else if (page.equals("next")) {
-            if (present < total - 1) {
-                start = Long.valueOf(present * 20);
-                end = Long.valueOf((present + 1) * 20);
-                break out;
-            } else {
-                start = Long.valueOf((total - 1) * 20);
-                end = Long.valueOf(totalNum);
-                break out;
-            }
-        } else if (page.equals("end")) {
-            start = Long.valueOf((total - 1) * 20);
-            end = Long.valueOf(totalNum);
-            break out;
-        } else {
-            Integer number = Integer.valueOf(page);
-            if (number < total && number > 0) {
-                start = Long.valueOf((number - 1) * 20);
-                end = Long.valueOf(number * 20);
-                break out;
-            } else if (number == total) {
-                start = Long.valueOf((total - 1) * 20);
-                end = Long.valueOf(totalNum);
-                break out;
-            } else {
-                start = Long.valueOf((present - 2) * 20);
-                end = Long.valueOf((present - 1) * 20);
-                break out;
-            }
-        }
-        List<MainPage> list = invertoryService.findMainPageInvertory(start, end);
-        Long aLong = start / 20 + 1;
-        present = Integer.parseInt(String.valueOf(aLong));
+        LimitMethod limitMethod = new LimitMethod();
+        Map map = limitMethod.limitMethods(present, total, page, totalNum);
+        List<MainPage> list = invertoryService.findMainPageInvertory((Long) map.get("start"), (Long) map.get("end"));
         req.setAttribute("mainList", list);
-        req.setAttribute("total", total);
-        req.setAttribute("present", present);
+        req.setAttribute("total", map.get("total"));
+        req.setAttribute("present", map.get("present"));
         result = "limit";
         return result;
     }
+
 
     /**
      * @Title: cart

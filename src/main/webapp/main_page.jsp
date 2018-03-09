@@ -61,6 +61,10 @@
 
 <script type="text/javascript">
     $('#cart').live("click", function () {
+        $('#cart').bind('click', function() {
+            $(this).unbind('click');
+            alert('该商品已加入购物车!');
+        });
         //获取商品的价格，名字，店铺，库存
         var nameStr = document.getElementsByName("nameName")[0].value;
         //输出商品名
@@ -82,10 +86,6 @@
             }
         };
         $.post(url, data, success, 'json');
-    });
-    $('#cart').bind('click', function() {
-        $(this).unbind('click');
-        alert('该商品已加入购物车!');
     });
 </script>
 
