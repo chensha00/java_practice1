@@ -10,6 +10,7 @@
 <html>
 <head>
     <link href="css/order_page_css.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.7.2.js"/>
     <title>用户订单信息</title>
 </head>
 <body>
@@ -18,45 +19,71 @@
     <%--用户筛选按钮--%>
     <div id="order-button" >
         <br/><span style="background-color: cornflowerblue">我的订单信息</span>
-        <button type="button" id="all-order"><a href="/order/order.htm?way=all&&peopleId=1">全  部</a></button>
-        <button type="button" id="pend-payment-order"><a href="/order/order.htm?way=not_payment&&peopleId=1">待付款</a></button>
-        <button type="button" id="pend-delivery-order"><a href="/order/order.htm?way=not_delivery&&peopleId=1">待发货</a></button>
-        <button type="button" id="pend-receive-order"><a href="/order/order.htm?way=not_receive&&peopleId=1">待收货</a></button>
+        <button type="button" id="all-order">全  部</button>
+        <button type="button" id="pend-payment-order">待付款</button>
+        <button type="button" id="pend-delivery-order">待发货</button>
+        <button type="button" id="pend-receive-order">待收货</button>
     </div>
     <div id="shopping-message-all">
-        <table class="order-table" align="center" border="1" cellspacing="0">
+        <table class="order-table" align="center" border="1" cellspacing="0" width="600px">
             <thead>
-            <th>我的订单信息 ${fn:length(goodsOrderList)}</th>
-            <th>${fn:length(orderDetailList)}</th>
+            <tr>
+                <th>我的订单信息</th>
+            </tr>
+            <%--<th>我的订单信息 ${fn:length(goodsOrderList)}</th>--%>
+            <%--<th>${fn:length(orderDetailList)}</th>--%>
             </thead>
             <c:forEach var="order" items="${goodsOrderList}" varStatus="index">
                 <tbody>
+                <tr>
+                    <td>订单编号</td>
+                    <td>订单状态</td>
+                    <td>总金额</td>
+                </tr>
                 <tr bgcolor="silver">
-                    <td width="30%">订单编号:${order.orderNum}</td>
-                    <c:choose>
-                        <%--0--未支付，1--支付成功，2--支付失败"--%>
-                        <c:when test="${order.orderStatus ==0}">
-                            <td width="30%">订单状态: 未支付</td>
-                        </c:when>
-                        <c:when test="${order.orderStatus ==1}">
-                            <td width="30%">订单状态: 支付成功</td>
-                        </c:when>
-                        <c:otherwise>
-                            <td width="30%">订单状态: 支付失败</td>
-                        </c:otherwise>
-                    </c:choose>
+                    <td width="15%">${order.orderNum}</td>
+                    <td width="15%">
+                        <c:choose>
+                            <%--0--未支付，1--支付成功，2--支付失败"--%>
+                            <c:when test="${order.orderStatus ==0}">未支付</c:when>
+                            <c:when test="${order.orderStatus ==1}">支付成功</c:when>
+                            <c:otherwise>支付失败</c:otherwise>
+                        </c:choose>
+                    </td>
+
                     <%--<td width="30%">订单状态:${order.orderStatus}</td>--%>
-                    <td width="30%">总金额:${order.totalMoney}</td>
+                    <td width="15%">${order.totalMoney}</td>
+                </tr>
+                <tr>
+                    <td>ID</td>
+                    <td>订单详情编号</td>
+                    <td>商品名字</td>
+                    <td>价格</td>
+                    <td>数量</td>
+                    <td>商品总价</td>
+                    <td>状态</td>
+                    <td></td>
                 </tr>
                 <c:forEach var="detail" items="${orderDetailList}" varStatus="detail_index">
                     <c:choose>
                         <c:when test="${detail.goodsOrderId eq order.id}">
                             <tr>
-                                <td>订单详情编号：${detail.orderNum}</td>
-                                <td>订单详情编号:${detail.goods.name}</td>
-                                <td>价格:${detail.goodsPrice}</td>
-                                <td>数量:${detail.number}</td>
-                                <td>商品总价:${detail.goodsAmount}</td>
+                                <td>${detail.id}</td>
+                                <td>${detail.orderNum}</td>
+                                <td>${detail.goods.name}</td>
+                                <td>${detail.goodsPrice}</td>
+                                <td>${detail.number}</td>
+                                <td>${detail.goodsAmount}</td>
+                                <td>
+                                    <%--orderStatus 订单状态 0--未支付，1--支付成功，2--支付失败，3--发货中，4--订单完成--%>
+                                    <c:choose>
+                                        <c:when test="${detail.orderStatus==0}">未支付</c:when>
+                                        <c:when test="${detail.orderStatus==1}">待发货</c:when>
+                                        <c:when test="${detail.orderStatus==2}">支付失败</c:when>
+                                        <c:when test="${detail.orderStatus==3}">待收货</c:when>
+                                        <c:when test="${detail.orderStatus==4}">订单完成</c:when>
+                                    </c:choose>
+                                </td>
                             </tr>
                         </c:when>
                     </c:choose>
@@ -177,6 +204,27 @@
         </table>
     </div>
 </div>
-
+<script type="text/javascript">
+    $("#all-order").click(function(){
+        var peopleId=${person.id};
+        alert(peopleId);
+        window.location.href="${pageContext.request.contextPath}/action/userOrderAction!findOrderAll.do";
+    });
+    $("#pend-payment-order").click(function(){
+        var peopleId=${person.id};
+        alert(peopleId);
+        window.location.href="${pageContext.request.contextPath}/action/userOrderAction!findNotPayOrder.do";
+    });
+    $("#pend-delivery-order").click(function(){
+        var peopleId=${person.id};
+        alert(peopleId);
+        window.location.href="${pageContext.request.contextPath}/action/userOrderAction!findNotDeliveryOrder.do"
+    });
+    $("#pend-receive-order").click(function(){
+        var peopleId=${person.id};
+        alert(peopleId);
+        window.location.href="${pageContext.request.contextPath}/action/userOrderAction!findNotReceiveOrder.do"
+    });
+</script>
 </body>
 </html>
