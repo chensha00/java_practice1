@@ -175,13 +175,12 @@
                         number: number
                     },
                     dataType: 'json',
-                    success: function (x) {
-                        alert("提交成功！！！");
-                    },
-                    error: function (XMLResponse) {
-                        alert("提交失败！可能是：" +"\n"+
-                              "亲，您还没登录哟！")
-                        window.location.replace("../login_page.jsp");
+                    success: function (response) {
+                        if (response.errno == 0) {
+                            alert(response.errmsg);
+                        }else{
+                            alert("亲，您还没登录哟！")
+                        }
                     }
                 })
         })
