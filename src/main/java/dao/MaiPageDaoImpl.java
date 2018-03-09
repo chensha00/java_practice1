@@ -63,7 +63,17 @@ public class MaiPageDaoImpl extends BaseDaoImpl<MainPage> implements MainPageDao
     public List<MainPage> findMainPageCondition(String condition) {
         return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findMainPageCondition", condition);
     }
-
+    /**
+     * @Title: findMainPageByStoreId
+     * @Description: 根据商品id查找商品信息
+     * @author hzq
+     * @date 2018-03-06
+     * @throw YnCorpSysException
+     */
+    @Override
+    public List<MainPage> findMainPageByStoreId(Long storeId) {
+        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findMainPageByStoreId", storeId);
+    }
 
 
 }

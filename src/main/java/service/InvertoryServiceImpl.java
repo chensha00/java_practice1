@@ -260,6 +260,23 @@ public class InvertoryServiceImpl implements InvertoryService {
     }
 
     /**
+     * @param storeId:商铺id
+     * @Title: findInvertoryByStoreIdAndGoodId
+     * @Description: 根据商铺id和商铺id查找库存信息
+     * @author hzq
+     * @date 2018-01-26
+     * @throw RuntimeException
+     */
+    public List<MainPage> findMainPageByStoreId(Long storeId) {
+        List<MainPage> mainPages = new ArrayList<MainPage>();
+
+        mainPages = mainPageDao.findMainPageByStoreId(storeId);
+
+        return mainPages;
+    }
+
+
+    /**
      * @param map 条件和值对应key和value
      * @Title: findInvertoryByUnSureCondition
      * @Description: 通过商铺id查找库存信息
