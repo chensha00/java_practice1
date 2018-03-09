@@ -41,7 +41,7 @@
             <%--<input formaction="../registration_page.jsp" type="submit1" value="注册"/>--%>
             <input type="button" onclick='location.href=("../registration_page.jsp")' value="注册"/>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <input type="submit" name="login" value="登录" id="submit" onclick="submit"/>
+            <input type="button" name="login" value="登录" id="submit" onclick="submit"/>
         </form>
         <%--<c:choose>--%>
         <%--<c:when test="${LoginMessage eq 'error'}">--%>
@@ -63,7 +63,7 @@
     <%--alert("成功登录");--%>
     <%--}--%>
     <%--}--%>
-    $(function () {
+
         $('#submit').live("click", function ()  {
             var username = $("input[name='username']").val();
             var password = $("input[name='password']").val();
@@ -83,7 +83,6 @@
                     alert("登陆失败！用户名或者密码错误！或者该账户未注册！")
                 }
             })
-        })
     })
 
 </script>
