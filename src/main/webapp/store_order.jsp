@@ -20,14 +20,14 @@
 <jsp:include page="head_page.jsp" flush="true"/>
 <div class="divForm">
     <h2 style="background-color: darkturquoise" align="center">本商铺订单信息</h2>
+    <%--<div align="center">--%>
+        <%--<form action="StoreOrderServletSelect.htm" method="post" >--%>
+            <%--<input type="text" name="select" value="${stores[0].id}" hidden="hidden"/>--%>
+            <%--<input type="submit" value="点击查询">--%>
+        <%--</form>--%>
+    <%--</div>--%>
     <div align="center">
-        <form action="StoreOrderServletSelect.htm" method="post" >
-            <input type="text" name="select" value="${stores[0].id}" hidden="hidden"/>
-            <input type="submit" value="点击查询">
-        </form>
-    </div>
-    <div align="center">
-        <table border="1" width="1200" align="center">
+        <table border="1" width="1200" align="center" id="orderDetail">
             <tr bgcolor="#6495ed">
                 <th width="100">商铺编码</th>
                 <th width="100">买家</th>
@@ -55,6 +55,7 @@
                         <td width="100">
                                 ${od.storeId}
                         </td>
+                        <input type="hidden" value="${od.storeId}" name="storeId1"/>
                         <td width="100">
                                 ${od.people.name}
                         </td>
@@ -123,10 +124,11 @@
                                     <p>买家未付款</p>
                                 </c:when>
                                 <c:otherwise>
-                                    <form action="StoreServletDelivery.htm" method="post">
-                                        <input type="text" name="odId" value="${od.id}" hidden="hidden"/>
-                                        <input type="submit" value="点击发货">
-                                    </form>
+                                    <%--<form action="${basePath}/orderDetailAction!storeDelivery.do?storeId=${od.id}">--%>
+                                        <%--<input type="text" name="odId" value="${od.id}" hidden="hidden"/>--%>
+                                        <%--<input type="submit" value="点击发货">--%>
+                                    <%--</form>--%>
+                                    <button type="submit" class="orderDetail_id" value="${od.id}">点击发货</button>
                                 </c:otherwise>
                             </c:choose>
                         </td>
@@ -136,7 +138,30 @@
         </table>
     </div>
 </div>
-
+<script type="text/javascript">
+    $(".orderDetail_id").click(function(){
+        var s=$(this).val();
+        var b=document.getElementsByName("storeId1")[0].value;
+        $.ajax({
+            type:"post",
+            dataType:"json",
+            data:{
+                storeId:s,
+                storeId1:b
+            },
+            url:"${basePath}/orderDetailAction!storeDelivery.do?storeId="+s,
+            //                contentType:"text",
+            success:function (x) {
+                alert("发货成功！！！");
+                window.location.replace("${basePath}/orderDetailAction!storeOrder.do?storeId="+b);
+            },
+            error:function(XMLResponse){
+                alert("发货失败！！！")
+            }
+        })
+        <%--window.location.href="${basePath}/orderDetailAction!storeDelivery.do?storeId="+s;--%>
+    })
+</script>
 </body>
 </html>
 

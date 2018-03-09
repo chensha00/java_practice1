@@ -12,7 +12,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>商城首页</title>
+    <title>星光购物</title>
     <script src="${basePath}../js/jquery-1.7.2.min.js"></script>
     <script src="${basePath}../js/jquery-1.7.2.js"></script>
     <link rel="stylesheet" href="${basePath}../css/main_page_css.css">
@@ -61,11 +61,15 @@
 
 <script type="text/javascript">
     $('#cart').live("click", function () {
+        $('#cart').bind('click', function() {
+            $(this).unbind('click');
+            alert('该商品已加入购物车!');
+        });
         //获取商品的价格，名字，店铺，库存
         var nameStr = document.getElementsByName("nameName")[0].value;
         //输出商品名
         var goodsCart = "商品:" + nameStr + "\n添加到购物车成功!";
-//        alert(goodsCart);
+        alert(goodsCart);
         //将数据传到另一个页面
         var url = 'mainAction!cart?op=add';
         var data = {
@@ -78,7 +82,7 @@
         };
         var success = function (response) {
             if (response.errno == 0) {
-                alert(goodsCart);;
+                alert(response.errmsg);
             }
         };
         $.post(url, data, success, 'json');

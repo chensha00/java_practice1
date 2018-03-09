@@ -101,7 +101,7 @@
 </div>
 <script type="text/javascript">
     $("#admin-user").click(function(){
-        window.location.href="${basePath}/action/adminUserAction!findPeopleAll.do?";
+        window.location.href="${basePath}/action/adminUserAction!findPeopleAll.do";
     });
     $("#admin-seller").click(function(){
         window.location.href="${basePath}/action/adminUserAction!findStoreAll.do";

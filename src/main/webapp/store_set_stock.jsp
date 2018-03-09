@@ -13,19 +13,9 @@
 <html>
 <head>
     <title>进货</title>
-    <style type="text/css">
-        .divForm{
-            position: absolute;/*绝对定位*/
-            width: 1200px;
-            height: 200px;
-            /*border: 1px solid red;*/
-            text-align: center;/*(让div中的内容居中)*/
-            top: 28%;
-            left: 18%;
-            margin-top: -200px;
-            margin-left: -150px;
-        }
-    </style>
+    <script src="${basePath}../js/jquery-1.7.2.min.js"></script>
+    <script src="${basePath}../js/jquery-1.7.2.js"></script>
+    <link rel="stylesheet" href="${basePath}../css/store_order_css.css">
 </head>
 <body align="center">
 <div class="divForm">

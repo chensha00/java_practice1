@@ -22,7 +22,7 @@
 
 <div class="ground">
     <div class="div">
-        <span class="title">&nbsp;大明星在线商城</span>
+        <span class="title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;星光购物商城</span>
 
         <form id="login" name="Login" action="/servlet/loginPage.htm" method="post" class="form">
             <table border="0" class="table">
