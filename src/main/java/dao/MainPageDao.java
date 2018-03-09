@@ -26,7 +26,7 @@ public interface MainPageDao {
      * @date
      * @throw YnCorpSysException
      */
-    public List<MainPage> findMainPageInvertory();
+    public List<MainPage> findMainPageInvertory(Long start,Long end);
 
     /**
      * @Title: findMainPageCondition
@@ -36,5 +36,8 @@ public interface MainPageDao {
      * @throw YnCorpSysException
      */
     public List<MainPage> findMainPageCondition(String condition);
+
+
+
 
 }

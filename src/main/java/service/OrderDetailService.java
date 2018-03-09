@@ -56,7 +56,7 @@ public interface OrderDetailService {
     /**
      * @Title: getGoodsDetailListByOrderId
      * @Description: 获取指定订单id 的订单详情
-     * @author yanyong
+     * @author yuweiyang
      * @date 2018-01-28
      * @param: orderId 指定订单id
      * @return: 订单详情集合
@@ -65,8 +65,18 @@ public interface OrderDetailService {
 
     /**
      * @Title: findOrderDetailByPeopleId
+     * @Description: 通过商铺id查找订单详情
+     * @author yuweiyang
+     * @date 2018-01-31
+     * @param: peopleId 指定人员id
+     * @return: 订单详情集合
+     */
+    public List<OrderDetail> findOrderDetailByStoreId(Long storeId);
+
+    /**
+     * @Title: findOrderDetailByPeopleId
      * @Description: 通过人员id查找订单详情
-     * @author yanyong
+     * @author yuweiyang
      * @date 2018-01-31
      * @param: peopleId 指定人员id
      * @return: 订单详情集合
@@ -76,7 +86,7 @@ public interface OrderDetailService {
     /**
      * @Title: showOrderDetailMessage
      * @Description: 订单详情查看
-     * @author yanyong
+     * @author yuweiyang
      * @date 2018-01-31
      * @param: orderDetail 订单详情对象
      */

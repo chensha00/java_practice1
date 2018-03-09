@@ -12,7 +12,9 @@ import Entity.MainPage;
 import common.util.base.BaseDaoImpl;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author kang
@@ -31,14 +33,25 @@ public class MaiPageDaoImpl extends BaseDaoImpl<MainPage> implements MainPageDao
      * @throw SQLException
      */
     @Override
-    public List<MainPage> findMainPageInvertory() {
-        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findMainPageInvertory");
+    public List<MainPage> findMainPageInvertory(Long start,Long end) {
+        Map map = new HashMap();
+        map.put("start",start);
+        map.put("end", end);
+        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findMainPageInvertory",map);
     }
 
+    /**
+     * @Title: findMainPageCondition
+     * @Description: 根据条件查询主页面的显示
+     * @author kang
+     * @date 2018-03-08
+     * @throw YnCorpSysException
+     */
     @Override
     public List<MainPage> findMainPageCondition(String condition) {
         return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findMainPageCondition", condition);
     }
+
 
 
 }

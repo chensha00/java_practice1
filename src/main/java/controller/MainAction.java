@@ -31,6 +31,7 @@ import java.util.List;
 @Action(value = "mainAction")
 @Results({
         @Result(name = "main", location = "/main_page.jsp"),
+        @Result(name = "limit", location = "/main_page.jsp"),
         @Result(name = "cart", location = "/cart.jsp"),
         @Result(name = "search", location = "/main_page_search.jsp")
 })
@@ -48,9 +49,81 @@ public class MainAction extends BaseAction {
     public String main() {
         String result = "";
         //从数据库获取商品信息，显示在主页上
-        List<MainPage> list = invertoryService.findMainPageInvertory();
+        List<MainPage> list = invertoryService.findMainPageInvertory(0L, 20L);
+        Integer total = invertoryService.limitMainPage();
+        Integer present = 1;
         req.setAttribute("mainList", list);
+        req.setAttribute("total", total);
+        req.setAttribute("present", present);
         result = "main";
+        return result;
+    }
+
+    /**
+     * @Title:
+     * @Description: 主页分页
+     * @author kang
+     * @date 2018-03-08
+     * @throw YnCorpSysException
+     */
+    public String limit() {
+        String result = "";
+        Integer present = Integer.valueOf(req.getParameter("present"));
+        Integer total = Integer.valueOf(req.getParameter("total"));
+        String page = req.getParameter("page");
+        Integer totalNum = invertoryService.findInvertoryAll().size();
+        Long start = 0l;
+        Long end = 0l;
+        out:
+        if (page.equals("start")) {
+            end = 20l;
+            break out;
+        } else if (page.equals("last")) {
+            if (present > 1) {
+                start = Long.valueOf((present - 2) * 20);
+                end = Long.valueOf((present - 1) * 20);
+                break out;
+            } else {
+                end = 20l;
+                break out;
+            }
+        } else if (page.equals("next")) {
+            if (present < total - 1) {
+                start = Long.valueOf(present * 20);
+                end = Long.valueOf((present + 1) * 20);
+                break out;
+            } else {
+                start = Long.valueOf((total - 1) * 20);
+                end = Long.valueOf(totalNum);
+                break out;
+            }
+        } else if (page.equals("end")) {
+            start = Long.valueOf((total - 1) * 20);
+            end = Long.valueOf(totalNum);
+            break out;
+        } else {
+            Integer number = Integer.valueOf(page);
+            if (number < total && number > 0) {
+                start = Long.valueOf((number - 1) * 20);
+                end = Long.valueOf(number * 20);
+                break out;
+            } else if (number == total) {
+                start = Long.valueOf((total - 1) * 20);
+                end = Long.valueOf(totalNum);
+                break out;
+            } else {
+                start = Long.valueOf((present - 2) * 20);
+                end = Long.valueOf((present - 1) * 20);
+                break out;
+            }
+        }
+        List<MainPage> list = invertoryService.findMainPageInvertory(start, end);
+        Long aLong = start / 20 + 1;
+        present = Integer.parseInt(String.valueOf(aLong));
+        req.setAttribute("mainList", list);
+        req.setAttribute("total", total);
+        req.setAttribute("present", present);
+        result = "limit";
         return result;
     }
 

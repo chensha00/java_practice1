@@ -111,6 +111,24 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 
     /**
      * @Title: findOrderDetailByPeopleId
+     * @Description: 通过店铺id查找订单详情
+     * @author yanyong
+     * @date 2018-01-31
+     * @param: peopleId 指定人员id
+     * @return: 订单详情集合
+     */
+    public List<OrderDetail> findOrderDetailByStoreId(Long storeId) {
+        List<OrderDetail> orders = new ArrayList<OrderDetail>();
+        try {
+            orders = orderDetailDao.findOrderDetailByStoreId(storeId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return orders;
+    }
+
+    /**
+     * @Title: findOrderDetailByPeopleId
      * @Description: 通过人员id查找订单详情
      * @author yanyong
      * @date 2018-01-31
@@ -120,7 +138,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     public List<OrderDetail> findOrderDetailByPeopleId(Long peopleId) {
         List<OrderDetail> orders = new ArrayList<OrderDetail>();
         try {
-            orders = orderDetailDao.findOrderDetailByPeopleId(peopleId);
+            orders = orderDetailDao.findOrderDetailByStoreId(peopleId);
         } catch (SQLException e) {
             e.printStackTrace();
         }

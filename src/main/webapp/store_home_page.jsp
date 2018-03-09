@@ -31,7 +31,7 @@
             <a href="/StoreServletStock.htm"> <h4>我要进货</h4></a>
         </div>
         <div class="store_home_delivery">
-            <a href="store_order.jsp"> <h4>我要发货</h4></a>
+            <a href="${basePath}/orderDetailAction!storeOrder.do?storeId=${stores[0].id}"> <h4>我要发货</h4></a>
         </div>
         <div class="store_home_delivery">
             <a href="store_order.jsp"> <h4>历史订单</h4></a>
