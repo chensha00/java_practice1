@@ -103,4 +103,34 @@ public class StoreAction extends BaseAction{
         }
         return  result;
     }
+
+    /**
+     * @Title: offLoading
+     * @Description: 商品下架
+     * @author hzq
+     * @date
+     */
+    public String offLoading(){
+        //接收数据（商品信息和店铺信息）
+        Long storeId =(Long)req.getAttribute("storeId");
+        Long goodId =(Long)req.getAttribute("goodId");
+        //通过两个id查找库存表，获取该条记录的库存id
+        List<Map<String,Object>> map = new ArrayList<Map<String,Object>>();
+        map.add(AddConditionUtils.addCondition("store_id", "=", storeId));
+        map.add(AddConditionUtils.addCondition("good_id", "=", goodId));
+        try {
+            List<Invertory> invertory = invertoryService.findInvertoryByUnSureCondition(map);
+            int res =  invertoryService.deleteInvertoryById(invertory.get(0).getId());
+            if (res!=0){
+                System.out.println("下架成功");
+                return "offLoading";
+            }else{
+                System.out.println("出现错误");
+                return "error";
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "error";
+        }
+    }
 }

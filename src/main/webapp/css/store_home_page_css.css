@@ -9,7 +9,6 @@
 */
 .store_home{
     width: 80%;
-    height: 950px
     margin:0 auto;
 }
 /*
@@ -17,7 +16,6 @@
 */
 .store_home_left{
     width: 25%;
-    height: 950px;
     margin-left: 0;
     float: left;
 
@@ -25,7 +23,6 @@
 /*设置排列商品的div*/
 .store_home-right{
     width: 70%;
-    height: 1000px;
     margin-left: 3px;
     float: left;
     border: 0px;
@@ -128,26 +125,19 @@ img {
     font-weight: 400;
 }
 /*设置分页样式*/
-.limit{
-    width: 100%;
-    float: right;
+.form {
     height: 45px;
-}
-
-.form{
-    height: 45px;
+    width: 50%;
     color: #ff4400;
     float: right;
 }
 
-.tb{
+.tb {
     height: 45px;
+    width: 80%;
 }
-/*设置商家开店的样式*/
 
-.people_open_store{
-    width: 40%;
-    height: 500px;
-    margin-top: 60px;
-    margin: 0 auto;
+.page-size{
+    height:45px;
+    color: blue;
 }

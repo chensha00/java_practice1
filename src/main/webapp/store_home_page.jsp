@@ -61,7 +61,7 @@
                         <div class="store_home_goodPrice">
                                 ${invertory.price}
                         </div>
-                        <div class="store_home_goodPrice">
+                        <div class="store_home_goodName">
                                 商品下架
                         </div>
                     </div>
