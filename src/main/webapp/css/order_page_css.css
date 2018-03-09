@@ -32,3 +32,9 @@
 #pay-money{
     background-color: azure;
 }
+#shopping-message-all{
+    width: 60%;
+    height: auto;
+    margin: auto;
+    background-color: #ff4400;
+}
