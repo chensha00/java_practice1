@@ -15,7 +15,9 @@ import common.util.base.BaseDaoImpl;
 import domain.GoodsOrder;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author zuorui
@@ -63,7 +65,9 @@ public class GoodsOrderDaoImpl extends BaseDaoImpl<GoodsOrder> implements GoodsO
      */
     @Override
     public Integer updateGoodsOrder(GoodsOrder goodsOrder){
-        return this.sqlSessionTemplate.update(getMybaitsNameSpace()+"updateGoodsOrderById",goodsOrder);
+        Map map=new HashMap();
+        map.put("goodsOrder",goodsOrder);
+        return this.sqlSessionTemplate.update(getMybaitsNameSpace()+"updateGoodsOrderById",map);
     }
     /**
      * @throws java.sql.SQLException

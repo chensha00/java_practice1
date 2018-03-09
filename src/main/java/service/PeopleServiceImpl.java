@@ -299,9 +299,9 @@ public class PeopleServiceImpl implements PeopleService {
      */
 
     public Boolean descMoney(Long peopleId, Double money) {
-        People people = new PeopleServiceImpl().findPeopleById(peopleId);
+        People people = this.findPeopleById(peopleId);
         people.setMoney(people.getMoney() - money);
-        Integer number = new PeopleServiceImpl().updatePeople(people);
+        Integer number = this.updatePeople(people);
         if (number > 0) {
             return true;
         } else {

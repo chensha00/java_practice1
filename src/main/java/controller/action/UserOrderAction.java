@@ -84,8 +84,6 @@ public class UserOrderAction extends BaseAction {
             session.setAttribute("goodsOrderList",goodsOrderList);
             session.setAttribute("orderDetailList",orderDetailList);
         }
-
-
         return SUCCESS;
     }
 
@@ -179,7 +177,7 @@ public class UserOrderAction extends BaseAction {
                 for (int j=orderDetailList.size()-1;j>=0;j--){
                     Long detailOrderId=orderDetailList.get(j).getGoodsOrderId();
                     Byte detailOrderStatus=orderDetailList.get(j).getOrderStatus();
-                    if (orderId==detailOrderId || detailOrderStatus==1){
+                    if (orderId==detailOrderId || detailOrderStatus!=1){
                         orderDetailList.remove(j);
                     }
                 }
@@ -235,7 +233,7 @@ public class UserOrderAction extends BaseAction {
                 for (int j=orderDetailList.size()-1;j>=0;j--){
                     Long detailOrderId=orderDetailList.get(j).getGoodsOrderId();
                     Byte detailOrderStatus=orderDetailList.get(j).getOrderStatus();
-                    if (orderId==detailOrderId || detailOrderStatus==3){
+                    if (orderId==detailOrderId || detailOrderStatus!=3){
                         orderDetailList.remove(j);
                     }
                 }
@@ -251,5 +249,62 @@ public class UserOrderAction extends BaseAction {
         }
 
         return SUCCESS;
+    }
+
+    /**
+     * @Title: deleteOrder
+     * @Description: 删除订单
+     * @author yanyong
+     * @date 2018-03-09
+     * @return:
+     */
+
+    public String deleteOrder(){
+
+        return SUCCESS;
+    }
+    /**
+     * @Title: payOrder
+     * @Description: 支付订单
+     * @author yanyong
+     * @date 2018-03-09
+     * @return: “payOrder”
+     */
+    public String payOrder(){
+
+        return "payOrder";
+    }
+
+    /**
+     * @Title: cancelOrder
+     * @Description: 取消订单
+     * @author yanyong
+     * @date 2018-03-09
+     * @return: SUCCESS
+     */
+    public String cancelOrder(){
+
+        return SUCCESS;
+    }
+    /**
+     * @Title: recevieGoods
+     * @Description: 收货
+     * @author yanyong
+     * @date 2018-03-09
+     * @return: SUCCESS
+     */
+    public String recevieGoods(){
+        return SUCCESS;
+    }
+    /**
+     * @Title: judgeGoods
+     * @Description: 评价
+     * @author yanyong
+     * @date 2018-03-09
+     * @return: "judgeGoods"
+     */
+    public String judgeGoods(){
+
+        return "judgeGoods";
     }
 }

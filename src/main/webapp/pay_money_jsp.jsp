@@ -12,6 +12,7 @@
     <meta charset="UTF-8">
     <title>支付页面</title>
     <link href="css/order_page_css.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.7.2.js"/>
 </head>
 <body>
 <jsp:include page="head_page.jsp"></jsp:include>
@@ -21,7 +22,7 @@
     <div align="center">
         <br/><br/><br/><br/>
 
-        <table id="pay-table" align="center" border="1">
+        <table id="pay-table" align="center" border="1" width="600px">
             <thead>
             <th><button id="pay-self">自己支付</button></th>
             <th>
@@ -53,7 +54,6 @@
                 <td colspan="2">订单详情数：${fn:length(orderDetailListPay)}</td>
             </tr>
             <tr></tr>
-            <form action="/pay/pay.htm?peopleId=1&&orderNum=${goodsOrderPay.orderNum}&&isPay=true" method="post">
             <c:forEach var="detailPay" items="${orderDetailListPay}" varStatus="detail_index">
                 <tr>
                     <td>订单详情编号：${detailPay.orderNum}</td>
@@ -63,51 +63,54 @@
                     <td>商品总价:${detailPay.goodsAmount}</td>
                 </tr>
             </c:forEach>
-            <%--<tr>--%>
-                <%--<td colspan="5" align="center">--%>
-                    <%--<button class="btn-evalute">评    价</button>--%>
-                    <%--<button class="btn-delete">删除订单</button>--%>
-                    <%--<button class="btn-pay">支    付</button>--%>
-                    <%--<button class="btn-cancel">取消订单</button>--%>
-                    <%--<button class="btn-recive">确定收货</button>--%>
-                <%--</td>--%>
-            <%--</tr>--%>
-
-            <%--<tr>--%>
-                <%--<td height="10px" colspan="5"></td>--%>
-            <%--</tr>--%>
-            <%--</tbody>--%>
-
-
-
-            <%----%>
-            <%--<tbody>--%>
-            <%--<tr>--%>
-                <%--<td colspan="3">支付订单</td>--%>
-            <%--</tr>--%>
-            <%--<tr>--%>
-                <%--<td>订单编号</td>--%>
-                <%--<td>支付金额</td>--%>
-                <%--<td>折扣</td>--%>
-            <%--</tr>--%>
-            <%--<tr>--%>
-                <%--<td><b>ORD109420</b></td>--%>
-                <%--<td><b>390.5</b></td>--%>
-                <%--<td><b>10</b></td>--%>
-            <%--</tr>--%>
             <tr>
                 <td colspan="5">
-                    <button id="pay-money">
-                        <%--<a href="http://localhost:8132/pay/pay.htm?peopleId=1&&orderNum=${goodsOrderPay.orderNum}&&isPay=true">--%>
-                            确认支付
-                    </button>
+                    <%--<a href="http://localhost:8132/pay/pay.htm?peopleId=1&&orderNum=${goodsOrderPay.orderNum}&&isPay=true">--%>
+                    <button id="pay-money">确认支付</button>
                 </td>
             </tr>
-            </form>
             </tbody>
         </table>
     </div>
 
 </div>
+
+<script type="text/javascript">
+    $("#pay-money").click(function(){
+        window.location.href="${pageContext.request.contextPath}/action/payMoneyAction!PayGoodsOrderMoney.do";
+    });
+</script>
+<%--<tr>--%>
+<%--<td colspan="5" align="center">--%>
+<%--<button class="btn-evalute">评    价</button>--%>
+<%--<button class="btn-delete">删除订单</button>--%>
+<%--<button class="btn-pay">支    付</button>--%>
+<%--<button class="btn-cancel">取消订单</button>--%>
+<%--<button class="btn-recive">确定收货</button>--%>
+<%--</td>--%>
+<%--</tr>--%>
+
+<%--<tr>--%>
+<%--<td height="10px" colspan="5"></td>--%>
+<%--</tr>--%>
+<%--</tbody>--%>
+
+
+
+<%----%>
+<%--<tbody>--%>
+<%--<tr>--%>
+<%--<td colspan="3">支付订单</td>--%>
+<%--</tr>--%>
+<%--<tr>--%>
+<%--<td>订单编号</td>--%>
+<%--<td>支付金额</td>--%>
+<%--<td>折扣</td>--%>
+<%--</tr>--%>
+<%--<tr>--%>
+<%--<td><b>ORD109420</b></td>--%>
+<%--<td><b>390.5</b></td>--%>
+<%--<td><b>10</b></td>--%>
+<%--</tr>--%>
 </body>
 </html>

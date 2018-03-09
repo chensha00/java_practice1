@@ -29,19 +29,24 @@
             <thead>
             <tr>
                 <th>我的订单信息</th>
+                <%--<th>我的订单信息 ${fn:length(goodsOrderList)}</th>--%>
+                <%--<th>${fn:length(orderDetailList)}</th>--%>
             </tr>
             <%--<th>我的订单信息 ${fn:length(goodsOrderList)}</th>--%>
             <%--<th>${fn:length(orderDetailList)}</th>--%>
             </thead>
+
             <c:forEach var="order" items="${goodsOrderList}" varStatus="index">
-                <tbody>
+            <tbody>
                 <tr>
+                    <td>ID</td>
                     <td>订单编号</td>
                     <td>订单状态</td>
                     <td>总金额</td>
                 </tr>
-                <tr bgcolor="silver">
-                    <td width="15%">${order.orderNum}</td>
+                <tr bgcolor="silver" class="order-tr">
+                    <td class="order-id">${order.id}</td>
+                    <td width="15%" class="order-num">${order.orderNum}</td>
                     <td width="15%">
                         <c:choose>
                             <%--0--未支付，1--支付成功，2--支付失败"--%>
@@ -68,49 +73,45 @@
                     <c:choose>
                         <c:when test="${detail.goodsOrderId eq order.id}">
                             <tr>
-                                <td>${detail.id}</td>
+                                <td id="detail-id">${detail.id}</td>
                                 <td>${detail.orderNum}</td>
                                 <td>${detail.goods.name}</td>
                                 <td>${detail.goodsPrice}</td>
                                 <td>${detail.number}</td>
                                 <td>${detail.goodsAmount}</td>
-                                <td>
                                     <%--orderStatus 订单状态 0--未支付，1--支付成功，2--支付失败，3--发货中，4--订单完成--%>
-                                    <c:choose>
-                                        <c:when test="${detail.orderStatus==0}">未支付</c:when>
-                                        <c:when test="${detail.orderStatus==1}">待发货</c:when>
-                                        <c:when test="${detail.orderStatus==2}">支付失败</c:when>
-                                        <c:when test="${detail.orderStatus==3}">待收货</c:when>
-                                        <c:when test="${detail.orderStatus==4}">订单完成</c:when>
-                                    </c:choose>
-                                </td>
+                                <c:choose>
+                                    <c:when test="${detail.orderStatus==0}"><td>未支付</td>
+                                        <td></td></c:when>
+                                    <c:when test="${detail.orderStatus==1}"><td>待发货</td>
+                                        <td></td></c:when>
+                                    <c:when test="${detail.orderStatus==2}"><td>支付失败</td>
+                                        <td></td></c:when>
+                                    <c:when test="${detail.orderStatus==3}"><td>待收货</td>
+                                        <td><button class="receive-btn">收货</button></td></c:when>
+                                    <c:when test="${detail.orderStatus==4}"><td>订单完成</td>
+                                        <td><button class="judge-btn">评价</button></td></c:when>
+                                </c:choose>
                             </tr>
                         </c:when>
                     </c:choose>
                 </c:forEach>
-                <c:choose>
+                <tr>
+                    <td colspan="5" align="center">
+                            <c:choose>
                     <%--0--未支付，1--支付成功，2--支付失败"--%>
-                    <c:when test="${order.orderStatus ==0}">
-                        <tr>
-                            <td colspan="5" align="center">
-                                <button class="btn-pay"><a href="http://localhost:8080/pay/pay.htm?peopleId=${person.id}&&orderNum=${orderNum}&&isPay=true">支    付</a></button>
-                                <button class="btn-cancel">取消订单</button>
-                            </td>
-                        </tr>
-                    </c:when>
-                    <c:when test="${order.orderStatus ==1}">
-                        <tr>
-                            <td colspan="5" align="center">
-                                <button class="btn-evalute">评    价</button>
+                            <c:when test="${order.orderStatus ==1}">
+                                <%--<button class="btn-evalute">评    价</button>--%>
                                 <button class="btn-delete">删除订单</button>
-                            </td>
-                        </tr>
-                    </c:when>
-                    <c:otherwise>
-                        <button class="btn-pay"><a href="http://localhost:8080/pay/pay.htm?peopleId=${person.id}&&orderNum=${orderNum}&&isPay=true">支    付</a></button>
+                         </c:when>
+                            <c:otherwise>
+                        <%--<a href="http://localhost:8080/pay/pay.htm?peopleId=${person.id}&&orderNum=${orderNum}&&isPay=true">--%>
+                        <button class="btn-pay">支    付</button>
                         <button class="btn-cancel">取消订单</button>
-                    </c:otherwise>
-                </c:choose>
+                        </c:otherwise>
+                        </c:choose>
+                    </td>
+                </tr>
                 <%--<tr>--%>
                     <%--<td colspan="5" align="center">--%>
                         <%--<button class="btn-evalute">评    价</button>--%>
@@ -123,7 +124,7 @@
                 <tr>
                     <td height="10px" colspan="3"></td>
                 </tr>
-                </tbody>
+            </tbody>
             </c:forEach>
             
             <%--<c:forEach var="orderDetail" items="orderDetailList" varStatus="detail_index">--%>
@@ -145,7 +146,7 @@
                     <%--&lt;%&ndash;</c:when>&ndash;%&gt;--%>
                 <%--&lt;%&ndash;</c:choose>&ndash;%&gt;--%>
             <%--</c:forEach>--%>
-            <tbody>
+            <%--<tbody>--%>
             <%--<tr>--%>
                 <%--<td>订单详情总数：${fn:length(orderDetailList)}</td>--%>
             <%--</tr>--%>
@@ -154,7 +155,7 @@
                     <%--<td>订单详情编号：${detail.orderNum}</td>--%>
                 <%--</tr>--%>
             <%--</c:forEach>--%>
-            </tbody>
+            <%--</tbody>--%>
 
             <%--<c:forEach var="orderDetail" items="orderDetailList" varStatus="detail_index">--%>
                 <%--<tr bgcolor="white">--%>
@@ -225,6 +226,31 @@
         alert(peopleId);
         window.location.href="${pageContext.request.contextPath}/action/userOrderAction!findNotReceiveOrder.do"
     });
+    $(".order-table").find(".receive-btn").click(function(){
+        var detail_id=$(this).parent("td").sibling("td.detail-id").text();
+        alert(detail_id);
+    });
+    $(".order-table").find(".judge-btn").click(function(){
+        var detail_id=$(this).parent("td").sibling("td.detail-id").text();
+        alert(detail_id);
+    });
+    $(".order-table").find(".btn-delete").click(function(){
+        var order_id=$(this).parents("tr").siblings(".order-tr").find(".order-id").text();
+        alert(order_id);
+    });
+    $(".order-table").find(".btn-pay").click(function(){
+        var order_id=$(this).parents("tr").siblings(".order-tr").find(".order-id").text();
+        var order_num=$(this).parents("tr").siblings(".order-tr").find(".order-num").text();
+        alert(order_id);
+        alert(order_num);
+        window.location.href="${pageContext.request.contextPath}/action/payMoneyAction!PayGoodsOrderShow.do?orderNum="+order_num;
+
+    });
+    $(".order-table").find("btn-cancel").click(function(){
+        var order_id=$(this).parents("tr").siblings(".order-tr").find(".order-id").text();
+        alert(order_id);
+    });
+
 </script>
 </body>
 </html>
