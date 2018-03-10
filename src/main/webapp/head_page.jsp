@@ -28,7 +28,7 @@
                onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">
                 商品分类</a></li>
             <li><a href="/mainAction!cart.do?op=list" target="_blank">购物车</a></li>
-            <li><a href="/mainAction!main.do">商城首页</a></li>
+            <li><a href="/mainAction!main.do" target="_blank">商城首页</a></li>
         </ul>
     </div>
     <div class="site-nav-two">
@@ -49,7 +49,7 @@
         <li><p><a href="/mainAction!classify.do?type=2">运动器材</a></p></li>
     </ul>
     <p class="close"><a href="javascript:void(0)"
-       onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">点击关闭本窗口</a></p>
+                        onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">点击关闭本窗口</a></p>
 </div>
 <div id="fade" class="black_overlay"></div>
 

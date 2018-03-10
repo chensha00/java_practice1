@@ -1,4 +1,4 @@
-package controller;/********************************************************************
+package controller.action;/********************************************************************
  /**
  * @Project: zyht_web
  * @Package controller
@@ -14,7 +14,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
-import service.InvertoryService;
+import service.InventoryService;
 import tools.LimitMethod;
 
 import javax.servlet.http.HttpSession;
@@ -40,10 +40,11 @@ import java.util.Map;
         @Result(name = "classify", location = "/main_page_classify.jsp"),
         @Result(name = "classifyLimit", location = "/main_page_classify.jsp"),
 })
+
 public class MainAction extends BaseAction {
 
     @Autowired
-    private InvertoryService invertoryService;
+    private InventoryService inventoryService;
 
 
     /**
@@ -56,10 +57,11 @@ public class MainAction extends BaseAction {
     public String main() {
         String result = "";
         //从数据库获取商品信息，显示在主页上
-        List<MainPage> list = invertoryService.findMainPageInvertory(0L, 20L);
-        Integer total = invertoryService.limitMainPage();
+        List<MainPage> list = inventoryService.findMainPageInventoryAll();
+        List<MainPage> list1 = list.subList(0, 20);
+        Integer total = (list.size() - 1) / 20 + 1;
         Integer present = 1;
-        req.setAttribute("mainList", list);
+        req.setAttribute("mainList", list1);
         req.setAttribute("total", total);
         req.setAttribute("present", present);
         result = "main";
@@ -77,7 +79,7 @@ public class MainAction extends BaseAction {
         String result = "";
         String present = req.getParameter("present");
         String page = req.getParameter("page");
-        List<MainPage> list = invertoryService.findMainPageInvertoryAll();
+        List<MainPage> list = inventoryService.findMainPageInventoryAll();
         Integer totalNum = list.size();
         LimitMethod limitMethod = new LimitMethod();
         Map map = limitMethod.limitMethods(present, page, totalNum);
@@ -105,13 +107,13 @@ public class MainAction extends BaseAction {
         //获取op，对其进行判断
         if ("add".equals(op)) {
             //将获取的信息储存到mainPage对象并发送
-            String invertoryId = req.getParameter("idName");
+            String inventoryId = req.getParameter("idName");
             String name = req.getParameter("nameName");
             String price = req.getParameter("priceName");
             String number = req.getParameter("numberName");
             String storeName = req.getParameter("storeNameName");
             MainPage mainPage = new MainPage();
-            mainPage.setInvertoryId(Long.valueOf(invertoryId));
+            mainPage.setinventoryId(Long.valueOf(inventoryId));
             mainPage.setName(name);
             mainPage.setPrice(Double.valueOf(price));
             mainPage.setNumber(Double.valueOf(number));
@@ -145,7 +147,7 @@ public class MainAction extends BaseAction {
         String result = "";
         String condition = req.getParameter("search");
         //从数据库获取商品信息，显示在搜索页上
-        List<MainPage> list = invertoryService.findMainPageCondition(condition);
+        List<MainPage> list = inventoryService.findMainPageCondition(condition);
         if (list != null && list.size() != 0) {
             int total = list.size();
             List<MainPage> list1 = null;
@@ -176,7 +178,7 @@ public class MainAction extends BaseAction {
     }
 
     /**
-     * @Title:searchLimit
+     * @Title:
      * @Description: 搜索分页
      * @author kang
      * @date 2018-03-08
@@ -187,7 +189,7 @@ public class MainAction extends BaseAction {
         String condition = req.getParameter("search");
         String present = req.getParameter("present");
         String page = req.getParameter("page");
-        List<MainPage> list = invertoryService.findMainPageCondition(condition);
+        List<MainPage> list = inventoryService.findMainPageCondition(condition);
         Integer totalNum = list.size();
         LimitMethod limitMethod = new LimitMethod();
         Map map = limitMethod.limitMethods(present, page, totalNum);
@@ -200,6 +202,7 @@ public class MainAction extends BaseAction {
         return result;
     }
 
+
     /**
      * @Title: classify
      * @Description: 分类查询
@@ -211,7 +214,7 @@ public class MainAction extends BaseAction {
         String result = "";
         byte type = Byte.parseByte(req.getParameter("type"));
         //从数据库获取商品信息，显示在搜索页上
-        List<MainPage> list = invertoryService.findMainPageClassify(type);
+        List<MainPage> list = inventoryService.findMainPageClassify(type);
         if (list != null && list.size() != 0) {
             int total = list.size();
             List<MainPage> list1 = null;
@@ -246,7 +249,7 @@ public class MainAction extends BaseAction {
         Byte type = Byte.valueOf(req.getParameter("type"));
         String present = req.getParameter("present");
         String page = req.getParameter("page");
-        List<MainPage> list = invertoryService.findMainPageClassify(type);
+        List<MainPage> list = inventoryService.findMainPageClassify(type);
         Integer totalNum = list.size();
         LimitMethod limitMethod = new LimitMethod();
         Map map = limitMethod.limitMethods(present, page, totalNum);

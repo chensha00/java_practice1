@@ -14,6 +14,7 @@
 <head>
     <title>store_home_page</title>
     <link href="${basePath}/css/store_home_page_css.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="${basePath}../css/head_page_css.css">
 </head>
 <body>
 <jsp:include page="head_page.jsp"></jsp:include>
@@ -29,7 +30,7 @@
                 </div>
             </div>
             <div class="store_home_delivery">
-                <a href="/StoreServletStock.htm"><h4>我要进货</h4></a>
+                <a href="${basePath}/storeSetStockAction!selectStoreGoods.do?storeId=${stores[0].id}"><h4>我要进货</h4></a>
             </div>
             <div class="store_home_delivery">
                 <a href="${basePath}/orderDetailAction!storeOrder.do?storeId=${stores[0].id}"><h4>我要发货</h4></a>
@@ -55,13 +56,18 @@
                     </div>
                     <div class="store_home_goodInfo">
                         <div class="store_home_goodName">
+                        <a href="${basePath}/storeAction!offLoading.do?peopleId=${person.id}&&inventoryId=${mainPages.inventoryId}">
+                            <input type="button" value="商品下架" />
+                            </a>
+                            <a href="javascript:void(0)"
+                               onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">
+                                <input type="button" value="商品调价" /></a>
+                        </div>
+                        <div class="store_home_goodName">
                                 ${mainPages.name}
                         </div>
                         <div class="store_home_goodPrice">
                                 ${mainPages.price}
-                        </div>
-                        <div class="store_home_goodName">
-                            商品下架
                         </div>
                     </div>
                 </div>
@@ -88,5 +94,17 @@
         </div>
     </div>
 </div>
+<%--分类悬浮框--%>
+<div id="light" class="white_content">
+    <ul>
+        <li><a>电脑</a></li>
+        <li><a>清洁用品</a></li>
+        <li><a>服装</a></li>
+        <li><a>运动器材</a></li>
+    </ul>
+    <a href="javascript:void(0)"
+       onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">点击关闭本窗口</a>
+</div>
+<div id="fade" class="black_overlay"></div>
 </body>
 </html>

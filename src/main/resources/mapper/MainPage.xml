@@ -3,8 +3,7 @@
 <mapper namespace="Entity.MainPage">
 
     <resultMap id="mainPage" type="Entity.MainPage">
-        <!--<result property="invertoryId" column="INVERTORY.ID" jdbcType="BIGINT" javaType="java.lang.Long"/>-->
-        <!--<result property="invertoryId" column="GOODS.TYPE" jdbcType="BIGINT" javaType="java.lang.Long"/>-->
+        <result property="inventoryId" column="ID" jdbcType="BIGINT" javaType="java.lang.Long"/>
         <result property="price" column="PRICE" jdbcType="DECIMAL" javaType="java.lang.Double"/>
         <result property="number" column="NUMBER" jdbcType="DOUBLE" javaType="java.lang.Double"/>
         <result property="name" column="NAME" jdbcType="VARCHAR" javaType="java.lang.String"/>
@@ -12,62 +11,62 @@
     </resultMap>
 
     <!--查询所有显示的数据-->
-    <select id="findMainPageInvertoryAll" resultType="java.util.Map" resultMap="mainPage">
+    <select id="findMainPageInventoryAll" resultType="java.util.Map" resultMap="mainPage">
         SELECT
-        invertory.ID,PRICE,NUMBER,NAME,STORE_NAME
-        FROM GOODS,STORE,INVERTORY
-        WHERE INVERTORY.STORE_ID = STORE.ID
-        AND INVERTORY.GOODS_ID = GOODS.ID
+        INVENTORY.ID,PRICE,NUMBER,NAME,STORE_NAME
+        FROM GOODS,STORE,inventory
+        WHERE INVENTORY.STORE_ID = STORE.ID
+        AND INVENTORY.GOODS_ID = GOODS.ID
         AND NUMBER > 0
-        GROUP BY INVERTORY.ID
-    </select>
-
-    <!--查询分类显示的数据-->
-    <select id="findMainPageClassify" resultType="java.util.Map" resultMap="mainPage">
-        SELECT
-        invertory.ID,PRICE,NUMBER,NAME,STORE_NAME
-        FROM GOODS,STORE,INVERTORY
-        WHERE INVERTORY.STORE_ID = STORE.ID
-        AND INVERTORY.GOODS_ID = GOODS.ID
-        AND NUMBER > 0
-        AND GOODS.TYPE=#{type}
-        GROUP BY INVERTORY.ID
+        GROUP BY inventory.ID
     </select>
 
     <!--查询所有显示的数据-->
     <select id="findMainPageByStoreId" resultType="java.util.Map" resultMap="mainPage">
         SELECT
-        invertory.ID,PRICE,NUMBER,NAME,STORE_NAME
-        FROM GOODS,STORE,INVERTORY
-        WHERE INVERTORY.STORE_ID = STORE.ID
-        AND INVERTORY.GOODS_ID = GOODS.ID
+        INVENTORY.ID,PRICE,NUMBER,NAME,STORE_NAME
+        FROM GOODS,STORE,inventory
+        WHERE INVENTORY.STORE_ID = STORE.ID
+        AND INVENTORY.GOODS_ID = GOODS.ID
         AND NUMBER > 0
         AND STORE.ID=#{storeId}
     </select>
 
-    <!--查询指定分页显示的数据-->
-    <select id="findMainPageInvertory" resultType="java.util.Map" resultMap="mainPage">
+    <!--查询分类显示的数据-->
+    <select id="findMainPageClassify" resultType="java.util.Map" resultMap="mainPage">
         SELECT
-        invertory.ID,PRICE,NUMBER,NAME,STORE_NAME
-        FROM GOODS,STORE,INVERTORY
-        WHERE INVERTORY.STORE_ID = STORE.ID
-        AND INVERTORY.GOODS_ID = GOODS.ID
+        INVENTORY.ID,PRICE,NUMBER,NAME,STORE_NAME
+        FROM GOODS,STORE,INVENTORY
+        WHERE INVENTORY.STORE_ID = STORE.ID
+        AND INVENTORY.GOODS_ID = GOODS.ID
         AND NUMBER > 0
-        GROUP BY INVERTORY.ID
+        AND GOODS.TYPE=#{type}
+        GROUP BY INVENTORY.ID
+    </select>
+
+    <!--查询指定分页显示的数据-->
+    <select id="findMainPageInventory" resultType="java.util.Map" resultMap="mainPage">
+        SELECT
+        INVENTORY.ID,PRICE,NUMBER,NAME,STORE_NAME
+        FROM GOODS,STORE,inventory
+        WHERE INVENTORY.STORE_ID = STORE.ID
+        AND INVENTORY.GOODS_ID = GOODS.ID
+        AND NUMBER > 0
+        GROUP BY INVENTORY.ID
         LIMIT #{start},#{end}
     </select>
 
     <!--条件查询-->
     <select id="findMainPageCondition" resultType="java.util.Map" resultMap="mainPage">
         SELECT
-        invertory.ID,PRICE,NUMBER,NAME,STORE_NAME
-        FROM GOODS,STORE,INVERTORY
-        WHERE INVERTORY.STORE_ID = STORE.ID
-        AND INVERTORY.GOODS_ID = GOODS.ID
+        INVENTORY.ID,PRICE,NUMBER,NAME,STORE_NAME
+        FROM GOODS,STORE,inventory
+        WHERE INVENTORY.STORE_ID = STORE.ID
+        AND INVENTORY.GOODS_ID = GOODS.ID
         AND NUMBER > 0
         AND NAME LIKE CONCAT('%',#{condition},'%')
 		OR STORE_NAME LIKE CONCAT('%',#{condition},'%')
-        GROUP BY invertory.ID
+        GROUP BY inventory.ID
     </select>
 
 

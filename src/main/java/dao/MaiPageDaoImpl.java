@@ -26,30 +26,30 @@ import java.util.Map;
 public class MaiPageDaoImpl extends BaseDaoImpl<MainPage> implements MainPageDao {
 
     /**
-     * @Title: findMainPageInvertoryAll
+     * @Title: findMainPageInventoryAll
      * @Description: 查询所有订单的价格，数量，以及商品的ID
      * @author liukang
      * @date
      * @throw SQLException
      */
     @Override
-    public List<MainPage> findMainPageInvertoryAll() {
-        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findMainPageInvertoryAll");
+    public List<MainPage> findMainPageInventoryAll() {
+        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findMainPageInventoryAll");
     }
 
     /**
-     * @Title: findMainPageInvertory
+     * @Title: findMainPageInventory
      * @Description: 查询指定订单的价格，数量，以及商品的ID
      * @author liukang
      * @date
      * @throw SQLException
      */
     @Override
-    public List<MainPage> findMainPageInvertory(Long start, Long end) {
+    public List<MainPage> findMainPageInventory(Long start,Long end) {
         Map map = new HashMap();
-        map.put("start", start);
+        map.put("start",start);
         map.put("end", end);
-        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findMainPageInvertory", map);
+        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findMainPageInventory",map);
     }
 
     /**
@@ -63,7 +63,6 @@ public class MaiPageDaoImpl extends BaseDaoImpl<MainPage> implements MainPageDao
     public List<MainPage> findMainPageCondition(String condition) {
         return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findMainPageCondition", condition);
     }
-
     /**
      * @Title: findMainPageByStoreId
      * @Description: 根据商品id查找商品信息
@@ -88,7 +87,5 @@ public class MaiPageDaoImpl extends BaseDaoImpl<MainPage> implements MainPageDao
     public List<MainPage> findMainPageClassify(Byte type) {
         return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findMainPageClassify", type);
     }
-
-    ;
 
 }

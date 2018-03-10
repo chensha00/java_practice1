@@ -56,7 +56,7 @@
                 <input type="hidden" name="nameName" value="${entry.name}">
                 <input type="hidden" name="numberName" value="${entry.number}">
                 <input type="hidden" name="storeNameName" value="${entry.storeName}">
-                <input type="hidden" name="idName" value="${entry.invertoryId}">
+                <input type="hidden" name="idName" value="${entry.inventoryId}">
             </form>
         </c:forEach>
         <iframe name="posthere" frameborder=0 width=0 height=0></iframe>
