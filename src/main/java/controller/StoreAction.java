@@ -64,9 +64,6 @@ public class StoreAction extends BaseAction{
 
         HttpSession session = req.getSession();
         Long  peopleId =Long.valueOf(req.getParameter("peopleId"));
-        if (peopleId == null){
-            peopleId = (Long) req.getAttribute("peopleId");
-        }
         String result = "";
 
         try {
@@ -106,22 +103,32 @@ public class StoreAction extends BaseAction{
      * @date
      */
 
-    public String offLoading(){
-        //接收数据（库存ID）
-        Long invertoryId =Long.valueOf(req.getParameter("invertoryId"));
-        Long peopleId = Long.valueOf(req.getParameter("peopleId"));
+    public String OffLoading(){
+        //接收数据（商品信息和店铺信息）
+        Long storeId =(Long)req.getAttribute("storeId");
+        Long goodId =(Long)req.getAttribute("goodId");
+        Long peopleId =(Long)req.getAttribute("peopleId");
+
         //定义返回字符串
         String result="";
 
-        Invertory invertory = invertoryService.findInvertoryById(invertoryId);
-        int res =  invertoryService.deleteInvertoryById(invertory.getId());
-        if (res!=0){
-            req.setAttribute("peopleId",peopleId);
-            System.out.println("下架成功");
-            result = "offLoadingSuccess";
-        }else{
-            System.out.println("出现错误");
-            result ="error";
+        //通过两个id查找库存表，获取该条记录的库存id
+        List<Map<String,Object>> map = new ArrayList<Map<String,Object>>();
+        map.add(AddConditionUtils.addCondition("store_id", "=", storeId));
+        map.add(AddConditionUtils.addCondition("good_id", "=", goodId));
+        try {
+            List<Invertory> invertory = invertoryService.findInvertoryByUnSureCondition(map);
+            int res =  invertoryService.deleteInvertoryById(invertory.get(0).getId());
+            if (res!=0){
+                System.out.println("下架成功");
+                req.setAttribute("peopleId",peopleId);
+                result = "offLoadingSuccess";
+            }else{
+                System.out.println("出现错误");
+                result ="error";
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return result;
