@@ -277,7 +277,7 @@ public class PeopleServiceImpl implements PeopleService {
                 //生成流水信息
                 PayFlow payFlow1 = new PayFlow(flowNum1, orderDetailList.get(i).getStore().getPeopleId(), orderDetailList.get(i).getGoodsAmount(), (byte) 2, new Date(), orderDetailList.get(i).getId(), orderDetailList.get(i).getGoodsOrderId());
                 orderDetailService.updateOrderDetailById(orderDetailList.get(i).getId(), orderDetailList.get(i));
-                payFlowService.savePayFlow(payFlow1);
+                int index=payFlowService.savePayFlow(payFlow1);
             }
             return true;
         } else {
@@ -319,9 +319,9 @@ public class PeopleServiceImpl implements PeopleService {
      * @return: 是否增加成功
      */
     public Boolean ascMoney(Long peopleId, Double money) {
-        People people = new PeopleServiceImpl().findPeopleById(peopleId);
+        People people = this.findPeopleById(peopleId);
         people.setMoney(people.getMoney() + money);
-        Integer number = new PeopleServiceImpl().updatePeople(people);
+        Integer number = this.updatePeople(people);
         if (number > 0) {
             return true;
         } else {
