@@ -14,6 +14,7 @@
 <head>
     <title>store_home_page</title>
     <link href="${basePath}/css/store_home_page_css.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="${basePath}../css/head_page_css.css">
 </head>
 <body>
 <jsp:include page="head_page.jsp"></jsp:include>
@@ -57,7 +58,10 @@
                         <div class="store_home_goodName">
                         <a href="${basePath}/storeAction!offLoading.do?peopleId=${person.id}&&invertoryId=${mainPages.invertoryId}">
                             <input type="button" value="商品下架" />
-                        </a>
+                            </a>
+                            <a href="javascript:void(0)"
+                               onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">
+                                <input type="button" value="商品调价" /></a>
                         </div>
                         <div class="store_home_goodName">
                                 ${mainPages.name}
@@ -90,5 +94,17 @@
         </div>
     </div>
 </div>
+<%--分类悬浮框--%>
+<div id="light" class="white_content">
+    <ul>
+        <li><a>电脑</a></li>
+        <li><a>清洁用品</a></li>
+        <li><a>服装</a></li>
+        <li><a>运动器材</a></li>
+    </ul>
+    <a href="javascript:void(0)"
+       onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">点击关闭本窗口</a>
+</div>
+<div id="fade" class="black_overlay"></div>
 </body>
 </html>
