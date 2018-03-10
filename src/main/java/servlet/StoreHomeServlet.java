@@ -10,13 +10,14 @@ package servlet;/***************************************************************
 
 import common.util.AddConditionUtils;
 import common.util.SpringContextUtil;
-import dao.StoreDao;
-import dao.StoreDaoImpl;
 import domain.Goods;
 import domain.Invertory;
 import domain.People;
 import domain.Store;
-import service.*;
+import service.GoodsService;
+import service.InvertoryService;
+import service.PeopleService;
+import service.StoreService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -41,7 +42,7 @@ public class StoreHomeServlet extends HttpServlet {
 
     StoreService storeService = (StoreService) SpringContextUtil.getBean("storeService");
 
-    InvertoryService invertoryService = (InvertoryService) SpringContextUtil.getBean("invertoryService");
+    InvertoryService inventoryService = (InvertoryService) SpringContextUtil.getBean("inventoryService");
 
     GoodsService goodsService = (GoodsService) SpringContextUtil.getBean("goodsService");
 
@@ -73,7 +74,7 @@ public class StoreHomeServlet extends HttpServlet {
                     List<Invertory> invertories = new ArrayList<Invertory>();
                     List<Map<String,Object>> map2 = new ArrayList<Map<String,Object>>();
                     map2.add(AddConditionUtils.addCondition("store_id","=",stores.get(0).getId()));
-                    invertories = invertoryService.findInvertoryByUnSureCondition(map2);
+                    invertories = inventoryService.findInventoryByUnSureCondition(map2);
                     //再根据库存编号中的商品id查找商品信息
                     List<Goods> goods = new ArrayList<Goods>();
                     for (int i = 0; i < invertories.size() ; i++) {
@@ -84,7 +85,7 @@ public class StoreHomeServlet extends HttpServlet {
                     }
                     session.setAttribute("stores",stores);
                     session.setAttribute("peoples",people);
-                    session.setAttribute("invertorys",invertories);
+                    session.setAttribute("inventorys",invertories);
                     session.setAttribute("goods",goods);
                     req.getRequestDispatcher("../store_home_page.jsp").forward(req,resp);
 

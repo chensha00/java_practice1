@@ -9,9 +9,11 @@ package servlet;/***************************************************************
  */
 
 import common.util.SpringContextUtil;
-import domain.Invertory;
 import domain.Store;
-import service.*;
+import service.GoodsService;
+import service.InvertoryService;
+import service.PeopleService;
+import service.StoreService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -33,7 +35,7 @@ public class OpenStoreServlet extends HttpServlet {
 
     StoreService storeService = (StoreService) SpringContextUtil.getBean("storeService");
 
-    InvertoryService invertoryService = (InvertoryService) SpringContextUtil.getBean("invertoryService");
+    InvertoryService inventoryService = (InvertoryService) SpringContextUtil.getBean("inventoryService");
 
     GoodsService goodsService = (GoodsService) SpringContextUtil.getBean("goodsService");
     @Override

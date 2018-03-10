@@ -40,7 +40,7 @@ public class payMoneyServlet extends HttpServlet {
     PeopleService peopleService = (PeopleService) SpringContextUtil.getBean("peopleService");
     GoodsOrderService goodsOrderService = (GoodsOrderService) SpringContextUtil.getBean("goodsOrderService");
     OrderDetailService orderDetailService = (OrderDetailService) SpringContextUtil.getBean("orderDetailService");
-    InvertoryDao invertoryDao = (InvertoryDao) SpringContextUtil.getBean("invertoryDao");
+    InvertoryDao inventoryDao = (InvertoryDao) SpringContextUtil.getBean("inventoryDao");
 
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

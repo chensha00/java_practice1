@@ -20,7 +20,7 @@ import java.util.Map;
 
 /**
  * @author liukang
- * @InterfaceName InvertoryService
+ * @InterfaceName InventoryService
  * @Description 库存 操作 接口
  * @date 2018/1/25
  */
@@ -29,35 +29,35 @@ public interface InvertoryService {
 
 
     /**
-     * @Title: saveInvertory
+     * @Title: saveInventory
      * @Description: 保存库存信息
      * @author yanyong
      * @date 2018-01-25
-     * @param: invertory 库存对象
+     * @param: inventory 库存对象
      * @return: 受影响行数
      */
-    public Integer saveInvertory(Invertory invertory);
+    public Integer saveInventory(Invertory inventory);
 
     /**
-     * @Title: findInvertoryById
+     * @Title: findInventoryById
      * @Description: 查找库存信息通过指定id
      * @author yanyong
      * @date 2018-01-25
      * @param: id 指定id
      * @return: 库存对象
      */
-    public Invertory findInvertoryById(Long id);
+    public Invertory findInventoryById(Long id);
 
 
     /**
-     * @Title: deleteInvertoryById
+     * @Title: deleteInventoryById
      * @Description: 删除库存信息 通过指定id
      * @author yanyong
      * @date 2018-01-25
      * @param: id 指定id
      * @return: 受影响行数
      */
-    public Integer deleteInvertoryById(Long id);
+    public Integer deleteInventoryById(Long id);
 
     /**
      * @Title: updateInvertorById
@@ -65,12 +65,12 @@ public interface InvertoryService {
      * @author yanyong
      * @date 2018-01-25
      * @param: id 指定id
-     * @param: invertory 库存对象
+     * @param: inventory 库存对象
      * @return: 受影响行数
      */
 
 
-    public Integer updateInvertorById(Long id, Invertory invertory);
+    public Integer updateInvertorById(Long id, Invertory inventory);
 
     /**
      * @Title: changeGoodsNumberById
@@ -127,50 +127,50 @@ public interface InvertoryService {
      * @param: num 数量
      * @return: 计算金额
      */
-    public Double calculationMoney(Invertory invertory, Double num);
+    public Double calculationMoney(Invertory inventory, Double num);
 
     /**
-     * @Title: showInvertory
+     * @Title: showInventory
      * @Description: 查看库存信息
      * @author yanyong
      * @date 2018-01-26
      * @throw YnCorpSysException
      * @param: 库存对象
      */
-    public void showInvertory(Invertory invertory);
+    public void showInventory(Invertory inventory);
 
     /**
      * @param storeId:商铺id
      * @param goodsId：商铺id
-     * @Title: findInvertoryByStoreIdAndGoodId
+     * @Title: findInventoryByStoreIdAndGoodId
      * @Description: 根据商铺id和商铺id查找库存信息
      * @author hzq
      * @date 2018-01-26
      * @throw RuntimeException
      */
-    public Invertory findInvertoryByStoreIdAndGoodsId(Long storeId, Long goodsId) throws SQLException;
+    public Invertory findInventoryByStoreIdAndGoodsId(Long storeId, Long goodsId) throws SQLException;
 
 
     /**
      * @param map 条件和值对应key和value
-     * @Title: findMainPageInvertory
-     * @Title: findInvertoryByUnSureCondition
+     * @Title: findMainPageInventory
+     * @Title: findInventoryByUnSureCondition
      * @Description: 通过商铺id查找库存信息
      * @author hzq
      * @date 2018/01/30
      * @throw SQLException
      */
-    public List<Invertory> findInvertoryByUnSureCondition(List<Map<String, Object>> map) throws SQLException;
+    public List<Invertory> findInventoryByUnSureCondition(List<Map<String, Object>> map) throws SQLException;
 
 
     /**
-     * @Title: findMainPageInvertory
+     * @Title: findMainPageInventory
      * @Description: 查询所有订单的价格，数量，以及商品的ID
      * @author liukang
      * @date
      * @throw YnCorpSysException
      */
-    public List<MainPage> findMainPageInvertory(Long start,Long end);
+    public List<MainPage> findMainPageInventory(Long start,Long end);
 
     /**
      * @Title: findMainPageCondition
@@ -190,14 +190,14 @@ public interface InvertoryService {
     public List<MainPage> findMainPageByStoreId(Long storeId);
 
     /**
-     * @Title: findInvertoryById
+     * @Title: findInventoryById
      * @Description: 查找库存信息通过指定id
      * @author yanyong
      * @date 2018-01-25
      * @param: id 指定id
      * @return: 库存对象
      */
-    public List<Invertory> findInvertoryAll();
+    public List<Invertory> findInventoryAll();
 
     /**
      * @Title: limitMainPage
@@ -209,12 +209,12 @@ public interface InvertoryService {
     public Integer limitMainPage();
 
     /**
-     * @Title: findMainPageInvertoryAll
+     * @Title: findMainPageInventoryAll
      * @Description: 查询所有订单的价格，数量，以及商品的ID
      * @author liukang
      * @date
      * @throw SQLException
      */
-    public List<MainPage> findMainPageInvertoryAll();
+    public List<MainPage> findMainPageInventoryAll();
 
 }

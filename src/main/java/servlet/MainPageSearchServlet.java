@@ -31,7 +31,7 @@ import java.util.List;
 public class MainPageSearchServlet extends HttpServlet {
 
     @Autowired
-    private InvertoryService invertoryService;
+    private InvertoryService inventoryService;
 
 
     @Override
@@ -54,9 +54,9 @@ public class MainPageSearchServlet extends HttpServlet {
 
         //获取信息
         String condition = req.getParameter("search");
-        InvertoryService invertoryService = (InvertoryService) SpringContextUtil.getBean("invertoryService");
+        InvertoryService inventoryService = (InvertoryService) SpringContextUtil.getBean("inventoryService");
         //从数据库获取商品信息，显示在主页上
-        List<MainPage> list = invertoryService.findMainPageCondition(condition);
+        List<MainPage> list = inventoryService.findMainPageCondition(condition);
 
         HttpSession session = req.getSession();
         session.setAttribute("mainList", list);

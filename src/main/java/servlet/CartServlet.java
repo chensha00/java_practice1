@@ -66,13 +66,13 @@ public class CartServlet extends HttpServlet {
      */
     public void add(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        String invertoryId = req.getParameter("idName");
+        String inventoryId = req.getParameter("idName");
         String name = req.getParameter("nameName");
         String price = req.getParameter("priceName");
         String number = req.getParameter("numberName");
         String storeName = req.getParameter("storeNameName");
         MainPage mainPage = new MainPage();
-        mainPage.setInvertoryId(Long.valueOf(invertoryId));
+        mainPage.setInventoryId(Long.valueOf(inventoryId));
         mainPage.setName(name);
         mainPage.setPrice(Double.valueOf(price));
         mainPage.setNumber(Double.valueOf(number));
