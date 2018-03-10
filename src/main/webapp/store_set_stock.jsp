@@ -69,16 +69,37 @@
                                 ${iAndGoods[0].number}
                             </td>
                             <td>
-                                <input type="text" name="inNumber" class="inNumber">
+                                <input type="text" name="inNumber">
                             </td>
                         </tr>
                     </c:forEach>
                 </c:if>
                 <input type="submit" value="添加商品">
-                <input type="submit" value="提交进货">
+                <input type="submit" value="提交进货" class="stock">
             </form>
         </table><br/>
     </div>
 </div>
+<script type="text/javascript">
+    $(".stock").click(function(){
+        var stockNum=document.getElementsByName("inNumber")[0].value;
+        $.ajax({
+            type:"post",
+            dataType:"json",
+            data:{
+                stockNum:stockNum
+            },
+            url:"${basePath}/storeSetStockAction!storeSetStock.do",
+            success:function (x) {
+                alert("进货成功！！！");
+                window.location.replace("${basePath}/storeSetStockAction!storeSetStock.do");
+            },
+            error:function(XMLResponse){
+                alert("发货失败！！！")
+            }
+        })
+
+    })
+</script>
 </body>
 </html>

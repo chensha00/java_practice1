@@ -89,6 +89,19 @@ public class StoreSetStockAction  extends BaseAction {
      * @date
      */
     public String storeSetStock(){
+        //设置编码集
+        try {
+            req.setCharacterEncoding("utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        resp.setCharacterEncoding("utf-8");
+
+
+
+
+
+
         return "storeSetStock";
     }
 }
