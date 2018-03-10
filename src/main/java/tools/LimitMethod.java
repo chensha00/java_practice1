@@ -88,7 +88,7 @@ public class LimitMethod {
                     break out;
                 }
             }
-            int aLong = start / 20 + 1;
+            int aLong = (start - 1) / 20 + 1;
             present = Integer.parseInt(String.valueOf(aLong));
         }
         map.put("start", start);
