@@ -26,30 +26,30 @@ import java.util.Map;
 public class MaiPageDaoImpl extends BaseDaoImpl<MainPage> implements MainPageDao {
 
     /**
-     * @Title: findMainPageInventoryAll
+     * @Title: findMainPageInvertoryAll
      * @Description: 查询所有订单的价格，数量，以及商品的ID
      * @author liukang
      * @date
      * @throw SQLException
      */
     @Override
-    public List<MainPage> findMainPageInventoryAll() {
-        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findMainPageInventoryAll");
+    public List<MainPage> findMainPageInvertoryAll() {
+        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findMainPageInvertoryAll");
     }
 
     /**
-     * @Title: findMainPageInventory
+     * @Title: findMainPageInvertory
      * @Description: 查询指定订单的价格，数量，以及商品的ID
      * @author liukang
      * @date
      * @throw SQLException
      */
     @Override
-    public List<MainPage> findMainPageInventory(Long start,Long end) {
+    public List<MainPage> findMainPageInvertory(Long start,Long end) {
         Map map = new HashMap();
         map.put("start",start);
         map.put("end", end);
-        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findMainPageInventory",map);
+        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findMainPageInvertory",map);
     }
 
     /**

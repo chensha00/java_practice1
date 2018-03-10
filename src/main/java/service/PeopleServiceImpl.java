@@ -39,7 +39,7 @@ public class PeopleServiceImpl implements PeopleService {
     private GoodsOrderService goodsOrderService;
 
     @Autowired
-    private InvertoryService inventoryService;
+    private InvertoryService invertoryService;
 
     @Autowired
     private OrderDetailService orderDetailService;
@@ -157,10 +157,10 @@ public class PeopleServiceImpl implements PeopleService {
             throw new PeopleException("数据错误，无法购买");
         }
         for (int i = 0; i < idList.size(); i++) {
-            if (inventoryService.judgeNumberIsEnough(idList.get(i), buyNumList.get(i)) == true) {
+            if (invertoryService.judgeNumberIsEnough(idList.get(i), buyNumList.get(i)) == true) {
                 System.out.println("库存Id:" + idList.get(i));
-                Invertory inventory = inventoryService.findInventoryById(idList.get(i));
-                Double goodsMoney = inventoryService.calculationMoney(inventory, buyNumList.get(i));
+                Invertory invertory = invertoryService.findInvertoryById(idList.get(i));
+                Double goodsMoney = invertoryService.calculationMoney(invertory, buyNumList.get(i));
                 goodsMoneyList.add(goodsMoney);
                 sumMoney = sumMoney + goodsMoney;
             } else {
@@ -175,13 +175,13 @@ public class PeopleServiceImpl implements PeopleService {
 
         for (int i = 0; i < idList.size(); i++) {
             String orderDetailNum = "OD" + System.currentTimeMillis();
-            Invertory inventory = inventoryService.findInventoryById(idList.get(i));
+            Invertory invertory = invertoryService.findInvertoryById(idList.get(i));
             Long buyerId = goodsOrder.getPeopleId();
-            Long storeId = inventory.getStoreId();
-            Long goodsId = inventory.getGoodsId();
+            Long storeId = invertory.getStoreId();
+            Long goodsId = invertory.getGoodsId();
             Long goodsOrderId = goodsOrder.getId();
             Double number = buyNumList.get(i);
-            Double goodsPrice = inventory.getPrice();
+            Double goodsPrice = invertory.getPrice();
             Double goodsAmount = goodsMoneyList.get(i);
             OrderDetail orderDetail = new OrderDetail(orderDetailNum, buyerId, storeId, goodsId, goodsOrderId, number, goodsPrice, goodsAmount);
             Integer number2 = orderDetailService.saveOrderDetail(orderDetail);

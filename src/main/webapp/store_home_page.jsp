@@ -55,7 +55,7 @@
                     </div>
                     <div class="store_home_goodInfo">
                         <div class="store_home_goodName">
-                        <a href="${basePath}/storeAction!offLoading.do?peopleId=${person.id}&&inventoryId=${mainPages.inventoryId}">
+                        <a href="${basePath}/storeAction!offLoading.do?peopleId=${person.id}&&invertoryId=${mainPages.invertoryId}">
                             <input type="button" value="商品下架" />
                         </a>
                         </div>

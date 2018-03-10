@@ -10,7 +10,7 @@ package domain;/****************************************************************
 
 /**
  * @author liukang
- * @ClassName Inventory
+ * @ClassName Invertory
  * @Description 库存实体类
  * @date 2018/1/25
  */

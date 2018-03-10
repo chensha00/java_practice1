@@ -24,11 +24,11 @@ import java.util.Map;
 
 /**
  * @author liukang
- * @ClassName InventoryDaoImpl
- * @Description 库存数据库操作类实现InventoryDao
+ * @ClassName InvertoryDaoImpl
+ * @Description 库存数据库操作类实现InvertoryDao
  * @date 2018/1/25
  */
-@Repository("inventoryDao")
+@Repository("invertoryDao")
 public class InvertoryDaoImpl extends BaseDaoImpl<Invertory> implements InvertoryDao {
 
     @Autowired
@@ -41,23 +41,23 @@ public class InvertoryDaoImpl extends BaseDaoImpl<Invertory> implements Invertor
     private StoreService storeService;
 
     @Autowired
-    private InvertoryService inventoryService;
+    private InvertoryService invertoryService;
 
     /**
-     * @Title: saveInventory
+     * @Title: saveInvertory
      * @Description: 保存库存信息
      * @author yanyong
      * @date 2018-01-25
-     * @param: inventory 库存对象
+     * @param: invertory 库存对象
      * @return: 受影响行数
      */
     @Override
-    public Integer saveInventory(Invertory inventory) {
-        return this.sqlSessionTemplate.insert(getMybaitsNameSpace() + "saveInventory", inventory);
+    public Integer saveInvertory(Invertory invertory) {
+        return this.sqlSessionTemplate.insert(getMybaitsNameSpace() + "saveInvertory", invertory);
     }
 
     /**
-     * @Title: findInventoryById
+     * @Title: findInvertoryById
      * @Description: 查找库存信息通过指定id
      * @author yanyong
      * @date 2018-01-25
@@ -65,12 +65,12 @@ public class InvertoryDaoImpl extends BaseDaoImpl<Invertory> implements Invertor
      * @return: 库存对象
      */
     @Override
-    public Invertory findInventoryById(Long id) {
-        return this.sqlSessionTemplate.selectOne(getMybaitsNameSpace() + "findInventoryById",id);
+    public Invertory findInvertoryById(Long id) {
+        return this.sqlSessionTemplate.selectOne(getMybaitsNameSpace() + "findInvertoryById",id);
     }
 
     /**
-     * @Title: findInventoryById
+     * @Title: findInvertoryById
      * @Description: 查找库存信息通过指定id
      * @author yanyong
      * @date 2018-01-25
@@ -78,12 +78,12 @@ public class InvertoryDaoImpl extends BaseDaoImpl<Invertory> implements Invertor
      * @return: 库存对象
      */
     @Override
-    public List<Invertory> findInventoryAll() {
-        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findInventoryAll");
+    public List<Invertory> findInvertoryAll() {
+        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findInvertoryAll");
     }
 
     /**
-     * @Title: deleteInventoryById
+     * @Title: deleteInvertoryById
      * @Description: 删除库存信息 通过指定id
      * @author yanyong
      * @date 2018-01-25
@@ -91,8 +91,8 @@ public class InvertoryDaoImpl extends BaseDaoImpl<Invertory> implements Invertor
      * @return: 受影响行数
      */
     @Override
-    public Integer deleteInventoryById(Long id) throws SQLException {
-        return this.sqlSessionTemplate.delete(getMybaitsNameSpace() + "deleteInventoryById", id);
+    public Integer deleteInvertoryById(Long id) throws SQLException {
+        return this.sqlSessionTemplate.delete(getMybaitsNameSpace() + "deleteInvertoryById", id);
     }
 
     /**
@@ -101,13 +101,13 @@ public class InvertoryDaoImpl extends BaseDaoImpl<Invertory> implements Invertor
      * @author yanyong
      * @date 2018-01-25
      * @param: id 指定id
-     * @param: inventory 库存对象
+     * @param: invertory 库存对象
      * @return: 受影响行数
      */
     @Override
-    public Integer updateInvertorById(Long id, Invertory inventory) throws SQLException {
+    public Integer updateInvertorById(Long id, Invertory invertory) throws SQLException {
         Map map=new HashMap();
-        map.put("inventory", inventory);
+        map.put("invertory", invertory);
         map.put("id", id);
         return this.sqlSessionTemplate.update(getMybaitsNameSpace() + "updateInvertorById", map);
     }
@@ -115,31 +115,31 @@ public class InvertoryDaoImpl extends BaseDaoImpl<Invertory> implements Invertor
     /**
      * @param storeId:商铺id
      * @param goodsId：商品id
-     * @Title: findInventoryByStoreIdAndGoodId
+     * @Title: findInvertoryByStoreIdAndGoodId
      * @Description: 根据商铺id和商品id查找库存信息
      * @author hzq
      * @date 2018-01-26
      * @throw RuntimeException
      */
     @Override
-    public Invertory findInventoryByStoreIdAndGoodsId(Long storeId, Long goodsId) {
+    public Invertory findInvertoryByStoreIdAndGoodsId(Long storeId, Long goodsId) {
         Map map = new HashMap();
         map.put("storeId",storeId);
         map.put("goodsId", goodsId);
-        return this.sqlSessionTemplate.selectOne(getMybaitsNameSpace() + "findInventoryByStoreIdAndGoodsId",map);
+        return this.sqlSessionTemplate.selectOne(getMybaitsNameSpace() + "findInvertoryByStoreIdAndGoodsId",map);
     }
 
     /**
      * @param map 条件和值对应key和value
-     * @Title: findInventoryByUnSureCondition
+     * @Title: findInvertoryByUnSureCondition
      * @Description: 通过商铺id查找库存信息
      * @author hzq
      * @date 2018/01/30
      * @throw SQLException
      */
-    public List<Invertory> findInventoryByUnSureCondition(List<Map<String, Object>> map)
+    public List<Invertory> findInvertoryByUnSureCondition(List<Map<String, Object>> map)
             throws SQLException {
-        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findInventoryByUnSureCondition",map);
+        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findInvertoryByUnSureCondition",map);
     }
 
 }

@@ -8,6 +8,7 @@ package service;/***************************************************************
  * @version V1.0
  */
 
+import common.util.DataSourceUtils;
 import dao.StoreDao;
 import domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tools.StateEnum;
 
+import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,7 +43,7 @@ public class StoreServiceImpl implements StoreService {
     private PeopleService peopleService;
 
     @Autowired
-    private InvertoryService inventoryService;
+    private InvertoryService invertoryService;
 
     @Autowired
     private OrderDetailService orderDetailService;
@@ -215,21 +217,21 @@ public class StoreServiceImpl implements StoreService {
         //商铺要进的货物或许是多个
         for (int i = 0; i < goods.size(); i++) {
             //对商品进行查找，判断该商品是否有或者有但是商品所属店铺不是该商铺，就执行添加操作
-            Invertory inventory = new Invertory();
+            Invertory invertory = new Invertory();
             //根据商铺id和商品id查找库存
             try {
-                inventory = inventoryService.findInventoryByStoreIdAndGoodsId(store.getId(), goods.get(i).getId());
+                invertory = invertoryService.findInvertoryByStoreIdAndGoodsId(store.getId(), goods.get(i).getId());
             } catch (SQLException e) {
                 e.printStackTrace();
             }
             //将查找出来的商品进行判断
-            if (inventory.getId() != null) {
+            if (invertory.getId() != null) {
                 //如果有库存则判定商铺之前进过这个货
-                double newNumber = inventory.getNumber().doubleValue() + number[i].doubleValue();
-                inventory.setNumber(newNumber);
+                double newNumber = invertory.getNumber().doubleValue() + number[i].doubleValue();
+                invertory.setNumber(newNumber);
                 //更新商品库存
                 int rows = 0;
-                rows = inventoryService.changeGoodsNumberById(inventory.getId(), newNumber);
+                rows = invertoryService.changeGoodsNumberById(invertory.getId(), newNumber);
                 //根据rows的结果返回结果
                 if (rows != 0) {
                     result = true;
@@ -238,12 +240,12 @@ public class StoreServiceImpl implements StoreService {
                 }
             } else {
                 //如果所属商品不是进货的商铺，则添加记录
-                inventory.setGoodsId(goods.get(i).getId());
-                inventory.setNumber(number[i]);
-                inventory.setStoreId(store.getId());
-                inventory.setPrice(price[i]);
+                invertory.setGoodsId(goods.get(i).getId());
+                invertory.setNumber(number[i]);
+                invertory.setStoreId(store.getId());
+                invertory.setPrice(price[i]);
                 Integer rows = 0;
-                rows = inventoryService.saveInventory(inventory);
+                rows = invertoryService.saveInvertory(invertory);
                 //根据rows的结果返回结果
                 if (rows != 0) {
                     result = true;
@@ -274,19 +276,19 @@ public class StoreServiceImpl implements StoreService {
             throw new RuntimeException("订单已发货");
         }
         //发货是根根据订单详情发货
-        Invertory inventory = new Invertory();
+        Invertory invertory = new Invertory();
         //根据商铺id和商品id查找库存
         try {
-            inventory = inventoryService.findInventoryByStoreIdAndGoodsId(orderDetail.getStoreId(), orderDetail.getGoodsId());
+            invertory = invertoryService.findInvertoryByStoreIdAndGoodsId(orderDetail.getStoreId(), orderDetail.getGoodsId());
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        if (inventory != null) {
-            double newNumber = inventory.getNumber().doubleValue() - orderDetail.getNumber().doubleValue();
-            inventory.setNumber(newNumber);
+        if (invertory != null) {
+            double newNumber = invertory.getNumber().doubleValue() - orderDetail.getNumber().doubleValue();
+            invertory.setNumber(newNumber);
             //调用商品的更新方法
             int rows = 0;
-            rows = inventoryService.changeGoodsNumberById(inventory.getId(), newNumber);
+            rows = invertoryService.changeGoodsNumberById(invertory.getId(), newNumber);
 //            根据rows的结果返回结果
             if (rows != 0) {
                 orderDetail.setOrderStatus(StateEnum.SEND.getIndex());
