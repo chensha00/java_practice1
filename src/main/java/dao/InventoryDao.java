@@ -99,12 +99,4 @@ public interface InventoryDao {
     public List<Inventory> findInventoryByUnSureCondition(List<Map<String, Object>> map)
             throws SQLException;
 
-    /**
-     * @Title: findMainPageNum
-     * @Description: 查询库存条数
-     * @author kang
-     * @date 2018-03-08
-     * @throw YnCorpSysException
-     */
-
 }
