@@ -304,10 +304,10 @@ public class InvertoryServiceImpl implements InvertoryService {
      * @throw YnCorpSysException
      */
     @Override
-    public List<MainPage> findMainPageInvertory(Long start,Long end) {
+    public List<MainPage> findMainPageInvertory(Long start, Long end) {
         List<MainPage> mainPages = new ArrayList<MainPage>();
 
-        mainPages = mainPageDao.findMainPageInvertory(start,end);
+        mainPages = mainPageDao.findMainPageInvertory(start, end);
 
         return mainPages;
 
@@ -338,7 +338,7 @@ public class InvertoryServiceImpl implements InvertoryService {
      * @return: 库存对象
      */
     @Override
-    public List<Invertory> findInvertoryAll(){
+    public List<Invertory> findInvertoryAll() {
         return invertoryDao.findInvertoryAll();
     }
 
@@ -349,10 +349,10 @@ public class InvertoryServiceImpl implements InvertoryService {
      * @date 2018-03-08
      * @throw YnCorpSysException
      */
-    public Integer limitMainPage(){
-        List<Invertory> list=this.findInvertoryAll();
-        int count=list.size();
-        int pageNum=count/20+1;
+    public Integer limitMainPage() {
+        List<Invertory> list = this.findInvertoryAll();
+        int count = list.size();
+        int pageNum = count / 20 + 1;
         return pageNum;
     }
 
@@ -364,7 +364,21 @@ public class InvertoryServiceImpl implements InvertoryService {
      * @throw SQLException
      */
     @Override
-    public List<MainPage> findMainPageInvertoryAll(){
+    public List<MainPage> findMainPageInvertoryAll() {
         return mainPageDao.findMainPageInvertoryAll();
     }
+
+    /**
+     * @param type 商品类型
+     * @Title: findMainPageClassify
+     * @Description: 分类查询
+     * @author kang
+     * @date 2018-03-10
+     * @throw YnCorpSysException
+     */
+    @Override
+    public List<MainPage> findMainPageClassify(Byte type) {
+        return mainPageDao.findMainPageClassify(type);
+    }
+
 }

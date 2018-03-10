@@ -170,7 +170,7 @@ public interface InvertoryService {
      * @date
      * @throw YnCorpSysException
      */
-    public List<MainPage> findMainPageInvertory(Long start,Long end);
+    public List<MainPage> findMainPageInvertory(Long start, Long end);
 
     /**
      * @Title: findMainPageCondition
@@ -180,6 +180,7 @@ public interface InvertoryService {
      * @throw YnCorpSysException
      */
     public List<MainPage> findMainPageCondition(String condition);
+
     /**
      * @Title: findMainPageByStoreId
      * @Description: 根据条件查询主页面的显示
@@ -216,5 +217,15 @@ public interface InvertoryService {
      * @throw SQLException
      */
     public List<MainPage> findMainPageInvertoryAll();
+
+    /**
+     * @param type 商品类型
+     * @Title: findMainPageClassify
+     * @Description: 分类查询
+     * @author kang
+     * @date 2018-03-10
+     * @throw YnCorpSysException
+     */
+    public List<MainPage> findMainPageClassify(Byte type);
 
 }
