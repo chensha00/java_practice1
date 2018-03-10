@@ -8,14 +8,10 @@ package servlet;/***************************************************************
  * @version V1.0
  */
 
-import common.util.AddConditionUtils;
 import common.util.SpringContextUtil;
-import domain.Goods;
-import domain.Invertory;
-import domain.People;
-import domain.Store;
+import domain.Inventory;
 import service.GoodsService;
-import service.InvertoryService;
+import service.InventoryService;
 import service.PeopleService;
 import service.StoreService;
 
@@ -23,13 +19,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.DoubleSummaryStatistics;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @ClassName UpdateGoodsPrice
@@ -43,7 +33,7 @@ public class UpdateGoodsPrice extends HttpServlet {
 
     StoreService storeService = (StoreService) SpringContextUtil.getBean("storeService");
 
-    InvertoryService invertoryService = (InvertoryService) SpringContextUtil.getBean("invertoryService");
+    InventoryService inventoryService = (InventoryService) SpringContextUtil.getBean("inventoryService");
 
     GoodsService goodsService = (GoodsService) SpringContextUtil.getBean("goodsService");
 
@@ -56,14 +46,14 @@ public class UpdateGoodsPrice extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         //首先获取需要调价的库存的信息
-        Long invertoryId = Long.valueOf(req.getParameter("invertoryId"));
-        Invertory invertory = new Invertory();
-        invertory = invertoryService.findInvertoryById(invertoryId);
+        Long inventoryId = Long.valueOf(req.getParameter("inventoryId"));
+        Inventory inventory = new Inventory();
+        inventory = inventoryService.findInventoryById(inventoryId);
         //然后获取新的商品价格信息
         Double price = Double.valueOf(req.getParameter("price"));
         if (price!=null){
-            invertory.setPrice(price);
-            int row = invertoryService.updateInvertorById(invertoryId,invertory);
+            inventory.setPrice(price);
+            int row = inventoryService.updateInventorById(inventoryId,inventory);
             if (row!=0){
                 System.out.println("更新成功");
             }else {
