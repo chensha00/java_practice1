@@ -35,7 +35,7 @@ public class UpdatePeopleServlet extends HttpServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //peopleId:id,name:name,cardId:cardId,sex:sex,age:age,money:money,address:address,username:username,password:password
+        //peopleid:id,name:name,cardId:cardId,sex:sex,age:age,money:money,address:address,username:username,password:password
         //设置编码方式
         req.setCharacterEncoding("utf-8");
         resp.setCharacterEncoding("utf-8");

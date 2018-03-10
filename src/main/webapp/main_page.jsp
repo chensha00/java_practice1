@@ -52,7 +52,7 @@
                 <input type="hidden" name="nameName" value="${entry.name}">
                 <input type="hidden" name="numberName" value="${entry.number}">
                 <input type="hidden" name="storeNameName" value="${entry.storeName}">
-                <input type="hidden" name="idName" value="${entry.inventoryId}">
+                <input type="hidden" name="idName" value="${entry.invertoryId}">
             </form>
         </c:forEach>
         <iframe name="posthere" frameborder=0 width=0 height=0></iframe>
@@ -73,7 +73,7 @@
             'priceStr': entry.price,
             'numberStr': entry.number,
             'storeNameStr': entry.storeName,
-            'idStr': entry.inventoryId,
+            'idStr': entry.invertoryId,
             'op': 'add'
         };
         var success = function (response) {

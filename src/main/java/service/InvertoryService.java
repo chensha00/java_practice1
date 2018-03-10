@@ -10,7 +10,7 @@ package service;/***************************************************************
 
 import Entity.MainPage;
 import domain.Goods;
-import domain.Inventory;
+import domain.Invertory;
 import domain.Store;
 import tools.GoodsException;
 
@@ -20,55 +20,57 @@ import java.util.Map;
 
 /**
  * @author liukang
- * @InterfaceName inventoryService
+ * @InterfaceName InvertoryService
  * @Description 库存 操作 接口
  * @date 2018/1/25
  */
 
-public interface InventoryService {
+public interface InvertoryService {
 
 
     /**
-     * @Title: saveInventory
+     * @Title: saveInvertory
      * @Description: 保存库存信息
      * @author yanyong
      * @date 2018-01-25
-     * @param: inventory 库存对象
+     * @param: invertory 库存对象
      * @return: 受影响行数
      */
-    public Integer saveInventory(Inventory inventory);
+    public Integer saveInvertory(Invertory invertory);
 
     /**
-     * @Title: findInventoryById
+     * @Title: findInvertoryById
      * @Description: 查找库存信息通过指定id
      * @author yanyong
      * @date 2018-01-25
      * @param: id 指定id
      * @return: 库存对象
      */
-    public Inventory findInventoryById(Long id);
+    public Invertory findInvertoryById(Long id);
 
 
     /**
-     * @Title: deleteInventoryById
+     * @Title: deleteInvertoryById
      * @Description: 删除库存信息 通过指定id
      * @author yanyong
      * @date 2018-01-25
      * @param: id 指定id
      * @return: 受影响行数
      */
-    public Integer deleteInventoryById(Long id);
+    public Integer deleteInvertoryById(Long id);
 
     /**
-     * @Title: updateInventorById
+     * @Title: updateInvertorById
      * @Description: 更新库存信息通过指定id
      * @author yanyong
      * @date 2018-01-25
      * @param: id 指定id
-     * @param: inventory 库存对象
+     * @param: invertory 库存对象
      * @return: 受影响行数
      */
-    public Integer updateInventorById(Long id, Inventory inventory);
+
+
+    public Integer updateInvertorById(Long id, Invertory invertory);
 
     /**
      * @Title: changeGoodsNumberById
@@ -125,50 +127,50 @@ public interface InventoryService {
      * @param: num 数量
      * @return: 计算金额
      */
-    public Double calculationMoney(Inventory inventory, Double num);
+    public Double calculationMoney(Invertory invertory, Double num);
 
     /**
-     * @Title: showInventory
+     * @Title: showInvertory
      * @Description: 查看库存信息
      * @author yanyong
      * @date 2018-01-26
      * @throw YnCorpSysException
      * @param: 库存对象
      */
-    public void showInventory(Inventory inventory);
+    public void showInvertory(Invertory invertory);
 
     /**
      * @param storeId:商铺id
      * @param goodsId：商铺id
-     * @Title: findInventoryByStoreIdAndGoodId
+     * @Title: findInvertoryByStoreIdAndGoodId
      * @Description: 根据商铺id和商铺id查找库存信息
      * @author hzq
      * @date 2018-01-26
      * @throw RuntimeException
      */
-    public Inventory findInventoryByStoreIdAndGoodsId(Long storeId, Long goodsId) throws SQLException;
+    public Invertory findInvertoryByStoreIdAndGoodsId(Long storeId, Long goodsId) throws SQLException;
 
 
     /**
      * @param map 条件和值对应key和value
-     * @Title: findMainPageInventory
-     * @Title: findInventoryByUnSureCondition
+     * @Title: findMainPageInvertory
+     * @Title: findInvertoryByUnSureCondition
      * @Description: 通过商铺id查找库存信息
      * @author hzq
      * @date 2018/01/30
      * @throw SQLException
      */
-    public List<Inventory> findInventoryByUnSureCondition(List<Map<String, Object>> map) throws SQLException;
+    public List<Invertory> findInvertoryByUnSureCondition(List<Map<String, Object>> map) throws SQLException;
 
 
     /**
-     * @Title: findMainPageInventory
+     * @Title: findMainPageInvertory
      * @Description: 查询所有订单的价格，数量，以及商品的ID
      * @author liukang
      * @date
      * @throw YnCorpSysException
      */
-    public List<MainPage> findMainPageInventory(Long start,Long end);
+    public List<MainPage> findMainPageInvertory(Long start,Long end);
 
     /**
      * @Title: findMainPageCondition
@@ -188,14 +190,14 @@ public interface InventoryService {
     public List<MainPage> findMainPageByStoreId(Long storeId);
 
     /**
-     * @Title: findInventoryById
+     * @Title: findInvertoryById
      * @Description: 查找库存信息通过指定id
      * @author yanyong
      * @date 2018-01-25
      * @param: id 指定id
      * @return: 库存对象
      */
-    public List<Inventory> findInventoryAll();
+    public List<Invertory> findInvertoryAll();
 
     /**
      * @Title: limitMainPage
@@ -207,12 +209,12 @@ public interface InventoryService {
     public Integer limitMainPage();
 
     /**
-     * @Title: findMainPageInventoryAll
+     * @Title: findMainPageInvertoryAll
      * @Description: 查询所有订单的价格，数量，以及商品的ID
      * @author liukang
      * @date
      * @throw SQLException
      */
-    public List<MainPage> findMainPageInventoryAll();
+    public List<MainPage> findMainPageInvertoryAll();
 
 }

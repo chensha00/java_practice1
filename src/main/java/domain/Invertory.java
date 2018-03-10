@@ -10,11 +10,11 @@ package domain;/****************************************************************
 
 /**
  * @author liukang
- * @ClassName inventory
+ * @ClassName Invertory
  * @Description 库存实体类
  * @date 2018/1/25
  */
-public class Inventory {
+public class Invertory {
 
     /**
      * id 主键
@@ -105,10 +105,10 @@ public class Inventory {
 
     //构造
 
-    public Inventory() {
+    public Invertory() {
     }
 
-    public Inventory(Long id, Long storeId, Store store, Long goodsId, Goods goods, Double price, Double number) {
+    public Invertory(Long id, Long storeId, Store store, Long goodsId, Goods goods, Double price, Double number) {
         this.id = id;
         this.storeId = storeId;
         this.store = store;
@@ -118,7 +118,7 @@ public class Inventory {
         this.number = number;
     }
 
-    public Inventory(Long storeId, Store store, Long goodsId, Goods goods, Double price, Double number) {
+    public Invertory(Long storeId, Store store, Long goodsId, Goods goods, Double price, Double number) {
         this.storeId = storeId;
         this.store = store;
         this.goodsId = goodsId;
@@ -127,7 +127,7 @@ public class Inventory {
         this.number = number;
     }
 
-    public Inventory(Store store, Goods goods, Double price, Double number) {
+    public Invertory(Store store, Goods goods, Double price, Double number) {
         this.storeId = store.getId();
         this.store = store;
         this.goodsId = goods.getId();
@@ -136,7 +136,7 @@ public class Inventory {
         this.number = number;
     }
 
-    public Inventory(Long storeId, Long goodsId, Double price, Double number) {
+    public Invertory(Long storeId, Long goodsId, Double price, Double number) {
         this.storeId = storeId;
         this.goodsId = goodsId;
         this.price = price;
