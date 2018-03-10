@@ -19,7 +19,7 @@ public class MainPage {
     /**
      * 库存ID
      */
-    private Long invertoryId;
+    private Long inventoryId;
     /**
      * price 商品价格
      */
@@ -40,12 +40,12 @@ public class MainPage {
      */
     private String storeName;
 
-    public Long getInvertoryId() {
-        return invertoryId;
+    public Long getinventoryId() {
+        return inventoryId;
     }
 
-    public void setInvertoryId(Long invertoryId) {
-        this.invertoryId = invertoryId;
+    public void setinventoryId(Long inventoryId) {
+        this.inventoryId = inventoryId;
     }
 
     public Double getPrice() {
