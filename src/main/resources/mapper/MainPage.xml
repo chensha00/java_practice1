@@ -11,7 +11,7 @@
     </resultMap>
 
     <!--查询所有显示的数据-->
-    <select id="findMainPageinventoryAll" resultType="java.util.Map" resultMap="mainPage">
+    <select id="findMainPageInventoryAll" resultType="java.util.Map" resultMap="mainPage">
         SELECT
         inventory.ID,PRICE,NUMBER,NAME,STORE_NAME
         FROM GOODS,STORE,inventory

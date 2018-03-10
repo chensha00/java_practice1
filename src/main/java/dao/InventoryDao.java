@@ -64,7 +64,7 @@ public interface InventoryDao {
     public Integer deleteInventoryById(Long id) throws SQLException;
 
     /**
-     * @Title: updateInvertorById
+     * @Title: updateInventorById
      * @Description: 更新库存信息通过指定id
      * @author yanyong
      * @date 2018-01-25

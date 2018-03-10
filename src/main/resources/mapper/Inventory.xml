@@ -15,7 +15,7 @@
         ID,STORE_ID,GOODS_ID,PRICE,NUMBER
     </sql>
     <!--根据ID查询-->
-    <select id="findinventoryById" resultMap="inventory">
+    <select id="findInventoryById" resultMap="inventory">
         SELECT
         <include refid="inventorySql"/>
         FROM inventory

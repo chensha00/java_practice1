@@ -34,7 +34,7 @@ public class MaiPageDaoImpl extends BaseDaoImpl<MainPage> implements MainPageDao
      */
     @Override
     public List<MainPage> findMainPageInventoryAll() {
-        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findMainPageinventoryAll");
+        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findMainPageInventoryAll");
     }
 
     /**
