@@ -53,7 +53,7 @@ public interface PayFlowService {
      * @return: 受影响行数
      */
 
-    public Long savePayFlow(PayFlow payFlow);
+    public int savePayFlow(PayFlow payFlow);
 
     /**
      * @param peopleId

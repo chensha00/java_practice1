@@ -25,10 +25,10 @@
                 #{addTime,jdbcType=TIMESTAMP},#{successTime,jdbcType=TIMESTAMP},#{orderStatus,jdbcType=TINYINT},#{isInvalid,jdbcType=TINYINT})
     </insert>
 
-    <update id="updateGoodsOrderById">
-        UPDATE goods_order SET ORDER_NUM=${map.goodsOrder.orderNum},PEOPLE_ID=${map.goodsorder.peopleId} ,TOTAL_MONEY=${map.goodsorder.totalMoney} ,
-        ADD_TIME=${map.goodsorder.addTime} ,SUCCESS_TIME=${map.goodsorder.successTime} ,ORDER_STATUS=${map.goodsorder.orderStatus} ,IS_INVALID=${map.goodsorder.isInvalid}
-        WHERE ID=${map.id}
+    <update id="updateGoodsOrderById" parameterType="java.util.Map">
+        UPDATE goods_order SET ORDER_NUM=#{goodsOrder.orderNum,jdbcType=VARCHAR},PEOPLE_ID=#{goodsOrder.peopleId,jdbcType=BIGINT}, TOTAL_MONEY=#{goodsOrder.totalMoney,jdbcType=DECIMAL},
+        ADD_TIME=#{goodsOrder.addTime,jdbcType=TIMESTAMP} ,SUCCESS_TIME=#{goodsOrder.successTime,jdbcType=TIMESTAMP} ,ORDER_STATUS=#{goodsOrder.orderStatus,jdbcType=TINYINT} ,IS_INVALID=#{goodsOrder.isInvalid,jdbcType=TINYINT}
+        WHERE ID=${id}
     </update>
 
     <select id="findGoodsOrderByNum" resultType="java.util.Map" resultMap="goodsOrder">

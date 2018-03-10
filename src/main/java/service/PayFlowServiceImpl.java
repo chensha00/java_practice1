@@ -46,19 +46,15 @@ public class PayFlowServiceImpl implements PayFlowService {
     @Override
     public PayFlow findPayFlowById(Long id) {
         PayFlow payFlow = null;
-        try {
-            payFlow = payFlowDao.findPayFlowById(id);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
+        payFlow = payFlowDao.findPayFlowById(id);
+
             //返回流水对象
-            if (payFlow != null) {
-                payFlow.setPeople(new PeopleServiceImpl().findPeopleById(payFlow.getPeopleId()));
-                payFlow.setOrderDetail(new OrderDetailServiceImpl().findOrderDetailById(payFlow.getOrderDetailId()));
-                payFlow.setGoodsOrder(new GoodsOrderServiceImpl().findGoodsOrderById(payFlow.getGoodsOrderId()));
-            }
-            return payFlow;
-        }
+//            if (payFlow != null) {
+//                payFlow.setPeople(.findPeopleById(payFlow.getPeopleId()));
+//                payFlow.setOrderDetail(new OrderDetailServiceImpl().findOrderDetailById(payFlow.getOrderDetailId()));
+//
+        return payFlow;
+
     }
 
 
@@ -93,16 +89,15 @@ public class PayFlowServiceImpl implements PayFlowService {
      */
 
     @Override
-    public Long savePayFlow(PayFlow payFlow) {
-        Long number = 0L;
-        try {
-            number = payFlowDao.savePayFlow(payFlow);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
+    public int savePayFlow(PayFlow payFlow) {
+        int number = 0;
+
+        number = payFlowDao.savePayFlow(payFlow);
+
+
             //受影响行数
-            return number;
-        }
+        return number;
+
     }
 
     /**
