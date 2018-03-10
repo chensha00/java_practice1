@@ -55,13 +55,15 @@
                     </div>
                     <div class="store_home_goodInfo">
                         <div class="store_home_goodName">
+                        <a href="${basePath}/storeAction!offLoading.do?peopleId=${person.id}&&invertoryId=${mainPages.invertoryId}">
+                            <input type="button" value="商品下架" />
+                        </a>
+                        </div>
+                        <div class="store_home_goodName">
                                 ${mainPages.name}
                         </div>
                         <div class="store_home_goodPrice">
                                 ${mainPages.price}
-                        </div>
-                        <div class="store_home_goodName">
-                            商品下架
                         </div>
                     </div>
                 </div>
