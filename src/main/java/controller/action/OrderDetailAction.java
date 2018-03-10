@@ -1,4 +1,4 @@
-package controller;/**
+package controller.action;/**
  * Created by Roger_yu on 2018/3/8.
  */
 
@@ -92,7 +92,6 @@ public class OrderDetailAction extends BaseAction{
         Long  odId =Long.valueOf(req.getParameter("storeId"));
         String result = "";
 
-        StoreService storeService= (StoreService) SpringContextUtil.getBean("storeService");
         storeService.delivery(odId);
 
         PrintWriter out = resp.getWriter();
