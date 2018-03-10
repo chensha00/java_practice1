@@ -3,8 +3,7 @@
 <mapper namespace="Entity.MainPage">
 
     <resultMap id="mainPage" type="Entity.MainPage">
-        <!--<result property="invertoryId" column="INVERTORY.ID" jdbcType="BIGINT" javaType="java.lang.Long"/>-->
-        <!--<result property="invertoryId" column="GOODS.TYPE" jdbcType="BIGINT" javaType="java.lang.Long"/>-->
+        <result property="invertoryId" column="ID" jdbcType="BIGINT" javaType="java.lang.Long"/>
         <result property="price" column="PRICE" jdbcType="DECIMAL" javaType="java.lang.Double"/>
         <result property="number" column="NUMBER" jdbcType="DOUBLE" javaType="java.lang.Double"/>
         <result property="name" column="NAME" jdbcType="VARCHAR" javaType="java.lang.String"/>
@@ -21,19 +20,6 @@
         AND NUMBER > 0
         GROUP BY INVERTORY.ID
     </select>
-
-    <!--查询分类显示的数据-->
-    <select id="findMainPageClassify" resultType="java.util.Map" resultMap="mainPage">
-        SELECT
-        invertory.ID,PRICE,NUMBER,NAME,STORE_NAME
-        FROM GOODS,STORE,INVERTORY
-        WHERE INVERTORY.STORE_ID = STORE.ID
-        AND INVERTORY.GOODS_ID = GOODS.ID
-        AND NUMBER > 0
-        AND GOODS.TYPE=#{type}
-        GROUP BY INVERTORY.ID
-    </select>
-
     <!--查询所有显示的数据-->
     <select id="findMainPageByStoreId" resultType="java.util.Map" resultMap="mainPage">
         SELECT

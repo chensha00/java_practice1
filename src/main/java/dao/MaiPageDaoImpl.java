@@ -45,11 +45,11 @@ public class MaiPageDaoImpl extends BaseDaoImpl<MainPage> implements MainPageDao
      * @throw SQLException
      */
     @Override
-    public List<MainPage> findMainPageInvertory(Long start, Long end) {
+    public List<MainPage> findMainPageInvertory(Long start,Long end) {
         Map map = new HashMap();
-        map.put("start", start);
+        map.put("start",start);
         map.put("end", end);
-        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findMainPageInvertory", map);
+        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findMainPageInvertory",map);
     }
 
     /**
@@ -63,7 +63,6 @@ public class MaiPageDaoImpl extends BaseDaoImpl<MainPage> implements MainPageDao
     public List<MainPage> findMainPageCondition(String condition) {
         return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findMainPageCondition", condition);
     }
-
     /**
      * @Title: findMainPageByStoreId
      * @Description: 根据商品id查找商品信息
@@ -76,19 +75,5 @@ public class MaiPageDaoImpl extends BaseDaoImpl<MainPage> implements MainPageDao
         return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findMainPageByStoreId", storeId);
     }
 
-    /**
-     * @param type 商品类型
-     * @Title: findMainPageClassify
-     * @Description: 分类查询
-     * @author kang
-     * @date 2018-03-10
-     * @throw YnCorpSysException
-     */
-    @Override
-    public List<MainPage> findMainPageClassify(Byte type) {
-        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findMainPageClassify", type);
-    }
-
-    ;
 
 }

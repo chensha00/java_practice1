@@ -27,7 +27,7 @@
     <ul class="goods-display">
         <%--//循环输出一个商品框，数据由数据库查询包含名字.价格.库存--%>
         <c:forEach items="${mainList}" var="entry">
-            <form id="cratGoods" name="cratGoods" action="/mainAction!cart.do?op=add" target="posthere" method="post">
+            <form id="cratGoods" name="cratGoods" action="/servlet/cartPage.htm?op=add" target="posthere" method="post">
                 <ui class="view">
                     <div class="imgLink">
                         <img src="${basePath}../img/beauty.jpg"/></div>
@@ -66,7 +66,7 @@
         var goodsCart = "商品:" + nameStr + "\n添加到购物车成功!";
         alert(goodsCart);
         //将数据传到另一个页面
-        var url = 'mainAction!cart.do?op=add';
+        var url = 'servlet/cartPage.htm?op=add';
         var data = {
             'nameStr': entry.name,
             'priceStr': entry.price,
