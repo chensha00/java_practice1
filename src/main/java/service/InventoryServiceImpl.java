@@ -367,4 +367,17 @@ public class InventoryServiceImpl implements InventoryService {
     public List<MainPage> findMainPageInventoryAll(){
         return mainPageDao.findMainPageInventoryAll();
     }
+
+    /**
+     * @param type 商品类型
+     * @Title: findMainPageClassify
+     * @Description: 分类查询
+     * @author kang
+     * @date 2018-03-10
+     * @throw YnCorpSysException
+     */
+    @Override
+    public List<MainPage> findMainPageClassify(Byte type) {
+        return mainPageDao.findMainPageClassify(type);
+    }
 }
