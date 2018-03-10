@@ -307,7 +307,7 @@ public class InventoryServiceImpl implements InventoryService {
     public List<MainPage> findMainPageInventory(Long start,Long end) {
         List<MainPage> mainPages = new ArrayList<MainPage>();
 
-        mainPages = mainPageDao.findMainPageInventory(start, end);
+        mainPages = mainPageDao.findMainPageInventory(start,end);
 
         return mainPages;
 
@@ -366,18 +366,5 @@ public class InventoryServiceImpl implements InventoryService {
     @Override
     public List<MainPage> findMainPageInventoryAll(){
         return mainPageDao.findMainPageInventoryAll();
-    }
-
-    /**
-     * @param type 商品类型
-     * @Title: findMainPageClassify
-     * @Description: 分类查询
-     * @author kang
-     * @date 2018-03-10
-     * @throw YnCorpSysException
-     */
-    @Override
-    public List<MainPage> findMainPageClassify(Byte type) {
-        return mainPageDao.findMainPageClassify(type);
     }
 }

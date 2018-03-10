@@ -36,9 +36,7 @@ import java.util.Map;
         @Result(name = "limit", location = "/main_page.jsp"),
         @Result(name = "cart", location = "/cart.jsp"),
         @Result(name = "search", location = "/main_page_search.jsp"),
-        @Result(name = "searchLimit", location = "/main_page_search.jsp"),
-        @Result(name = "classify", location = "/main_page_classify.jsp"),
-        @Result(name = "classifyLimit", location = "/main_page_classify.jsp"),
+        @Result(name = "searchLimit", location = "/main_page_search.jsp")
 })
 public class MainAction extends BaseAction {
 
@@ -56,11 +54,10 @@ public class MainAction extends BaseAction {
     public String main() {
         String result = "";
         //从数据库获取商品信息，显示在主页上
-        List<MainPage> list = inventoryService.findMainPageInventoryAll();
-        List<MainPage> list1 = list.subList(0, 20);
-        Integer total = (list.size() - 1) / 20 + 1;
+        List<MainPage> list = inventoryService.findMainPageInventory(0L, 20L);
+        Integer total = inventoryService.limitMainPage();
         Integer present = 1;
-        req.setAttribute("mainList", list1);
+        req.setAttribute("mainList", list);
         req.setAttribute("total", total);
         req.setAttribute("present", present);
         result = "main";
@@ -156,7 +153,7 @@ public class MainAction extends BaseAction {
                 list1 = list;
             }
             Integer present = 1;
-            int total1 = (total - 1) / 20 + 1;
+            int total1 = (total-1) / 20 + 1;
             req.setAttribute("total", total1);
             req.setAttribute("present", present);
             req.setAttribute("search", condition);
@@ -198,65 +195,6 @@ public class MainAction extends BaseAction {
         req.setAttribute("total", map.get("total"));
         req.setAttribute("present", map.get("present"));
         result = "searchLimit";
-        return result;
-    }
-
-    /**
-     * @Title: classify
-     * @Description: 分类查询
-     * @author kang
-     * @date 2018-03-10
-     * @throw YnCorpSysException
-     */
-    public String classify() {
-        String result = "";
-        byte type = Byte.parseByte(req.getParameter("type"));
-        //从数据库获取商品信息，显示在搜索页上
-        List<MainPage> list = inventoryService.findMainPageClassify(type);
-        if (list != null && list.size() != 0) {
-            int total = list.size();
-            List<MainPage> list1 = null;
-            if (total > 20) {
-                list1 = list.subList(0, 20);
-            } else {
-                list1 = list;
-            }
-            Integer present = 1;
-            int total1 = (total - 1) / 20 + 1;
-            req.setAttribute("total", total1);
-            req.setAttribute("present", present);
-            req.setAttribute("type", type);
-            req.setAttribute("mainList", list1);
-        } else {
-            result = "main";
-            return result;
-        }
-        result = "classify";
-        return result;
-    }
-
-    /**
-     * @Title:classifyLimit
-     * @Description: 搜分类分页
-     * @author kang
-     * @date 2018-03-08
-     * @throw YnCorpSysException
-     */
-    public String classifyLimit() {
-        String result = "";
-        Byte type = Byte.valueOf(req.getParameter("type"));
-        String present = req.getParameter("present");
-        String page = req.getParameter("page");
-        List<MainPage> list = inventoryService.findMainPageClassify(type);
-        Integer totalNum = list.size();
-        LimitMethod limitMethod = new LimitMethod();
-        Map map = limitMethod.limitMethods(present, page, totalNum);
-        List<MainPage> list1 = list.subList((int) map.get("start"), (int) map.get("end"));
-        req.setAttribute("mainList", list1);
-        req.setAttribute("type", type);
-        req.setAttribute("total", map.get("total"));
-        req.setAttribute("present", map.get("present"));
-        result = "classifyLimit";
         return result;
     }
 }

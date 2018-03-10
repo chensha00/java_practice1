@@ -215,14 +215,4 @@ public interface InventoryService {
      */
     public List<MainPage> findMainPageInventoryAll();
 
-    /**
-     * @param type 商品类型
-     * @Title: findMainPageClassify
-     * @Description: 分类查询
-     * @author kang
-     * @date 2018-03-10
-     * @throw YnCorpSysException
-     */
-    public List<MainPage> findMainPageClassify(Byte type);
-
 }
