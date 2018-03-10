@@ -35,7 +35,7 @@ import java.util.List;
 @Action(value = "payMoneyAction")
 @Results({
         @Result(name = "payMoney",location = "/pay_money_jsp.jsp"),
-//        @Result(name = "userOrder",location = "/action/userOrderAction!findOrderAll.do"),
+        @Result(name = "userOrder",location = "/user_order_message.jsp"),
         @Result(name = "payFail",location = "/pay_money_jsp.jsp")
 })
 
