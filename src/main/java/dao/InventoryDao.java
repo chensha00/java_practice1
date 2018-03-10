@@ -8,7 +8,7 @@ package dao;/*******************************************************************
  * @version V1.0
  */
 
-import domain.Invertory;
+import domain.Inventory;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -17,86 +17,86 @@ import java.util.Map;
 
 /**
  * @author liukang
- * @InterfaceName InvertoryDap
+ * @InterfaceName inventoryDap
  * @Description 库存数据库操作接口
  * @date 2018/1/25
  */
-public interface InvertoryDao {
+public interface InventoryDao {
     /**
-     * @Title: saveInvertory
+     * @Title: saveInventory
      * @Description: 保存库存信息
      * @author yanyong
      * @date 2018-01-25
-     * @param: invertory 库存对象
+     * @param: inventory 库存对象
      * @return: 受影响行数
      */
-    public Integer saveInvertory(Invertory invertory);
+    public Integer saveInventory(Inventory inventory);
 
     /**
-     * @Title: findInvertoryById
+     * @Title: findInventoryById
      * @Description: 查找库存信息通过指定id
      * @author yanyong
      * @date 2018-01-25
      * @param: id 指定id
      * @return: 库存对象
      */
-    public Invertory findInvertoryById(Long id);
+    public Inventory findInventoryById(Long id);
 
     /**
-     * @Title: findInvertoryById
+     * @Title: findInventoryById
      * @Description: 查找库存信息通过指定id
      * @author yanyong
      * @date 2018-01-25
      * @param: id 指定id
      * @return: 库存对象
      */
-    public List<Invertory> findInvertoryAll();
+    public List<Inventory> findInventoryAll();
 
 
     /**
-     * @Title: deleteInvertoryById
+     * @Title: deleteInventoryById
      * @Description: 删除库存信息 通过指定id
      * @author yanyong
      * @date 2018-01-25
      * @param: id 指定id
      * @return: 受影响行数
      */
-    public Integer deleteInvertoryById(Long id) throws SQLException;
+    public Integer deleteInventoryById(Long id) throws SQLException;
 
     /**
-     * @Title: updateInvertorById
+     * @Title: updateInventorById
      * @Description: 更新库存信息通过指定id
      * @author yanyong
      * @date 2018-01-25
      * @param: id 指定id
-     * @param: invertory 库存对象
+     * @param: inventory 库存对象
      * @return: 受影响行数
      */
 
 
-    public Integer updateInvertorById(Long id, Invertory invertory)
+    public Integer updateInventorById(Long id, Inventory inventory)
             throws SQLException;
 
     /**
      * @param storeId:商铺id
      * @param goodsId：商铺id
-     * @Title: findInvertoryByStoreIdAndGoodId
+     * @Title: findInventoryByStoreIdAndGoodId
      * @Description: 根据商铺id和商品id查找库存信息
      * @author hzq
      * @date 2018-01-26
      * @throw RuntimeException
      */
-    public Invertory findInvertoryByStoreIdAndGoodsId(Long storeId, Long goodsId);
+    public Inventory findInventoryByStoreIdAndGoodsId(Long storeId, Long goodsId);
 
     /**
      * @param map 条件和值对应key和value
-     * @Title: findInvertoryByUnSureCondition
+     * @Title: findInventoryByUnSureCondition
      * @Description: 通过商铺id查找库存信息
      * @author hzq
      * @date 2018/01/30
      * @throw SQLException
      */
-    public List<Invertory> findInvertoryByUnSureCondition(List<Map<String, Object>> map)
+    public List<Inventory> findInventoryByUnSureCondition(List<Map<String, Object>> map)
             throws SQLException;
 
     /**

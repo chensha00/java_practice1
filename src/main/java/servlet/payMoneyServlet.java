@@ -9,7 +9,7 @@ package servlet;/***************************************************************
  */
 
 import common.util.SpringContextUtil;
-import dao.InvertoryDao;
+import dao.InventoryDao;
 import domain.GoodsOrder;
 import domain.OrderDetail;
 import service.GoodsOrderService;
@@ -40,7 +40,7 @@ public class payMoneyServlet extends HttpServlet {
     PeopleService peopleService = (PeopleService) SpringContextUtil.getBean("peopleService");
     GoodsOrderService goodsOrderService = (GoodsOrderService) SpringContextUtil.getBean("goodsOrderService");
     OrderDetailService orderDetailService = (OrderDetailService) SpringContextUtil.getBean("orderDetailService");
-    InvertoryDao invertoryDao = (InvertoryDao) SpringContextUtil.getBean("invertoryDao");
+    InventoryDao inventoryDao = (InventoryDao) SpringContextUtil.getBean("inventoryDao");
 
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

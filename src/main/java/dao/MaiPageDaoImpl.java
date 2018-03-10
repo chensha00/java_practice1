@@ -26,30 +26,30 @@ import java.util.Map;
 public class MaiPageDaoImpl extends BaseDaoImpl<MainPage> implements MainPageDao {
 
     /**
-     * @Title: findMainPageInvertoryAll
+     * @Title: findMainPageInventoryAll
      * @Description: 查询所有订单的价格，数量，以及商品的ID
      * @author liukang
      * @date
      * @throw SQLException
      */
     @Override
-    public List<MainPage> findMainPageInvertoryAll() {
-        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findMainPageInvertoryAll");
+    public List<MainPage> findMainPageInventoryAll() {
+        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findMainPageInventoryAll");
     }
 
     /**
-     * @Title: findMainPageInvertory
+     * @Title: findMainPageInventory
      * @Description: 查询指定订单的价格，数量，以及商品的ID
      * @author liukang
      * @date
      * @throw SQLException
      */
     @Override
-    public List<MainPage> findMainPageInvertory(Long start,Long end) {
+    public List<MainPage> findMainPageInventory(Long start,Long end) {
         Map map = new HashMap();
         map.put("start",start);
         map.put("end", end);
-        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findMainPageInvertory",map);
+        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findMainPageInventory",map);
     }
 
     /**
@@ -75,5 +75,17 @@ public class MaiPageDaoImpl extends BaseDaoImpl<MainPage> implements MainPageDao
         return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findMainPageByStoreId", storeId);
     }
 
+    /**
+     * @param type 商品类型
+     * @Title: findMainPageClassify
+     * @Description: 分类查询
+     * @author kang
+     * @date 2018-03-10
+     * @throw YnCorpSysException
+     */
+    @Override
+    public List<MainPage> findMainPageClassify(Byte type) {
+        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findMainPageClassify", type);
+    }
 
 }

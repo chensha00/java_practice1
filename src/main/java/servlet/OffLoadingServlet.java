@@ -10,12 +10,9 @@ package servlet;/***************************************************************
 
 import common.util.AddConditionUtils;
 import common.util.SpringContextUtil;
-import domain.Goods;
-import domain.Invertory;
-import domain.People;
-import domain.Store;
+import domain.Inventory;
 import service.GoodsService;
-import service.InvertoryService;
+import service.InventoryService;
 import service.PeopleService;
 import service.StoreService;
 
@@ -23,7 +20,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -42,7 +38,7 @@ public class OffLoadingServlet extends HttpServlet {
 
     StoreService storeService = (StoreService) SpringContextUtil.getBean("storeService");
 
-    InvertoryService invertoryService = (InvertoryService) SpringContextUtil.getBean("invertoryService");
+    InventoryService inventoryService = (InventoryService) SpringContextUtil.getBean("inventoryService");
 
     GoodsService goodsService = (GoodsService) SpringContextUtil.getBean("goodsService");
 
@@ -62,8 +58,8 @@ public class OffLoadingServlet extends HttpServlet {
         map.add(AddConditionUtils.addCondition("store_id", "=", storeId));
         map.add(AddConditionUtils.addCondition("good_id", "=", goodId));
         try {
-            List<Invertory> invertory = invertoryService.findInvertoryByUnSureCondition(map);
-            int res =  invertoryService.deleteInvertoryById(invertory.get(0).getId());
+            List<Inventory> inventory = inventoryService.findInventoryByUnSureCondition(map);
+            int res =  inventoryService.deleteInventoryById(inventory.get(0).getId());
             if (res!=0){
                 System.out.println("下架成功");
                 req.getRequestDispatcher("../store/store_home_servlet").forward(req,resp);

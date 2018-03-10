@@ -48,7 +48,7 @@
                             <p class="name">${cart.name}</p>
                             <span class="price">${cart.price}</span>
                                 <%--为JS获取值--%>
-                            <input type="hidden" name="idName" value="${cart.invertoryId}">
+                            <input type="hidden" name="idName" value="${cart.inventoryId}">
                             <input type="hidden" name="numberName" value="${cart.number}">
                                 <%--加减按钮--%>
                             <input class="product_id" type="hidden" name="product_id" value="value"/>
