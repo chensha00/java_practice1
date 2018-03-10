@@ -9,10 +9,10 @@ package service;/***************************************************************
  */
 
 import Entity.MainPage;
-import dao.InventoryDao;
+import dao.InvertoryDao;
 import dao.MainPageDao;
 import domain.Goods;
-import domain.Inventory;
+import domain.Invertory;
 import domain.Store;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,41 +27,41 @@ import java.util.Map;
 
 /**
  * @author liukang
- * @ClassName inventoryServiceImpl
- * @Description 库存操作类实现 inventoryService
+ * @ClassName InvertoryServiceImpl
+ * @Description 库存操作类实现 InvertoryService
  * @date 2018/1/25
  */
-@Service("inventoryService")
+@Service("invertoryService")
 @Transactional
-public class InventoryServiceImpl implements InventoryService {
+public class InvertoryServiceImpl implements InvertoryService {
 
     @Autowired
-    private InventoryDao inventoryDao;
+    private InvertoryDao invertoryDao;
 
     @Autowired
     private MainPageDao mainPageDao;
 
     /**
-     * @Title: saveInventory
+     * @Title: saveInvertory
      * @Description: 保存库存信息
      * @author yanyong
      * @date 2018-01-25
-     * @param: inventory 库存对象
+     * @param: invertory 库存对象
      * @return: 受影响行数
      */
     @Override
-    public Integer saveInventory(Inventory inventory) {
+    public Integer saveInvertory(Invertory invertory) {
 
         Integer number = 0;
 
-        number = inventoryDao.saveInventory(inventory);
+        number = invertoryDao.saveInvertory(invertory);
 
         return number;
 
     }
 
     /**
-     * @Title: findInventoryById
+     * @Title: findInvertoryById
      * @Description: 查找库存信息通过指定id
      * @author yanyong
      * @date 2018-01-25
@@ -69,16 +69,16 @@ public class InventoryServiceImpl implements InventoryService {
      * @return: 库存对象
      */
     @Override
-    public Inventory findInventoryById(Long id) {
+    public Invertory findInvertoryById(Long id) {
 
-        Inventory inventory = inventoryDao.findInventoryById(id);
+        Invertory invertory = invertoryDao.findInvertoryById(id);
 
-        return inventory;
+        return invertory;
     }
 
 
     /**
-     * @Title: deleteInventoryById
+     * @Title: deleteInvertoryById
      * @Description: 删除库存信息 通过指定id
      * @author yanyong
      * @date 2018-01-25
@@ -86,10 +86,10 @@ public class InventoryServiceImpl implements InventoryService {
      * @return: 受影响行数
      */
     @Override
-    public Integer deleteInventoryById(Long id) {
+    public Integer deleteInvertoryById(Long id) {
         Integer number = 0;
         try {
-            number = inventoryDao.deleteInventoryById(id);
+            number = invertoryDao.deleteInvertoryById(id);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -99,27 +99,27 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     /**
-     * @Title: updateInventorById
+     * @Title: updateInvertorById
      * @Description: 更新库存信息通过指定id
      * @author yanyong
      * @date 2018-01-25
      * @param: id 指定id
-     * @param: inventory 库存对象
+     * @param: invertory 库存对象
      * @return: 受影响行数
      */
 
     @Override
-    public Integer updateInventorById(Long id, Inventory inventory) {
+    public Integer updateInvertorById(Long id, Invertory invertory) {
         Integer number = 0;
-        Inventory oldinventory = this.findInventoryById(id);
-        if (inventory.getPrice() != null) {
-            oldinventory.setPrice(inventory.getPrice());
+        Invertory oldInvertory = this.findInvertoryById(id);
+        if (invertory.getPrice() != null) {
+            oldInvertory.setPrice(invertory.getPrice());
         }
-        if (inventory.getNumber() != null) {
-            oldinventory.setNumber(inventory.getNumber());
+        if (invertory.getNumber() != null) {
+            oldInvertory.setNumber(invertory.getNumber());
         }
         try {
-            number = inventoryDao.updateInventorById(id, oldinventory);
+            number = invertoryDao.updateInvertorById(id, oldInvertory);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -129,19 +129,19 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     /**
-     * @Title: showInventory
+     * @Title: showInvertory
      * @Description: 查看库存信息
      * @author yanyong
      * @date 2018-01-26
      * @throw YnCorpSysException
      * @param: 库存对象
      */
-    public void showInventory(Inventory inventory) {
-        System.out.println("主键ID：" + inventory.getId());
-        System.out.println("店铺ID：" + inventory.getStoreId());
-        System.out.println("商品ID：" + inventory.getGoodsId());
-        System.out.println("价格：" + inventory.getPrice());
-        System.out.println("数量：" + inventory.getNumber());
+    public void showInvertory(Invertory invertory) {
+        System.out.println("主键ID：" + invertory.getId());
+        System.out.println("店铺ID：" + invertory.getStoreId());
+        System.out.println("商品ID：" + invertory.getGoodsId());
+        System.out.println("价格：" + invertory.getPrice());
+        System.out.println("数量：" + invertory.getNumber());
     }
 
     /**
@@ -155,10 +155,10 @@ public class InventoryServiceImpl implements InventoryService {
      */
     @Override
     public Integer changeGoodsNumberById(Long id, Double number) {
-        Inventory inventory = new Inventory();
+        Invertory invertory = new Invertory();
         Integer num = 0;
-        inventory.setNumber(number);
-        num = this.updateInventorById(id, inventory);
+        invertory.setNumber(number);
+        num = this.updateInvertorById(id, invertory);
         return num;
     }
 
@@ -176,9 +176,9 @@ public class InventoryServiceImpl implements InventoryService {
      */
     @Override
     public Integer stock(Store store, Goods goods, Double addNum, Double price) {
-        Inventory inventory = this.findInventoryById(goods.getId());
-        if (inventory != null) {
-            Integer number = this.changeGoodsNumberById(goods.getId(), inventory.getNumber() + addNum);
+        Invertory invertory = this.findInvertoryById(goods.getId());
+        if (invertory != null) {
+            Integer number = this.changeGoodsNumberById(goods.getId(), invertory.getNumber() + addNum);
             return number;
         } else {
             return 0;
@@ -196,15 +196,15 @@ public class InventoryServiceImpl implements InventoryService {
      */
     @Override
     public Integer sale(Long id, Double saleNum) throws GoodsException {
-        Inventory inventory = this.findInventoryById(id);
+        Invertory invertory = this.findInvertoryById(id);
         Integer number = 0;
-        if (inventory == null) {
+        if (invertory == null) {
             throw new GoodsException("商品不存在");
         } else {
-            if (inventory.getNumber() < saleNum) {
+            if (invertory.getNumber() < saleNum) {
                 throw new GoodsException("商品数量不够，无法售卖");
             } else {
-                number = this.changeGoodsNumberById(id, inventory.getNumber() - saleNum);
+                number = this.changeGoodsNumberById(id, invertory.getNumber() - saleNum);
                 return number;
             }
         }
@@ -219,8 +219,8 @@ public class InventoryServiceImpl implements InventoryService {
      * @param: num 数量
      * @return: 计算金额
      */
-    public Double calculationMoney(Inventory inventory, Double num) {
-        return inventory.getPrice() * num;
+    public Double calculationMoney(Invertory invertory, Double num) {
+        return invertory.getPrice() * num;
     }
 
     /**
@@ -234,8 +234,8 @@ public class InventoryServiceImpl implements InventoryService {
      */
     @Override
     public Boolean judgeNumberIsEnough(Long id, Double needNumber) {
-        Inventory inventory = this.findInventoryById(id);
-        if (inventory.getNumber() >= needNumber) {
+        Invertory invertory = this.findInvertoryById(id);
+        if (invertory.getNumber() >= needNumber) {
             return true;
         } else {
             return false;
@@ -245,23 +245,23 @@ public class InventoryServiceImpl implements InventoryService {
     /**
      * @param storeId:商铺id
      * @param goodsId：商铺id
-     * @Title: findInventoryByStoreIdAndGoodId
+     * @Title: findInvertoryByStoreIdAndGoodId
      * @Description: 根据商铺id和商铺id查找库存信息
      * @author hzq
      * @date 2018-01-26
      * @throw RuntimeException
      */
-    public Inventory findInventoryByStoreIdAndGoodsId(Long storeId, Long goodsId) throws SQLException {
-        Inventory inventory = null;
+    public Invertory findInvertoryByStoreIdAndGoodsId(Long storeId, Long goodsId) throws SQLException {
+        Invertory invertory = null;
 
-        inventory = inventoryDao.findInventoryByStoreIdAndGoodsId(storeId, goodsId);
+        invertory = invertoryDao.findInvertoryByStoreIdAndGoodsId(storeId, goodsId);
 
-        return inventory;
+        return invertory;
     }
 
     /**
      * @param storeId:商铺id
-     * @Title: findMainPageByStoreId
+     * @Title: findInvertoryByStoreIdAndGoodId
      * @Description: 根据商铺id和商铺id查找库存信息
      * @author hzq
      * @date 2018-01-26
@@ -278,36 +278,36 @@ public class InventoryServiceImpl implements InventoryService {
 
     /**
      * @param map 条件和值对应key和value
-     * @Title: findInventoryByUnSureCondition
+     * @Title: findInvertoryByUnSureCondition
      * @Description: 通过商铺id查找库存信息
      * @author hzq
      * @date 2018/01/30
      * @throw SQLException
      */
     @Override
-    public List<Inventory> findInventoryByUnSureCondition(List<Map<String, Object>> map) throws SQLException {
-        List<Inventory> inventory = null;
+    public List<Invertory> findInvertoryByUnSureCondition(List<Map<String, Object>> map) throws SQLException {
+        List<Invertory> invertorys = null;
         try {
-            inventory = inventoryDao.findInventoryByUnSureCondition(map);
+            invertorys = invertoryDao.findInvertoryByUnSureCondition(map);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            return inventory;
+            return invertorys;
         }
     }
 
     /**
-     * @Title: findMainPageInventory
+     * @Title: findMainPageInvertory
      * @Description: 查询所有订单的价格，数量，以及商品的ID
      * @author liukang
      * @date
      * @throw YnCorpSysException
      */
     @Override
-    public List<MainPage> findMainPageInventory(Long start,Long end) {
+    public List<MainPage> findMainPageInvertory(Long start,Long end) {
         List<MainPage> mainPages = new ArrayList<MainPage>();
 
-        mainPages = mainPageDao.findMainPageInventory(start,end);
+        mainPages = mainPageDao.findMainPageInvertory(start,end);
 
         return mainPages;
 
@@ -330,7 +330,7 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     /**
-     * @Title: findInventoryById
+     * @Title: findInvertoryById
      * @Description: 查找库存信息通过指定id
      * @author yanyong
      * @date 2018-01-25
@@ -338,8 +338,8 @@ public class InventoryServiceImpl implements InventoryService {
      * @return: 库存对象
      */
     @Override
-    public List<Inventory> findInventoryAll(){
-        return inventoryDao.findInventoryAll();
+    public List<Invertory> findInvertoryAll(){
+        return invertoryDao.findInvertoryAll();
     }
 
     /**
@@ -350,21 +350,21 @@ public class InventoryServiceImpl implements InventoryService {
      * @throw YnCorpSysException
      */
     public Integer limitMainPage(){
-        List<Inventory> list=this.findInventoryAll();
+        List<Invertory> list=this.findInvertoryAll();
         int count=list.size();
         int pageNum=count/20+1;
         return pageNum;
     }
 
     /**
-     * @Title: findMainPageInventoryAll
+     * @Title: findMainPageInvertoryAll
      * @Description: 查询所有订单的价格，数量，以及商品的ID
      * @author liukang
      * @date
      * @throw SQLException
      */
     @Override
-    public List<MainPage> findMainPageInventoryAll(){
-        return mainPageDao.findMainPageInventoryAll();
+    public List<MainPage> findMainPageInvertoryAll(){
+        return mainPageDao.findMainPageInvertoryAll();
     }
 }

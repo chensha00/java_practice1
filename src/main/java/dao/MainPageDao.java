@@ -20,22 +20,22 @@ import java.util.List;
  */
 public interface MainPageDao {
     /**
-     * @Title: findMainPageInventoryAll
+     * @Title: findMainPageInvertoryAll
      * @Description: 查询所有订单的价格，数量，以及商品的ID
      * @author liukang
      * @date
      * @throw YnCorpSysException
      */
-    public List<MainPage> findMainPageInventoryAll();
+    public List<MainPage> findMainPageInvertoryAll();
 
     /**
-     * @Title: findMainPageInventory
+     * @Title: findMainPageInvertory
      * @Description: 查询指定订单的价格，数量，以及商品的ID
      * @author liukang
      * @date
      * @throw YnCorpSysException
      */
-    public List<MainPage> findMainPageInventory(Long start,Long end);
+    public List<MainPage> findMainPageInvertory(Long start,Long end);
 
     /**
      * @Title: findMainPageCondition

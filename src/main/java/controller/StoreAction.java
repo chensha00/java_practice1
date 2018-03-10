@@ -10,8 +10,10 @@ package controller;/************************************************************
 
 import Entity.MainPage;
 import common.util.AddConditionUtils;
+import common.util.SpringContextUtil;
 import common.util.base.BaseAction;
-import domain.Inventory;
+import domain.Goods;
+import domain.Invertory;
 import domain.People;
 import domain.Store;
 import org.apache.struts2.convention.annotation.Action;
@@ -19,7 +21,7 @@ import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 import service.GoodsService;
-import service.InventoryService;
+import service.InvertoryService;
 import service.PeopleService;
 import service.StoreService;
 
@@ -48,7 +50,7 @@ public class StoreAction extends BaseAction{
     @Autowired
     private StoreService storeService;
     @Autowired
-    private InventoryService InventoryService;
+    private InvertoryService invertoryService;
     @Autowired
     private GoodsService goodsService;
     /**
@@ -82,7 +84,7 @@ public class StoreAction extends BaseAction{
                 }else{
                     //根据店铺id查找到商品信息
                     List<MainPage> mainPages = new ArrayList<MainPage>();
-                    mainPages = InventoryService.findMainPageByStoreId(stores.get(0).getId());
+                    mainPages = invertoryService.findMainPageByStoreId(stores.get(0).getId());
                     //再根据库存编号中的商品id查找商品信息
                     session.setAttribute("stores",stores);
                     session.setAttribute("peoples",people);
@@ -106,13 +108,13 @@ public class StoreAction extends BaseAction{
 
     public String offLoading(){
         //接收数据（库存ID）
-        Long InventoryId =Long.valueOf(req.getParameter("InventoryId"));
+        Long invertoryId =Long.valueOf(req.getParameter("invertoryId"));
         Long peopleId = Long.valueOf(req.getParameter("peopleId"));
         //定义返回字符串
         String result="";
 
-        Inventory inventory = InventoryService.findInventoryById(InventoryId);
-        int res =  InventoryService.deleteInventoryById(inventory.getId());
+        Invertory invertory = invertoryService.findInvertoryById(invertoryId);
+        int res =  invertoryService.deleteInvertoryById(invertory.getId());
         if (res!=0){
             req.setAttribute("peopleId",peopleId);
             System.out.println("下架成功");
