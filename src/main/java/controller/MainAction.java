@@ -153,7 +153,7 @@ public class MainAction extends BaseAction {
                 list1 = list;
             }
             Integer present = 1;
-            int total1 = total / 20 + 1;
+            int total1 = (total-1) / 20 + 1;
             req.setAttribute("total", total1);
             req.setAttribute("present", present);
             req.setAttribute("search", condition);
@@ -180,7 +180,7 @@ public class MainAction extends BaseAction {
      * @date 2018-03-08
      * @throw YnCorpSysException
      */
-    public String SearchLimit() {
+    public String searchLimit() {
         String result = "";
         String condition = req.getParameter("search");
         String present = req.getParameter("present");
@@ -194,7 +194,7 @@ public class MainAction extends BaseAction {
         req.setAttribute("search", condition);
         req.setAttribute("total", map.get("total"));
         req.setAttribute("present", map.get("present"));
-        result = "limit";
+        result = "searchLimit";
         return result;
     }
 }

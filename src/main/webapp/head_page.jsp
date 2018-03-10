@@ -19,9 +19,14 @@
         <ul class="site-nav-bd-one">
             <li><a href="../login_page.jsp" target="_top">登录/注册</a></li>
             <li><a href="../person.jsp" target="_blank">用户：${person.name}</a></li>
-            <li><a href="${pageContext.request.contextPath}/action/userOrderAction!findOrderAll.do?peopleId=${person.id}" target="_blank">查看订单</a></li>
+            <li>
+                <a href="${pageContext.request.contextPath}/action/userOrderAction!findOrderAll.do?peopleId=${person.id}"
+                   target="_blank">查看订单</a></li>
             <li><a href="/${basePath}storeAction!storeHome.do?peopleId=${person.id}" target="_blank">卖家中心</a></li>
-            <li><a href="/mainAction!main.do" target="_blank">商品分类</a></li>
+            <%--<li><a href="/mainAction!main.do" target="_blank">商品分类</a></li>--%>
+            <li><a href="javascript:void(0)"
+               onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">
+                商品分类</a></li>
             <li><a href="/mainAction!cart.do?op=list" target="_blank">购物车</a></li>
             <li><a href="/mainAction!main.do" target="_blank">商城首页</a></li>
         </ul>
@@ -34,6 +39,20 @@
 </div>
 <br>
 <br>
+
+<%--分类悬浮框--%>
+<div id="light" class="white_content">
+    <ul>
+        <li><a>电脑</a></li>
+        <li><a>清洁用品</a></li>
+        <li><a>服装</a></li>
+        <li><a>运动器材</a></li>
+    </ul>
+    <a href="javascript:void(0)"
+       onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">点击关闭本窗口</a>
+</div>
+<div id="fade" class="black_overlay"></div>
+
 <!--搜索框-->
 <div class="search-entirety">
     <div class="search-logo">
@@ -67,20 +86,4 @@
 <br>
 </body>
 
-<%--搜索框的实现--%>
-<%--<script type="text/javascript">--%>
-    <%--$('#submit').live("click", function () {--%>
-        <%--var condition = document.getElementById("search").value;--%>
-        <%--var url = '/mainAction!search.do';--%>
-        <%--var data = {--%>
-            <%--condition: condition--%>
-        <%--};--%>
-        <%--var success = function (response) {--%>
-            <%--if (response.errno == 0) {--%>
-                <%--alert(response.errmsg);--%>
-            <%--}--%>
-        <%--};--%>
-        <%--$.post(url, data, success, 'json');--%>
-    <%--});--%>
-<%--</script>--%>
 </html>
