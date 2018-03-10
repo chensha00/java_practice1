@@ -10,10 +10,8 @@ package servlet;/***************************************************************
 
 import common.util.AddConditionUtils;
 import common.util.SpringContextUtil;
-import dao.StoreDao;
-import dao.StoreDaoImpl;
 import domain.Goods;
-import domain.Invertory;
+import domain.Inventory;
 import domain.People;
 import domain.Store;
 import service.*;
@@ -41,7 +39,7 @@ public class StoreHomeServlet extends HttpServlet {
 
     StoreService storeService = (StoreService) SpringContextUtil.getBean("storeService");
 
-    InvertoryService invertoryService = (InvertoryService) SpringContextUtil.getBean("invertoryService");
+    InventoryService inventoryService = (InventoryService) SpringContextUtil.getBean("inventoryService");
 
     GoodsService goodsService = (GoodsService) SpringContextUtil.getBean("goodsService");
 
@@ -70,21 +68,21 @@ public class StoreHomeServlet extends HttpServlet {
                     req.getRequestDispatcher("../people_open_store.jsp").forward(req,resp);
                 }else{
                     //根据店铺id查找到库存信息
-                    List<Invertory> invertories = new ArrayList<Invertory>();
+                    List<Inventory> inventories = new ArrayList<Inventory>();
                     List<Map<String,Object>> map2 = new ArrayList<Map<String,Object>>();
                     map2.add(AddConditionUtils.addCondition("store_id","=",stores.get(0).getId()));
-                    invertories = invertoryService.findInvertoryByUnSureCondition(map2);
+                    inventories = inventoryService.findInventoryByUnSureCondition(map2);
                     //再根据库存编号中的商品id查找商品信息
                     List<Goods> goods = new ArrayList<Goods>();
-                    for (int i = 0; i < invertories.size() ; i++) {
+                    for (int i = 0; i < inventories.size() ; i++) {
                         Goods good = new Goods();
-                        good = goodsService.findGoodsById(invertories.get(i).getGoodsId());
+                        good = goodsService.findGoodsById(inventories.get(i).getGoodsId());
                         System.out.println(good.getName());
                         goods.add(good);
                     }
                     session.setAttribute("stores",stores);
                     session.setAttribute("peoples",people);
-                    session.setAttribute("invertorys",invertories);
+                    session.setAttribute("inventories",inventories);
                     session.setAttribute("goods",goods);
                     req.getRequestDispatcher("../store_home_page.jsp").forward(req,resp);
 
