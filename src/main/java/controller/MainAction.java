@@ -36,8 +36,11 @@ import java.util.Map;
         @Result(name = "limit", location = "/main_page.jsp"),
         @Result(name = "cart", location = "/cart.jsp"),
         @Result(name = "search", location = "/main_page_search.jsp"),
-        @Result(name = "searchLimit", location = "/main_page_search.jsp")
+        @Result(name = "searchLimit", location = "/main_page_search.jsp"),
+        @Result(name = "classify", location = "/main_page_classify.jsp"),
+        @Result(name = "classifyLimit", location = "/main_page_classify.jsp"),
 })
+
 public class MainAction extends BaseAction {
 
     @Autowired
