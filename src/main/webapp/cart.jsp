@@ -23,7 +23,8 @@
 <jsp:include page="head_page.jsp" flush="true"/>
 
 <div class="cart_div">
-    <form action="/pay_money_jsp.jsp" method="post" class="form">
+    <form action="${pageContext.request.contextPath}/action/payMoneyAction!PayGoodsOrderShow.do?orderNum="+order_num method="post" class="form">
+    <form class="form">
         <fieldset>
             <legend><img src="${basePath}../img/cart.jpg"></legend>
             <table class="cart_table" id="tab" border="1">
@@ -168,7 +169,7 @@
                 );
                 $.ajax({
                     type: "POST",
-                    url: '/pay/pay.htm',
+                    url: '${pageContext.request.contextPath}/action/payMoneyAction!PayGoodsOrderShow.do?orderNum="+order_num;',
                     data: {
                         peopleId: peopleStr,
                         idName: idStr,
