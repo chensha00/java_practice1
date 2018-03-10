@@ -13,43 +13,56 @@
     <!--查询所有显示的数据-->
     <select id="findMainPageInventoryAll" resultType="java.util.Map" resultMap="mainPage">
         SELECT
-        inventory.ID,PRICE,NUMBER,NAME,STORE_NAME
+        INVENTORY.ID,PRICE,NUMBER,NAME,STORE_NAME
         FROM GOODS,STORE,inventory
-        WHERE inventory.STORE_ID = STORE.ID
-        AND inventory.GOODS_ID = GOODS.ID
+        WHERE INVENTORY.STORE_ID = STORE.ID
+        AND INVENTORY.GOODS_ID = GOODS.ID
         AND NUMBER > 0
         GROUP BY inventory.ID
     </select>
+
     <!--查询所有显示的数据-->
     <select id="findMainPageByStoreId" resultType="java.util.Map" resultMap="mainPage">
         SELECT
-        inventory.ID,PRICE,NUMBER,NAME,STORE_NAME
+        INVENTORY.ID,PRICE,NUMBER,NAME,STORE_NAME
         FROM GOODS,STORE,inventory
-        WHERE inventory.STORE_ID = STORE.ID
-        AND inventory.GOODS_ID = GOODS.ID
+        WHERE INVENTORY.STORE_ID = STORE.ID
+        AND INVENTORY.GOODS_ID = GOODS.ID
         AND NUMBER > 0
         AND STORE.ID=#{storeId}
+    </select>
+
+    <!--查询分类显示的数据-->
+    <select id="findMainPageClassify" resultType="java.util.Map" resultMap="mainPage">
+        SELECT
+        INVENTORY.ID,PRICE,NUMBER,NAME,STORE_NAME
+        FROM GOODS,STORE,INVENTORY
+        WHERE INVENTORY.STORE_ID = STORE.ID
+        AND INVENTORY.GOODS_ID = GOODS.ID
+        AND NUMBER > 0
+        AND GOODS.TYPE=#{type}
+        GROUP BY INVENTORY.ID
     </select>
 
     <!--查询指定分页显示的数据-->
     <select id="findMainPageInventory" resultType="java.util.Map" resultMap="mainPage">
         SELECT
-        inventory.ID,PRICE,NUMBER,NAME,STORE_NAME
+        INVENTORY.ID,PRICE,NUMBER,NAME,STORE_NAME
         FROM GOODS,STORE,inventory
-        WHERE inventory.STORE_ID = STORE.ID
-        AND inventory.GOODS_ID = GOODS.ID
+        WHERE INVENTORY.STORE_ID = STORE.ID
+        AND INVENTORY.GOODS_ID = GOODS.ID
         AND NUMBER > 0
-        GROUP BY inventory.ID
+        GROUP BY INVENTORY.ID
         LIMIT #{start},#{end}
     </select>
 
     <!--条件查询-->
     <select id="findMainPageCondition" resultType="java.util.Map" resultMap="mainPage">
         SELECT
-        inventory.ID,PRICE,NUMBER,NAME,STORE_NAME
+        INVENTORY.ID,PRICE,NUMBER,NAME,STORE_NAME
         FROM GOODS,STORE,inventory
-        WHERE inventory.STORE_ID = STORE.ID
-        AND inventory.GOODS_ID = GOODS.ID
+        WHERE INVENTORY.STORE_ID = STORE.ID
+        AND INVENTORY.GOODS_ID = GOODS.ID
         AND NUMBER > 0
         AND NAME LIKE CONCAT('%',#{condition},'%')
 		OR STORE_NAME LIKE CONCAT('%',#{condition},'%')

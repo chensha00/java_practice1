@@ -75,5 +75,17 @@ public class MaiPageDaoImpl extends BaseDaoImpl<MainPage> implements MainPageDao
         return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findMainPageByStoreId", storeId);
     }
 
+    /**
+     * @param type 商品类型
+     * @Title: findMainPageClassify
+     * @Description: 分类查询
+     * @author kang
+     * @date 2018-03-10
+     * @throw YnCorpSysException
+     */
+    @Override
+    public List<MainPage> findMainPageClassify(Byte type) {
+        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "findMainPageClassify", type);
+    }
 
 }
