@@ -9,7 +9,6 @@
 */
 .store_home{
     width: 80%;
-    height: 950px
     margin:0 auto;
 }
 /*
@@ -17,7 +16,6 @@
 */
 .store_home_left{
     width: 25%;
-    height: 950px;
     margin-left: 0;
     float: left;
 
@@ -25,7 +23,6 @@
 /*设置排列商品的div*/
 .store_home-right{
     width: 70%;
-    height: 1000px;
     margin-left: 3px;
     float: left;
     border: 0px;

@@ -41,6 +41,7 @@ import java.util.Map;
 
 @Results({
         @Result( name="storeHome",location="/store_home_page.jsp"),
+        @Result( name="offLoadingSuccess",location="storeAction",type = "chain",params = {"method","storeHome"})
 })
 public class StoreAction extends BaseAction{
 
@@ -93,5 +94,43 @@ public class StoreAction extends BaseAction{
             e.printStackTrace();
         }
         return  result;
+    }
+
+    /**
+     * @Title: OffLoading
+     * @Description: 商品下架
+     * @author hzq
+     * @date
+     */
+
+    public String OffLoading(){
+        //接收数据（商品信息和店铺信息）
+        Long storeId =(Long)req.getAttribute("storeId");
+        Long goodId =(Long)req.getAttribute("goodId");
+        Long peopleId =(Long)req.getAttribute("peopleId");
+
+        //定义返回字符串
+        String result="";
+
+        //通过两个id查找库存表，获取该条记录的库存id
+        List<Map<String,Object>> map = new ArrayList<Map<String,Object>>();
+        map.add(AddConditionUtils.addCondition("store_id", "=", storeId));
+        map.add(AddConditionUtils.addCondition("good_id", "=", goodId));
+        try {
+            List<Invertory> invertory = invertoryService.findInvertoryByUnSureCondition(map);
+            int res =  invertoryService.deleteInvertoryById(invertory.get(0).getId());
+            if (res!=0){
+                System.out.println("下架成功");
+                req.setAttribute("peopleId",peopleId);
+                result = "offLoadingSuccess";
+            }else{
+                System.out.println("出现错误");
+                result ="error";
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 }

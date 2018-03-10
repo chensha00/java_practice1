@@ -45,32 +45,29 @@
             <div class="store_home_goodsListHead">
                 商品列表
             </div>
-            <div class="store_home_goods">
-                <c:if test="${mainPages==null||fn:length(mainPages)==0}">
-                    <h2>你还没有商品上架！</h2>
-                </c:if>
-                <c:forEach items="${mainPages}" var="mainPages" varStatus="status">
-                    <div class="store_home_good">
-                        <div class="store_home_goodImg">
-                            <img src="${basePath}/img/1.jpg"></src>
+            <c:if test="${mainPages==null||fn:length(mainPages)==0}">
+                <h2>你还没有商品上架！</h2>
+            </c:if>
+            <c:forEach items="${mainPages}" var="mainPages" varStatus="status">
+                <div class="store_home_good">
+                    <div class="store_home_goodImg">
+                        <img src="${basePath}/img/1.jpg"></src>
+                    </div>
+                    <div class="store_home_goodInfo">
+                        <div class="store_home_goodName">
+                                ${mainPages.name}
                         </div>
-                        <div class="store_home_goodInfo">
-                            <div class="store_home_goodName">
-                                    ${mainPages.name}
-                            </div>
-                            <div class="store_home_goodPrice">
-                                    ${mainPages.price}
-                            </div>
-                            <div class="store_home_goodName">
-                                商品下架
-                            </div>
+                        <div class="store_home_goodPrice">
+                                ${mainPages.price}
+                        </div>
+                        <div class="store_home_goodName">
+                            商品下架
                         </div>
                     </div>
-                </c:forEach>
-            </div>
+                </div>
+            </c:forEach>
         </div>
     </div>
-
     <div class="wit">
         <div class="limit">
             <form class="form" name="f1" method="POST" action="#">
