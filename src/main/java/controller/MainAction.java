@@ -54,10 +54,11 @@ public class MainAction extends BaseAction {
     public String main() {
         String result = "";
         //从数据库获取商品信息，显示在主页上
-        List<MainPage> list = inventoryService.findMainPageInventory(0L, 20L);
-        Integer total = inventoryService.limitMainPage();
+        List<MainPage> list = inventoryService.findMainPageInventoryAll();
+        List<MainPage> list1 = list.subList(0, 20);
+        Integer total = (list.size() - 1) / 20 + 1;
         Integer present = 1;
-        req.setAttribute("mainList", list);
+        req.setAttribute("mainList", list1);
         req.setAttribute("total", total);
         req.setAttribute("present", present);
         result = "main";
@@ -153,7 +154,7 @@ public class MainAction extends BaseAction {
                 list1 = list;
             }
             Integer present = 1;
-            int total1 = (total-1) / 20 + 1;
+            int total1 = (total - 1) / 20 + 1;
             req.setAttribute("total", total1);
             req.setAttribute("present", present);
             req.setAttribute("search", condition);
