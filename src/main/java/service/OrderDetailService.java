@@ -2,6 +2,7 @@ package service;/**
  * Created by Roger_yu on 2018/1/20.
  */
 
+import domain.GoodsOrder;
 import domain.OrderDetail;
 
 import java.util.List;
@@ -92,4 +93,14 @@ public interface OrderDetailService {
      */
 
     public void showOrderDetailMessage(OrderDetail orderDetail);
+
+    /**
+     * @Title: findOrderDetailByOrderList
+     * @Description: 查找指定List<GoodsOrder>的订单详情集合
+     * @author yanyong
+     * @date 2018-03-12
+     * @param: goodsOrderList 指定List<GoodsOrder>
+     * @return:  List<OrderDetail>
+     */
+    public List<OrderDetail> findOrderDetailByOrderList(List<GoodsOrder> goodsOrderList);
 }
