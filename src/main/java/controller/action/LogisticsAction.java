@@ -8,6 +8,8 @@ package controller.action; /**
  */
 
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import common.util.SpringContextUtil;
 import common.util.base.BaseAction;
 import domain.LogisticsGoby;
@@ -21,6 +23,9 @@ import service.LogisticsGobyServiceImpl;
 import service.LogisticsInfoService;
 import service.LogisticsInfoServiceImpl;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -32,7 +37,7 @@ import java.util.List;
 @Action( value = "logisticsAction")
 
 @Results({
-        @Result( name="logisticsPage",location="/logistics_page.jsp"),
+        @Result( name="logisticsPage",location="/logistics_page.jsp")
 })
 public class LogisticsAction extends BaseAction {
 
@@ -44,6 +49,15 @@ public class LogisticsAction extends BaseAction {
     @Autowired
     private LogisticsGobyService logisticsGobyService;
 
+    /**
+     * @Title: logisticsPage
+     * @Description: 物流页，传入一个订单详情的id
+     * @author jiangxiangwen
+     * @date 2018/3/11
+     * @param
+     * @return
+     *
+     */
     public String logisticsPage(){
          req.setAttribute("orderDetailId","1");
         // 获得订单详情的 id
@@ -60,4 +74,49 @@ public class LogisticsAction extends BaseAction {
         }
         return "logisticsPage";
     }
+
+    /**
+     * @Title: addLogistics
+     * @Description: 添加物流信息，需要传入一个订单详情的id
+     * @author jiangxiangwen
+     * @date 2018/3/11
+     * @param
+     * @return
+     *
+     */
+    public void addLogistics() throws IOException {
+        // 获取表单提交过来的数据
+        String deliverName=req.getParameter("deliver_name");
+        String deliverPhone=req.getParameter("deliver_phone");
+        String deliverddress=req.getParameter("deliver_address");
+        String consigneeName=req.getParameter("consignee_name");
+        String consigneePhone=req.getParameter("consignee_phone");
+        String consigneeAddress=req.getParameter("consignee_address");
+        // 将拿到的数据放入物流信息实体类
+        LogisticsInfo logisticsInfo=new LogisticsInfo();
+        logisticsInfo.setDeliverName(deliverName);
+        logisticsInfo.setDeliverPhone(deliverPhone);
+        logisticsInfo.setDeliverAddress(deliverddress);
+        logisticsInfo.setConsigneeName(consigneeName);
+        logisticsInfo.setDeliverPhone(consigneePhone);
+        logisticsInfo.setDeliverAddress(consigneeAddress);
+        // 传入serivce层
+        Integer row=logisticsInfoService.saveLogisticsInfo(logisticsInfo);
+        PrintWriter out = resp.getWriter();
+        HashMap<String,String> hashMap=new HashMap<String, String>();
+        Gson gson=new Gson();
+        if(row==null||row==0){
+            hashMap.put("MESSAGE","添加失败");
+            out.print(gson.toJson(hashMap));
+        }
+        else {
+            hashMap.put("MESSAGE","添加成功");
+            out.print(gson.toJson(hashMap));
+        }
+        out.flush();
+        out.close();
+    }
 }
+
+
+
