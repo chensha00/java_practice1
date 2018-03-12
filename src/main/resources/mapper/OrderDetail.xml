@@ -74,7 +74,7 @@
 
     <!--更新操作-->
     <update id="updateOrderDetailById" parameterType="java.util.Map">
-        UPDATE ORDER_DETAIL SET ORDER_NUM=${orderDetail.orderNum}
+        UPDATE ORDER_DETAIL SET ORDER_NUM=#{orderDetail.orderNum}
         ,SUCCESS_TIME=#{orderDetail.successTime,jdbcType=TIMESTAMP},DELIVERY_TIME=#{orderDetail.deliveryTime,jdbcType=TIMESTAMP}
         ,ORDER_STATUS=${orderDetail.orderStatus},IS_INVALID=${orderDetail.isInvalid} WHERE ID=#{id};
     </update>

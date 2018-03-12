@@ -28,7 +28,7 @@
         SELECT <include refid="peopleSql"/> FROM people WHERE ID=#{id}
     </select>
     <!--删除人员信息根据指定id-->
-    <delete id="deletePeopleById" parameterType="java.lang.Long">2
+    <delete id="deletePeopleById" parameterType="java.lang.Long">
         DELETE FROM people WHERE ID=#{id}
     </delete>
     <!--更新人员信息-->

@@ -44,7 +44,7 @@ public class PayFlow {
     /**
      * crateTime 流水生成时间  yyyy-MM-dd HHmmss
      */
-    private Date crateTime;
+    private Date createTime;
     /**
      * orderDetailId 订单详情外键
      */
@@ -112,12 +112,20 @@ public class PayFlow {
         this.flowType = flowType;
     }
 
-    public Date getCrateTime() {
-        return crateTime;
+    public Long getId() {
+        return id;
     }
 
-    public void setCrateTime(Date crateTime) {
-        this.crateTime = (Date) crateTime;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public Long getOrderDetailId() {
@@ -161,7 +169,7 @@ public class PayFlow {
         this.peopleId = peopleId;
         this.money = money;
         this.flowType = flowType;
-        this.crateTime = crateTime;
+        this.createTime = crateTime;
         this.orderDetailId = orderDetailId;
         this.goodsOrderId = goodsOrderId;
     }
@@ -171,7 +179,7 @@ public class PayFlow {
         this.peopleId = peopleId;
         this.money = money;
         this.flowType = flowType;
-        this.crateTime = crateTime;
+        this.createTime = crateTime;
         this.goodsOrderId = goodsOrderId;
     }
 
@@ -182,7 +190,7 @@ public class PayFlow {
         this.people = people;
         this.money = money;
         this.flowType = flowType;
-        this.crateTime = crateTime;
+        this.createTime = crateTime;
         this.orderDetailId = orderDetailId;
         this.orderDetail = orderDetail;
         this.goodsOrderId = goodsOrderId;

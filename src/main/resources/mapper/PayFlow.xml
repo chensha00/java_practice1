@@ -13,13 +13,16 @@
         <result property="peopleId" column="PEOPLE_ID" jdbcType="BIGINT" javaType="java.lang.Long"/>
         <result property="money" column="MONEY" jdbcType="DECIMAL" javaType="java.lang.Double"/>
         <result property="flowType" column="FLOW_TYPE" jdbcType="TINYINT" javaType="java.lang.Byte"/>
-        <result property="crateTime" column="CRATE_TIME" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result property="createTime" column="CREATE_TIME" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
         <result property="orderDetailId" column="ORDER_DETAIL_ID" jdbcType="BIGINT" javaType="java.lang.Long"/>
         <result property="goodsOrderId" column="GOODS_ORDER_ID" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <association property="people" column="PEOPLE_ID" javaType="domain.People" select="domain.People.getPoepleById"/>
+        <association property="orderDetail" column="ORDER_DETAIL_ID" javaType="domain.OrderDetail" select="domain.OrderDetail.findOrderDetailById"/>
+        <association property="goodsOrder" column="GOODS_ORDER_ID" javaType="domain.GoodsOrder" select="domain.GoodsOrder.findGoodsOrderById"/>
 
     </resultMap>
     <sql id="payFlowSql">
-        ID,FLOW_NUM,PEOPLE_ID,MONEY,FLOW_TYPE,CRATE_TIME,ORDER_DETAIL_ID,GOODS_ORDER_ID
+        ID,FLOW_NUM,PEOPLE_ID,MONEY,FLOW_TYPE,CREATE_TIME,ORDER_DETAIL_ID,GOODS_ORDER_ID
     </sql>
     <!--查询所有-->
     <select id="getAll" resultType="java.util.Map" resultMap="payFlow">
@@ -34,16 +37,14 @@
     </select>
 
     <!--通过流水号查询流水表-->
-    <select id="payFlowByFlowNum"  resultMap="payFlow" parameterType="java.lang.Long">
-        SELECT <include refid="payFlowSql"/> FROM pay_flow WHERE FLOW_NUM=#{FLOW_NUM,jdbcType=VARCHAR}
+    <select id="payFlowByFlowNum"  resultMap="payFlow" parameterType="java.util.Map">
+        SELECT <include refid="payFlowSql"/> FROM pay_flow WHERE FLOW_NUM=#{flow_num,jdbcType=VARCHAR}
     </select>
 
     <!--添加全部-->
-    <insert id="add">
-        INSERT INTO pay_flow(ID,FLOW_NUM,PEOPLE_ID,MONEY,FLOW_TYPE,CRATE_TIME,ORDER_DETAIL_ID,GOODS_ORDER_ID) VALUES(DEFAULT ,
-        ${pay_flow.flowNum},${pay_flow.peopleId},${pay_flow.money},${pay_flow.flowType},
-        ${pay_flow.crateTime},${pay_flow.orderDetailId},${pay_flow.goodsOrderId})
+    <insert id="add" parameterType="java.util.Map">
+        INSERT INTO pay_flow(<include refid="payFlowSql"/>) VALUES(DEFAULT,
+        #{pay_flow.flowNum,jdbcType=VARCHAR},#{pay_flow.peopleId,jdbcType=BIGINT},#{pay_flow.money,jdbcType=DECIMAL},#{pay_flow.flowType,jdbcType=TINYINT},
+        #{pay_flow.createTime,jdbcType=TIMESTAMP},#{pay_flow.orderDetailId,jdbcType=BIGINT},#{pay_flow.goodsOrderId,jdbcType=BIGINT})
     </insert>
-
-
 </mapper>

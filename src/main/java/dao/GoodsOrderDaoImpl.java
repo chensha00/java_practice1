@@ -67,6 +67,7 @@ public class GoodsOrderDaoImpl extends BaseDaoImpl<GoodsOrder> implements GoodsO
     public Integer updateGoodsOrder(GoodsOrder goodsOrder){
         Map map=new HashMap();
         map.put("goodsOrder",goodsOrder);
+        map.put("id",goodsOrder.getId());
         return this.sqlSessionTemplate.update(getMybaitsNameSpace()+"updateGoodsOrderById",map);
     }
     /**

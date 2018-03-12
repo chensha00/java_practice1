@@ -30,7 +30,7 @@ public interface PayFlowDao {
      * @date
      * @throw YnCorpSysException
      */
-    public PayFlow findPayFlowById(Long id) throws SQLException;
+    public PayFlow findPayFlowById(Long id);
 
     /**
      * @param flowNum 流水号
@@ -51,7 +51,7 @@ public interface PayFlowDao {
      * @date
      * @throw YnCorpSysException
      */
-    public Long savePayFlow(PayFlow payFlow) throws SQLException;
+    public int savePayFlow(PayFlow payFlow);
 
     /**
      * @param peopleId

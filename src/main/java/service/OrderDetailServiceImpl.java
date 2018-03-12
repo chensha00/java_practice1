@@ -3,6 +3,7 @@ package service;/**
  */
 
 import dao.OrderDetailDao;
+import domain.GoodsOrder;
 import domain.OrderDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -168,5 +169,34 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         System.out.print("是否作废:" + orderDetail.getIsInvalid() + " ");
         System.out.println();
 
+    }
+
+    /**
+     * @Title: findOrderDetailByOrderList
+     * @Description: 查找指定List<GoodsOrder>的订单详情集合
+     * @author yanyong
+     * @date 2018-03-12
+     * @param: goodsOrderList 指定List<GoodsOrder>
+     * @return:  List<OrderDetail>
+     */
+    @Override
+    public List<OrderDetail> findOrderDetailByOrderList(List<GoodsOrder> goodsOrderList){
+        //定义orderDetailList
+        List<OrderDetail> orderDetailList=new ArrayList<OrderDetail>();
+        //判断goodsOrderList是否有数据
+        if (goodsOrderList==null ||goodsOrderList.size()==0){
+            return null;
+        }
+        //获取所有的订单详情集合
+        for (int i=0;i<goodsOrderList.size();i++){
+            //获取单个GoodsOrder的 List<OrderDetail>集合
+            List<OrderDetail> orderDetails=this.findOrderDetailListByOrderId(goodsOrderList.get(i).getId());
+            orderDetailList.addAll(orderDetails);
+        }
+        if (orderDetailList.size()==0){
+            return null;
+        }else {
+            return orderDetailList;
+        }
     }
 }

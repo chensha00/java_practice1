@@ -12,23 +12,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>商城首页</title>
+    <title>商品分类页面</title>
     <script src="${basePath}../js/jquery-1.7.2.min.js"></script>
     <script src="${basePath}../js/jquery-1.7.2.js"></script>
     <link rel="stylesheet" href="${basePath}../css/main_page_css.css">
-    <meta name="referrer" content="always">
 </head>
 
 <body>
 
 <jsp:include page="head_page.jsp" flush="true"/>
 
+
+<div>
+
+</div>
+
 <div class="goods-display">
 
     <ul class="goods-display">
         <%--//循环输出一个商品框，数据由数据库查询包含名字.价格.库存--%>
         <c:forEach items="${mainList}" var="entry">
-            <form id="cartGoods" name="cartGoods" action="/mainAction!cart.do?op=add" target="posthere" method="post">
+            <form id="cratGoods" name="cratGoods" action="/mainAction!cart.do?op=add" target="posthere" method="post">
                 <ui class="view">
                     <div class="imgLink">
                         <img src="${basePath}../img/beauty.jpg"/></div>
@@ -67,13 +71,13 @@
         var goodsCart = "商品:" + nameStr + "\n添加到购物车成功!";
         alert(goodsCart);
         //将数据传到另一个页面
-        var url = 'mainAction!cart?op=add';
+        var url = 'mainAction!cart.do?op=add';
         var data = {
             'nameStr': entry.name,
             'priceStr': entry.price,
             'numberStr': entry.number,
             'storeNameStr': entry.storeName,
-            'idStr': entry.inventoryId,
+            'idStr': entry.invertoryId,
             'op': 'add'
         };
         var success = function (response) {
@@ -87,14 +91,14 @@
 
 <div class="wit">
     <div class="limit">
-        <form class="form" name="f1" method="POST" action="/mainAction!limit.do?present=${present}">
+        <form class="form" name="f1" method="POST" action="/mainAction!classifyLimit.do?present=${present}&&type=${type}">
             <table border="0" align="center" class="tb">
                 <tr>
                     <td><span class="page-size">当前第 ${present} 页       共 ${total} 页</span>></td>
-                    <td><a href="mainAction!limit.do?page=start&&present=${present}">首页</a></td>
-                    <td><a href="mainAction!limit.do?page=last&&present=${present}"> 上一页</a></td>
-                    <td><a href="mainAction!limit.do?page=next&&present=${present}"> 下一页</a></td>
-                    <td><a href="mainAction!limit.do?page=end&&present=${present}">最后一页</a></td>
+                    <td><a href="mainAction!classifyLimit.do?page=start&&present=${present}&&type=${type}">首页</a></td>
+                    <td><a href="mainAction!classifyLimit.do?page=last&&present=${present}&&type=${type}"> 上一页</a></td>
+                    <td><a href="mainAction!classifyLimit.do?page=next&&present=${present}&&type=${type}"> 下一页</a></td>
+                    <td><a href="mainAction!classifyLimit.do?page=end&&present=${present}&&type=${type}">最后一页</a></td>
                     <td>转到第:<input type="text" name="page" size="8"
                                    onkeypress="return event.keyCode>=48&&event.keyCode<=57" ng-pattern="/[^a-zA-Z]/"/>页
                         <input type="submit" value="GO" name="GO"></td>
@@ -103,6 +107,7 @@
         </form>
     </div>
 </div>
+
 
 </body>
 </html>

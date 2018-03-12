@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -64,7 +65,17 @@ public class LogisticsInfoServiceImpl implements LogisticsInfoService {
      */
     @Override
     public Integer saveLogisticsInfo(LogisticsInfo logisticsInfo) {
-        return logisticsInfoDao.saveLogisticsInfo(logisticsInfo);
+        if (logisticsInfo!=null){
+            // 生成订单号
+            logisticsInfo.setLogisticsNum(String.valueOf(System.currentTimeMillis()));
+            logisticsInfo.setLogisticsTime(new Date());
+            // 设置订单状态为已揽件
+            logisticsInfo.setLogisticsState((byte)1);
+            return logisticsInfoDao.saveLogisticsInfo(logisticsInfo);
+        }
+        else {
+            return -1;
+        }
     }
 
     /**

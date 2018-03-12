@@ -1,4 +1,4 @@
-package controller;/********************************************************************
+package controller.action;/********************************************************************
  /**
  * @Project: zyht_web
  * @Package controller
@@ -36,8 +36,11 @@ import java.util.Map;
         @Result(name = "limit", location = "/main_page.jsp"),
         @Result(name = "cart", location = "/cart.jsp"),
         @Result(name = "search", location = "/main_page_search.jsp"),
-        @Result(name = "searchLimit", location = "/main_page_search.jsp")
+        @Result(name = "searchLimit", location = "/main_page_search.jsp"),
+        @Result(name = "classify", location = "/main_page_classify.jsp"),
+        @Result(name = "classifyLimit", location = "/main_page_classify.jsp"),
 })
+
 public class MainAction extends BaseAction {
 
     @Autowired
@@ -55,10 +58,12 @@ public class MainAction extends BaseAction {
         String result = "";
         //从数据库获取商品信息，显示在主页上
         List<MainPage> list = inventoryService.findMainPageInventoryAll();
-        List<MainPage> list1 = list.subList(0, 20);
         Integer total = (list.size() - 1) / 20 + 1;
         Integer present = 1;
-        req.setAttribute("mainList", list1);
+        if (list.size() > 20) {
+            list = list.subList(0, 20);
+        }
+        req.setAttribute("mainList", list);
         req.setAttribute("total", total);
         req.setAttribute("present", present);
         result = "main";
