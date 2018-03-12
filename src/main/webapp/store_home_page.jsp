@@ -96,12 +96,9 @@
 </div>
 <%--分类悬浮框--%>
 <div id="light" class="white_content">
-    <ul>
-        <li><a>电脑</a></li>
-        <li><a>清洁用品</a></li>
-        <li><a>服装</a></li>
-        <li><a>运动器材</a></li>
-    </ul>
+    <form action="" name="form1" method="post">
+        <input type="text">
+    </form>
     <a href="javascript:void(0)"
        onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">点击关闭本窗口</a>
 </div>
