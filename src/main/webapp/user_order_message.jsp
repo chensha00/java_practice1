@@ -43,6 +43,7 @@
                     <td>订单编号</td>
                     <td>订单状态</td>
                     <td>总金额</td>
+                    <td>是否作废</td>
                 </tr>
                 <tr bgcolor="silver" class="order-tr">
                     <td class="order-id">${order.id}</td>
@@ -58,6 +59,12 @@
 
                     <%--<td width="30%">订单状态:${order.orderStatus}</td>--%>
                     <td width="15%">${order.totalMoney}</td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${order.isInvalid ==false}">作废</c:when>
+                            <c:otherwise>不作废</c:otherwise>
+                        </c:choose>
+                    </td>
                 </tr>
                 <tr>
                     <td>ID</td>
@@ -67,7 +74,7 @@
                     <td>数量</td>
                     <td>商品总价</td>
                     <td>状态</td>
-                    <td></td>
+                    <td>物流信息</td>
                 </tr>
                 <c:forEach var="detail" items="${orderDetailList}" varStatus="detail_index">
                     <c:choose>
@@ -92,6 +99,7 @@
                                     <c:when test="${detail.orderStatus==4}"><td>订单完成</td>
                                         <td><button class="judge-btn">评价</button></td></c:when>
                                 </c:choose>
+                                <td><button type="button" class="logistics-btn">物流</button> </td>
                             </tr>
                         </c:when>
                     </c:choose>
@@ -229,6 +237,7 @@
     $(".order-table").find(".receive-btn").click(function(){
         var detail_id=$(this).parent("td").sibling("td.detail-id").text();
         alert(detail_id);
+        window.location.href="${pageContext.request.contextPath}/action/userOrderAction!recevieGoods.do?detailId="+detail_id;
     });
     $(".order-table").find(".judge-btn").click(function(){
         var detail_id=$(this).parent("td").sibling("td.detail-id").text();
@@ -237,6 +246,7 @@
     $(".order-table").find(".btn-delete").click(function(){
         var order_id=$(this).parents("tr").siblings(".order-tr").find(".order-id").text();
         alert(order_id);
+        window.location.href="${pageContext.request.contextPath}/action/userOrderAction!deleteOrder.do?orderId="+order_id;
     });
     $(".order-table").find(".btn-pay").click(function(){
         var order_id=$(this).parents("tr").siblings(".order-tr").find(".order-id").text();
@@ -246,11 +256,16 @@
         window.location.href="${pageContext.request.contextPath}/action/payMoneyAction!PayGoodsOrderShow.do?orderNum="+order_num;
 
     });
-    $(".order-table").find("btn-cancel").click(function(){
+    $(".order-table").find(".btn-cancel").click(function(){
         var order_id=$(this).parents("tr").siblings(".order-tr").find(".order-id").text();
         alert(order_id);
+        window.location.href="${pageContext.request.contextPath}/action/userOrderAction!cancelOrder.do?orderId="+order_id;
     });
-
+    $(".order-table").find(".logistics-btn").click(function(){
+        var detail_id=$(this).parent("td").sibling("td.detail-id").text();
+        alert(detail_id);
+        window.location.href="${pageContext.request.contextPath}/action/logisticsAction!logisticsPage.do?orderDetailId="+detail_id;
+    });
 </script>
 </body>
 </html>

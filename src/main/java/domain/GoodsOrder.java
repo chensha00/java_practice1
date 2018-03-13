@@ -63,7 +63,7 @@ public class GoodsOrder {
     private Byte orderStatus;
 
     /**
-     * isInvalid  "订单是否作废 0--作废，1--不作废"
+     * isInvalid  "订单是否作废 false--作废，true--不作废"
      */
     private Boolean isInvalid;
 

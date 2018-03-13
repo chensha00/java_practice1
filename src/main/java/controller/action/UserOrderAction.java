@@ -42,14 +42,13 @@ public class UserOrderAction extends BaseAction {
     @Autowired
     private OrderDetailService orderDetailService;
 
-    /**
-     * @Title: findOrderAll
-     * @Description: 查看所有订单信息
-     * @author yanyong
-     * @date 2018-03-08
-     * @return: String
-     */
-    public String findOrderAll(){
+    private List<GoodsOrder> goodsOrderList;
+
+    private List<OrderDetail> orderDetailList;
+
+    private HttpSession session;
+
+    private void initData(){
         //设置编码方式
         try {
             req.setCharacterEncoding("utf-8");
@@ -60,15 +59,27 @@ public class UserOrderAction extends BaseAction {
         //获取订单信息和订单详情
 
 //        People person=req.getParameter("person");
-        HttpSession session=req.getSession();
+        session=req.getSession();
         People person= (People) session.getAttribute("person");
 //        String strId=req.getParameter("peopleId");
         Long peopleId=person.getId();
-        List<GoodsOrder> goodsOrderList=goodsOrderService.findGoodsOrderByPeopleId(peopleId);
+        goodsOrderList=goodsOrderService.findGoodsOrderByPeopleId(peopleId);
         System.out.println(goodsOrderList.size());
         //获取订单详情集合
-        List<OrderDetail> orderDetailList=orderDetailService.findOrderDetailByPeopleId(peopleId);
+        orderDetailList=orderDetailService.findOrderDetailByOrderList(goodsOrderList);
         System.out.println(orderDetailList.size());
+    }
+
+    /**
+     * @Title: findOrderAll
+     * @Description: 查看所有订单信息
+     * @author yanyong
+     * @date 2018-03-08
+     * @return: String
+     */
+    public String findOrderAll(){
+
+        this.initData();
 
 //        //查看订单详情
 //        for (int i=0;i<orderDetailList.size();i++){
@@ -96,25 +107,7 @@ public class UserOrderAction extends BaseAction {
      */
 
     public String findNotPayOrder(){
-        //设置编码方式
-        try {
-            req.setCharacterEncoding("utf-8");
-            resp.setCharacterEncoding("utf-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        //获取订单信息和订单详情
-
-//        People person=req.getParameter("person");
-        HttpSession session=req.getSession();
-        People person= (People) session.getAttribute("person");
-//        String strId=req.getParameter("peopleId");
-        Long peopleId=person.getId();
-        List<GoodsOrder> goodsOrderList=goodsOrderService.findGoodsOrderByPeopleId(peopleId);
-        System.out.println(goodsOrderList.size());
-        //获取订单详情集合
-        List<OrderDetail> orderDetailList=orderDetailService.findOrderDetailByPeopleId(peopleId);
-        System.out.println(orderDetailList.size());
+       this.initData();
         //删除已支付的订单
         for(int i=goodsOrderList.size()-1;i>=0;i--){
             Byte orderStatus=goodsOrderList.get(i).getOrderStatus();
@@ -149,25 +142,7 @@ public class UserOrderAction extends BaseAction {
      * @return: SUCCESS
      */
     public String findNotDeliveryOrder(){
-        //设置编码方式
-        try {
-            req.setCharacterEncoding("utf-8");
-            resp.setCharacterEncoding("utf-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        //获取订单信息和订单详情
-
-//        People person=req.getParameter("person");
-        HttpSession session=req.getSession();
-        People person= (People) session.getAttribute("person");
-//        String strId=req.getParameter("peopleId");
-        Long peopleId=person.getId();
-        List<GoodsOrder> goodsOrderList=goodsOrderService.findGoodsOrderByPeopleId(peopleId);
-        System.out.println(goodsOrderList.size());
-        //获取订单详情集合
-        List<OrderDetail> orderDetailList=orderDetailService.findOrderDetailByPeopleId(peopleId);
-        System.out.println(orderDetailList.size());
+        this.initData();
         //删除已发货订单详情
         for(int i=goodsOrderList.size()-1;i>=0;i--){
             Byte orderStatus=goodsOrderList.get(i).getOrderStatus();
@@ -205,25 +180,7 @@ public class UserOrderAction extends BaseAction {
 
     public String findNotReceiveOrder(){
 
-        //设置编码方式
-        try {
-            req.setCharacterEncoding("utf-8");
-            resp.setCharacterEncoding("utf-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        //获取订单信息和订单详情
-
-//        People person=req.getParameter("person");
-        HttpSession session=req.getSession();
-        People person= (People) session.getAttribute("person");
-//        String strId=req.getParameter("peopleId");
-        Long peopleId=person.getId();
-        List<GoodsOrder> goodsOrderList=goodsOrderService.findGoodsOrderByPeopleId(peopleId);
-        System.out.println(goodsOrderList.size());
-        //获取订单详情集合
-        List<OrderDetail> orderDetailList=orderDetailService.findOrderDetailByPeopleId(peopleId);
-        System.out.println(orderDetailList.size());
+       this.initData();
         //删除未收货订单详情
         for(int i=goodsOrderList.size()-1;i>=0;i--){
             Byte orderStatus=goodsOrderList.get(i).getOrderStatus();
@@ -261,18 +218,20 @@ public class UserOrderAction extends BaseAction {
 
     public String deleteOrder(){
 
-        return SUCCESS;
-    }
-    /**
-     * @Title: payOrder
-     * @Description: 支付订单
-     * @author yanyong
-     * @date 2018-03-09
-     * @return: “payOrder”
-     */
-    public String payOrder(){
-
-        return "payOrder";
+        //获取订单id
+        String orderStrId=req.getParameter("orderId");
+        Long orderId=Long.valueOf(orderStrId);
+        //获取订单信息和订单详细
+        GoodsOrder goodsOrder=goodsOrderService.findGoodsOrderById(orderId);
+        List<OrderDetail> orderDetailList=orderDetailService.findOrderDetailListByOrderId(orderId);
+        //将订单和订单详情设置为作废
+        goodsOrder.setIsInvalid(false);
+        goodsOrderService.updateGoodsOrder(goodsOrder);
+        for (OrderDetail orderDetail:orderDetailList){
+            orderDetail.setIsInvalid(false);
+            orderDetailService.updateOrderDetailById(orderDetail.getId(),orderDetail);
+        }
+        return this.findOrderAll();
     }
 
     /**
@@ -283,8 +242,24 @@ public class UserOrderAction extends BaseAction {
      * @return: SUCCESS
      */
     public String cancelOrder(){
-
-        return SUCCESS;
+        return this.deleteOrder();
+//        //获取订单id
+//        String orderStrId=req.getParameter("orderId");
+//        Long orderId=Long.valueOf(orderStrId);
+//        //获取订单信息和订单详细
+//        GoodsOrder goodsOrder=goodsOrderService.findGoodsOrderById(orderId);
+//        List<OrderDetail> orderDetailList=orderDetailService.findOrderDetailListByOrderId(orderId);
+//        //修改订单详情，将其失效，并写入数据库
+//        for (int i=0;i<orderDetailList.size();i++){
+//            OrderDetail orderDetail=orderDetailList.get(i);
+//            orderDetail.setIsInvalid(false);
+//            orderDetailService.updateOrderDetailById(orderDetail.getId(),orderDetail);
+//        }
+//        //修改订单信息
+//        goodsOrder.setIsInvalid(false);
+//        goodsOrderService.updateGoodsOrder(goodsOrder);
+//
+//        return this.findOrderAll();
     }
     /**
      * @Title: recevieGoods
@@ -294,17 +269,15 @@ public class UserOrderAction extends BaseAction {
      * @return: SUCCESS
      */
     public String recevieGoods(){
-        return SUCCESS;
+        //获取指定订单详情信息
+        String detailStrId=req.getParameter("detailId");
+        Long detailId=Long.valueOf(detailStrId);
+        OrderDetail orderDetail=orderDetailService.findOrderDetailById(detailId);
+        //将订单详情状态设置为4
+        if (orderDetail.getOrderStatus()==3){
+            orderDetail.setOrderStatus((byte) 4);
+        }
+        return this.findOrderAll();
     }
-    /**
-     * @Title: judgeGoods
-     * @Description: 评价
-     * @author yanyong
-     * @date 2018-03-09
-     * @return: "judgeGoods"
-     */
-    public String judgeGoods(){
 
-        return "judgeGoods";
-    }
 }
